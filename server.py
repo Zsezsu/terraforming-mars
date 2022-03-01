@@ -10,6 +10,11 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/design')
+def design():
+    return render_template('design/design.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True,
             port=8000,
