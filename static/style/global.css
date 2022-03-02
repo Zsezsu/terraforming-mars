@@ -1,0 +1,17 @@
+body {
+    font-family: 'Enter Sansman', sans-serif;
+}
+
+main {
+    height: 500vh;
+    margin: 0 200px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+h1 {
+    margin: 50px;
+    text-transform: uppercase;
+}

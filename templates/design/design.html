@@ -1,0 +1,61 @@
+{% extends 'layout/layout.html' %}
+
+{% block title %}Design{% endblock %}
+
+{% block nav_design %}active{% endblock %}
+
+{% block content %}
+    <main class="bg-dark">
+        <h1 class="text-center text-light">Terraforming Mars</h1>
+        <h2 class="text-center text-light">Leagues</h2>
+        <button class="btn btn-light">Add new League</button>
+        <div class="cards leagues bg-dark">
+
+            <div class="card league bg-dark">
+                <img alt="mars" src="{{ url_for('static', filename='img/mars-1.webp') }}">
+                <h3 class="text-light">League 5</h3>
+                <div class="card-details">
+                    <small class="text-light">5 / 5</small>
+                    <i class="fa-solid fa-circle-check text-light"></i>
+                </div>
+            </div>
+
+            <div class="card league bg-dark">
+                <img alt="mars" src="{{ url_for('static', filename='img/mars-2.webp') }}">
+                <h3 class="text-light">League 4</h3>
+                <div class="card-details">
+                    <small class="text-light">3 / 2</small>
+                    <i class="fa-solid fa-ban text-light"></i>
+                </div>
+            </div>
+
+            <div class="card league bg-dark">
+                <img alt="mars" src="{{ url_for('static', filename='img/mars-3.webp') }}">
+                <h3 class="text-light">League 3</h3>
+                <div class="card-details">
+                    <small class="text-light">2 / 1</small>
+                    <i class="fa-solid fa-ban text-light"></i>
+                </div>
+            </div>
+
+            <div class="card league bg-dark">
+                <img alt="mars" src="{{ url_for('static', filename='img/mars-4.webp') }}">
+                <h3 class="text-light">Strange Encounter in the Night</h3>
+                <div class="card-details">
+                    <small class="text-light">4 / 4</small>
+                    <i class="fa-solid fa-circle-check text-light"></i>
+                </div>
+            </div>
+
+            <div class="card league bg-dark">
+                <img alt="mars" src="{{ url_for('static', filename='img/mars-5.webp') }}">
+                <h3 class="text-light">The Biggest Terraforming in the Galaxy</h3>
+                <div class="card-details">
+                    <small class="text-light">2 / 2</small>
+                    <i class="fa-solid fa-circle-check text-light"></i>
+                </div>
+            </div>
+
+        </div>
+    </main>
+{% endblock %}

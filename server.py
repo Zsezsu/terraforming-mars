@@ -10,8 +10,27 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/design')
+def design():
+    return render_template('design/design.html')
+
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
+
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
+
+@app.route('/games')
+def games():
+    return render_template('games.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True,
             port=8000,
             host="0.0.0.0")
-
