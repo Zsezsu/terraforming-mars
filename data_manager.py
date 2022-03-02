@@ -3,6 +3,8 @@ import psycopg2
 import psycopg2.extras
 
 
+
+
 def establish_connection(connection_data=None):
     """
     Create a database connection based on the :connection_data: parameter
@@ -36,7 +38,7 @@ def get_connection_data(db_name=None):
 
     return {
         'dbname': db_name,
-        'user': os.environ.get('MY_PSQL_USER'),
+        'user': os.getenv('MY_PSQL_USER'),
         'host': os.environ.get('MY_PSQL_HOST'),
         'password': os.environ.get('MY_PSQL_PASSWORD')
     }
