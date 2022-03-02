@@ -32,9 +32,9 @@ def profile():
     return render_template('profile.html')
 
 
-@app.route('/games')
-def games():
-    return render_template('games.html')
+@app.route('/my-leagues')
+def leagues():
+    return render_template('my_leagues.html')
 
 
 @app.route('/test')
