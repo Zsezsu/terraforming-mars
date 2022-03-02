@@ -2,6 +2,10 @@
 
 {% block title %}Main Page{% endblock %}
 
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/index.js') }}" defer></script>
+{% endblock %}
+
 {% block content %}
     <h1 class="text-center text-light">Terraforming Mars</h1>
     <div class="cards leagues bg-dark">

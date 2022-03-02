@@ -2,6 +2,10 @@
 
 {% block title %}My Leagues{% endblock %}
 
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/myLeagues.js') }}" defer></script>
+{% endblock %}
+
 {% block nav_games %}active{% endblock %}
 
 {% block content %}

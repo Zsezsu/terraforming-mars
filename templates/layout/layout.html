@@ -21,8 +21,9 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/global.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/nav.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/cards.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/leagues.css') }}">
-    <script src="{{ url_for('static', filename='js/index.js') }}" defer></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/leagues.css') }}">
+
+    {% block scripts %}{% endblock %}
 </head>
 <body class="bg-dark">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
