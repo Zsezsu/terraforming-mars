@@ -57,6 +57,26 @@ def leagues():
     return render_template('my_leagues.html', logged_in_user=logged_in_user, leagues=logged_in_user_leagues)
 
 
+@app.route('/account/signup')
+def registration():
+    pass
+
+
+@app.route('/registration-onsubmit', methods=['POST'])
+def registration_onsubmit():
+    pass
+
+
+@app.route('/account/login')
+def login():
+    pass
+
+
+@app.route('/logout')
+def logout():
+    pass
+
+
 if __name__ == '__main__':
     app.run(debug=True,
             port=8000,
