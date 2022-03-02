@@ -3,12 +3,12 @@
 {% block title %}Query test{% endblock %}
 
 {% block content %}
-    <h1>Query test</h1>
+    <h1 class="text-light">Query test</h1>
     <br>
     <br>
     <ol>
         {% for milestone in milestones %}
-            <li>{{ milestone['milestone_name'] }}</li>
+            <li class="text-light">{{ milestone['milestone_name'] }}</li>
         {% endfor %}
     </ol>
 {% endblock %}
