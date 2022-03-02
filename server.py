@@ -27,7 +27,7 @@ def profile():
 
 @app.route('/games')
 def games():
-    pass
+    return render_template('games.html')
 
 
 if __name__ == '__main__':
