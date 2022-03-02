@@ -21,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/global.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/nav.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/cards.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/leagues.css') }}">
     <script src="{{ url_for('static', filename='js/index.js') }}" defer></script>
 </head>
 <body class="bg-dark">
@@ -47,8 +48,9 @@
         </ul>
     </div>
 </nav>
+<main>
 {% block content %}
 {% endblock %}
-
+</main>
 </body>
 </html>
