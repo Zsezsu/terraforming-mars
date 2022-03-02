@@ -34,7 +34,8 @@ def profile():
 
 @app.route('/my-leagues')
 def leagues():
-    return render_template('my_leagues.html')
+    leagues_data = select_queries.get_leagues()
+    return render_template('my_leagues.html', leagues=leagues_data)
 
 
 @app.route('/test')

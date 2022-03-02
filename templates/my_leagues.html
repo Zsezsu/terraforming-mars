@@ -15,8 +15,17 @@
             Add new league
         </button>
     </div>
-    <div class="leagues">
-
+    <div class="leagues cards">
+        {% for league in leagues %}
+            <div class="card league bg-dark" id="league-{{ league.id }}">
+                <img alt="mars" src="{{ url_for('static', filename='img/mars-1.webp') }}">
+                <h3 class="text-light">{{ 'League ' + league.id | string if not league.league_name else league.league_name }}</h3>
+                <div class="card-details">
+                    <small class="text-light">5 / 5</small>
+                    <i class="fa-solid fa-circle-check text-light"></i>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 
 {% endblock %}

@@ -8,3 +8,12 @@ def get_milestones():
     SELECT milestone_name FROM milestones;
     """
     return execute_select(SQL(query))
+
+
+def get_leagues():
+    query = """
+    SELECT *
+    FROM leagues
+    ORDER BY id DESC
+    """
+    return execute_select(SQL(query))
