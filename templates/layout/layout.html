@@ -24,8 +24,11 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/global.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/nav.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/cards.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/leagues.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/leagues.css') }}">
+
     <script src="{{ url_for('static', filename='js/index.js') }}" defer></script>
+    {% block script %}{% endblock %}
+
 </head>
 <body class="bg-dark">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -37,7 +40,8 @@
         <a class="navbar-brand" href="{{ url_for('index') }}">Mars</a>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                <a class="nav-link {% block nav_dashboard %}{% endblock %}" href="{{ url_for('dashboard') }}">Dashboard<span class="sr-only">(current)</span></a>
+                <a class="nav-link {% block nav_dashboard %}{% endblock %}"
+                   href="{{ url_for('dashboard') }}">Dashboard<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {% block nav_games %}{% endblock %}" href="{{ url_for('leagues') }}">My Leagues</a>
@@ -52,8 +56,8 @@
     </div>
 </nav>
 <main>
-{% block content %}
-{% endblock %}
+    {% block content %}
+    {% endblock %}
 </main>
 </body>
 </html>

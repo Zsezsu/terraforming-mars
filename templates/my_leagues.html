@@ -2,14 +2,27 @@
 
 {% block title %}My Leagues{% endblock %}
 
+{% block script %}
+    <script src="{{ url_for('static', filename='js/addLeague.js') }}" defer></script>
+{% endblock %}
+
 {% block nav_games %}active{% endblock %}
 
 {% block content %}
     <h1 class="text-center text-light">My Leagues</h1>
     <div class="header">
-        <button class="btn btn-light">
+        <button id="new-league" class="btn btn-light">
             Add new league
         </button>
+    </div>
+    <div class="card league bg-dark" hidden>
+        <a href="{{ url_for('leagues') }}">
+            <img alt="mars" src="{{ url_for('static', filename='img/mars-2.webp') }}">
+            <h3 class="text-light">My Leagues</h3>
+        </a>
+        <div class="card-details">
+            <i class="fa-solid fa-gamepad text-light"></i>
+        </div>
     </div>
     <div class="leagues">
 

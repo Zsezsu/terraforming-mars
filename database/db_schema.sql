@@ -107,6 +107,7 @@ DROP TABLE IF EXISTS leagues;
 CREATE TABLE leagues
 (
     id           SERIAL UNIQUE NOT NULL,
+    league_name  TEXT,
     league_admin INTEGER       NULL,
     round_number INTEGER,
     PRIMARY KEY (id)
@@ -117,6 +118,7 @@ CREATE TABLE league_players
 (
     id        SERIAL UNIQUE,
     league_id INTEGER,
+    player_id INTEGER,
     CONSTRAINT fk_league_id
         FOREIGN KEY (league_id)
             REFERENCES leagues (id) ON DELETE CASCADE
