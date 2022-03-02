@@ -15,8 +15,22 @@ def design():
     return render_template('design/design.html')
 
 
+@app.route('/dashboard')
+def dashboard():
+    pass
+
+
+@app.route('/profile')
+def profile():
+    pass
+
+
+@app.route('/games')
+def games():
+    pass
+
+
 if __name__ == '__main__':
     app.run(debug=True,
             port=8000,
             host="0.0.0.0")
-
