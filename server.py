@@ -1,5 +1,12 @@
 from flask import Flask, render_template, request, url_for, redirect, jsonify
+from dotenv import load_dotenv
 
+import queries.insert_queries as insert_queries
+import queries.select_queries as select_queries
+import queries.update_queries as update_queries
+import queries.delete_queries as delete_queries
+
+load_dotenv()
 app = Flask(__name__)
 
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -28,6 +35,12 @@ def profile():
 @app.route('/games')
 def games():
     return render_template('games.html')
+
+
+@app.route('/test')
+def test():
+    milestones = select_queries.get_milestones()
+    return render_template('test.html', milestones=milestones)
 
 
 if __name__ == '__main__':

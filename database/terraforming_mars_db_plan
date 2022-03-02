@@ -1,0 +1,105 @@
+Terraforming Mars database
+
+Tables:
+
+Players 
+
+Leagues
+League_players #connect table
+
+Rounds
+Round_player 	#connect table
+
+Game setup 	#connect table
+Boards
+Expansions
+
+Results
+Points
+Milestones
+Awards
+
+Nem tudom hogy kell-e:
+Corporations - felsorolni a cégeket
+
+
+
+Columns on tables:
+
+Players table columns:
+id (unique, primary key) / username (unique) / email (uniqe) / password / image
+
+Leagues table columns:
+id (unique, primary key) / league_admin (who created the league, player_id) / round_number (not null, max 10 ?)  
+
+League_players columns:
+id (unique, primary key) / league_id / player_id
+		
+
+Rounds columns:
+id (unique, primary key) / league_id (not null, foreign key) 
+
+Round_players columns:
+id (unique, primary key) / round_id (foreign key) / player_id
+
+
+Game_setup columns:
+id (unique, primary key) / round_id / board_id / expansion_id
+
+
+			
+Boards columns:
+id (unique, primary key) / board_name
+			1 Basic
+			2 Elysium
+			3 Hellas
+
+Expansions table columns:
+id (unique, primary key) / expansion_name
+			1 Prelude
+			2 Venus Next
+			3 Colonies			
+
+								
+
+Milestones columns:
+id (unique, primary key) / milestone_name / board_id / expansion_id
+		1 	/ Terraformer 	/ 1		/ null
+		2 	/ Mayor	/ 1		/ null
+		3	/ Gardener	/ 1		/ null
+		4	/ Builder	/ 1		/ null
+		5	/ Planner	/ 1		/ null
+		6	/ Generalist	/ 2		/ null
+		7	/ Specialist	/ 2		/ null
+		8	/ Ecologist	/ 2		/ null
+		9 	/ Tycoon	/ 2		/ null
+		10	/ Legend	/ 2 		/ null
+		11	/ Hoverlord	/ null		/ 2
+				
+
+Awards columns:
+id (unique, primary key) / award_name / board_id / expansion_id
+		1	/ Landlord	/1		/ null
+		2	/ Banker	/1		/ null
+		3	/ Scientist	/1		/ null
+		4	/ Thermalist	/1		/ null
+		5	/ Miner	/1		/ null
+		6 	/ Celebrity	/2		/ null
+		7	/ Industrialist/2		/ null
+		8	/ Desert Settler/2		/ null
+		9 	/ Estate Dealer/2		/ null
+		10	/ Benefactor	/2		/ null
+		11	/ Venuphille	/null		/ 2
+
+
+Results columns:
+id (unique, primary key) / round_id (not null, foreign key) / player_id / sum_points
+
+!!! nem biztos hogy külön kell szedni a results és a points táblákat, de egyben túl nagynak éreztem !!!
+
+Points columns:
+id (unique, primary key) / result_id / tr_number (not null) / milestone_points / award_points / number_of_own_greeneries / number_of_cities / greeneries_around_cities / vp_on_cards
+
+
+
+
