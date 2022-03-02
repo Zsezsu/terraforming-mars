@@ -22,7 +22,7 @@ def dashboard():
 
 @app.route('/profile')
 def profile():
-    pass
+    return render_template('profile.html')
 
 
 @app.route('/games')
