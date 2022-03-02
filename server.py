@@ -17,7 +17,7 @@ def design():
 
 @app.route('/dashboard')
 def dashboard():
-    pass
+    return render_template('dashboard.html')
 
 
 @app.route('/profile')

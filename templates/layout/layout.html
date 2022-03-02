@@ -30,10 +30,10 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbar">
-        <a class="navbar-brand {% block nav_index %}{% endblock %}" href="{{ url_for('index') }}">Mars</a>
+        <a class="navbar-brand" href="{{ url_for('index') }}">Mars</a>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item {% block nav_dashboard %}{% endblock %}">
-                <a class="nav-link" href="#">Dashboard<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item {% block nav_games %}{% endblock %}">
                 <a class="nav-link" href="#">My Games</a>
