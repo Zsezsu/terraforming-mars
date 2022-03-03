@@ -1,6 +1,6 @@
-from flask import Flask, render_template, session
-from api import api
+from flask import Flask, render_template, request, url_for, redirect, jsonify, session
 from dotenv import load_dotenv
+from api import api
 from mail_system import mail
 
 import profile_manager as pm
@@ -54,13 +54,21 @@ def leagues():
 
 
 @app.route('/account/signup')
-def registration():
-    pass
+def registration(m_error=False, f_error=False):
+    return render_template('profile-register.html', match_error=m_error, format_error=f_error)
 
 
 @app.route('/registration-onsubmit', methods=['POST'])
 def registration_onsubmit():
-    pass
+    if pm.validate_unique_data_matching(request.form):
+        if pm.validate_registration(request.form):
+            user_id = pm.submit_registration(request.form)
+            session['UID'] = user_id
+            return render_template('index.html')
+        else:
+            return render_template(url_for('registration', False, True))
+    else:
+        return render_template(url_for('registration', True, False))
 
 
 @app.route('/account/login')
