@@ -1,13 +1,11 @@
 from flask import Flask, render_template, request, url_for, redirect, jsonify
-from dotenv import load_dotenv
+from api import api
 
-import queries.insert_queries as insert_queries
-import queries.select_queries as select_queries
-import queries.update_queries as update_queries
-import queries.delete_queries as delete_queries
+from dotenv import load_dotenv
 
 load_dotenv()
 app = Flask(__name__)
+app.register_blueprint(api)
 
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
@@ -35,24 +33,6 @@ def profile():
 @app.route('/my-leagues')
 def leagues():
     return render_template('my_leagues.html')
-
-
-@app.route('/api/players')
-def send_players():
-    players = select_queries.get_players()
-    return jsonify(players)
-
-
-@app.route('/api/images/leagues')
-def send_league_images():
-    league_images = select_queries.get_images('leagues')
-    return jsonify(league_images)
-
-
-@app.route('/test')
-def test():
-    milestones = select_queries.get_milestones()
-    return render_template('test.html', milestones=milestones)
 
 
 if __name__ == '__main__':
