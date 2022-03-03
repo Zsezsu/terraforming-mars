@@ -71,8 +71,16 @@
 
 #league-slideshow {
     width: 100%;
+    user-select: none;
 }
 
+#league-slideshow img, #league-slideshow img:hover {
+    filter: none;
+}
+
+#league-slideshow i {
+    font-size: 60px;
+}
 
 .new-league input {
     margin: 10px 0 25px;

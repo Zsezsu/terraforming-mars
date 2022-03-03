@@ -9,6 +9,15 @@ export const dataHandler = {
     getLoggedInUser: async function () {
         return await apiGet(`/api/users/logged-in`);
     },
+    getImages: async function() {
+        return [
+            '/static/img/mars-1.webp',
+            '/static/img/mars-2.webp',
+            '/static/img/mars-3.webp',
+            '/static/img/mars-4.webp',
+            '/static/img/mars-5.webp',
+        ]
+    },
     //POST
     postNewLeague: async function (data) {
         await apiPost(`/api/leagues`, data);
