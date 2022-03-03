@@ -1,7 +1,9 @@
 from flask import Flask, render_template, session
 from api import api
 from dotenv import load_dotenv
+from mail_system import mail
 
+import profile_manager as pm
 import queries.insert_queries as insert_queries
 import queries.select_queries as select_queries
 import queries.update_queries as update_queries
@@ -11,19 +13,13 @@ import queries.delete_queries as delete_queries
 load_dotenv()
 app = Flask(__name__)
 app.register_blueprint(api)
+app.register_blueprint(mail)
 
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 
 @app.route('/')
 def index():
-    session['UID'] = 1  # DUMMY DATA-----------------------
-    session['logged_in_user'] = {
-        'id': 1,
-        'username': 'Zsu',
-        'name': 'Zsuzsanna Juhász',
-        'image_source': 'img/favicon.ico'
-    }  # DUMMY DATA----------------------------------------------
     return render_template('index.html')
 
 
