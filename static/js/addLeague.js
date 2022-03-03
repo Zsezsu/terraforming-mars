@@ -9,13 +9,7 @@ const data = {
 
 function createNewLeague() {
     const addNewLeagueButton = document.querySelector('button#new-league');
-    addNewLeagueButton.addEventListener('click', openNewLeagueDiv);
-}
-
-function openNewLeagueDiv() {
-    const playerContainer = document.querySelector('div#selected-players');
-    addPlayersToGame();
-
+    addNewLeagueButton.addEventListener('click', addPlayersToGame);
 }
 
 function addPlayersToGame() {
@@ -28,12 +22,25 @@ function selectPlayersByInput(event) {
     let userContainer = document.querySelector('div#searched-players');
     clearHtml(userContainer);
     for (let player of data.players) {
-        if (player.name.includes(input) || player.username.includes(input) && player.id !== data.loggedInUser.id) {
-            let playerCard = createPlayerCard(player);
-            userContainer.insertAdjacentHTML('beforeend', playerCard);
+        if (player.name.includes(input) || player.username.includes(input)) {
+            if (!selectedPlayers(player.id)) {
+                let playerCard = createPlayerCard(player);
+                userContainer.insertAdjacentHTML('beforeend', playerCard);
+            }
         }
     }
     addCardEventListeners()
+}
+
+function selectedPlayers(playerId) {
+    const selectedPlayers = document.querySelector('div#selected-players').children;
+    for (let selectedPlayer of selectedPlayers) {
+        if (+selectedPlayer.getAttribute('player-id') === playerId) {
+            return true
+        }
+    }
+    return false
+
 }
 
 function clearHtml(element) {
@@ -57,13 +64,11 @@ function addCardEventListeners() {
 
 function movePlayerToGame(event) {
     const selectPlayerContainer = document.querySelector('div#searched-players');
-    const selectedPlayerContainer = document.querySelector('div#selected-players');
-    removeElement(selectPlayerContainer, event.currentTarget);
-    selectedPlayerContainer.appendChild(event.currentTarget);
-}
+    selectPlayerContainer.removeChild(event.currentTarget);
 
-function removeElement(container, element) {
-    container.removeChild(element);
+    const selectedPlayerContainer = document.querySelector('div#selected-players');
+    selectedPlayerContainer.appendChild(event.currentTarget);
+    event.currentTarget.removeEventListener('click', movePlayerToGame)
 }
 
 function main() {
