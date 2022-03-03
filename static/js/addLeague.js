@@ -43,7 +43,7 @@ function playerSelector(input) {
 function selectedPlayers(playerId) {
     const selectedPlayers = document.querySelector('div#selected-players').children;
     for (let selectedPlayer of selectedPlayers) {
-        if (+selectedPlayer.getAttribute('player-id') === playerId) {
+        if (+selectedPlayer.getAttribute('data-player-id') === playerId) {
             return true;
         }
     }
@@ -56,7 +56,7 @@ function clearHtml(element) {
 
 function createPlayerCard(player) {
     return `
-    <div class="player-card" player-id="${player.id}">
+    <div class="player-card" data-player-id="${player.id}">
         <p>${player.username}(${player.name})</p>
         <img alt="user-image" src="static/${player.image_source}">
     </div>`;
@@ -86,7 +86,7 @@ function movePlayerToGame(event) {
 }
 
 function addRemoveButton(player) {
-    const playerId = +player.getAttribute('player-id');
+    const playerId = +player.getAttribute('data-player-id');
     player.insertAdjacentHTML('beforeend',
         `<i data-remove-id="${playerId}" class="fa-solid fa-circle-xmark text-danger"></i>`
     );
@@ -97,7 +97,7 @@ function addRemoveButton(player) {
 function removePlayer(event) {
     const playerId = event.target.getAttribute('data-remove-id');
     const selectedPlayerContainer = document.querySelector('div#selected-players');
-    const currentPlayer = selectedPlayerContainer.querySelector(`div[player-id="${playerId}"]`)
+    const currentPlayer = selectedPlayerContainer.querySelector(`div[data-player-id="${playerId}"]`)
     selectedPlayerContainer.removeChild(currentPlayer);
     refreshPlayersNumber();
     refreshPlayerSelector();
@@ -150,7 +150,7 @@ const confirmLeague = {
 function getPlayersDetails(players) {
     let playersDetails = [];
     for (let player of players) {
-        let id = player.getAttribute('player-id');
+        let id = player.getAttribute('data-player-id');
         playersDetails.push({'id': id});
     }
     return playersDetails;
