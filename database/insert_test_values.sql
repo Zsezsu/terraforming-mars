@@ -1,11 +1,11 @@
 INSERT INTO
-    players(username, email, password)
+    players(username, first_name, last_name, email, password)
 VALUES
-    ('Zsu', 'zsu@mars.hu', '1234'),
-    ('Bende', 'bende@mars.hu', '1234'),
-    ('Benedek', 'benedek@mars.hu', '1234'),
-    ('Viktor', 'viktor@mars.hu', '1234'),
-    ('Akárki', 'akarki@mars.hu', '1234');
+    ('Zsu', 'Zsu', 'Juhász', 'zsu@mars.hu', '1234'),
+    ('Bende', 'Bendegúz', 'Dudaskó', 'bende@mars.hu', '1234'),
+    ('Benedek', 'Benedek', 'Halaj', 'benedek@mars.hu', '1234'),
+    ('Viktor', 'Viktor', 'Sági', 'viktor@mars.hu', '1234'),
+    ('Akárki', 'Akar', 'ki', 'akarki@mars.hu', '1234');
 
 INSERT INTO
     leagues(round_number)
@@ -20,3 +20,32 @@ VALUES
     (1, 3),
     (1, 4),
     (1, 5);
+
+INSERT INTO
+    game_setup(round_id, board_id, expansion_id)
+VALUES
+    (1, 1, 1),
+    (2, 1, 2),
+    (3, 1, 2),
+    (4, 2, 2),
+    (5, 3, 1);
+
+INSERT INTO
+    results(round_id, player_id, sum_points)
+VALUES
+    (1, 1, NULL),
+    (1, 2, NULL),
+    (1, 3, NULL),
+    (1, 4, NULL),
+    (1, 5, NULL);
+
+
+INSERT INTO
+    points(result_id, tr_number, milestones_points,
+           award_points, number_of_own_greeneries, number_of_cities, greeneries_around_cities, vp_on_cards)
+VALUES
+    (1, 44, 5, 5, 5, 2, 8, 12),
+    (2, 48, 5, 5, 4, 3, 11, 3),
+    (3, 51, 5, 5, 6, 4, 6, 6),
+    (4, 40, 5, 5, 7, 2, 4, 8),
+    (5, 60, 5, 5, 13, 2, 9, 10);
