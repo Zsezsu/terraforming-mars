@@ -15,7 +15,19 @@
             Add new league
         </button>
     </div>
-    <div id="add-league" class="card league bg-dark" hidden>
+    <div id="add-league" class="card league bg-dark">
+        <label for="league-name">League Name</label>
+        <input type="text" name="league-name" placeholder="League Name">
+        <label for="league-rounds">Number of Rounds</label>
+        <input type="number" name="league-rounds" placeholder="Number of Rounds">
+        <label for="league-players">League Players</label>
+        <div id="selected-players"></div>
+        <input type="text" name="league-players" placeholder="League Players">
+        <div id="searched-players"></div>
+        <div id="new-league-pictures"></div>
+        <button id="button-confirm" class="btn btn-light" type="button">Confirm</button>
+        <button id="button-close" class="btn btn-light" type="button">Close</button>
+
     </div>
     <div class="leagues">
 
