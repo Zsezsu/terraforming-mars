@@ -10,7 +10,12 @@ const data = {
 function createNewLeague() {
     const addNewLeagueButton = document.querySelector('button#new-league');
     addNewLeagueButton.addEventListener('click', addPlayersToGame);
+
+    const confirmButton = document.querySelector('button#button-confirm');
+    confirmButton.addEventListener('click', confirmLeague.confirm)
 }
+
+// --------------------------------Select Players------------------------------------------
 
 function addPlayersToGame() {
     const usernameInput = document.querySelector('input[name="league-players"]');
@@ -19,6 +24,10 @@ function addPlayersToGame() {
 
 function selectPlayersByInput(event) {
     const input = event.currentTarget.value;
+    playerSelector(input)
+}
+
+function playerSelector(input) {
     let userContainer = document.querySelector('div#searched-players');
     clearHtml(userContainer);
     for (let player of data.players) {
@@ -40,7 +49,6 @@ function selectedPlayers(playerId) {
         }
     }
     return false
-
 }
 
 function clearHtml(element) {
@@ -69,6 +77,37 @@ function movePlayerToGame(event) {
     const selectedPlayerContainer = document.querySelector('div#selected-players');
     selectedPlayerContainer.appendChild(event.currentTarget);
     event.currentTarget.removeEventListener('click', movePlayerToGame)
+    addRemoveButton(event.currentTarget);
+}
+
+function addRemoveButton(player) {
+    const playerId = +player.getAttribute('player-id');
+    player.insertAdjacentHTML('beforeend',
+        `<i data-remove-id="${playerId}" class="fa-solid fa-circle-xmark text-danger"></i>`
+    );
+    const removeButton = player.querySelector('i');
+    removeButton.addEventListener('click', removePlayer);
+}
+
+function removePlayer(event) {
+    const playerId = event.target.getAttribute('data-remove-id');
+    const selectedPlayerContainer = document.querySelector('div#selected-players');
+    const currentPlayer = selectedPlayerContainer.querySelector(`div[player-id="${playerId}"]`)
+    selectedPlayerContainer.removeChild(currentPlayer);
+    refreshPlayerSelector()
+}
+
+function refreshPlayerSelector() {
+    const userInput = document.querySelector('input[name="league-players"]').value;
+    playerSelector(userInput);
+}
+
+// --------------------------------Confirm league------------------------------------------
+
+const confirmLeague = {
+    confirm: function () {
+
+    }
 }
 
 function main() {
