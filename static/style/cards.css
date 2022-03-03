@@ -58,13 +58,21 @@
 
 .new-league {
     padding: 50px;
-    width: 55%;
+    width: 100%;
     height: 800px;
     margin: 20px 0;
     background: #181b1e !important;
     transition: 1s ease;
     overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
 }
+
+#league-slideshow {
+    width: 100%;
+}
+
 
 .new-league input {
     margin: 10px 0 25px;
@@ -72,6 +80,7 @@
     color: white;
     border-radius: 5px;
     border: 2px solid #212529;
+    width: 80%;
 }
 
 .new-league h2 {
