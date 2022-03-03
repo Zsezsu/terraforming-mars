@@ -95,11 +95,13 @@ ALTER TABLE IF EXISTS ONLY public.players
 DROP TABLE IF EXISTS players;
 CREATE TABLE players
 (
-    id       SERIAL UNIQUE  NOT NULL,
-    username TEXT UNIQUE    NOT NULL,
-    email    VARCHAR UNIQUE NOT NULL,
-    password VARCHAR        NOT NULL,
-    image    VARCHAR,
+    id          SERIAL UNIQUE  NOT NULL,
+    username    TEXT UNIQUE    NOT NULL,
+    first_name  TEXT           NOT NULL,
+    last_name   TEXT           NOT NULL,
+    email       VARCHAR UNIQUE NOT NULL,
+    password    VARCHAR        NOT NULL,
+    image       VARCHAR,
     PRIMARY KEY (id)
 );
 

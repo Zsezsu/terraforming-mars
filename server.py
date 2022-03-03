@@ -37,6 +37,12 @@ def leagues():
     return render_template('my_leagues.html')
 
 
+@app.route('/api/players')
+def send_players():
+    players = select_queries.get_players()
+    return jsonify(players)
+
+
 @app.route('/test')
 def test():
     milestones = select_queries.get_milestones()
