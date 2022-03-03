@@ -47,9 +47,10 @@ CREATE TABLE images
 DROP TABLE IF EXISTS corporations;
 CREATE TABLE corporations
 (
-    id          SERIAL UNIQUE NOT NULL,
-    name        TEXT,
-    image_id    INTEGER,
+    id              SERIAL UNIQUE NOT NULL,
+    name            TEXT,
+    expansion_id    INTEGER,
+    image_id        INTEGER,
     PRIMARY KEY (id)
 );
 
@@ -268,7 +269,38 @@ VALUES
     ('Space Baron',     3,      NULL),
     ('Excentric',       3,      NULL),
     ('Contractor',      3,      NULL),
-    ('Venuphille',      NULL,   2)
+    ('Venuphille',      NULL,   2);
+
+INSERT INTO
+    corporations(name, expansion_id, image_id)
+VALUES
+    ('Credicor',                        NULL, NULL),
+    ('Ecoline',                         NULL, NULL),
+    ('Helion',                          NULL, NULL),
+    ('Mining Guild',                    NULL, NULL),
+    ('Interplanetary Cinematics',       NULL, NULL),
+    ('Inventrix',                       NULL, NULL),
+    ('Phobolog',                        NULL, NULL),
+    ('Tharsis Rebuplic',                NULL, NULL),
+    ('Thorgate',                        NULL, NULL),
+    ('United Nations Mars Initiative',  NULL, NULL),
+    ('Teractor',                        NULL, NULL),
+    ('Saturn Systems',                  NULL, NULL),
+    ('Aphrodite',                       NULL, 2),
+    ('Celestic',                        NULL, 2),
+    ('Manutech',                        NULL, 2),
+    ('Morning Star Inc',                NULL, 2),
+    ('Viron',                           NULL, 2),
+    ('Cheung Shing Mars',               NULL, 1),
+    ('Point Luna',                      NULL, 1),
+    ('Robinson Industries',             NULL, 1),
+    ('Valley Trust',                    NULL, 1),
+    ('Vitor',                           NULL, 1),
+    ('Aridor',                          NULL, 3),
+    ('Arklight',                        NULL, 3),
+    ('Polyphemos',                      NULL, 3),
+    ('Poseidon',                        NULL, 3),
+    ('Storm Craft Incorporated',        NULL, 3);
 
 
 /*Terraforming Mars database
