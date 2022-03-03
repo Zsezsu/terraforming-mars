@@ -129,6 +129,14 @@ const confirmLeague = {
             if (+leagueRounds >= minRounds && +leagueRounds <= maxRounds) {
                 if (+selectedPlayers.length >= minPlayers && +selectedPlayers.length <= maxPlayers) {
                     console.log('yeeeee');
+                    const selectedPlayersDetails = getPlayersDetails(selectedPlayers)
+                    const data = {
+                        'leagueName': leagueName,
+                        'leagueRounds': leagueRounds,
+                        'userIds': selectedPlayersDetails
+                    }
+                    dataHandler.postNewLeague(data);
+                    console.log(data);
                 } else {
                     alert(`players Number(${selectedPlayers.length}) has to be between ${minPlayers}-${maxPlayers}`);
                 }
@@ -139,6 +147,15 @@ const confirmLeague = {
             alert('League name required');
         }
     }
+}
+
+function getPlayersDetails(players) {
+    let playersDetails = [];
+    for (let player of players) {
+        let id = player.getAttribute('player-id');
+        playersDetails.push({'id': id});
+    }
+    return playersDetails;
 }
 
 function main() {
