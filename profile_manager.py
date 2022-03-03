@@ -11,7 +11,7 @@ def verify_password(plain_text_password, hashed_password):
 
 
 def update_password_on_form(form, password):
-    """Replaces the unhashed password withhashed one
+    """Replaces the unhashed password with hashed one
     in dictionary"""
     form = dict(form)
     form['password'] = password
@@ -39,6 +39,12 @@ def submit_registration(form):
 def is_password_format_correct(password):
     """If password formatted like, 'format_template'
     returns True"""
+    return bool
+
+
+def is_registration_passwords_equal(pwd1, pwd2):
+    """If password field one and password field two
+    the same string the same, returns True"""
     return bool
 
 
