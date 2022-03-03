@@ -43,6 +43,11 @@ def test():
     return render_template('test.html', milestones=milestones)
 
 
+@app.route('/round/<round_id>')
+def results(round_id=1):
+    return render_template('round_details.html', round_id=round_id)
+
+
 if __name__ == '__main__':
     app.run(debug=True,
             port=8000,
