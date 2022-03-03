@@ -50,8 +50,7 @@ def submit_registration(form):
 def is_password_format_correct(password):
     """If password formatted like, 'format_template'
     returns True"""
-    return bool
-
+    return re.match("^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$", password)
 
 def is_registration_major_data_equal(str1, str2):
     """If data field one and data field two
