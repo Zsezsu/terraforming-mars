@@ -1,6 +1,5 @@
 import {dataHandler} from "./data/dataHandler.js";
 
-
 const data = {
     players: await dataHandler.getPlayers(),
     leagueImages: await dataHandler.getLeagueImages(),
@@ -106,7 +105,20 @@ function refreshPlayerSelector() {
 
 const confirmLeague = {
     confirm: function () {
-
+        const leagueName = document.querySelector('input[name="league-name"]').value;
+        const leagueRounds = document.querySelector('input[name="league-rounds"]').value;
+        const selectedPlayers = document.querySelector('div#selected-players').children;
+        const minRounds = 1;
+        const maxRounds = 10;
+        const minPlayers = 2;
+        const maxPlayers = 5
+        if (leagueName) {
+            if (+leagueRounds >= minRounds && +leagueRounds <= maxRounds) {
+                if (+selectedPlayers.length >= minPlayers && +selectedPlayers.length <= maxPlayers) {
+                    console.log('yeeeee');
+                } else {alert(`players Number(${selectedPlayers.length}) has to be between 2-5`);}
+            } else {alert(`League round(${leagueRounds}) has to be between 1-10`);}
+        } else {alert('League name required');}
     }
 }
 
