@@ -14,8 +14,7 @@ const roundDetails = {
     renderTable(){
         let containerDiv = document.querySelector('.container');
         console.log(containerDiv)
-        let table = this.htmlFactory();
-        containerDiv.innerHTML = table;
+        containerDiv.innerHTML = this.htmlFactory();
     },
 
     htmlFactory(){
