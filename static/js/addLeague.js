@@ -128,7 +128,6 @@ const confirmLeague = {
         if (leagueName) {
             if (+leagueRounds >= minRounds && +leagueRounds <= maxRounds) {
                 if (+selectedPlayers.length >= minPlayers && +selectedPlayers.length <= maxPlayers) {
-                    console.log('yeeeee');
                     const selectedPlayersDetails = getPlayersDetails(selectedPlayers)
                     const data = {
                         'leagueName': leagueName,
@@ -136,7 +135,6 @@ const confirmLeague = {
                         'userIds': selectedPlayersDetails
                     }
                     dataHandler.postNewLeague(data);
-                    console.log(data);
                 } else {
                     alert(`players Number(${selectedPlayers.length}) has to be between ${minPlayers}-${maxPlayers}`);
                 }
