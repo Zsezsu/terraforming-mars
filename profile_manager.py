@@ -1,4 +1,7 @@
 import bcrypt
+import re
+from queries import insert_queries
+from queries import select_queries
 
 
 def hash_password(plain_text_password):
