@@ -1,20 +1,59 @@
 import {dataHandler} from "./data/dataHandler.js";
 
 
+const data = {
+    players: await dataHandler.getPlayers(),
+    leagueImages: await dataHandler.getLeagueImages(),
+    loggedInUser: await dataHandler.getLoggedInUser()
+}
+
 function createNewLeague() {
     const addNewLeagueButton = document.querySelector('button#new-league');
     addNewLeagueButton.addEventListener('click', openNewLeagueDiv);
 }
 
-async function openNewLeagueDiv() {
-    const players = await dataHandler.getPlayers();
-    const leagueImages = await dataHandler.getLeagueImages();
-    const loggedInUser = await dataHandler.getLoggedInUser();
+function openNewLeagueDiv() {
     const playerContainer = document.querySelector('div#selected-players');
+    addPlayersToGame();
 
 }
 
+function addPlayersToGame() {
+    const usernameInput = document.querySelector('input[name="league-players"]');
+    usernameInput.addEventListener('input', selectPlayersByInput);
+}
 
+function selectPlayersByInput(e) {
+    const input = e.currentTarget.value;
+    let userContainer = document.querySelector('div#searched-players');
+    clearHtml(userContainer);
+    for (let player of data.players) {
+        if (player.name.includes(input) || player.username.includes(input) && player.id !== data.loggedInUser.id) {
+            let playerCard = createPlayerCard(player);
+            userContainer.insertAdjacentHTML('beforeend', playerCard);
+        }
+    }
+    addCardEventListeners()
+}
+
+function clearHtml(element) {
+    element.innerHTML = ``;
+}
+
+function createPlayerCard(player) {
+    return `
+    <div class="player-card" player-id="${player.id}">
+        <p>${player.username}(${player.name})</p>
+        <img alt="user-image" src="static/${player.image_source}">
+    </div>`
+}
+
+function addCardEventListeners() {
+    let userContainer = document.querySelector('div#searched-players');
+    for (let playerCard of userContainer.childNodes) {
+        console.log(playerCard);
+    }
+}
 
 function main() {
     createNewLeague();
