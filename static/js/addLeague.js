@@ -23,8 +23,8 @@ function addPlayersToGame() {
     usernameInput.addEventListener('input', selectPlayersByInput);
 }
 
-function selectPlayersByInput(e) {
-    const input = e.currentTarget.value;
+function selectPlayersByInput(event) {
+    const input = event.currentTarget.value;
     let userContainer = document.querySelector('div#searched-players');
     clearHtml(userContainer);
     for (let player of data.players) {
@@ -51,8 +51,19 @@ function createPlayerCard(player) {
 function addCardEventListeners() {
     let userContainer = document.querySelector('div#searched-players');
     for (let playerCard of userContainer.childNodes) {
-        console.log(playerCard);
+        playerCard.addEventListener('click', movePlayerToGame);
     }
+}
+
+function movePlayerToGame(event) {
+    const selectPlayerContainer = document.querySelector('div#searched-players');
+    const selectedPlayerContainer = document.querySelector('div#selected-players');
+    removeElement(selectPlayerContainer, event.currentTarget);
+    selectedPlayerContainer.appendChild(event.currentTarget);
+}
+
+function removeElement(container, element) {
+    container.removeChild(element);
 }
 
 function main() {
