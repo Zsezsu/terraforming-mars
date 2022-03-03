@@ -66,10 +66,11 @@ def is_unique_data_exist(unique_value):
     return False # bool(select_queries.is_unique_data_exist(unique_value))
 
 
-def unpack_registration_form(form_data):
+def unpack_registration_form_for_validation(data):
     """Unpacks registration from coming from html
     returns username, email, password, pp_id = (profile_picture_id)"""
-    return [username, email, password, pp_id]
+    data = dict(data)
+    return data['nickname'], data['email'], data['email2'], data['password'], data['password2']
 
 
 def unpack_login_form(form):
