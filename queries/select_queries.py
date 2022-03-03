@@ -30,6 +30,8 @@ def get_rounds(league_id):
         rounds
     WHERE 
         league_id = {league_id}
+    ORDER BY
+        sequence
     """
     return execute_select(SQL(query).format(
         league_id=Literal(int(league_id))

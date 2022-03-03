@@ -14,7 +14,13 @@
                 <img alt="mars" src="{{ url_for('static', filename='img/mars-1.webp') }}">
                 <h3 class="text-light">{{ 'Round ' + round.sequence | string }}</h3>
                 <div class="card-details">
-                    <i class="fa-solid fa-circle-check text-light"></i>
+                    {% if round.finished %}
+                        <i class="fa-solid fa-circle-check text-light"></i>
+                    {% elif loop.index0 < 1 or rounds[loop.index0 - 1].finished %}
+                        <i class="fa-regular fa-circle-check text-light"></i>
+                    {% else %}
+                        <i class="fa-solid fa-lock text-light"></i>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}
