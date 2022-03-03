@@ -229,17 +229,22 @@ VALUES
 INSERT INTO
     milestones(milestone_name, board_id, expansion_id)
 VALUES
-    ('Terraformer', 1,      NULL),
-    ('Mayor',       1,      NULL),
-    ('Gardener',    1,      NULL),
-    ('Builder',     1,      NULL),
-    ('Planner',     1,      NULL),
-    ('Generalist',  2,      NULL),
-    ('Specialist',  2,      NULL),
-    ('Ecologist',   2,      NULL),
-    ('Tycoon',      2,      NULL),
-    ('Legend',      2,      NULL),
-    ('Hoverlord',   NULL,   2);
+    ('Terraformer',     1,      NULL),
+    ('Mayor',           1,      NULL),
+    ('Gardener',        1,      NULL),
+    ('Builder',         1,      NULL),
+    ('Planner',         1,      NULL),
+    ('Generalist',      2,      NULL),
+    ('Specialist',      2,      NULL),
+    ('Ecologist',       2,      NULL),
+    ('Tycoon',          2,      NULL),
+    ('Legend',          2,      NULL),
+    ('Diversifier',     3,      NULL),
+    ('Tactician',       3,      NULL),
+    ('Polar Explorer',  3,      NULL),
+    ('Energizer',       3,      NULL),
+    ('Rim Settler',     3,      NULL),
+    ('Hoverlord',       NULL,   2);
 
 INSERT INTO
     awards(awards_name, board_id, expansion_id)
@@ -247,13 +252,18 @@ VALUES
     ('Landlord',        1,      NULL),
     ('Banker',          1,      NULL),
     ('Scientist',       1,      NULL),
-    ('hermalist',       1,      NULL),
+    ('Hermalist',       1,      NULL),
     ('Miner',           1,      NULL),
     ('Celebrity',       2,      NULL),
     ('Industrialist',   2,      NULL),
     ('Desert Settler',  2,      NULL),
     ('Estate Dealer',   2,      NULL),
     ('Benefactor',      2,      NULL),
+    ('Cultivator',      3,      NULL),
+    ('Magnate',         3,      NULL),
+    ('Space Baron',     3,      NULL),
+    ('Excentric',       3,      NULL),
+    ('Contractor',      3,      NULL),
     ('Venuphille',      NULL,   2)
 
 
