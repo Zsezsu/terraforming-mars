@@ -69,7 +69,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: row;
-    gap: 100px;
+    gap: 75px;
     justify-content: center;
     align-items: center;
 }
@@ -151,19 +151,22 @@
 
 /* --------------- League Slideshow --------------- */
 
-.new-league-images {
-    position: relative;
-    width: 70%;
-    border-radius: 20px;
-    box-shadow: black 5px 5px 10px -4px;
-}
-
 #league-slideshow {
     width: 100%;
+    height: auto;
     user-select: none;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+}
+
+.new-league-images {
+    position: relative;
+    width: 90%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: black 5px 5px 20px -4px;
 }
 
 #league-slideshow img, #league-slideshow img:hover {
@@ -191,5 +194,8 @@
 }
 
 #slideshow-image {
-    border-radius: 20px;
+    object-fit: cover;
+    border-radius: 15px;
+    width: 100%;
+    height: 300px;
 }
