@@ -45,7 +45,21 @@
     margin-top: -10px;
 }
 
-.card img:hover {
+.card:not(.locked) .card-image:hover img {
     filter: brightness(0.7) grayscale(0);
+    transition: 0.4s linear;
+}
+
+.lock-indicator {
+    font-size: 4em;
+    position: absolute;
+    top: 30%;
+    left: 45%;
+    opacity: 0;
+    transition: 0.4s linear;
+}
+
+.card.locked .card-image:hover .lock-indicator {
+    opacity: 1;
     transition: 0.4s linear;
 }

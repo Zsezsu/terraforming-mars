@@ -10,13 +10,22 @@
     <h1 class="text-center text-light">League {{ league_id }}</h1>
     <div class="cards rounds">
         {% for round in rounds %}
-            <div class="card round bg-dark" id="round-{{ round.id }}">
-                <img alt="mars" src="{{ url_for('static', filename='img/mars-1.webp') }}">
-                <h3 class="text-light">{{ 'Round ' + round.sequence | string }}</h3>
+            {% set finished = round.finished %}
+            {% set in_progress = loop.index0 < 1 or rounds[loop.index0 - 1].finished %}
+            {% set locked = not finished and not in_progress %}
+
+            <div class="card round bg-dark {{ 'locked' if locked }}" id="round-{{ round.id }}">
+                <div class="card-image">
+                    <img alt="mars" src="{{ url_for('static', filename='img/mars-1.webp') }}">
+                    {% if locked %}
+                        <i class="fa-solid fa-lock lock-indicator text-light"></i>
+                    {% endif %}
+                    <h3 class="text-light">{{ 'Round ' + round.sequence | string }}</h3>
+                </div>
                 <div class="card-details">
-                    {% if round.finished %}
+                    {% if finished %}
                         <i class="fa-solid fa-circle-check text-light"></i>
-                    {% elif loop.index0 < 1 or rounds[loop.index0 - 1].finished %}
+                    {% elif in_progress %}
                         <i class="fa-regular fa-circle-check text-light"></i>
                     {% else %}
                         <i class="fa-solid fa-lock text-light"></i>
