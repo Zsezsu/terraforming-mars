@@ -42,9 +42,9 @@ def is_password_format_correct(password):
     return bool
 
 
-def is_registration_passwords_equal(pwd1, pwd2):
-    """If password field one and password field two
-    the same string the same, returns True"""
+def is_registration_major_data_equal(str1, str2):
+    """If data field one and data field two
+    the same string, returns True"""
     return bool
 
 
