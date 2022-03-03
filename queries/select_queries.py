@@ -28,7 +28,8 @@ def get_rounds(league_id):
         *
     FROM
         rounds
-    WHERE league_id = {league_id}
+    WHERE 
+        league_id = {league_id}
     """
     return execute_select(SQL(query).format(
         league_id=Literal(int(league_id))
