@@ -24,6 +24,12 @@ def validate_registration(form):
     pass
 
 
+def validate_unique_data_matching(form):
+    """If email and password typed in correct
+    return True"""
+    return bool
+
+
 def validate_login(form):
     """If every input matches the requirements
     returns True"""
