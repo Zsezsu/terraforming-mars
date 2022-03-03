@@ -9,6 +9,7 @@ import queries.insert_queries as insert_queries
 import queries.select_queries as select_queries
 import queries.update_queries as update_queries
 import queries.delete_queries as delete_queries
+import helper
 
 
 load_dotenv()
@@ -102,7 +103,9 @@ def logout():
 
 @app.route('/round/<round_id>')
 def results(round_id=1):
-    return render_template('round_details.html', round_id=round_id)
+    round = select_queries.get_round_by_id(round_id)
+    round_status = helper.get_round_status(round)
+    return render_template('round_details.html', round_id=round_id, round_status=round_status)
 
 
 if __name__ == '__main__':
