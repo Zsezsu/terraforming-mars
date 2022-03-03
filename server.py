@@ -105,7 +105,10 @@ def logout():
 def results(round_id=1):
     round = select_queries.get_round_by_id(round_id)
     round_status = helper.get_round_status(round)
-    return render_template('round_details.html', round_id=round_id, round_status=round_status)
+    return render_template('round_details.html',
+                           round_id=round_id,
+                           round_status=round_status,
+                           league_id=round['league_id'])
 
 
 if __name__ == '__main__':

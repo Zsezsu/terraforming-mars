@@ -41,7 +41,7 @@ def get_players():
 def get_round_by_id(round_id):
     query = """
     SELECT 
-        started, finished
+        league_id, started, finished
     FROM 
         rounds
     WHERE id = {round_id}
