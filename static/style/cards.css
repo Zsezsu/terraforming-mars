@@ -51,28 +51,51 @@
 }
 
 .new-league {
-    width: 800px;
+    padding: 50px;
+    width: 50%;
     height: 600px;
+    margin: 20px 0;
+    background: #181b1e !important;
+}
+
+.new-league input {
+    margin: 10px 0 25px;
+    background: #212529 !important;
+    color: white;
+    border-radius: 5px;
+    border: 2px solid #212529;
+}
+
+.new-league h2 {
+    margin: 0 0 30px;
+}
+
+.new-league button {
+    margin: 5px 30px;
 }
 
 .player-card {
     display: flex;
     flex-direction: row;
-    border-radius: 5px;
-    border: 2px solid whitesmoke;
-    font-size: 0.8em!important;
     color: white;
-    width: 150px;
-    height: 50px;
-    padding: 20px;
-    justify-content: center;
+    width: 300px;
+    height: 70px;
+    font-size: 0.9em;
     align-items: center;
+    justify-content: stretch;
+    gap: 15px;
 }
 
 .player-card img {
-    width: 20px !important;
-    height: 20px !important;
-    border-radius: 100%;
+    object-fit: contain;
+    left: 0;
+    width: 100px;
+    height: 80px;
+    filter: none;
+}
+
+.player-card img:hover {
+    filter: none;
 }
 
 .player-container {
