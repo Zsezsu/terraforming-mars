@@ -50,12 +50,20 @@
     transition: 0.4s linear;
 }
 
+#new-league {
+    overflow: hidden;
+    transition: 0.4s linear;
+    height: 40px;
+}
+
 .new-league {
     padding: 50px;
     width: 55%;
-    height: auto;
+    height: 800px;
     margin: 20px 0;
     background: #181b1e !important;
+    transition: 1s ease;
+    overflow: hidden;
 }
 
 .new-league input {
@@ -108,4 +116,17 @@
     gap: 20px;
     justify-content: center;
     align-items: center;
+}
+
+.hide-new-league {
+    height: 0;
+    border: none;
+    padding: 0;
+}
+
+.hide-new-league-button {
+    height: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
 }
