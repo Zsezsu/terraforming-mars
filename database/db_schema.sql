@@ -120,6 +120,7 @@ DROP TABLE IF EXISTS leagues;
 CREATE TABLE leagues
 (
     id              SERIAL UNIQUE NOT NULL,
+    league_name     TEXT,
     league_admin    INTEGER       NULL,
     round_number    INTEGER,
     image_id        INTEGER,
