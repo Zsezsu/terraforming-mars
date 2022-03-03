@@ -143,6 +143,7 @@ CREATE TABLE rounds
     id          SERIAL UNIQUE NOT NULL,
     league_id   INTEGER,
     sequence    INTEGER,
+    started     BOOLEAN DEFAULT FALSE,
     finished    BOOLEAN DEFAULT FALSE,
     image_id    INTEGER,
     CONSTRAINT fk_league_id
