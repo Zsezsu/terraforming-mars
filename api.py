@@ -1,3 +1,5 @@
+import json
+
 from flask import Blueprint, Flask, request, jsonify, session
 
 import queries.insert_queries as insert_queries
@@ -36,3 +38,9 @@ def send_league_images():
                     {'id': 4, 'image_source': 'img/mars-4.webp'}
                     ]
     return jsonify(league_images)
+
+@api.route('/api/leagues', methods=['POST'])
+def create_league():
+    data = json.loads(request.data)
+    print(data)
+    return jsonify('')
