@@ -32,7 +32,6 @@
                 {% set username = logged_in_user['username'] %}
                 {% set name = logged_in_user['name'] %}
                 {% set img_source = logged_in_user['image_source'] %}
-
                 <div class="player-card card bg-dark" data-player-id="{{ user_id }}">
                     <img alt="Profile picture of {{ username }}"
                          src="{{ url_for('static', filename='img/mars-1.webp') }}">

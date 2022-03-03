@@ -56,9 +56,12 @@ function clearHtml(element) {
 
 function createPlayerCard(player) {
     return `
-    <div class="player-card" data-player-id="${player.id}">
-        <p>${player.username}(${player.name})</p>
-        <img alt="user-image" src="static/${player.image_source}">
+    <div class="player-card card bg-dark" data-player-id="${player.id}">
+        <img alt="Profile picture of ${player.username}" src="static/${player.image_source}">
+        <div class="player-card-description">
+            <p>${player.name}</p>
+            <small>${player.username}</small>
+        </div>
     </div>`;
 }
 
