@@ -1,7 +1,11 @@
-from flask import Flask, render_template, request, url_for, redirect, jsonify
+from flask import Flask, render_template, request, url_for, redirect, jsonify, session
 from api import api
 
 from dotenv import load_dotenv
+import queries.insert_queries as insert_queries
+import queries.select_queries as select_queries
+import queries.update_queries as update_queries
+import queries.delete_queries as delete_queries
 
 load_dotenv()
 app = Flask(__name__)
@@ -32,7 +36,15 @@ def profile():
 
 @app.route('/my-leagues')
 def leagues():
-    return render_template('my_leagues.html')
+    session['UID'] = 1
+    uid = session['UID']
+    logged_in_user = select_queries.get_logged_in_user(uid)
+    logged_in_user = {'id': 1,
+                      'username': 'Zsu',
+                      'name': 'Zsuzsanna Juhász',
+                      'image_source': 'img/favicon.ico'
+                      }
+    return render_template('my_leagues.html', logged_in_user=logged_in_user)
 
 
 if __name__ == '__main__':

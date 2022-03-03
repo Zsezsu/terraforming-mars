@@ -9,6 +9,9 @@ function createNewLeague() {
 async function openNewLeagueDiv() {
     const players = await dataHandler.getPlayers();
     const leagueImages = await dataHandler.getLeagueImages();
+    const loggedInUser = await dataHandler.getLoggedInUser();
+    const playerContainer = document.querySelector('div#selected-players');
+
 }
 
 

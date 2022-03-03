@@ -49,3 +49,39 @@
     filter: brightness(0.7) grayscale(0);
     transition: 0.4s linear;
 }
+
+.new-league {
+    width: 800px;
+    height: 600px;
+}
+
+.player-card {
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+    border: 2px solid whitesmoke;
+    font-size: 0.8em!important;
+    color: white;
+    width: 150px;
+    height: 50px;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-card img {
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 100%;
+}
+
+.player-container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 2px solid whitesmoke;
+    color: white;
+    width: 570px;
+    height: 200px;
+    padding: 10px;
+}

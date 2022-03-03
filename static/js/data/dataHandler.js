@@ -3,7 +3,10 @@ export const dataHandler = {
         return await apiGet(`/api/players`);
     },
     getLeagueImages: async function() {
-        return await apiGet(`/api/images/leagues`)
+        return await apiGet(`/api/images/leagues`);
+    },
+    getLoggedInUser: async function() {
+        return await apiGet(`/api/users/logged-in`);
     }
 }
 
