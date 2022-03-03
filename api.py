@@ -42,5 +42,4 @@ def send_league_images():
 @api.route('/api/leagues', methods=['POST'])
 def create_league():
     data = json.loads(request.data)
-    print(data)
     return jsonify('')
