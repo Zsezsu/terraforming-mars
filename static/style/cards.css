@@ -52,8 +52,8 @@
 
 .new-league {
     padding: 50px;
-    width: 50%;
-    height: 600px;
+    width: 55%;
+    height: auto;
     margin: 20px 0;
     background: #181b1e !important;
 }
@@ -87,10 +87,10 @@
 }
 
 .player-card img {
-    object-fit: contain;
+    object-fit: cover;
     left: 0;
+    height: 120%;
     width: 100px;
-    height: 80px;
     filter: none;
 }
 
@@ -99,12 +99,13 @@
 }
 
 .player-container {
-    display: flex;
-    flex-direction: column;
+    margin: 10px 0 20px;
+    padding: 20px;
     border-radius: 10px;
-    border: 2px solid whitesmoke;
-    color: white;
-    width: 570px;
-    height: 200px;
-    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
 }
