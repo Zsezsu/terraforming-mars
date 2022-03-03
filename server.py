@@ -38,6 +38,11 @@ def leagues():
     return render_template('my_leagues.html', leagues=leagues_data)
 
 
+@app.route('/league/<league_id>')
+def league(league_id):
+    return render_template('league.html', league_id=league_id)
+
+
 @app.route('/test')
 def test():
     milestones = select_queries.get_milestones()
