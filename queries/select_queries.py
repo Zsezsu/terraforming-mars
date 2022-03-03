@@ -20,3 +20,12 @@ def get_round_by_id(round_id):
     """
     return execute_select(SQL(query).format(round_id=Literal(round_id)), fetchall=False)
 
+
+def get_boards():
+    query = """
+    SELECT
+        *
+    FROM boards
+    """
+    return execute_select(query)
+

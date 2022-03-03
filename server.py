@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, url_for, redirect, jsonify
 from dotenv import load_dotenv
+from api import api
 
 import queries.insert_queries as insert_queries
 import queries.select_queries as select_queries
@@ -9,6 +10,7 @@ import helper
 
 load_dotenv()
 app = Flask(__name__)
+app.register_blueprint(api)
 
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
