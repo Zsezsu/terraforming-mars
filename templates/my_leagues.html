@@ -20,7 +20,7 @@
         <input type="text" name="league-name" placeholder="League Name">
         <label class="text-light" for="league-rounds">Number of Rounds(Limit 10)</label>
         <input type="number" name="league-rounds" min="1" max="10" placeholder="Number of Rounds(max 10)">
-        <label class="text-light" for="league-players">League Players</label>
+        <label id="label-league-players" class="text-light" for="league-players">League Players 1/5</label>
         <div id="selected-players" class="player-container">
             {% set user_id = logged_in_user['id'] %}
             {% set username = logged_in_user['username'] %}

@@ -75,8 +75,10 @@ function movePlayerToGame(event) {
 
     const selectedPlayerContainer = document.querySelector('div#selected-players');
     selectedPlayerContainer.appendChild(event.currentTarget);
-    event.currentTarget.removeEventListener('click', movePlayerToGame)
+    event.currentTarget.removeEventListener('click', movePlayerToGame);
     addRemoveButton(event.currentTarget);
+    refreshPlayersNumber();
+
 }
 
 function addRemoveButton(player) {
@@ -93,12 +95,19 @@ function removePlayer(event) {
     const selectedPlayerContainer = document.querySelector('div#selected-players');
     const currentPlayer = selectedPlayerContainer.querySelector(`div[player-id="${playerId}"]`)
     selectedPlayerContainer.removeChild(currentPlayer);
-    refreshPlayerSelector()
+    refreshPlayersNumber();
+    refreshPlayerSelector();
 }
 
 function refreshPlayerSelector() {
     const userInput = document.querySelector('input[name="league-players"]').value;
     playerSelector(userInput);
+}
+
+function refreshPlayersNumber() {
+    const selectedPlayerContainer = document.querySelector('div#selected-players');
+    const selectedPlayersLabel = document.querySelector('label#label-league-players');
+    selectedPlayersLabel.innerText = `League Players ${selectedPlayerContainer.children.length}/5`;
 }
 
 // --------------------------------Confirm league------------------------------------------
@@ -110,15 +119,21 @@ const confirmLeague = {
         const selectedPlayers = document.querySelector('div#selected-players').children;
         const minRounds = 1;
         const maxRounds = 10;
-        const minPlayers = 2;
+        const minPlayers = 1;
         const maxPlayers = 5
         if (leagueName) {
             if (+leagueRounds >= minRounds && +leagueRounds <= maxRounds) {
                 if (+selectedPlayers.length >= minPlayers && +selectedPlayers.length <= maxPlayers) {
                     console.log('yeeeee');
-                } else {alert(`players Number(${selectedPlayers.length}) has to be between 2-5`);}
-            } else {alert(`League round(${leagueRounds}) has to be between 1-10`);}
-        } else {alert('League name required');}
+                } else {
+                    alert(`players Number(${selectedPlayers.length}) has to be between ${minPlayers}-${maxPlayers}`);
+                }
+            } else {
+                alert(`League round(${leagueRounds}) has to be between ${minRounds}-${maxRounds}`);
+            }
+        } else {
+            alert('League name required');
+        }
     }
 }
 
