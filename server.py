@@ -43,6 +43,12 @@ def send_players():
     return jsonify(players)
 
 
+@app.route('/api/images/leagues')
+def send_league_images():
+    league_images = select_queries.get_images('leagues')
+    return jsonify(league_images)
+
+
 @app.route('/test')
 def test():
     milestones = select_queries.get_milestones()

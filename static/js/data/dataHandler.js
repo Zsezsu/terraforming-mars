@@ -1,6 +1,9 @@
 export const dataHandler = {
-    getPlayers: async function () {
+    getPlayers: async function() {
         return await apiGet(`/api/players`);
+    },
+    getLeagueImages: async function() {
+        return await apiGet(`/api/images/leagues`)
     }
 }
 
