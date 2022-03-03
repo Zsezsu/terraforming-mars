@@ -25,7 +25,7 @@
             <label class="text-light" for="league-rounds">Number of Rounds</label><br>
             <input type="number" id="league-rounds" name="league-rounds" min="1" max="10"
                    placeholder="Choose the number of rounds between 1-10"><br>
-            <label class="text-light" for="league-players">League Players 1/5</label><br>
+            <label id="label-league-players" class="text-light" for="league-players">League Players 1/5</label><br>
             <input type="text" id="league-players" name="league-players" placeholder="Add new players to league"><br>
             <div id="selected-players" class="player-container bg-dark">
                 {% set user_id = logged_in_user['id'] %}
@@ -33,7 +33,7 @@
                 {% set name = logged_in_user['name'] %}
                 {% set img_source = logged_in_user['image_source'] %}
 
-                <div class="player-card card bg-dark" player-id="{{ user_id }}">
+                <div class="player-card card bg-dark" data-player-id="{{ user_id }}">
                     <img alt="Profile picture of {{ username }}"
                          src="{{ url_for('static', filename='img/mars-1.webp') }}">
                     <div class="player-card-description">
