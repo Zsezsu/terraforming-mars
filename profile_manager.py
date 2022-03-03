@@ -47,7 +47,11 @@ def validate_login(form):
 def submit_registration(form):
     """This submits !valid! data to database
     If process successful returns user id"""
-    return user_id
+    hashed_pwd = hash_password(form['password'])
+    data = update_password_on_form(form, hashed_pwd)
+    insert_queries.insert_new_user(data)
+    user_id = select_queries.get_user_id(form['nickname'])
+    return 99 # user_id
 
 
 def is_password_format_correct(password):
