@@ -37,17 +37,17 @@ function playerSelector(input) {
             }
         }
     }
-    addCardEventListeners()
+    addCardEventListeners();
 }
 
 function selectedPlayers(playerId) {
     const selectedPlayers = document.querySelector('div#selected-players').children;
     for (let selectedPlayer of selectedPlayers) {
         if (+selectedPlayer.getAttribute('player-id') === playerId) {
-            return true
+            return true;
         }
     }
-    return false
+    return false;
 }
 
 function clearHtml(element) {
@@ -59,7 +59,7 @@ function createPlayerCard(player) {
     <div class="player-card" player-id="${player.id}">
         <p>${player.username}(${player.name})</p>
         <img alt="user-image" src="static/${player.image_source}">
-    </div>`
+    </div>`;
 }
 
 function addCardEventListeners() {
@@ -70,14 +70,18 @@ function addCardEventListeners() {
 }
 
 function movePlayerToGame(event) {
-    const selectPlayerContainer = document.querySelector('div#searched-players');
-    selectPlayerContainer.removeChild(event.currentTarget);
-
+    const playerLimit = 5;
     const selectedPlayerContainer = document.querySelector('div#selected-players');
-    selectedPlayerContainer.appendChild(event.currentTarget);
-    event.currentTarget.removeEventListener('click', movePlayerToGame);
-    addRemoveButton(event.currentTarget);
-    refreshPlayersNumber();
+    const selectPlayerContainer = document.querySelector('div#searched-players');
+    if (selectedPlayerContainer.children.length >= playerLimit) {
+        alert('You have reached the player limit(5)');
+    } else {
+        selectPlayerContainer.removeChild(event.currentTarget);
+        selectedPlayerContainer.appendChild(event.currentTarget);
+        event.currentTarget.removeEventListener('click', movePlayerToGame);
+        addRemoveButton(event.currentTarget);
+        refreshPlayersNumber();
+    }
 
 }
 
@@ -120,7 +124,7 @@ const confirmLeague = {
         const minRounds = 1;
         const maxRounds = 10;
         const minPlayers = 1;
-        const maxPlayers = 5
+        const maxPlayers = 5;
         if (leagueName) {
             if (+leagueRounds >= minRounds && +leagueRounds <= maxRounds) {
                 if (+selectedPlayers.length >= minPlayers && +selectedPlayers.length <= maxPlayers) {
