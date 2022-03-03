@@ -60,11 +60,10 @@ def is_registration_major_data_equal(str1, str2):
     the same string, returns True"""
     return bool
 
-
-def is_unique_data_exist(unique):
+def is_unique_data_exist(unique_value):
     """If unique already exist in database
     returns True"""
-    return bool
+    return False # bool(select_queries.is_unique_data_exist(unique_value))
 
 
 def unpack_registration_form(form_data):
