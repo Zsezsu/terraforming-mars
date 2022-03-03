@@ -84,3 +84,10 @@ def get_logged_in_user_leagues(user_id):
     """
     return execute_select(SQL(query).format(user_id=Literal(user_id)))
 
+
+def get_user_id(nickname):
+    pass
+
+
+def is_unique_data_exist(unique_value):
+    pass
