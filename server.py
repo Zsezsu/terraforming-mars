@@ -40,6 +40,8 @@ def my_leagues():
 
 @app.route('/league/<league_id>')
 def league(league_id):
+    rounds = select_queries.get_rounds(league_id)
+    print(rounds)
     return render_template('league.html', league_id=league_id)
 
 
