@@ -20,14 +20,19 @@ def update_password_on_form(form, password):
 
 def validate_registration(form):
     """If every input matches the requirements
-    returns True"""
-    pass
-
-
-def validate_unique_data_matching(form):
-    """If email and password typed in correct
-    return True"""
-    return bool
+    returns an empty error message"""
+    nickname, email, email2, pwd, pwd2 = unpack_registration_form_for_validation(form)
+    if is_unique_data_exist(nickname):
+        return 'nickname already exist'
+    if is_unique_data_exist(email):
+        return 'email already registered'
+    if email != email2:
+        return 'email not matching'
+    if pwd != pwd2:
+        return 'password not matching'
+    if is_password_format_correct(pwd) is None:
+        return 'your password must contains minimum 8 characters, at least one letter and one number and one big letter'
+    return ''
 
 
 def validate_login(form):
