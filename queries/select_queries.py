@@ -8,3 +8,15 @@ def get_milestones():
     SELECT milestone_name FROM milestones;
     """
     return execute_select(SQL(query))
+
+
+def get_round_by_id(round_id):
+    query = """
+    SELECT 
+        started, finished
+    FROM 
+        rounds
+    WHERE id = {round_id}
+    """
+    return execute_select(SQL(query).format(round_id=Literal(round_id)), fetchall=False)
+
