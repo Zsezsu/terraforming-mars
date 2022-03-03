@@ -2,7 +2,6 @@ const roundDetails = {
     init(){
         const id = this.getDataValue('id');
         const roundStatus = this.getDataValue('status');
-        console.log(roundStatus)
         this.pageControl(roundStatus)
     },
 
@@ -16,31 +15,49 @@ const roundDetails = {
         if (roundStatus === 'init_round'){
              containerDiv.insertAdjacentHTML('afterbegin', `<button id="init">Init round</button>`);
              let button = document.querySelector('#init');
-             button.addEventListener('click', initButtonClick)
+             button.addEventListener('click', this.initButtonClick.bind(this))
         } else if (roundStatus === 'started'){
 
         } else if (roundStatus === 'finished'){
 
         }
 
-        function initButtonClick(event){
-            containerDiv.insertAdjacentHTML(
-                "beforeend",
-                `<label for="table" class="text-light">Please select the table of this game</label>
-                    <select>
-                        <option></option>
-                    </select>`)
+    },
+
+    async initButtonClick(event){
+        let button = event.currentTarget;
+        button.hidden = 'True';
+        const containerDiv = document.querySelector('.container');
+        let boards =  await this.fetchData();
+        let optionHTML = ''
+        for (let board of boards){
+            optionHTML += `<option id="${board['id']}">${board['board_name']}</option>`
         }
+        containerDiv.insertAdjacentHTML(
+            "beforeend",
+            `<label for="table" class="text-light">Please select the table of this game</label>
+                <select id="select-board">
+                    ${optionHTML}
+                </select>`);
+        let select = document.querySelector('#select-board');
+        select.addEventListener('select', this.selectEvent.bind(this))
+
+    },
+
+
+    selectEvent(event){
+        let value = event.currentTarget.value;
+
     },
 
     async fetchData(){
         let response = await fetch('/api/boards');
+        return await response.json();
     },
 
 
     renderTable(){
         let containerDiv = document.querySelector('.container');
-        console.log(containerDiv)
         containerDiv.innerHTML = this.htmlFactory();
     },
 
