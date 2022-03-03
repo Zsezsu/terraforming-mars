@@ -5,6 +5,7 @@
 {% block script %}
     <script type="module" src="{{ url_for('static', filename='js/addLeague.js') }}" defer></script>
     <script type="module" src="{{ url_for('static', filename='js/addLeagueTransition.js') }}" defer></script>
+    <script type="module" src="{{ url_for('static', filename='js/leagueSlideshow.js') }}" defer></script>
 {% endblock %}
 
 {% block nav_games %}active{% endblock %}
@@ -49,7 +50,11 @@
         </div>
         <div id="league-slideshow">
             <h2 class="text-center text-light">Choose an image</h2>
-            <div id="new-league-pictures"></div>
+            <div id="new-league-pictures text-light">
+                <img id="slideshow-image" alt="league background" src="">
+                <i class="fa-solid fa-angle-left text-light" id="slideshow-previous"></i>
+                <i class="fa-solid fa-angle-right text-light" id="slideshow-next"></i>
+            </div>
         </div>
     </div>
     <div class="leagues">
