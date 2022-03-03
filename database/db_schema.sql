@@ -38,7 +38,7 @@ DROP TABLE IF EXISTS images;
 CREATE TABLE images
 (
     id          SERIAL UNIQUE NOT NULL,
-    image       TEXT,
+    source       TEXT,
     league_card BOOLEAN DEFAULT FALSE,
     user_image  BOOLEAN DEFAULT FALSE,
     corporation BOOLEAN DEFAULT FALSE
