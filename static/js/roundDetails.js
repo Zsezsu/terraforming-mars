@@ -1,13 +1,15 @@
 const roundDetails = {
     init(){
-        const id = this.getRoundId();
-        this.renderTable();
+        const id = this.getDataValue('id');
+        const roundStatus = this.getDataValue('status');
+        console.log(roundStatus)
     },
 
-    getRoundId(){
+    getDataValue(dataValue){
         const containerDiv = document.querySelector('.container');
-        return containerDiv.getAttribute('id');
+        return containerDiv.getAttribute(`data-${dataValue}`);
     },
+
 
     renderTable(){
         let containerDiv = document.querySelector('.container');

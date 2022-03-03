@@ -6,7 +6,7 @@
 {% block script_results %}<script src="{{ url_for('static', filename='js/roundDetails.js') }}" defer></script> {% endblock %}
 
 {% block content %}
-    <div class="container" id="{{ round_id }}">
+    <div class="container" data-id="{{ round_id }}" data-status="{{ round_status }}">
 
     </div>
 {% endblock %}
