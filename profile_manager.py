@@ -48,8 +48,8 @@ def is_registration_major_data_equal(str1, str2):
     return bool
 
 
-def is_username_exist(username):
-    """If username already exist in database
+def is_unique_data_exist(unique):
+    """If unique already exist in database
     returns True"""
     return bool
 
