@@ -59,10 +59,6 @@ def is_password_format_correct(password):
     returns True"""
     return re.match("^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$", password)
 
-def is_registration_major_data_equal(str1, str2):
-    """If data field one and data field two
-    the same string, returns True"""
-    return bool
 
 def is_unique_data_exist(unique_value):
     """If unique already exist in database
