@@ -109,3 +109,14 @@ def get_password(token):
     return execute_select(SQL(query).format(
         token=Literal(token)
     ), fetchall=False)
+
+
+def get_user_email(user_id):
+    query = """
+    SELECT email
+    FROM players
+    WHERE id = {user_id}
+    """
+    return execute_select(SQL(query).format(
+        user_id=Literal(user_id)
+    ), fetchall=False)

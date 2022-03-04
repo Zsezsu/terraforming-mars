@@ -57,7 +57,7 @@ def submit_registration(form):
     hashed_pwd = hash_password(form['password'])
     data = update_password_on_form(form, hashed_pwd)
     insert_queries.insert_new_user(data)
-    user_id = select_queries.get_user_id(form['nickname'])
+    user_id = select_queries.get_user_id(form['nickname'])['id']
     return user_id
 
 
