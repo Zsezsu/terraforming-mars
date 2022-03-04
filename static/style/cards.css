@@ -163,12 +163,21 @@
     border-radius: 5px;
 }
 
+#searched-players p {
+    display: inline;
+    margin-right: 15px;
+}
+
 #searched-players div:hover {
     background: white;
     color: black;
 }
 
 #searched-players img {
+    display: none;
+}
+
+.hidden {
     display: none;
 }
 
