@@ -101,3 +101,7 @@
 .round-table th:not(.editable), .round-table th:not(.editable) {
     background-color: #2c3034;
 }
+
+#save-round {
+    float: right;
+}
