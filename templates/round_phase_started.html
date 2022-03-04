@@ -1,0 +1,34 @@
+<div class="round-status" data-id="{{ round_id }}" data-status="{{ round_status }}">
+    <p class="text-light text-center">Status: <small class="status-started">Started</small></p>
+</div>
+<div class="round-game">
+    <table class="round-table table table-dark table-bordered text-center">
+        <thead>
+        <tr>
+            <th>Player</th>
+            <th>Company</th>
+            <th class="editable">TR</th>
+            <th class="editable">Milestone Points</th>
+            <th class="editable">Award Points</th>
+            <th class="editable">Greens</th>
+            <th class="editable">Cities</th>
+            <th class="editable">Greens around Cities</th>
+            <th class="editable">Win points</th>
+            <th>Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for player in players_in_game %}
+            <tr>
+                <th>{{ player.username }}</th>
+                <th>{{ player.company }}</th>
+                {% for _ in range(7) %}
+                    <td class="editable"><input type="number" class="edit-data text-center text-light"
+                                                value="0" data-player-id="{{ player.id }}"></td>
+                {% endfor %}
+                <th class="result" data-player-id="{{ player.id }}">0</th>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
