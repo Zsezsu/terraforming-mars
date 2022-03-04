@@ -14,10 +14,10 @@ api = Blueprint('api', __name__, template_folder='templates')
 def send_players():
     players = select_queries.get_players()
     players = [
-        {'id': 1, 'username': 'Zsu', 'name': 'Zsuzsanna Juhász', 'image_source': 'img/favicon.ico'},
-        {'id': 2, 'username': 'Bende', 'name': 'Bendegúz Dudaskó', 'image_source': 'img/favicon.ico'},
-        {'id': 3, 'username': 'Viktor', 'name': 'Viktor Sági', 'image_source': 'img/favicon.ico'},
-        {'id': 4, 'username': 'Benedek', 'name': 'Benedek Halaj', 'image_source': 'img/favicon.ico'}
+        {'id': 1, 'username': 'egyetlenkiralyano', 'name': 'Zsuzsanna Juhász', 'image_source': 'img/favicon.ico'},
+        {'id': 2, 'username': 'grandecruz', 'name': 'Bendegúz Dudaskó', 'image_source': 'img/favicon.ico'},
+        {'id': 3, 'username': 'viktorurunkkiralyunk', 'name': 'Viktor Sági', 'image_source': 'img/favicon.ico'},
+        {'id': 4, 'username': 'benedekhalaj', 'name': 'Benedek Halaj', 'image_source': 'img/favicon.ico'}
     ] # DUMMY DATA----------------------------------------------
     return jsonify(players)
 
