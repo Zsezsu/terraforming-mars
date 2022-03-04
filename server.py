@@ -51,7 +51,6 @@ def league(league_id):
     return f'League {league_id}'
 
 
-
 @app.route('/my-leagues')
 def leagues():
     uid = session['UID']
