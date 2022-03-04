@@ -13,6 +13,17 @@ def get_milestones():
     return execute_select(SQL(query))
 
 
+def get_user_id(token):
+    query = """
+    SELECT id
+    FROM players
+    WHERE username LIKE {token} OR email LIKE {token}
+    """
+    return dict(execute_select(SQL(query).format(
+        token=Literal(token)
+    ), fetchall=False))
+
+
 def get_players():
     query = """
     SELECT 
@@ -89,5 +100,12 @@ def get_user_id(nickname):
     pass
 
 
-def is_unique_data_exist(unique_value):
-    pass
+def get_password(token):
+    query = """
+    SELECT id, password
+    FROM players
+    WHERE username LIKE {token} OR email LIKE {token}
+    """
+    return dict(execute_select(SQL(query).format(
+        token=Literal(token)
+    ), fetchall=False))
