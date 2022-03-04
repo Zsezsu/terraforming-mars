@@ -3,7 +3,11 @@
 
 {% block title %}Round {{ round_id }}{% endblock %}
 
-{#{% block script_results %}<script src="{{ url_for('static', filename='js/roundDetails.js') }}" defer></script> {% endblock %}#}
+{% block script_results %}
+    {% if round_status == 'started' %}
+        <script src="{{ url_for('static', filename='js/roundStarted.js') }}" defer></script>
+    {% endif %}
+{% endblock %}
 
 {% block content %}
     <h1 class="text-light text-center">Round {{ round.sequence }} of League {{ round.league_id }}</h1>
@@ -48,7 +52,7 @@
             <p class="text-light text-center">Status: <small class="status-started">Started</small></p>
         </div>
         <div class="round-game">
-            <table class="round-table table table-dark">
+            <table class="round-table table table-dark table-bordered table-striped">
                 <thead>
                 <tr>
                     <th>Player</th>
