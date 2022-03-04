@@ -25,7 +25,28 @@ def get_boards():
     query = """
     SELECT
         *
-    FROM boards
+    FROM 
+        boards
     """
-    return execute_select(query)
+    return execute_select(SQL(query))
+
+
+def get_expansions():
+    query = """
+    SELECT
+        *
+    FROM 
+        expansions
+    """
+    return execute_select(SQL(query))
+
+
+def get_corporations():
+    query = """
+    SELECT
+        *
+    FROM 
+        corporations
+    """
+    return execute_select(SQL(query))
 

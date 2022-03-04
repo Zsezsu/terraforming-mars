@@ -50,10 +50,16 @@ def test():
 def results(round_id=1):
     round_data = select_queries.get_round_by_id(round_id)
     round_status = helper.get_round_status(round_data)
+    game_data = {
+        "boards": select_queries.get_boards(),
+        "expansions": select_queries.get_expansions(),
+        "corporations": select_queries.get_corporations()
+    }
     return render_template('round_details.html',
                            round_status=round_status,
                            round=round_data,
-                           round_id=round_id)
+                           round_id=round_id,
+                           game=game_data)
 
 
 if __name__ == '__main__':
