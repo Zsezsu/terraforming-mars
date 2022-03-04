@@ -8,7 +8,7 @@ let currentImageIndex = 0;
 main();
 
 async function main() {
-    images = await dataHandler.getImages();
+    images = await dataHandler.getImages('league-cards');
     maxImageIndex = images.length;
     changeImage();
     const previousButton = document.getElementById('slideshow-previous');
@@ -18,7 +18,8 @@ async function main() {
 }
 
 function changeImage() {
-    leagueImage.src = images[currentImageIndex];
+    leagueImage.src = `static/${images[currentImageIndex].image_source}`;
+    leagueImage.setAttribute('data-image-id', images[currentImageIndex].id);
 }
 
 function nextImage() {
