@@ -27,6 +27,7 @@
                    placeholder="Choose the number of rounds between 1-10"><br>
             <label id="label-league-players" class="text-light" for="league-players">League Players 1/5</label><br>
             <input type="text" id="league-players" name="league-players" placeholder="Add new players to league"><br>
+            <div id="searched-players"></div>
             <div id="selected-players" class="player-container bg-dark">
                 {% set user_id = logged_in_user['id'] %}
                 {% set username = logged_in_user['username'] %}
@@ -41,9 +42,7 @@
                     </div>
                 </div>
             </div>
-            <div id="searched-players"></div>
-            <button id="button-confirm" class="btn btn-light" type="button">Confirm</button>
-            <br>
+            <button id="button-confirm" class="btn btn-light" type="button">Confirm</button><br>
             <button id="button-close" class="btn btn-dark" type="button">Close</button>
         </div>
         <div class="league-separator"></div>

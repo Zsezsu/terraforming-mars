@@ -104,6 +104,7 @@
     gap: 20px;
     justify-content: center;
     align-items: center;
+    width: 600px;
 }
 
 .player-card {
@@ -147,6 +148,28 @@
     height: 90%;
     width: 5px;
     background: #292a2f;
+}
+
+#searched-players {
+    position: absolute;
+    z-index: 1;
+    margin-top: -23px;
+    border-radius: 2px;
+}
+
+#searched-players div {
+    width: 600px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+#searched-players div:hover {
+    background: white;
+    color: black;
+}
+
+#searched-players img {
+    display: none;
 }
 
 /* --------------- League Slideshow --------------- */
