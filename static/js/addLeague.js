@@ -32,10 +32,13 @@ function playerSelector(input) {
     let userContainer = document.querySelector('div#searched-players');
     clearHtml(userContainer);
     for (let player of data.players) {
-        if (player.name.toLowerCase().includes(input.toLowerCase()) || player.username.toLowerCase().includes(input.toLowerCase())) {
-            if (!selectedPlayers(player.id)) {
-                let playerCard = createPlayerCard(player);
-                userContainer.insertAdjacentHTML('beforeend', playerCard);
+        if (input !== '') {
+            if (player.name.toLowerCase().includes(input.toLowerCase()) ||
+                player.username.toLowerCase().includes(input.toLowerCase())) {
+                if (!selectedPlayers(player.id)) {
+                    let playerCard = createPlayerCard(player);
+                    userContainer.insertAdjacentHTML('beforeend', playerCard);
+                }
             }
         }
     }
