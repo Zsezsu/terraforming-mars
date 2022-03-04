@@ -61,7 +61,6 @@ def registration():
 
 @app.route('/registration-onsubmit', methods=['POST'])
 def registration_onsubmit():
-    print(request.form)
     error_message = pm.validate_registration(request.form)
     if error_message == '':
         user_id = pm.submit_registration(request.form)
