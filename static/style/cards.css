@@ -177,6 +177,18 @@
     display: none;
 }
 
+.remove-player {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    transition: 0.2s ease;
+}
+
+.remove-player:hover {
+    filter: brightness(0.8);
+    transition: 0.2s ease;
+}
+
 .hidden {
     display: none;
 }

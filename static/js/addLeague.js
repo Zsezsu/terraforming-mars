@@ -96,7 +96,7 @@ function movePlayerToGame(event) {
 function addRemoveButton(player) {
     const playerId = +player.getAttribute('data-player-id');
     player.insertAdjacentHTML('beforeend',
-        `<i data-remove-id="${playerId}" class="fa-solid fa-circle-xmark text-danger"></i>`
+        `<i data-remove-id="${playerId}" class="remove-player fa-solid fa-circle-xmark text-light"></i>`
     );
     const removeButton = player.querySelector('i');
     removeButton.addEventListener('click', removePlayer);
