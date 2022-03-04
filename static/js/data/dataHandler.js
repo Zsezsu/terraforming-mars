@@ -3,20 +3,11 @@ export const dataHandler = {
     getPlayers: async function () {
         return await apiGet(`/api/players`);
     },
-    getLeagueImages: async function () {
-        return await apiGet(`/api/images/leagues`);
-    },
     getLoggedInUser: async function () {
         return await apiGet(`/api/users/logged-in`);
     },
-    getImages: async function() {
-        return [
-            '/static/img/mars-1.webp',
-            '/static/img/mars-2.webp',
-            '/static/img/mars-3.webp',
-            '/static/img/mars-4.webp',
-            '/static/img/mars-5.webp',
-        ]
+    getImages: async function(imageType) {
+        return await apiGet(`/api/images/${imageType}`)
     },
     //POST
     postNewLeague: async function (data) {

@@ -2,7 +2,7 @@ import {dataHandler} from "./data/dataHandler.js";
 
 const data = {
     players: await dataHandler.getPlayers(),
-    leagueImages: await dataHandler.getLeagueImages(),
+    leagueImages: await dataHandler.getImages('league-cards'),
     loggedInUser: await dataHandler.getLoggedInUser()
 }
 
@@ -30,7 +30,7 @@ function playerSelector(input) {
     let userContainer = document.querySelector('div#searched-players');
     clearHtml(userContainer);
     for (let player of data.players) {
-        if (player.name.includes(input) || player.username.includes(input)) {
+        if (player.name.toLowerCase().includes(input.toLowerCase()) || player.username.toLowerCase().includes(input.toLowerCase())) {
             if (!selectedPlayers(player.id)) {
                 let playerCard = createPlayerCard(player);
                 userContainer.insertAdjacentHTML('beforeend', playerCard);
@@ -124,6 +124,8 @@ const confirmLeague = {
         const leagueName = document.querySelector('input[name="league-name"]').value;
         const leagueRounds = document.querySelector('input[name="league-rounds"]').value;
         const selectedPlayers = document.querySelector('div#selected-players').children;
+        const leagueAdminId = data.loggedInUser.id;
+        const selectedLeagueImage = document.querySelector('img[data-image-id]');
         const minRounds = 1;
         const maxRounds = 10;
         const minPlayers = 1;
@@ -135,7 +137,9 @@ const confirmLeague = {
                     const data = {
                         'leagueName': leagueName,
                         'leagueRounds': leagueRounds,
-                        'userIds': selectedPlayersDetails
+                        'userIds': selectedPlayersDetails,
+                        'leagueAdminId': leagueAdminId,
+                        'leagueImageId': selectedLeagueImage.getAttribute('data-image-id')
                     }
                     dataHandler.postNewLeague(data);
                 } else {
