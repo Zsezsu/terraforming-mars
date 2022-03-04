@@ -55,11 +55,18 @@ def results(round_id=1):
         "expansions": select_queries.get_expansions(),
         "corporations": select_queries.get_corporations()
     }
+    players_data = [
+        {'username': 'dudaskobende', 'player_id': 1},
+        {'username': 'Zsezsu', 'player_id': 2},
+        {'username': 'Sagi-Viktor', 'player_id': 3},
+        {'username': 'benedekhalaj', 'player_id': 4}
+    ]
     return render_template('round_details.html',
                            round_status=round_status,
                            round=round_data,
                            round_id=round_id,
-                           game=game_data)
+                           game=game_data,
+                           players=players_data)
 
 
 if __name__ == '__main__':

@@ -13,8 +13,35 @@
             <p class="text-light text-center">Status: <small class="status-init-game">Not yet started</small></p>
         </div>
         <div class="round-details round-init-game">
-            <button class="btn btn-light">Init game</button>
+            <button class="btn btn-light">Initialize round</button>
         </div>
+        <div class="round-form">
+        <form method="post">
+            <label class="text-light" for="round-board">Choose a board</label><br>
+            <select id="round-board"><br><br>
+                {% for board in game.boards %}
+                    <option>{{ board.board_name }}</option>
+                {% endfor %}
+            </select><br><br>
+            <label class="text-light" for="round-expansion">Choose expansions</label><br>
+            {% for expansion in game.expansions %}
+                <input type="checkbox" id="expansion{{ expansion.id }}" name="expansion{{ expansion.id }}"
+                       value="{{ expansion.expansion_name }}">
+                <label class="text-light" for="expansion{{ expansion.id }}">{{ expansion.expansion_name }}</label><br>
+            {% endfor %}
+            <br>
+            <label class="text-light" for="round-corporations">Choose a corporation for each player</label><br><br>
+            {% for player in players %}
+                <label class="text-light" for="player{{ player.player_id }}">{{ player.username }}</label>
+                <select id="player{{ player.player_id }}">
+                    {% for corporation in game.corporations %}
+                        <option>{{ corporation.name }}</option>
+                    {% endfor %}
+                </select><br><br>
+            {% endfor %}
+            <button class="btn btn-light" type="submit">Save</button>
+
+        </form>
     {% elif round_status == 'started' %}
     {% else %}
     {% endif %}
