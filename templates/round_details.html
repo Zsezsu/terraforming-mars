@@ -13,80 +13,11 @@
     <h1 class="text-light text-center">Round {{ round.sequence }} of League {{ round.league_id }}</h1>
 
     {% if round_status == 'init_round' %}
-        <div class="round-status" data-id="{{ round_id }}" data-status="{{ round_status }}">
-            <p class="text-light text-center">Status: <small class="status-init-game">Not yet started</small></p>
-        </div>
-        <div class="round-details round-init-game">
-            <button class="btn btn-light">Initialize round</button>
-        </div>
-        <div class="round-form">
-            <form method="post">
-                <label class="text-light" for="round-board">Choose a board</label><br>
-                <select id="round-board"><br><br>
-                    {% for board in game.boards %}
-                        <option>{{ board.board_name }}</option>
-                    {% endfor %}
-                </select><br><br>
-                <label class="text-light" for="round-expansion">Choose expansions</label><br>
-                {% for expansion in game.expansions %}
-                    <input type="checkbox" id="expansion{{ expansion.id }}" name="expansion{{ expansion.id }}"
-                           value="{{ expansion.expansion_name }}">
-                    <label class="text-light" for="expansion{{ expansion.id }}">{{ expansion.expansion_name }}</label>
-                    <br>
-                {% endfor %}
-                <br>
-                <label class="text-light" for="round-corporations">Choose a corporation for each player</label><br><br>
-                {% for player in players %}
-                    <label class="text-light" for="player{{ player.player_id }}">{{ player.username }}</label>
-                    <select id="player{{ player.player_id }}">
-                        {% for corporation in game.corporations %}
-                            <option>{{ corporation.name }}</option>
-                        {% endfor %}
-                    </select><br><br>
-                {% endfor %}
-                <button class="btn btn-light" type="submit">Save</button>
-            </form>
-        </div>
+        {% include 'round_phase_init_game.html' %}
     {% elif round_status == 'started' %}
-        <div class="round-status" data-id="{{ round_id }}" data-status="{{ round_status }}">
-            <p class="text-light text-center">Status: <small class="status-started">Started</small></p>
-        </div>
-        <div class="round-game">
-            <table class="round-table table table-dark table-bordered text-center">
-                <thead>
-                <tr>
-                    <th>Player</th>
-                    <th>Company</th>
-                    <th class="editable">TR</th>
-                    <th class="editable">Milestone Points</th>
-                    <th class="editable">Award Points</th>
-                    <th class="editable">Greens</th>
-                    <th class="editable">Cities</th>
-                    <th class="editable">Greens around Cities</th>
-                    <th class="editable">Win points</th>
-                    <th>Total</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for player in players_in_game %}
-                    <tr>
-                        <th>{{ player.username }}</th>
-                        <th>{{ player.company }}</th>
-                        {% for _ in range(7) %}
-                            <td class="editable"><input type="number" class="edit-data text-center text-light" value="0"></td>
-                        {% endfor %}
-                        <th>0</th>
-                    </tr>
-                {% endfor %}
-
-                </tbody>
-            </table>
-        </div>
+        {% include 'round_phase_started.html' %}
     {% else %}
-        <div class="round-status" data-id="{{ round_id }}" data-status="{{ round_status }}">
-            <p class="text-light text-center">Status: <small class="status-finished">Finished</small></p>
-        </div>
-        <div class="round-results"></div>
+        {% include 'round_phase_finished.html' %}
     {% endif %}
 
 {% endblock %}
