@@ -10,5 +10,5 @@ VALUES
     ('img/league_cards/mars-5.webp', TRUE);
 
 INSERT INTO
-    images(source, match_card)
+    images(source, round_card)
 VALUES ('img/league_cards/mars-1.webp', TRUE);
