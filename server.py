@@ -103,12 +103,12 @@ def logout():
 
 @app.route('/round/<round_id>')
 def results(round_id=1):
-    round = select_queries.get_round_by_id(round_id)
-    round_status = helper.get_round_status(round)
+    round_data = select_queries.get_round_by_id(round_id)
+    round_status = helper.get_round_status(round_data)
     return render_template('round_details.html',
-                           round_id=round_id,
                            round_status=round_status,
-                           league_id=round['league_id'])
+                           round=round_data,
+                           round_id=round_id)
 
 
 if __name__ == '__main__':

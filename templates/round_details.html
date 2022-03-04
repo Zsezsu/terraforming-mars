@@ -3,12 +3,21 @@
 
 {% block title %}Round {{ round_id }}{% endblock %}
 
-{% block script_results %}<script src="{{ url_for('static', filename='js/roundDetails.js') }}" defer></script> {% endblock %}
+{#{% block script_results %}<script src="{{ url_for('static', filename='js/roundDetails.js') }}" defer></script> {% endblock %}#}
 
 {% block content %}
-    <h3 class="text-light">Round {{ round_id }} of League {{ league_id }}</h3>
-    <div class="container" data-id="{{ round_id }}" data-status="{{ round_status }}">
+    <h1 class="text-light text-center">Round {{ round.sequence }} of League {{ round.league_id }}</h1>
 
-    </div>
+    {% if round_status == 'init_round' %}
+        <div class="round-status" data-id="{{ round_id }}" data-status="{{ round_status }}">
+            <p class="text-light text-center">Status: <small class="status-init-game">Not yet started</small></p>
+        </div>
+        <div class="round-details round-init-game">
+            <button class="btn btn-light">Init game</button>
+        </div>
+    {% elif round_status == 'started' %}
+    {% else %}
+    {% endif %}
+
 {% endblock %}
 

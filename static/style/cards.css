@@ -55,6 +55,28 @@
     transition: 0.4s linear;
 }
 
+/* ------------- ROUND ------------- */
+
+.round-status {
+    display: flex;
+    background-color: #383e44;
+    height: 80px;
+    padding: 1px 20px;
+    margin: 20px 0;
+    border-radius: 15px;
+    justify-content: start;
+    align-items: center;
+    box-shadow: black 3px 3px 12px -4px;
+}
+
+.round-status p {
+    font-size: 1.5em;
+}
+
+.status-init-game {
+    color: red;
+}
+
 
 /* --------------- League Container --------------- */
 
