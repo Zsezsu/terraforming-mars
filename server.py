@@ -73,7 +73,18 @@ def registration_onsubmit():
 
 @app.route('/account/login')
 def login():
-    pass
+    error = request.args.get('error')
+    return render_template('profile-login.html', error=error)
+
+
+@app.route('/login-onsubmit', methods=['POST'])
+def login_onsubmit():
+    if pm.validate_login(request.form):
+        session['UID'] = select_queries.get_user_id(request.form['login_token'])['id']
+        return render_template('index.html')
+    else:
+        return render_template('index.html')
+        return render_template(url_for('login'), error=True)
 
 
 @app.route('/logout')
