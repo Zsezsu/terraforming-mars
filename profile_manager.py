@@ -77,9 +77,3 @@ def unpack_registration_form_for_validation(data):
     returns username, email, password, pp_id = (profile_picture_id)"""
     data = dict(data)
     return data['nickname'], data['email'], data['email2'], data['password'], data['password2']
-
-
-def unpack_login_form(form):
-    """Unpacks login form coming from html
-    returns login_token, password"""
-    return [login_token, password]
