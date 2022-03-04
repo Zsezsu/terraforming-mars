@@ -10,6 +10,7 @@ def add_new_league(data):
     add_league_players(league_id, data)
     # create league rounds
     add_league_rounds(league_id, data)
+    return league_id
 
 
 def add_league(data):

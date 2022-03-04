@@ -11,7 +11,7 @@ export const dataHandler = {
     },
     //POST
     postNewLeague: async function (data) {
-        await apiPost(`/api/leagues`, data);
+        return await apiPost(`/api/leagues`, data);
     }
 }
 
