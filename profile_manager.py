@@ -43,8 +43,9 @@ def validate_login(form):
     returns True"""
     login_token = form['login_token']
     password = form['password']
-    hashed_password = select_queries.get_password(login_token)['password']
-    if hashed_password:
+    pwd_container = select_queries.get_password(login_token)
+    if pwd_container:
+        hashed_password = dict(pwd_container)['password']
         if verify_password(password, hashed_password):
             return True
     return False

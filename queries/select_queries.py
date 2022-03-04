@@ -19,9 +19,9 @@ def get_user_id(token):
     FROM players
     WHERE username LIKE {token} OR email LIKE {token}
     """
-    return dict(execute_select(SQL(query).format(
+    return execute_select(SQL(query).format(
         token=Literal(token)
-    ), fetchall=False))
+    ), fetchall=False)
 
 
 def get_players():
@@ -106,6 +106,6 @@ def get_password(token):
     FROM players
     WHERE username LIKE {token} OR email LIKE {token}
     """
-    return dict(execute_select(SQL(query).format(
+    return execute_select(SQL(query).format(
         token=Literal(token)
-    ), fetchall=False))
+    ), fetchall=False)
