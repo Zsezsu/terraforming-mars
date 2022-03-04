@@ -53,17 +53,31 @@
                 <tr>
                     <th>Player</th>
                     <th>Company</th>
-                    <th>TR</th>
-                    <th>Milestone Points</th>
-                    <th>Award Points</th>
-                    <th>Greens</th>
-                    <th>Cities</th>
-                    <th>Greens around Cities</th>
-                    <th>Win points</th>
+                    <th class="editable">TR</th>
+                    <th class="editable">Milestone Points</th>
+                    <th class="editable">Award Points</th>
+                    <th class="editable">Greens</th>
+                    <th class="editable">Cities</th>
+                    <th class="editable">Greens around Cities</th>
+                    <th class="editable">Win points</th>
                     <th>Total</th>
                 </tr>
                 </thead>
                 <tbody>
+                {% for player in players_in_game %}
+                    <tr>
+                        <th>{{ player.username }}</th>
+                        <th>{{ player.company }}</th>
+                        <td class="editable"></td>
+                        <td class="editable"></td>
+                        <td class="editable"></td>
+                        <td class="editable"></td>
+                        <td class="editable"></td>
+                        <td class="editable"></td>
+                        <td class="editable"></td>
+                        <th></th>
+                    </tr>
+                {% endfor %}
 
                 </tbody>
             </table>
