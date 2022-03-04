@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form method="post" action="/login-onsubmit">
+    <label id="login-token-label">nickname</label><br>
+    <input id="login-token-label" type="text" name="login_token"><br><br>
+    <label id="password-label">password</label><br>
+    <input id="password-input" type="password" name="password"><br><br>
+
+    <input type="submit" value="submit">
+</form>
+
+{% if error %}
+    <h1>Invalid username / email or password</h1>
+{% endif %}
+
+</body>
+</html>
