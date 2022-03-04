@@ -40,6 +40,7 @@ CREATE TABLE images
     id          SERIAL UNIQUE NOT NULL,
     source       TEXT,
     league_card BOOLEAN DEFAULT FALSE,
+    round_card  BOOLEAN DEFAULT FALSE,
     user_image  BOOLEAN DEFAULT FALSE,
     corporation BOOLEAN DEFAULT FALSE
 );
@@ -133,6 +134,7 @@ CREATE TABLE league_players
 (
     id        SERIAL UNIQUE,
     league_id INTEGER,
+    player_id INTEGER,
     CONSTRAINT fk_league_id
         FOREIGN KEY (league_id)
             REFERENCES leagues (id) ON DELETE CASCADE
