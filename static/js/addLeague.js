@@ -173,10 +173,17 @@ function addNewLeagueCard(data, newLeagueId) {
                     <h3 class="text-light">${data.leagueName}</h3>
                 </a>
                 <div class="card-details">
-                    <small class="text-light">${data.userIds.length}</small>
-                    <i class="fa-solid fa-user-astronaut text-light"></i>
-                    <small class="text-light">0 / ${data.leagueRounds}</small>
-                    <i class="fa-solid fa-circle-check text-light"></i>
+                    <div class="detail-admin">
+                        <i class="fa-solid fa-crown text-light"></i>
+                    </div>
+                    <div class="detail-players">
+                        <small class="text-light">${data.userIds.length}</small>
+                        <i class="fa-solid fa-user-astronaut text-light"></i>
+                    </div>
+                    <div class="detail-rounds">
+                        <small class="text-light">0 / ${data.leagueRounds}</small>
+                        <i class="fa-solid fa-circle-check text-light"></i>
+                    </div>
                 </div>`
     leagueDiv.insertAdjacentHTML('afterbegin', newLeagueDiv);
 }

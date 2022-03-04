@@ -67,7 +67,7 @@
             {% set finished_rounds = league['finished_rounds'] | int %}
             {% set img_source = league['league_image_source'] %}
             {% set finished_league = number_of_rounds == finished_rounds %}
-            {% set admin = league['league_admin'] | int == league_admin_id | int %}
+            {% set admin = league_admin_id | int == logged_in_user['id'] | int %}
 
             <div class="card league bg-dark" data-league-id="{{ league_id }}"
                  data-league-admin-id="{{ league_admin_id }}">
