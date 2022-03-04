@@ -45,6 +45,13 @@ def profile():
     return render_template('profile.html')
 
 
+@app.route('/league/<league_id>')
+def league(league_id):
+    # For testing purposes
+    return f'League {league_id}'
+
+
+
 @app.route('/my-leagues')
 def leagues():
     uid = session['UID']

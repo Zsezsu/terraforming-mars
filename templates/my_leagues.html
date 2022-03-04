@@ -43,7 +43,8 @@
                     </div>
                 </div>
             </div>
-            <button id="button-confirm" class="btn btn-light" type="button">Confirm</button><br>
+            <button id="button-confirm" class="btn btn-light" type="button">Confirm</button>
+            <br>
             <button id="button-close" class="btn btn-dark" type="button">Close</button>
         </div>
         <div class="league-separator"></div>
@@ -66,9 +67,12 @@
             {% set finished_rounds = league['finished_rounds'] %}
             {% set img_source = league['league_image_source'] %}
 
-            <div class="card league bg-dark" data-league-id="{{ league_id }}" data-league-admin-id="{{ league_admin_id }}">
-                <img alt="mars" src="{{ url_for('static', filename=img_source) }}">
-                <h3 class="text-light">{{ league_name }}</h3>
+            <div class="card league bg-dark" data-league-id="{{ league_id }}"
+                 data-league-admin-id="{{ league_admin_id }}">
+                <a href="{{ url_for('league', league_id=league_id) }}">
+                    <img alt="mars" src="{{ url_for('static', filename=img_source) }}">
+                    <h3 class="text-light">{{ league_name }}</h3>
+                </a>
                 <div class="card-details">
                     <small class="text-light">{{ player_number }}</small>
                     <i class="fa-solid fa-user-astronaut text-light"></i>

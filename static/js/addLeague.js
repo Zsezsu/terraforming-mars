@@ -167,9 +167,11 @@ const confirm = async function () {
 
 function addNewLeagueCard(data, newLeagueId) {
     const leagueDiv = document.querySelector('div#league-card-container');
-    const newLeagueDiv = `<div class="card league bg-dark" data-league-id="${newLeagueId}" data-league-admin-id="${data.leagueAdminId}">
-                <img alt="mars" src="${data.selectedLeagueImageSource}">
-                <h3 class="text-light">${data.leagueName}</h3>
+    const newLeagueDiv = `<div class="card league bg-dark" data-league-id="${newLeagueId['league_id']}" data-league-admin-id="${data.leagueAdminId}">
+                <a href="/league/${newLeagueId['league_id']}">
+                    <img alt="mars" src="${data.selectedLeagueImageSource}">
+                    <h3 class="text-light">${data.leagueName}</h3>
+                </a>
                 <div class="card-details">
                     <small class="text-light">${data.userIds.length}</small>
                     <i class="fa-solid fa-user-astronaut text-light"></i>
