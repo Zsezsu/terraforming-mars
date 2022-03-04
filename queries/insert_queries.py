@@ -66,4 +66,17 @@ def add_league_rounds(league_id, data):
 
 
 def insert_new_user(data):
-    pass
+    query = """
+    INSERT INTO
+        players(username, first_name, last_name, email, password, image)
+    VALUES
+        ({username}, {first_name}, {last_name}, {email}, {password}, {image})
+    """
+    return execute_insert(SQL(query).format(
+        username=Literal(data['nickname']),
+        first_name=Literal(data['first_name']),
+        last_name=Literal(data['last_name']),
+        email=Literal(data['email']),
+        password=Literal(data['password']),
+        image=Literal(data['pp_id'])
+    ))

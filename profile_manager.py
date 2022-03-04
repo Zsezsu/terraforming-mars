@@ -57,7 +57,7 @@ def submit_registration(form):
     data = update_password_on_form(form, hashed_pwd)
     insert_queries.insert_new_user(data)
     user_id = select_queries.get_user_id(form['nickname'])
-    return 99 # user_id
+    return user_id
 
 
 def is_password_format_correct(password):
@@ -69,7 +69,7 @@ def is_password_format_correct(password):
 def is_unique_data_exist(unique_value):
     """If unique already exist in database
     returns True"""
-    return False # bool(select_queries.is_unique_data_exist(unique_value))
+    return bool(select_queries.get_user_id(unique_value))
 
 
 def unpack_registration_form_for_validation(data):
