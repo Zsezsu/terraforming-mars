@@ -1,7 +1,12 @@
 from flask import Blueprint
 import smtplib
+import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+text_file = os.path.join(basedir, 'templates/email-designs/test-mail.txt')
+html_file = os.path.join(basedir, 'templates/email-designs/test-mail.html')
 
 mail = Blueprint('mail_system', __name__, template_folder='templates')
 
@@ -12,7 +17,7 @@ mail_password = 'ZsuBendeBenedekVik123#'
 @mail.route('/mail-test')
 def send_registration_email(customer_address=''):
 
-    # customer_address = 'dudaskobende@gmail.com'
+    customer_address = 'dudaskobende@gmail.com'
     print(customer_address)
 
     # build email structure -----------------------------------------------
@@ -22,9 +27,9 @@ def send_registration_email(customer_address=''):
     msg['To'] = customer_address
 
     # open files from templates/email-design route -------------------------
-    with open('templates/email-designs/test-mail.txt', 'r') as plain_text:
+    with open(text_file, 'r') as plain_text:
         text = plain_text.read()
-    with open('templates/email-designs/test-mail.html', 'r') as design:
+    with open(html_file, 'r') as design:
         html = design.read()
 
     # attach opened files to email structure -------------------------------
