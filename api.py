@@ -10,6 +10,6 @@ api = Blueprint('api', __name__, template_folder='templates')
 
 @api.route('/api/boards')
 def boards():
-    boards = select_queries.get_boards()
-    return jsonify(boards)
+    boards_data = select_queries.get_boards()
+    return jsonify(boards_data)
 
