@@ -41,7 +41,13 @@ def validate_registration(form):
 def validate_login(form):
     """If every input matches the requirements
     returns True"""
-    pass
+    login_token = form['login_token']
+    password = form['password']
+    hashed_password = select_queries.get_password(login_token)['password']
+    if hashed_password:
+        if verify_password(password, hashed_password):
+            return True
+    return False
 
 
 def submit_registration(form):
