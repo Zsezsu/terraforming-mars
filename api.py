@@ -18,7 +18,7 @@ def send_players():
         {'id': 2, 'username': 'Bende', 'name': 'Bendegúz Dudaskó', 'image_source': 'img/favicon.ico'},
         {'id': 3, 'username': 'Viktor', 'name': 'Viktor Sági', 'image_source': 'img/favicon.ico'},
         {'id': 4, 'username': 'Benedek', 'name': 'Benedek Halaj', 'image_source': 'img/favicon.ico'}
-    ]
+    ] # DUMMY DATA----------------------------------------------
     return jsonify(players)
 
 
@@ -26,7 +26,7 @@ def send_players():
 def send_logged_in_user():
     uid = session['UID']
     logged_in_user = select_queries.get_logged_in_user(uid)
-    logged_in_user = {'id': 1, 'username': 'Zsu', 'name': 'Zsuzsanna Juhász', 'image_source': 'img/favicon.ico'}
+    logged_in_user = session['logged_in_user'] # DUMMY DATA----------------------------------------------
     return jsonify(logged_in_user)
 
 

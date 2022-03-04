@@ -1,4 +1,6 @@
 import {dataHandler} from "./data/dataHandler.js";
+import {toggleAddNewLeague} from "./addLeagueTransition.js";
+import {leagueImages, changeImage} from "./leagueSlideshow.js";
 
 const data = {
     players: await dataHandler.getPlayers(),
@@ -130,6 +132,7 @@ const confirmLeague = {
         const maxRounds = 10;
         const minPlayers = 1;
         const maxPlayers = 5;
+        const divTransition = 1000;
         if (leagueName) {
             if (+leagueRounds >= minRounds && +leagueRounds <= maxRounds) {
                 if (+selectedPlayers.length >= minPlayers && +selectedPlayers.length <= maxPlayers) {
@@ -141,7 +144,9 @@ const confirmLeague = {
                         'leagueAdminId': leagueAdminId,
                         'leagueImageId': selectedLeagueImage.getAttribute('data-image-id')
                     }
+                    toggleAddNewLeague();
                     dataHandler.postNewLeague(data);
+                    setTimeout(clearLeagueDiv, divTransition);
                 } else {
                     alert(`players Number(${selectedPlayers.length}) has to be between ${minPlayers}-${maxPlayers}`);
                 }
@@ -152,6 +157,17 @@ const confirmLeague = {
             alert('League name required');
         }
     }
+}
+
+function clearLeagueDiv() {
+    document.querySelector('input[name="league-name"]').value = "";
+    document.querySelector('input[name="league-rounds"]').value = "";
+    document.querySelector('input[name="league-players"]').value = "";
+    document.querySelector('label#label-league-players').innerText = "League Players 1/5";
+    document.querySelector('div#selected-players').innerHTML = createPlayerCard(data.loggedInUser);
+    document.querySelector('div#searched-players').innerHTML = "";
+    leagueImages.currentImageIndex = 0;
+    changeImage();
 }
 
 function getPlayersDetails(players) {
