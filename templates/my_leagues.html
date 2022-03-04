@@ -62,10 +62,12 @@
             {% set league_id = league['id'] %}
             {% set league_name = league['league_name'] %}
             {% set league_admin_id = league['league_admin'] %}
-            {% set number_of_rounds = league['round_number'] %}
+            {% set number_of_rounds = league['round_number'] | int %}
             {% set player_number = league['player_number'] %}
-            {% set finished_rounds = league['finished_rounds'] %}
+            {% set finished_rounds = league['finished_rounds'] | int %}
             {% set img_source = league['league_image_source'] %}
+            {% set finished_league = number_of_rounds == finished_rounds %}
+            {% set admin = league['league_admin'] | int == league_admin_id | int %}
 
             <div class="card league bg-dark" data-league-id="{{ league_id }}"
                  data-league-admin-id="{{ league_admin_id }}">
@@ -74,10 +76,19 @@
                     <h3 class="text-light">{{ league_name }}</h3>
                 </a>
                 <div class="card-details">
-                    <small class="text-light">{{ player_number }}</small>
-                    <i class="fa-solid fa-user-astronaut text-light"></i>
-                    <small class="text-light">{{ finished_rounds }} / {{ number_of_rounds }}</small>
-                    <i class="fa-solid fa-circle-check text-light"></i>
+                    {% if admin %}
+                        <div class="detail-admin">
+                            <i class="fa-solid fa-crown text-light"></i>
+                        </div>
+                    {% endif %}
+                    <div class="detail-players">
+                        <small class="text-light">{{ player_number }}</small>
+                        <i class="fa-solid fa-user-astronaut text-light"></i>
+                    </div>
+                    <div class="detail-rounds">
+                        <small class="text-light">{{ finished_rounds }} / {{ number_of_rounds }}</small>
+                        <i class="fa-solid {{ 'fa-circle-check' if finished_league else 'fa-rocket' }} text-light"></i>
+                    </div>
                 </div>
             </div>
         {% endfor %}

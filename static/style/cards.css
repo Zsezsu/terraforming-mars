@@ -25,8 +25,13 @@
     justify-content: right;
     align-items: center;
     margin-right: 15px;
-    gap: 15px;
+    gap: 30px;
 }
+
+.detail-admin {
+    margin-right: 190px;
+}
+
 
 .card h3 {
     position: absolute;
