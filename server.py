@@ -50,7 +50,9 @@ def leagues():
     uid = session['UID']
     logged_in_user = select_queries.get_logged_in_user(uid)
     logged_in_user = session['logged_in_user'] # DUMMY DATA----------------------------------------------
-    return render_template('my_leagues.html', logged_in_user=logged_in_user)
+    logged_in_user_leagues = select_queries.get_logged_in_user_leagues(uid)
+    print(logged_in_user_leagues)
+    return render_template('my_leagues.html', logged_in_user=logged_in_user, leagues=logged_in_user_leagues)
 
 
 if __name__ == '__main__':
