@@ -71,3 +71,11 @@
 .status-init-game {
     color: red;
 }
+
+.status-started {
+    color: deepskyblue;
+}
+
+.status-finished {
+    color: forestgreen;
+}
