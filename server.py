@@ -82,8 +82,7 @@ def login_onsubmit():
         session['UID'] = select_queries.get_user_id(request.form['login_token'])['id']
         return render_template('index.html')
     else:
-        return render_template('index.html')
-        return render_template(url_for('login'), error=True)
+        return redirect(url_for('login', error=True))
 
 
 @app.route('/logout')
