@@ -61,12 +61,19 @@ def results(round_id=1):
         {'username': 'Sagi-Viktor', 'player_id': 3},
         {'username': 'benedekhalaj', 'player_id': 4}
     ]
+    players_in_game = [
+        {'username': 'dudaskobende', 'player_id': 1, 'company': 'company 1'},
+        {'username': 'Zsezsu', 'player_id': 2, 'company': 'company 2'},
+        {'username': 'Sagi-Viktor', 'player_id': 3, 'company': 'company 3'},
+        {'username': 'benedekhalaj', 'player_id': 4, 'company': 'company 4'}
+    ]
     return render_template('round_details.html',
                            round_status=round_status,
                            round=round_data,
                            round_id=round_id,
                            game=game_data,
-                           players=players_data)
+                           players=players_data,
+                           players_in_game=players_in_game)
 
 
 if __name__ == '__main__':
