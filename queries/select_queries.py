@@ -55,3 +55,32 @@ def get_logged_in_user(user_id):
     WHERE players.id = {user_id} 
     """
     return execute_select(SQL(query).format(user_id=Literal(user_id)), fetchall=False)
+
+
+def get_logged_in_user_leagues(user_id):
+    query = """
+    SELECT
+            leagues.id                                                          AS  id,
+            leagues.league_name                                                 AS  league_name,
+            leagues.league_admin                                                AS  league_admin,
+            leagues.round_number                                                AS  round_number,
+            COUNT(DISTINCT league_players.player_id)                            AS  player_number,
+            COUNT(DISTINCT rounds.id) FILTER ( WHERE rounds.finished IS TRUE )  AS  finished_rounds,
+            images.source                                                       AS  league_image_source
+    
+        FROM
+            leagues
+        LEFT JOIN league_players ON leagues.id = league_players.league_id
+        LEFT JOIN images ON leagues.image_id = images.id
+        LEFT JOIN rounds ON leagues.id = rounds.league_id
+        WHERE
+            leagues.league_admin = {user_id}
+        OR
+            league_players.league_id = {user_id}
+        GROUP BY
+            leagues.id, images.source
+        ORDER BY
+            leagues.id DESC;
+    """
+    return execute_select(SQL(query).format(user_id=Literal(user_id)))
+

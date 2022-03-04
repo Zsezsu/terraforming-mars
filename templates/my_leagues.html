@@ -42,7 +42,8 @@
                 </div>
             </div>
             <div id="searched-players"></div>
-            <button id="button-confirm" class="btn btn-light" type="button">Confirm</button><br>
+            <button id="button-confirm" class="btn btn-light" type="button">Confirm</button>
+            <br>
             <button id="button-close" class="btn btn-dark" type="button">Close</button>
         </div>
         <div class="league-separator"></div>
@@ -55,7 +56,27 @@
             </div>
         </div>
     </div>
-    <div class="leagues">
+    <div class="leagues cards">
+        {% for league in leagues %}
+            {% set league_id = league['id'] %}
+            {% set league_name = league['league_name'] %}
+            {% set league_admin_id = league['league_admin'] %}
+            {% set number_of_rounds = league['round_number'] %}
+            {% set player_number = league['player_number'] %}
+            {% set finished_rounds = league['finished_rounds'] %}
+            {% set img_source = league['league_image_source'] %}
+
+            <div class="card league bg-dark" data-league-id="{{ league_id }}" data-league-admin-id="{{ league_admin_id }}">
+                <img alt="mars" src="{{ url_for('static', filename=img_source) }}">
+                <h3 class="text-light">{{ league_name }}</h3>
+                <div class="card-details">
+                    <small class="text-light">{{ player_number }}</small>
+                    <i class="fa-solid fa-user-astronaut text-light"></i>
+                    <small class="text-light">{{ finished_rounds }} / {{ number_of_rounds }}</small>
+                    <i class="fa-solid fa-circle-check text-light"></i>
+                </div>
+            </div>
+        {% endfor %}
 
     </div>
 
