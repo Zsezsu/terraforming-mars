@@ -39,5 +39,6 @@ def send_league_images():
 @api.route('/api/leagues', methods=['POST'])
 def create_league():
     data = json.loads(request.data)
-    insert_queries.add_new_league(data)
-    return jsonify('')
+    league_id = insert_queries.add_new_league(data)
+    new_league_id = {'league_id': league_id}
+    return jsonify(new_league_id)
