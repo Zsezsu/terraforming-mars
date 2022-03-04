@@ -18,7 +18,12 @@ mail_password = 'ZsuBendeBenedekVik123#'
 def send_registration_email(customer_address=''):
 
     customer_address = 'dudaskobende@gmail.com'
-    print(customer_address)
+    if not customer_address:
+        print('customer email not found'
+              'abort email sending'
+              'see mail_system.py / send_registration_email() for more information')
+        return ''
+    print(f'customer email address: {customer_address}')
 
     # build email structure -----------------------------------------------
     msg = MIMEMultipart('alternative')
@@ -44,6 +49,12 @@ def send_registration_email(customer_address=''):
     server.login(mail_address, mail_password)
 
     # sends email and quit server -----------------------------------------
-    server.sendmail(mail_address, customer_address, msg.as_string())
-    server.quit()
+    try:
+        server.sendmail(mail_address, customer_address, msg.as_string())
+    except:
+        print('An exception occurred when: email sent to client'
+              '>-< Program skips step >-<'
+              'see mail_system.py / send_registration_email() for more information')
+    finally:
+        server.quit()
     return ''
