@@ -88,7 +88,8 @@ def login_onsubmit():
 
 @app.route('/logout')
 def logout():
-    pass
+    session['UID'] = ''
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
