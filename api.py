@@ -18,4 +18,4 @@ def boards():
 def save_round_points(league_id, round_id):
     round_data = json.loads(request.data)
     print(round_data)
-    return ''
+    return jsonify('')

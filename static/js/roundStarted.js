@@ -1,5 +1,15 @@
 import {dataHandler} from "./data/dataHandler.js";
 
+const pointsTypes = [
+    'tr_number',
+    'milestones_points',
+    'award_points',
+    'number_of_own_greeneries',
+    'number_of_cities',
+    'greeneries_around_cities',
+    'vp_on_cards',
+];
+
 function main() {
     const editableCells = document.querySelectorAll('td.editable');
     editableCells.forEach(cell => cell.addEventListener('input', calculateResults));
@@ -29,18 +39,22 @@ async function saveRound() {
         const leagueId = table.getAttribute('data-league-id');
         const roundId = table.getAttribute('data-round-id');
         let results = [];
+
         for (let player of players) {
             const total = player.querySelector('th.result').innerText;
             const playerId = player.getAttribute('data-player-id');
-            let playerResult = {playerId: playerId, total: total}
+            let playerResult = {playerId: playerId, total: total};
 
             const points = player.querySelectorAll('td input');
             let resultPoints = [];
-            for (let point of points) {
-                resultPoints.push(point.value)
+            for (let index = 0; index < points.length; index++) {
+                let point = pointsTypes[index];
+                let pointObject = {};
+                pointObject[point] = points[index].value;
+                resultPoints.push(pointObject);
             }
             playerResult['points'] = resultPoints;
-            results.push(playerResult)
+            results.push(playerResult);
         }
         await dataHandler.saveResults(leagueId, roundId, results);
     }
