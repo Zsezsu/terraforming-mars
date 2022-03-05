@@ -4,8 +4,9 @@
 <div class="round-details round-init-game">
     <button class="btn btn-light">Initialize round</button>
 </div>
-<div class="round-form">
+<div class="round-form card text-light">
     <form method="post">
+        <h2 class="text-light">Round settings</h2>
         <label class="text-light" for="round-board">Choose a board</label><br>
         <select id="round-board" name="board"><br><br>
             {% for board in game.boards %}
