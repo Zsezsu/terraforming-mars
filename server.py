@@ -46,28 +46,28 @@ def test():
     return render_template('test.html', milestones=milestones)
 
 
-@app.route('/round/<round_id>', methods=['GET'])
-def results(round_id=1):
+@app.route('/league/<league_id>/round/<round_id>', methods=['GET'])
+def results(league_id=1, round_id=2):
     round_data = select_queries.get_round_by_id(round_id)
     round_status = helper.get_round_status(round_data)
+    game_data, players_data, players_in_game = (None, None, None)
+    players_data, players_in_game = helper.dummy_data()  # CREATES DUMMY DATA
     # init_game, started, finished
-    game_data = {
-        "boards": select_queries.get_boards(),
-        "expansions": select_queries.get_expansions(),
-        "corporations": select_queries.get_corporations()
-    }
-    players_data = [
-        {'username': 'dudaskobende', 'player_id': 1},
-        {'username': 'Zsezsu', 'player_id': 2},
-        {'username': 'Sagi-Viktor', 'player_id': 3},
-        {'username': 'benedekhalaj', 'player_id': 4}
-    ]
-    players_in_game = [
-        {'username': 'dudaskobende', 'player_id': 1, 'company': 'company 1'},
-        {'username': 'Zsezsu', 'player_id': 2, 'company': 'company 2'},
-        {'username': 'Sagi-Viktor', 'player_id': 3, 'company': 'company 3'},
-        {'username': 'benedekhalaj', 'player_id': 4, 'company': 'company 4'}
-    ]
+
+    if round_status == 'init_round':
+        players_data = select_queries.get_round_players(league_id)
+        game_data = {
+            "boards": select_queries.get_boards(),
+            "expansions": select_queries.get_expansions(),
+            "corporations": select_queries.get_corporations()
+        }
+
+    elif round_status == 'started':
+        players_in_game = select_queries.get_players_in_round(round_id)
+    elif round_status == 'finished':
+        print('Not finished')
+    else:
+        return redirect('/')
     return render_template('round_details.html',
                            round_status=round_status,
                            round=round_data,
@@ -77,11 +77,11 @@ def results(round_id=1):
                            players_in_game=players_in_game)
 
 
-@app.route('/round/<round_id>', methods=['POST'])
-def init_round(round_id):
+@app.route('/league/<league_id>/round/<round_id>', methods=['POST'])
+def init_round(league_id, round_id):
     round_details = request.form
     insert_queries.init_round(round_details, round_id)
-    return redirect(f'/round/{round_id}')
+    return redirect(f'/league{league_id}/round/{round_id}')
 
 
 if __name__ == '__main__':

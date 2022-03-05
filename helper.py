@@ -1,3 +1,21 @@
+
+def dummy_data():
+    players_data = [
+        {'username': 'dudaskobende', 'player_id': 1},
+        {'username': 'Zsezsu', 'player_id': 2},
+        {'username': 'Sagi-Viktor', 'player_id': 3},
+        {'username': 'benedekhalaj', 'player_id': 4}
+    ]
+    players_in_game = [
+        {'username': 'dudaskobende', 'player_id': 1, 'company': 'company 1'},
+        {'username': 'Zsezsu', 'player_id': 2, 'company': 'company 2'},
+        {'username': 'Sagi-Viktor', 'player_id': 3, 'company': 'company 3'},
+        {'username': 'benedekhalaj', 'player_id': 4, 'company': 'company 4'}
+    ]
+    return players_data, players_in_game
+
+
+
 def get_round_status(round):
     round_status = ''
     for key, value in round.items():

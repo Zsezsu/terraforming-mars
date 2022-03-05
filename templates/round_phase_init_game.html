@@ -31,8 +31,8 @@
         <br>
         <label class="text-light" for="round-corporations">Choose a corporation for each player</label><br><br>
         {% for player in players %}
-            <label class="text-light" for="player{{ player.player_id }}">{{ player.username }}</label>
-            <select id="player{{ player.player_id }}" name="player-{{ player.player_id }}">
+            <label class="text-light" for="player{{ player.id }}">{{ player.username }}</label>
+            <select id="player{{ player.id }}" name="player-{{ player.id }}">
                 {% for corporation in game.corporations %}
                     <option value="{{ corporation.id }}">{{ corporation.name }}</option>
                 {% endfor %}
