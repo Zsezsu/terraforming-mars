@@ -2,9 +2,9 @@
     <p class="text-light text-center">Status: <small class="status-init-game">Not yet started</small></p>
 </div>
 <div class="round-details round-init-game">
-    <button class="btn btn-light">Initialize round</button>
+    <button class="btn btn-light show-round-form-button">Initialize round</button>
 </div>
-<div class="round-form card text-light">
+<div class="round-form card text-light hide-round-form">
     <form method="post">
         <h2 class="text-light">Round settings</h2>
         <label class="text-light" for="round-board">Choose a board</label><br>
@@ -30,6 +30,7 @@
                 {% endfor %}
             </select><br><br>
         {% endfor %}
-        <button class="btn btn-light" type="submit">Save</button>
+        <button class="btn btn-light save-round-form-button" type="submit">Save</button>
+        <button class="btn btn-dark close-round-form-button" type="button">Close</button>
     </form>
 </div>
