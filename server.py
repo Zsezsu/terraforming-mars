@@ -127,6 +127,7 @@ def results(league_id=1, round_id=2):
                            round_status=round_status,
                            round=round_data,
                            round_id=round_id,
+                           league_id=league_id,
                            game=game_data,
                            players=players_data,
                            players_in_game=players_in_game)

@@ -16,6 +16,9 @@ export const dataHandler = {
     //POST
     postNewLeague: async function (data) {
         return await apiPost(`/api/leagues`, data);
+    },
+    saveResults: async function (leagueId, roundId, data) {
+        return await apiPost(`/api/leagues/${leagueId}/rounds/${roundId}`, data)
     }
 }
 

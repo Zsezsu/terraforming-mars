@@ -2,7 +2,8 @@
     <p class="text-light text-center">Status: <small class="status-started">Started</small></p>
 </div>
 <div class="round-game">
-    <table class="round-table table table-dark table-bordered text-center">
+    <table id="point-table" class="round-table table table-dark table-bordered text-center"
+           data-league-id="{{ league_id }}" data-round-id="{{ round_id }}">
         <thead>
         <tr>
             <th>Player</th>

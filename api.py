@@ -16,6 +16,13 @@ def boards():
     return jsonify(boards_data)
 
 
+@api.route('/api/leagues/<league_id>/rounds/<round_id>', methods=['POST'])
+def save_round_points(league_id, round_id):
+    round_data = json.loads(request.data)
+    print(round_data)
+    return ''
+
+
 @api.route('/api/players')
 def send_players():
     players = select_queries.get_players()

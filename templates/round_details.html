@@ -5,7 +5,7 @@
 
 {% block script_results %}
     {% if round_status == 'started' %}
-        <script src="{{ url_for('static', filename='js/roundStarted.js') }}" defer></script>
+        <script type="module" src="{{ url_for('static', filename='js/roundStarted.js') }}" defer></script>
     {% endif %}
 {% endblock %}
 
