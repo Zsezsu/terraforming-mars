@@ -129,3 +129,16 @@ def get_pictures():
     WHERE user_image IS TRUE
     """
     return execute_select(SQL(query))
+
+
+def get_user_data(uid):
+    query = """
+    SELECT username, first_name, last_name, email, source 
+    FROM players
+    JOIN images
+        ON players.image = images.id::varchar
+    WHERE players.id = {uid}
+    """
+    return dict(execute_select(SQL(query).format(
+        uid=Literal(uid)
+    ), fetchall=False))
