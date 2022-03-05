@@ -1,6 +1,4 @@
-import json
-
-from flask import Blueprint, Flask, request, jsonify, session
+from flask import Blueprint, Flask, request, session, jsonify, json
 
 import queries.insert_queries as insert_queries
 import queries.select_queries as select_queries
@@ -20,7 +18,7 @@ def boards():
 def save_round_points(league_id, round_id):
     round_data = json.loads(request.data)
     print(round_data)
-    return ''
+    return jsonify('')
 
 
 @api.route('/api/players')
