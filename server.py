@@ -80,9 +80,9 @@ def results(round_id=1):
 @app.route('/round/<round_id>', methods=['POST'])
 def init_round(round_id):
     round_details = request.form
-    print(round_details)
-    # insert_queries.init_round(round_details)
+    insert_queries.init_round(round_details, round_id)
     return redirect(f'/round/{round_id}')
+
 
 if __name__ == '__main__':
     app.run(debug=True,

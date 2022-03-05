@@ -18,13 +18,13 @@
         <label class="text-light" for="round-board">Choose a board</label><br>
         <select id="round-board" name="board"><br><br>
             {% for board in game.boards %}
-                <option>{{ board.board_name }}</option>
+                <option name="board-{{ board.id }}" value="{{ board.id }}">{{ board.board_name }}</option>
             {% endfor %}
         </select><br><br>
         <label class="text-light" for="round-expansion">Choose expansions</label><br>
         {% for expansion in game.expansions %}
-            <input type="checkbox" id="expansion{{ expansion.id }}" name="expansion-{{ expansion.id }}"
-                   value="{{ expansion.expansion_name }}">
+            <input type="checkbox" id="expansion{{ expansion.id }}" name="expansion-{{ expansion.expansion_name }}"
+                   value="{{ expansion.id }}">
             <label class="text-light" for="expansion{{ expansion.id }}">{{ expansion.expansion_name }}</label>
             <br>
         {% endfor %}
@@ -34,7 +34,7 @@
             <label class="text-light" for="player{{ player.player_id }}">{{ player.username }}</label>
             <select id="player{{ player.player_id }}" name="player-{{ player.player_id }}">
                 {% for corporation in game.corporations %}
-                    <option>{{ corporation.name }}</option>
+                    <option value="{{ corporation.id }}">{{ corporation.name }}</option>
                 {% endfor %}
             </select><br><br>
         {% endfor %}
