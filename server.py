@@ -46,7 +46,7 @@ def test():
     return render_template('test.html', milestones=milestones)
 
 
-@app.route('/round/<round_id>')
+@app.route('/round/<round_id>', methods=['GET'])
 def results(round_id=1):
     round_data = select_queries.get_round_by_id(round_id)
     round_status = helper.get_round_status(round_data)
@@ -76,6 +76,13 @@ def results(round_id=1):
                            players=players_data,
                            players_in_game=players_in_game)
 
+
+@app.route('/round/<round_id>', methods=['POST'])
+def init_round(round_id):
+    round_details = request.form
+    print(round_details)
+    # insert_queries.init_round(round_details)
+    return redirect(f'/round/{round_id}')
 
 if __name__ == '__main__':
     app.run(debug=True,
