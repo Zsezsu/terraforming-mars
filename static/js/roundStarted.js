@@ -1,5 +1,10 @@
-const editableCells = document.querySelectorAll('td.editable');
-editableCells.forEach(cell => cell.addEventListener('input', calculateResults));
+function main() {
+    const editableCells = document.querySelectorAll('td.editable');
+    editableCells.forEach(cell => cell.addEventListener('input', calculateResults));
+
+    const saveButton = document.querySelector('button#save-round');
+    saveButton.addEventListener('click', saveRound)
+}
 
 function calculateResults(inputEvent) {
     const inputCell = inputEvent.target;
@@ -13,3 +18,28 @@ function calculateResults(inputEvent) {
     });
     resultCell.textContent = resultSum;
 }
+
+
+function saveRound() {
+    if (confirm('Can we start the game?') === true) {
+        const players = document.querySelectorAll('tr[data-player-id]');
+        let results = [];
+        for (let player of players) {
+            const total = player.querySelector('th.result').innerText;
+            const playerId = player.getAttribute('data-player-id');
+            let playerResult = {playerId: playerId, total: total}
+
+            const points = player.querySelectorAll('td input');
+            let resultPoints = [];
+            for (let point of points) {
+                resultPoints.push(point.value)
+            }
+            playerResult['points'] = resultPoints;
+            results.push(playerResult)
+        }
+        console.log(results);
+    }
+
+}
+
+main();
