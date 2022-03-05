@@ -16,14 +16,22 @@ def init_round(round_details, round_id):
             {game_setup_values};
         
         INSERT INTO 
-        round_players(round_id, player_id, corporation_id)
-    VALUES
-        {round_players_values};
+            round_players(round_id, player_id, corporation_id)
+        VALUES
+            {round_players_values};
+        
+        UPDATE 
+            rounds
+        SET 
+            started = TRUE
+        WHERE
+            rounds.id = {round_id};
     COMMIT;
     """
     execute_insert(SQL(query).format(
         game_setup_values=SQL(game_setup_values),
-        round_players_values=SQL(round_players_values)
+        round_players_values=SQL(round_players_values),
+        round_id=Literal(round_id)
     ))
 
 
