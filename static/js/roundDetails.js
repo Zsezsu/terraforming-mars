@@ -1,3 +1,5 @@
+import {dataHandler} from "./data/dataHandler.js";
+
 const roundDetails = {
     init(){
         const id = this.getDataValue('id');
@@ -28,7 +30,7 @@ const roundDetails = {
         let button = event.currentTarget;
         button.hidden = 'True';
         const containerDiv = document.querySelector('.container');
-        let boards =  await this.fetchData();
+        let boards =  await dataHandler.getBoards();
         let optionHTML = ''
         for (let board of boards){
             optionHTML += `<option id="${board['id']}">${board['board_name']}</option>`
@@ -49,12 +51,6 @@ const roundDetails = {
         let value = event.currentTarget.value;
 
     },
-
-    async fetchData(){
-        let response = await fetch('/api/boards');
-        return await response.json();
-    },
-
 
     renderTable(){
         let containerDiv = document.querySelector('.container');
