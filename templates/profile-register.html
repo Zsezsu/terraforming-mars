@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Test registration</title>
+    <script src="{{ url_for('static', filename='js/registrationPicturePicker.js') }}" defer></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/registration.css' ) }}">
+
 </head>
 <body>
 
@@ -21,10 +24,16 @@
     <input id="password-input" type="password" name="password"><br><br>
     <label id="password2-label">password2</label><br>
     <input id="password2-input" type="password" name="password2"><br><br>
-    <label >pp id</label><br>
-    <input type="text" name="pp_id"><br><br>
-    <input type="submit" value="submit">
+    <input id="picture-input" type="hidden" name="pp_id">
+    <input id="hidden-button" type="submit" value="submit" hidden>
 </form>
+
+<div id="profile-picture-container">
+    {% for picture in pictures %}
+        <img class="profile-picture" id="{{ picture['id'] }}" src="{{ url_for('static', filename=picture['source']) }}">
+    {% endfor %}
+
+</div>
 
     <h1>{{ error }}</h1>
 
