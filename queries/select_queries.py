@@ -120,3 +120,12 @@ def get_user_email(user_id):
     return execute_select(SQL(query).format(
         user_id=Literal(user_id)
     ), fetchall=False)
+
+
+def get_pictures():
+    query = """
+    SELECT id, source
+    FROM images
+    WHERE user_image IS TRUE
+    """
+    return execute_select(SQL(query))
