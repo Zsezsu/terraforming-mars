@@ -2,9 +2,28 @@
     <p class="text-light text-center">Status: <small class="status-finished">Finished</small></p>
 </div>
 <div class="round-results">
-    <ol>
-    {% for round_point in round_points %}
-        <li class="text-light">{{ round_point }}</li>
-    {% endfor %}
-    </ol>
+    <table class="round-table table table-dark table-bordered text-center">
+        <thead>
+        <tr>
+            {% for type in round_points[0].keys() %}
+                <th>{{ type }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for player_round_points in round_points %}
+            {% set player_name = player_round_points.Player %}
+            {% set corporation = player_round_points.Corporation %}
+            <tr>
+                <th>{{ player_name }}</th>
+                <th>{{ corporation }}</th>
+                {% for point in player_round_points.values() %}
+                    {% if point not in [player_name, corporation] %}
+                        <td>{{ point }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
