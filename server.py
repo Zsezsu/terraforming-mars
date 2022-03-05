@@ -110,7 +110,7 @@ def results(league_id=1, round_id=2):
     # init_game, started, finished
 
     if round_status == 'init_round':
-        players_data = select_queries.get_round_players(league_id)
+        # players_data = select_queries.get_round_players(league_id)
         game_data = {
             "boards": select_queries.get_boards(),
             "expansions": select_queries.get_expansions(),
