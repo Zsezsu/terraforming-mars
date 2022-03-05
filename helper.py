@@ -57,7 +57,7 @@ def init_round_players_values(round_id, players):
     return values
 
 
-def insert_round_values(round_id, round_data):
+def insert_point_values(round_id, round_data):
     values = ''
     for index in range(len(round_data)):
         player = round_data[index]

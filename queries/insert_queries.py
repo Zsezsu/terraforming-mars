@@ -36,7 +36,7 @@ def init_round(round_details, round_id):
 
 
 def insert_round_points(round_id, round_data):
-    round_points_values = helper.insert_round_values(round_id, round_data)
+    round_points_values = helper.insert_point_values(round_id, round_data)
     query = """
     BEGIN;
     
