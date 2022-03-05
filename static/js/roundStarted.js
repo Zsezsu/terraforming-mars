@@ -1,3 +1,5 @@
+import {dataHandler} from "./data/dataHandler.js";
+
 function main() {
     const editableCells = document.querySelectorAll('td.editable');
     editableCells.forEach(cell => cell.addEventListener('input', calculateResults));
@@ -20,9 +22,12 @@ function calculateResults(inputEvent) {
 }
 
 
-function saveRound() {
+async function saveRound() {
     if (confirm('Can we start the game?') === true) {
         const players = document.querySelectorAll('tr[data-player-id]');
+        const table = document.querySelector("table#point-table");
+        const leagueId = table.getAttribute('data-league-id');
+        const roundId = table.getAttribute('data-round-id');
         let results = [];
         for (let player of players) {
             const total = player.querySelector('th.result').innerText;
@@ -37,7 +42,7 @@ function saveRound() {
             playerResult['points'] = resultPoints;
             results.push(playerResult)
         }
-        console.log(results);
+        await dataHandler.saveResults(leagueId, roundId, results);
     }
 
 }
