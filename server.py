@@ -36,7 +36,12 @@ def dashboard():
 
 @app.route('/profile')
 def profile():
-    return render_template('profile.html')
+    if session['UID']:
+        user_data = select_queries.get_user_data(session['UID'])
+        print(user_data)
+        return render_template('profile.html', data=user_data)
+    else:
+        return redirect(url_for('registration'))
 
 
 @app.route('/league/<league_id>')
