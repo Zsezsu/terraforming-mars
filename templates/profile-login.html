@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'layout/layout.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block nav_profile %}active{% endblock %}
+
+{% block content %}
 
 <form method="post" action="/login-onsubmit">
     <label id="login-token-label">nickname</label><br>
@@ -19,5 +19,4 @@
     <h1>Invalid username / email or password</h1>
 {% endif %}
 
-</body>
-</html>
+{% endblock %}

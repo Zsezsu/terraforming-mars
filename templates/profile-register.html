@@ -1,5 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'layout/layout.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block nav_profile %}active{% endblock %}
+
+{% block content %}
+
 <head>
     <meta charset="UTF-8">
     <title>Test registration</title>
@@ -36,6 +42,4 @@
 </div>
 
     <h1>{{ error }}</h1>
-
-</body>
-</html>
+{% endblock %}
