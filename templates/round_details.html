@@ -4,7 +4,9 @@
 {% block title %}Round {{ round_id }}{% endblock %}
 
 {% block script_results %}
-    {% if round_status == 'started' %}
+    {% if round_status == 'init_round' %}
+        <script src="{{ url_for('static', filename='js/roundInitGame.js') }}" defer></script>
+    {% elif round_status == 'started' %}
         <script type="module" src="{{ url_for('static', filename='js/roundStarted.js') }}" defer></script>
     {% endif %}
 {% endblock %}

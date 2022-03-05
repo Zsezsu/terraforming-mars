@@ -121,7 +121,7 @@
 .round-form {
     padding: 50px;
     width: 50%;
-    height: 700px;
+    height: 850px;
     margin: 20px 0;
     background: #181b1e !important;
     transition: 1s ease;
@@ -131,6 +131,7 @@
     gap: 75px;
     justify-content: center;
     align-items: center;
+    border: none;
 }
 
 .round-form h2 {
@@ -150,54 +151,8 @@
     width: 100%;
 }
 
-/* --------------- League Form --------------- */
-
-.player-container {
-    margin: 10px 0 20px;
-    padding: 20px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-    width: 600px;
-}
-
-.player-card {
-    display: flex;
-    flex-direction: row;
-    color: white;
-    width: 250px;
-    height: 100px;
-    font-size: 0.9em;
-    align-items: center;
-    justify-content: stretch;
-    gap: 15px;
-}
-
-.player-card img {
-    object-fit: cover;
-    left: 0;
-    height: 120%;
-    width: 100px;
-    filter: none;
-}
-
-.player-card img:hover {
-    filter: none;
-}
-
-.hide-new-league {
+.hide-round-form {
     height: 0;
     border: none;
     padding: 0;
-}
-
-.hide-new-league-button {
-    height: 0 !important;
-    padding: 0 !important;
-    border: none !important;
-    box-shadow: none !important;
 }
