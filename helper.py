@@ -57,22 +57,13 @@ def init_round_players_values(round_id, players):
     return values
 
 
-def insert_round_result_values(round_id, round_data):
-    values = ''
-    for index in range(len(round_data)):
-        player = round_data[index]
-        separator = ', ' if index < len(round_data) - 1 else ''
-        values += f'({round_id}, {player["playerId"]}, {player["total"]}){separator}'
-    return values
-
-
-def insert_round_point_values(result_id, round_data):
+def insert_round_values(round_id, round_data):
     values = ''
     for index in range(len(round_data)):
         player = round_data[index]
         separator = ', ' if index < len(round_data) - 1 else ''
         points = add_points(player['points'])
-        values += f'({result_id}, {points}){separator}'
+        values += f'({round_id}, {player["playerId"]}, {points}{player["total"]}){separator}'
     return values
 
 
@@ -88,6 +79,5 @@ def add_points(points):
     ]
     point_query_values = ''
     for index in range(len(points)):
-        separator = ', ' if index < len(points) - 1 else ''
-        point_query_values += f'{points[point_types[index]]}{separator}'
+        point_query_values += f'{points[point_types[index]]}, '
     return point_query_values
