@@ -31,21 +31,11 @@ VALUES
     (5, 3, 1);
 
 INSERT INTO
-    results(round_id, player_id, sum_points)
+    points(round_id, player_id, tr_number, milestones_points,
+           award_points, number_of_own_greeneries, number_of_cities, greeneries_around_cities, vp_on_cards, sum_points)
 VALUES
-    (1, 1, NULL),
-    (1, 2, NULL),
-    (1, 3, NULL),
-    (1, 4, NULL),
-    (1, 5, NULL);
-
-
-INSERT INTO
-    points(result_id, tr_number, milestones_points,
-           award_points, number_of_own_greeneries, number_of_cities, greeneries_around_cities, vp_on_cards)
-VALUES
-    (1, 44, 5, 5, 5, 2, 8, 12),
-    (2, 48, 5, 5, 4, 3, 11, 3),
-    (3, 51, 5, 5, 6, 4, 6, 6),
-    (4, 40, 5, 5, 7, 2, 4, 8),
-    (5, 60, 5, 5, 13, 2, 9, 10);
+    (1, 1,1, 44, 5, 5, 5, 2, 8, 12),
+    (1, 2,2, 48, 5, 5, 4, 3, 11, 3),
+    (1, 3,3, 51, 5, 5, 6, 4, 6, 6),
+    (1, 4,4, 40, 5, 5, 7, 2, 4, 8),
+    (1, 5,5, 60, 5, 5, 13, 2, 9, 10);

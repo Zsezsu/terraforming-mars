@@ -28,8 +28,7 @@ ALTER TABLE IF EXISTS ONLY public.round_players     DROP CONSTRAINT IF EXISTS fk
 ALTER TABLE IF EXISTS ONLY public.game_setup        DROP CONSTRAINT IF EXISTS fk_round_id           CASCADE;
 ALTER TABLE IF EXISTS ONLY public.game_setup        DROP CONSTRAINT IF EXISTS fk_board_id           CASCADE;
 ALTER TABLE IF EXISTS ONLY public.game_setup        DROP CONSTRAINT IF EXISTS fk_expansion_id       CASCADE;
-ALTER TABLE IF EXISTS ONLY public.results           DROP CONSTRAINT IF EXISTS fk_round_id           CASCADE;
-ALTER TABLE IF EXISTS ONLY public.points            DROP CONSTRAINT IF EXISTS fk_result_id          CASCADE;
+ALTER TABLE IF EXISTS ONLY public.points            DROP CONSTRAINT IF EXISTS fk_round_id           CASCADE;
 
 
 --------------------------------------------------Game Properties--------------------------------------------------
@@ -187,25 +186,12 @@ CREATE TABLE game_setup
             REFERENCES expansions (id) ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS results;
-CREATE TABLE results
-(
-    id         SERIAL UNIQUE NOT NULL,
-    round_id   INTEGER,
-    player_id  INTEGER,
-    sum_points INTEGER,
-    PRIMARY KEY (id),
-    CONSTRAINT fk_round_id
-        FOREIGN KEY (round_id)
-            REFERENCES rounds (id) ON DELETE CASCADE
-);
-
-
 DROP TABLE IF EXISTS points;
 CREATE TABLE points
 (
     id                       SERIAL UNIQUE NOT NULL,
-    result_id                INTEGER,
+    round_id                 INTEGER,
+    player_id                INTEGER,
     tr_number                INTEGER       NOT NULL,
     milestones_points        INTEGER,
     award_points             INTEGER,
@@ -213,9 +199,10 @@ CREATE TABLE points
     number_of_cities         INTEGER,
     greeneries_around_cities INTEGER,
     vp_on_cards              INTEGER,
-    CONSTRAINT fk_result_id
-        FOREIGN KEY (result_id)
-            REFERENCES results (id) ON DELETE CASCADE
+    sum_points               INTEGER,
+    CONSTRAINT fk_round_id
+        FOREIGN KEY (round_id)
+            REFERENCES rounds (id) ON DELETE CASCADE
 );
 
 ----------------------------------------------------Insert---------------------------------------------------------
