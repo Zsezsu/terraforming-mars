@@ -55,3 +55,39 @@ def init_round_players_values(round_id, players):
         player_id, corporation_id = player[0], player[1]
         values += f'({round_id}, {player_id}, {corporation_id}){separator}'
     return values
+
+
+def insert_round_result_values(round_id, round_data):
+    values = ''
+    for index in range(len(round_data)):
+        player = round_data[index]
+        separator = ', ' if index < len(round_data) - 1 else ''
+        values += f'({round_id}, {player["playerId"]}, {player["total"]}){separator}'
+    return values
+
+
+def insert_round_point_values(result_id, round_data):
+    values = ''
+    for index in range(len(round_data)):
+        player = round_data[index]
+        separator = ', ' if index < len(round_data) - 1 else ''
+        points = add_points(player['points'])
+        values += f'({result_id}, {points}){separator}'
+    return values
+
+
+def add_points(points):
+    point_types = [
+        'tr_number',
+        'milestones_points',
+        'award_points',
+        'number_of_own_greeneries',
+        'number_of_cities',
+        'greeneries_around_cities',
+        'vp_on_cards',
+    ]
+    point_query_values = ''
+    for index in range(len(points)):
+        separator = ', ' if index < len(points) - 1 else ''
+        point_query_values += f'{points[point_types[index]]}{separator}'
+    return point_query_values

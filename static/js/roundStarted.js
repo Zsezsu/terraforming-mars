@@ -46,12 +46,10 @@ async function saveRound() {
             let playerResult = {playerId: playerId, total: total};
 
             const points = player.querySelectorAll('td input');
-            let resultPoints = [];
+            let resultPoints = {};
             for (let index = 0; index < points.length; index++) {
-                let point = pointsTypes[index];
-                let pointObject = {};
-                pointObject[point] = points[index].value;
-                resultPoints.push(pointObject);
+                let pointType = pointsTypes[index];
+                resultPoints[pointType] = points[index].value;
             }
             playerResult['points'] = resultPoints;
             results.push(playerResult);
