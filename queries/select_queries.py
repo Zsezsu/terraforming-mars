@@ -8,7 +8,9 @@ def get_milestones():
     SELECT 
         milestone_name 
     FROM 
-        milestones;
+        milestones
+    ORDER BY
+        milestones.milestone_name;
     """
     return execute_select(SQL(query))
 
@@ -44,7 +46,7 @@ def get_round_by_id(round_id):
         league_id, started, finished, sequence
     FROM 
         rounds
-    WHERE id = {round_id}
+    WHERE id = {round_id};
     """
     return execute_select(SQL(query).format(round_id=Literal(round_id)), fetchall=False)
 
@@ -55,6 +57,8 @@ def get_boards():
         *
     FROM 
         boards
+    ORDER BY 
+        boards.board_name;
     """
     return execute_select(SQL(query))
 
@@ -65,6 +69,8 @@ def get_expansions():
         *
     FROM 
         expansions
+    ORDER BY 
+        expansions.expansion_name;
     """
     return execute_select(SQL(query))
 
@@ -75,6 +81,8 @@ def get_corporations():
         *
     FROM 
         corporations
+    ORDER BY 
+        corporations.name;
     """
     return execute_select(SQL(query))
 
