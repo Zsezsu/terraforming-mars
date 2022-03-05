@@ -33,7 +33,7 @@ function calculateResults(inputEvent) {
 
 
 async function saveRound() {
-    if (confirm('Can we start the game?') === true) {
+    if (confirm('Are you sure?') === true) {
         const players = document.querySelectorAll('tr[data-player-id]');
         const table = document.querySelector("table#point-table");
         const leagueId = table.getAttribute('data-league-id');

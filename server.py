@@ -105,7 +105,7 @@ def logout():
 def results(league_id=1, round_id=2):
     round_data = select_queries.get_round_by_id(round_id)
     round_status = helper.get_round_status(round_data)
-    game_data, players_data, players_in_game = (None, None, None)
+    game_data, players_data, players_in_game, round_points = (None, None, None, None)
     players_data, players_in_game = helper.dummy_data()  # CREATES DUMMY DATA
     # init_game, started, finished
 
@@ -120,11 +120,12 @@ def results(league_id=1, round_id=2):
     elif round_status == 'started':
         players_in_game = select_queries.get_players_in_round(round_id)
     elif round_status == 'finished':
-        print('Not finished')
+        round_points = select_queries.get_round_points(round_id)
     else:
         return redirect('/')
     return render_template('round_details.html',
                            round_status=round_status,
+                           round_points=round_points,
                            round=round_data,
                            round_id=round_id,
                            league_id=league_id,
