@@ -57,7 +57,8 @@ def leagues():
 @app.route('/account/signup')
 def registration():
     d_error = request.args.get('d_error')
-    return render_template('profile-register.html', error=d_error)
+    pictures = select_queries.get_pictures()
+    return render_template('profile-register.html', error=d_error, pictures=pictures)
 
 
 @app.route('/registration-onsubmit', methods=['POST'])
@@ -68,7 +69,7 @@ def registration_onsubmit():
         user_email = select_queries.get_user_email(user_id)
         send_mail(user_email['email'])
         session['UID'] = user_id
-        return render_template('index.html')
+        return redirect(url_for('index'))
     else:
         return redirect(url_for('registration', d_error=error_message))
 
