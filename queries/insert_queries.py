@@ -35,34 +35,36 @@ def init_round(round_details, round_id):
     ))
 
 
-def insert_round_points_results(round_id, round_data):
-    result_values = helper.insert_round_result_values(round_id, round_data)
+def insert_round_points(round_id, round_data):
+    round_points_values = helper.insert_round_values(round_id, round_data)
     query = """
-    INSERT INTO 
-        results(round_id, player_id, sum_points)
-    VALUES 
-        {result_values}
-    RETURNING id;
+    BEGIN;
+    
+        INSERT INTO 
+            points(
+                round_id,
+                player_id,
+                tr_number,
+                milestones_points,
+                award_points,
+                number_of_own_greeneries,
+                number_of_cities,
+                greeneries_around_cities,
+                vp_on_cards,
+                sum_points
+            )
+        VALUES 
+            {round_points_values};
+        
+        UPDATE 
+            rounds
+        SET
+            finished = TRUE
+        WHERE 
+            rounds.id = {round_id};
+    COMMIT;
     """
-    result_id = execute_insert(SQL(query).format(result_values=SQL(result_values)), fetchone=True)
-    insert_round_points(result_id, round_data)
-
-
-def insert_round_points(result_id, round_data):
-    round_points_values = helper.insert_round_point_values(result_id[0], round_data)
-    query = """
-    INSERT INTO 
-        points(
-            result_id,
-            tr_number,
-            milestones_points,
-            award_points,
-            number_of_own_greeneries,
-            number_of_cities,
-            greeneries_around_cities,
-            vp_on_cards
-        )
-    VALUES 
-        {round_points_values};
-    """
-    execute_insert(SQL(query).format(round_points_values=SQL(round_points_values)))
+    execute_insert(SQL(query).format(
+        round_points_values=SQL(round_points_values),
+        round_id=Literal(round_id)
+    ))

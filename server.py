@@ -82,7 +82,7 @@ def results(league_id=1, round_id=2):
 def init_round(league_id, round_id):
     round_details = request.form
     insert_queries.init_round(round_details, round_id)
-    return redirect(f'/league{league_id}/round/{round_id}')
+    return redirect(f'/league/{league_id}/round/{round_id}')
 
 
 if __name__ == '__main__':
