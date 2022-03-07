@@ -13,7 +13,7 @@ function createNewLeague() {
     addNewLeagueButton.addEventListener('click', addPlayersToGame);
 
     const confirmButton = document.querySelector('button#button-confirm');
-    confirmButton.addEventListener('click', confirm)
+    confirmButton.addEventListener('click', confirmLeague)
 }
 
 // --------------------------------Select Players------------------------------------------
@@ -125,7 +125,8 @@ function refreshPlayersNumber() {
 // --------------------------------Confirm league------------------------------------------
 
 
-const confirm = async function () {
+const confirmLeague = async function () {
+
     const leagueName = document.querySelector('input[name="league-name"]').value;
     const leagueRounds = document.querySelector('input[name="league-rounds"]').value;
     const selectedPlayers = document.querySelector('div#selected-players').children;
@@ -140,19 +141,21 @@ const confirm = async function () {
     if (leagueName) {
         if (+leagueRounds >= minRounds && +leagueRounds <= maxRounds) {
             if (+selectedPlayers.length >= minPlayers && +selectedPlayers.length <= maxPlayers) {
-                const selectedPlayersDetails = getPlayersDetails(selectedPlayers)
-                const data = {
-                    'leagueName': leagueName,
-                    'leagueRounds': leagueRounds,
-                    'userIds': selectedPlayersDetails,
-                    'leagueAdminId': leagueAdminId,
-                    'leagueImageId': selectedLeagueImage.getAttribute('data-image-id'),
-                    'selectedLeagueImageSource': selectedLeagueImageSource
+                if (confirm('Are you sure you want to add a new league?')) {
+                    const selectedPlayersDetails = getPlayersDetails(selectedPlayers)
+                    const data = {
+                        'leagueName': leagueName,
+                        'leagueRounds': leagueRounds,
+                        'userIds': selectedPlayersDetails,
+                        'leagueAdminId': leagueAdminId,
+                        'leagueImageId': selectedLeagueImage.getAttribute('data-image-id'),
+                        'selectedLeagueImageSource': selectedLeagueImageSource
+                    }
+                    toggleAddNewLeague();
+                    setTimeout(clearLeagueDiv, divTransition);
+                    const newLeagueId = await dataHandler.postNewLeague(data);
+                    addNewLeagueCard(data, newLeagueId);
                 }
-                toggleAddNewLeague();
-                setTimeout(clearLeagueDiv, divTransition);
-                const newLeagueId = await dataHandler.postNewLeague(data);
-                addNewLeagueCard(data, newLeagueId);
             } else {
                 alert(`players Number(${selectedPlayers.length}) has to be between ${minPlayers}-${maxPlayers}`);
             }
