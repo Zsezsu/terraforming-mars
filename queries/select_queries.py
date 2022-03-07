@@ -43,10 +43,15 @@ def get_players():
 def get_round_by_id(round_id):
     query = """
     SELECT 
-        league_id, started, finished, sequence
+        rounds.league_id,
+        leagues.league_name AS league_name,
+        rounds.started,
+        rounds.finished,
+        rounds.sequence
     FROM 
         rounds
-    WHERE id = {round_id};
+        LEFT JOIN leagues ON rounds.league_id = leagues.id
+    WHERE rounds.id = {round_id};
     """
     return execute_select(SQL(query).format(round_id=Literal(round_id)), fetchall=False)
 
@@ -211,6 +216,7 @@ def get_rounds_for_league(league_id, logged_in_user_id):
     SELECT
         rounds.id               AS  id,
         rounds.league_id        AS  league_id,
+        leagues.league_name     AS  league_name,
         rounds.sequence         AS  sequence,
         rounds.started          AS  started,
         rounds.finished         AS  finished,

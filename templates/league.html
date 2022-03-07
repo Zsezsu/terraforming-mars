@@ -1,13 +1,13 @@
 {% extends 'layout/layout.html' %}
 
-{% block title %}League {{ league_id }}{% endblock %}
+{% block title %}{{ rounds[0].league_name }}{% endblock %}
 
 {% block scripts %}
 
 {% endblock %}
 
 {% block content %}
-    <h1 class="text-center text-light">League {{ league_id }}</h1>
+    <h1 class="text-center text-light">{{ rounds[0].league_name }}</h1>
     <div class="cards rounds">
     {% for round in rounds %}
         {% set finished = round.finished %}
