@@ -206,6 +206,36 @@ def get_logged_in_user_leagues(user_id):
     return execute_select(SQL(query).format(user_id=Literal(user_id)))
 
 
+def get_rounds_for_league(league_id, logged_in_user_id):
+    query = """
+    SELECT
+        rounds.id               AS  id,
+        rounds.league_id        AS  league_id,
+        rounds.sequence         AS  sequence,
+        rounds.started          AS  started,
+        rounds.finished         AS  finished,
+        CASE 
+            WHEN (leagues.league_admin = {logged_in_user_id})
+                THEN
+                    TRUE
+            ELSE 
+                FALSE
+        END                     AS  admin,
+        images.source           AS  image_source
+        
+    FROM
+        rounds
+    LEFT JOIN images    ON  rounds.image_id = images.id
+    LEFT JOIN leagues   ON  rounds.league_id = leagues.id
+    WHERE rounds.league_id = {league_id}
+    ORDER BY rounds.sequence ASC;
+     """
+    return execute_select(SQL(query).format(
+        logged_in_user_id=Literal(logged_in_user_id),
+        league_id=Literal(league_id)
+    ))
+
+
 def get_password(token):
     query = """
     SELECT id, password
