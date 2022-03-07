@@ -6,29 +6,26 @@
 
 ---------------------------------------------Drop primary keys-----------------------------------------------------
 
-ALTER TABLE IF EXISTS ONLY public.corporations      DROP CONSTRAINT IF EXISTS corporations_pkey     CASCADE;
-ALTER TABLE IF EXISTS ONLY public.corporations      DROP CONSTRAINT IF EXISTS corporations_id_key   CASCADE;
-ALTER TABLE IF EXISTS ONLY public.boards            DROP CONSTRAINT IF EXISTS boards_pkey           CASCADE;
-ALTER TABLE IF EXISTS ONLY public.expansions        DROP CONSTRAINT IF EXISTS expansions_pkey       CASCADE;
-ALTER TABLE IF EXISTS ONLY public.legues            DROP CONSTRAINT IF EXISTS leagues_pkey          CASCADE;
-ALTER TABLE IF EXISTS ONLY public.results           DROP CONSTRAINT IF EXISTS results_pkey          CASCADE;
-ALTER TABLE IF EXISTS ONLY public.players           DROP CONSTRAINT IF EXISTS players_pkey          CASCADE;
+ALTER TABLE IF EXISTS ONLY public.corporations          DROP CONSTRAINT IF EXISTS corporations_pkey     CASCADE;
+ALTER TABLE IF EXISTS ONLY public.boards                DROP CONSTRAINT IF EXISTS boards_pkey           CASCADE;
+ALTER TABLE IF EXISTS ONLY public.expansions            DROP CONSTRAINT IF EXISTS expansions_pkey       CASCADE;
+ALTER TABLE IF EXISTS ONLY public.leagues               DROP CONSTRAINT IF EXISTS leagues_pkey          CASCADE;
+ALTER TABLE IF EXISTS ONLY public.results               DROP CONSTRAINT IF EXISTS results_pkey          CASCADE;
+ALTER TABLE IF EXISTS ONLY public.players               DROP CONSTRAINT IF EXISTS players_pkey          CASCADE;
 
 ---------------------------------------------Drop foreign keys-----------------------------------------------------
 
-ALTER TABLE IF EXISTS ONLY public.milestones        DROP CONSTRAINT IF EXISTS fk_board_id           CASCADE;
-ALTER TABLE IF EXISTS ONLY public.milestones        DROP CONSTRAINT IF EXISTS fk_expansion_id       CASCADE;
-ALTER TABLE IF EXISTS ONLY public.milestones        DROP CONSTRAINT IF EXISTS fk_expansion_id       CASCADE;
-ALTER TABLE IF EXISTS ONLY public.awards            DROP CONSTRAINT IF EXISTS fk_board_id           CASCADE;
-ALTER TABLE IF EXISTS ONLY public.legues            DROP CONSTRAINT IF EXISTS fk_league_id          CASCADE;
-ALTER TABLE IF EXISTS ONLY public.league_players    DROP CONSTRAINT IF EXISTS fk_league_id          CASCADE;
-ALTER TABLE IF EXISTS ONLY public.rounds            DROP CONSTRAINT IF EXISTS fk_league_id          CASCADE;
-ALTER TABLE IF EXISTS ONLY public.round_players     DROP CONSTRAINT IF EXISTS fk_round_id           CASCADE;
-ALTER TABLE IF EXISTS ONLY public.round_players     DROP CONSTRAINT IF EXISTS fk_corporation_id     CASCADE;
-ALTER TABLE IF EXISTS ONLY public.game_setup        DROP CONSTRAINT IF EXISTS fk_round_id           CASCADE;
-ALTER TABLE IF EXISTS ONLY public.game_setup        DROP CONSTRAINT IF EXISTS fk_board_id           CASCADE;
-ALTER TABLE IF EXISTS ONLY public.game_setup        DROP CONSTRAINT IF EXISTS fk_expansion_id       CASCADE;
-ALTER TABLE IF EXISTS ONLY public.points            DROP CONSTRAINT IF EXISTS fk_round_id           CASCADE;
+ALTER TABLE IF EXISTS ONLY public.milestones            DROP CONSTRAINT IF EXISTS fk_board_id           CASCADE;
+ALTER TABLE IF EXISTS ONLY public.milestones            DROP CONSTRAINT IF EXISTS fk_expansion_id       CASCADE;
+ALTER TABLE IF EXISTS ONLY public.awards                DROP CONSTRAINT IF EXISTS fk_board_id           CASCADE;
+ALTER TABLE IF EXISTS ONLY public.league_players        DROP CONSTRAINT IF EXISTS fk_league_id          CASCADE;
+ALTER TABLE IF EXISTS ONLY public.rounds                DROP CONSTRAINT IF EXISTS fk_league_id          CASCADE;
+ALTER TABLE IF EXISTS ONLY public.round_players         DROP CONSTRAINT IF EXISTS fk_round_id           CASCADE;
+ALTER TABLE IF EXISTS ONLY public.round_players         DROP CONSTRAINT IF EXISTS fk_corporation_id     CASCADE;
+ALTER TABLE IF EXISTS ONLY public.game_setup            DROP CONSTRAINT IF EXISTS fk_round_id           CASCADE;
+ALTER TABLE IF EXISTS ONLY public.game_setup            DROP CONSTRAINT IF EXISTS fk_board_id           CASCADE;
+ALTER TABLE IF EXISTS ONLY public.game_setup            DROP CONSTRAINT IF EXISTS fk_expansion_id       CASCADE;
+ALTER TABLE IF EXISTS ONLY public.points                DROP CONSTRAINT IF EXISTS fk_round_id           CASCADE;
 
 
 --------------------------------------------------Game Properties--------------------------------------------------
@@ -190,8 +187,8 @@ DROP TABLE IF EXISTS points;
 CREATE TABLE points
 (
     id                       SERIAL UNIQUE NOT NULL,
-    round_id                 INTEGER,
-    player_id                INTEGER,
+    round_id                 INTEGER       NOT NULL,
+    player_id                INTEGER       NOT NULL,
     tr_number                INTEGER       NOT NULL,
     milestones_points        INTEGER,
     award_points             INTEGER,
