@@ -1,0 +1,25 @@
+{% extends 'layout/layout.html' %}
+
+
+{% block title %}Round {{ round_id }}{% endblock %}
+
+{% block script_results %}
+    {% if round_status == 'init_round' %}
+        <script src="{{ url_for('static', filename='js/roundInitGame.js') }}" defer></script>
+    {% elif round_status == 'started' %}
+        <script type="module" src="{{ url_for('static', filename='js/roundStarted.js') }}" defer></script>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-light text-center">Round {{ round.sequence }} of League {{ round.league_id }}</h1>
+
+    {% if round_status == 'init_round' %}
+        {% include 'round_phase_init_game.html' %}
+    {% elif round_status == 'started' %}
+        {% include 'round_phase_started.html' %}
+    {% else %}
+        {% include 'round_phase_finished.html' %}
+    {% endif %}
+
+{% endblock %}

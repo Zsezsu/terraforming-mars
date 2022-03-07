@@ -27,6 +27,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/leagues.css') }}">
 
     <script src="{{ url_for('static', filename='js/index.js') }}" defer></script>
+    {% block script_results %}{% endblock %}
     {% block script %}{% endblock %}
 
 </head>

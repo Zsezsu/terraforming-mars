@@ -7,11 +7,18 @@ export const dataHandler = {
         return await apiGet(`/api/users/logged-in`);
     },
     getImages: async function(imageType) {
-        return await apiGet(`/api/images/${imageType}`)
+        return await apiGet(`/api/images/${imageType}`);
     },
+    getBoards: async function() {
+        return await apiGet(`/api/boards`);
+    },
+
     //POST
     postNewLeague: async function (data) {
         return await apiPost(`/api/leagues`, data);
+    },
+    saveResults: async function (leagueId, roundId, data) {
+        return await apiPost(`/api/leagues/${leagueId}/rounds/${roundId}`, data)
     }
 }
 
