@@ -1,5 +1,4 @@
 from psycopg2.sql import SQL, Literal, Identifier
-
 from data_manager import execute_insert
 
 
@@ -64,3 +63,21 @@ def add_league_rounds(league_id, data):
         VALUES {rounds}
     """
     execute_insert(SQL(query).format(rounds=SQL(rounds)))
+
+
+def insert_new_user(data):
+    query = """
+    INSERT INTO
+        players(username, first_name, last_name, email, password, image_id)
+    VALUES
+        ({username}, {first_name}, {last_name}, {email}, {password}, {image_id})
+    RETURNING id
+    """
+    return execute_insert(SQL(query).format(
+        username=Literal(data['nickname']),
+        first_name=Literal(data['first_name']),
+        last_name=Literal(data['last_name']),
+        email=Literal(data['email']),
+        password=Literal(data['password']),
+        image_id=Literal(data['pp_id'])
+    ), fetchone=True)

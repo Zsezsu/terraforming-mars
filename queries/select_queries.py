@@ -13,6 +13,17 @@ def get_milestones():
     return execute_select(SQL(query))
 
 
+def get_user_id(token):
+    query = """
+    SELECT id
+    FROM players
+    WHERE username LIKE {token} OR email LIKE {token}
+    """
+    return execute_select(SQL(query).format(
+        token=Literal(token)
+    ), fetchall=False)
+
+
 def get_players():
     query = """
     SELECT 
@@ -76,7 +87,7 @@ def get_logged_in_user_leagues(user_id):
         WHERE
             leagues.league_admin = {user_id}
         OR
-            league_players.league_id = {user_id}
+            league_players.player_id = {user_id}
         GROUP BY
             leagues.id, images.source
         ORDER BY
@@ -84,3 +95,46 @@ def get_logged_in_user_leagues(user_id):
     """
     return execute_select(SQL(query).format(user_id=Literal(user_id)))
 
+
+def get_password(token):
+    query = """
+    SELECT id, password
+    FROM players
+    WHERE username LIKE {token} OR email LIKE {token}
+    """
+    return execute_select(SQL(query).format(
+        token=Literal(token)
+    ), fetchall=False)
+
+
+def get_user_email(user_id):
+    query = """
+    SELECT email
+    FROM players
+    WHERE id = {user_id}
+    """
+    return execute_select(SQL(query).format(
+        user_id=Literal(user_id)
+    ), fetchall=False)
+
+
+def get_pictures():
+    query = """
+    SELECT id, source
+    FROM images
+    WHERE user_image IS TRUE
+    """
+    return execute_select(SQL(query))
+
+
+def get_user_data(uid):
+    query = """
+    SELECT username, first_name, last_name, email, source 
+    FROM players
+    JOIN images
+        ON players.image_id = images.id::varchar
+    WHERE players.id = {uid}
+    """
+    return dict(execute_select(SQL(query).format(
+        uid=Literal(uid)
+    ), fetchall=False))
