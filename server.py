@@ -53,8 +53,6 @@ def league(league_id):
 @app.route('/my-leagues')
 def leagues():
     uid = session['UID']
-    print(uid)
-    print('--- loged user -____')
     logged_in_user = select_queries.get_logged_in_user(uid)
     logged_in_user_leagues = select_queries.get_logged_in_user_leagues(uid)
     return render_template('my_leagues.html', logged_in_user=logged_in_user, leagues=logged_in_user_leagues)
