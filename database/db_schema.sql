@@ -95,11 +95,13 @@ ALTER TABLE IF EXISTS ONLY public.players
 DROP TABLE IF EXISTS players;
 CREATE TABLE players
 (
-    id       SERIAL UNIQUE  NOT NULL,
-    username TEXT UNIQUE    NOT NULL,
-    email    VARCHAR UNIQUE NOT NULL,
-    password VARCHAR        NOT NULL,
-    image    VARCHAR,
+    id          SERIAL UNIQUE  NOT NULL,
+    username    TEXT UNIQUE    NOT NULL,
+    first_name  TEXT           NOT NULL,
+    last_name   TEXT           NOT NULL,
+    email       VARCHAR UNIQUE NOT NULL,
+    password    VARCHAR        NOT NULL,
+    image       VARCHAR,
     PRIMARY KEY (id)
 );
 
@@ -107,6 +109,7 @@ DROP TABLE IF EXISTS leagues;
 CREATE TABLE leagues
 (
     id           SERIAL UNIQUE NOT NULL,
+    league_name  TEXT,
     league_admin INTEGER       NULL,
     round_number INTEGER,
     PRIMARY KEY (id)
@@ -117,6 +120,7 @@ CREATE TABLE league_players
 (
     id        SERIAL UNIQUE,
     league_id INTEGER,
+    player_id INTEGER,
     CONSTRAINT fk_league_id
         FOREIGN KEY (league_id)
             REFERENCES leagues (id) ON DELETE CASCADE

@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, url_for, redirect, jsonify
+from flask import Flask, render_template, session
+from api import api
 from dotenv import load_dotenv
 
 import queries.insert_queries as insert_queries
@@ -6,14 +7,23 @@ import queries.select_queries as select_queries
 import queries.update_queries as update_queries
 import queries.delete_queries as delete_queries
 
+
 load_dotenv()
 app = Flask(__name__)
+app.register_blueprint(api)
 
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 
 @app.route('/')
 def index():
+    session['UID'] = 1  # DUMMY DATA-----------------------
+    session['logged_in_user'] = {
+        'id': 1,
+        'username': 'Zsu',
+        'name': 'Zsuzsanna Juhász',
+        'image_source': 'img/favicon.ico'
+    }  # DUMMY DATA----------------------------------------------
     return render_template('index.html')
 
 
@@ -32,15 +42,19 @@ def profile():
     return render_template('profile.html')
 
 
-@app.route('/games')
-def games():
-    return render_template('games.html')
+@app.route('/league/<league_id>')
+def league(league_id):
+    # For testing purposes
+    return f'League {league_id}'
 
 
-@app.route('/test')
-def test():
-    milestones = select_queries.get_milestones()
-    return render_template('test.html', milestones=milestones)
+@app.route('/my-leagues')
+def leagues():
+    uid = session['UID']
+    logged_in_user = select_queries.get_logged_in_user(uid)
+    logged_in_user = session['logged_in_user'] # DUMMY DATA----------------------------------------------
+    logged_in_user_leagues = select_queries.get_logged_in_user_leagues(uid)
+    return render_template('my_leagues.html', logged_in_user=logged_in_user, leagues=logged_in_user_leagues)
 
 
 if __name__ == '__main__':
