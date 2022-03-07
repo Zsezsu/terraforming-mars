@@ -1,5 +1,3 @@
-
-
 img.profile-picture {
     height:100px;
     width:auto;
@@ -9,4 +7,8 @@ img.profile-picture {
 
 .selected {
     border: 10px solid #555;
+}
+
+.registration-form input {
+
 }

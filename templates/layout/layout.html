@@ -25,10 +25,12 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/nav.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/cards.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/leagues.css') }}">
+    {% block styles %}{% endblock %}
 
     <script src="{{ url_for('static', filename='js/index.js') }}" defer></script>
     {% block script_results %}{% endblock %}
     {% block script %}{% endblock %}
+    {% block scripts %}{% endblock %}
 
 </head>
 <body class="bg-dark">
