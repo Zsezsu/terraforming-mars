@@ -10,8 +10,8 @@
     <meta charset="UTF-8">
     <title>Test registration</title>
     <script src="{{ url_for('static', filename='js/registrationPicturePicker.js') }}" defer></script>
+    <script type="module" src="{{ url_for('static', filename='js/userDataValidation.js') }}" defer></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/registration.css' ) }}">
-
 </head>
 <body>
 
@@ -20,8 +20,8 @@
     <input id="firstname-input" type="text" name="first_name" minlength="2" maxlength="8"><br><br>
     <label id="lastname-label">lastname</label><br>
     <input id="lastname-input" type="text" name="last_name" minlength="2" maxlength="8"><br><br>
-    <label id="nickname-label">nickname</label><br>
-    <input id="nickname-label" type="text" name="nickname"minlength="2" maxlength="10"><br><br>
+    <label id="username-label">nickname</label><br>
+    <input id="username-input" type="text" name="nickname"minlength="2" maxlength="10"><br><br>
     <label id="email-label">email</label><br>
     <input id="email-input" type="email" name="email"><br><br>
     <label id="email2-label">email2</label><br>

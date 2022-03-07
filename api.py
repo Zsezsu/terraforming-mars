@@ -46,3 +46,8 @@ def create_league():
     league_id = insert_queries.add_new_league(data)
     new_league_id = {'league_id': league_id}
     return jsonify(new_league_id)
+
+
+@api.route('/api/user/name/<token>')
+def is_unique_token_exist(token):
+    return jsonify(bool(select_queries.get_user_id(token)))
