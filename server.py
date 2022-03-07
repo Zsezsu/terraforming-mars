@@ -102,7 +102,7 @@ def login_onsubmit():
 @app.route('/logout')
 def logout():
     session['UID'] = ''
-    return render_template('index.html')
+    return redirect(url_for('index'))
 
 
 @app.route('/league/<league_id>/round/<round_id>', methods=['GET'])
