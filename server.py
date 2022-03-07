@@ -1,14 +1,11 @@
-from flask import Flask, render_template, request, url_for, redirect, jsonify, session
+from flask import Flask, render_template, session
 from api import api
-
 from dotenv import load_dotenv
+
 import queries.insert_queries as insert_queries
 import queries.select_queries as select_queries
 import queries.update_queries as update_queries
 import queries.delete_queries as delete_queries
-
-
-
 
 
 load_dotenv()
