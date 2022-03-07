@@ -27,7 +27,7 @@
             <input type="number" id="league-rounds" name="league-rounds" min="1" max="10"
                    placeholder="Choose the number of rounds between 1-10"><br>
             <label id="label-league-players" class="text-light" for="league-players">League Players 1/5</label><br>
-            <input type="text" id="league-players" name="league-players" placeholder="Add new players to league"><br>
+            <input type="text" id="league-players" name="league-players" placeholder="Add new players to league" autocomplete="off"><br>
             <div id="searched-players"></div>
             <div id="selected-players" class="player-container bg-dark">
                 {% set user_id = logged_in_user['id'] %}
