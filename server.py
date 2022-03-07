@@ -122,8 +122,10 @@ def results(league_id=1, round_id=2):
 
         elif round_status == 'started':
             players_in_game = select_queries.get_players_in_round(round_id)
+
         elif round_status == 'finished':
             round_points = select_queries.get_round_points(round_id)
+
         else:
             return redirect('/')
         return render_template('round_details.html',
