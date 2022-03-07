@@ -5,15 +5,18 @@
     <table class="round-table table table-dark table-bordered text-center">
         <thead>
         <tr>
-            {% for type in round_points[0].keys() %}
-                <th>{{ type }}</th>
+            <th>Player</th>
+            <th>Corporation</th>
+            {% for header in table_headers %}
+                <th>{{ header }}</th>
             {% endfor %}
+            <th>Total</th>
         </tr>
         </thead>
         <tbody>
         {% for player_round_points in round_points %}
-            {% set player_name = player_round_points.Player %}
-            {% set corporation = player_round_points.Corporation %}
+            {% set player_name = player_round_points.username %}
+            {% set corporation = player_round_points.corporation_name %}
             <tr>
                 <th>{{ player_name }}</th>
                 <th>{{ corporation }}</th>

@@ -25,8 +25,11 @@ function calculateResults(inputEvent) {
     const playerCells = document.querySelectorAll(`td.editable input[data-player-id="${playerId}"]`);
     let resultSum = 0;
     playerCells.forEach(cell => {
-        const cellValue = parseInt(cell.value);
-        cellValue ? resultSum += parseInt(cell.value) : 0;
+        const point = cell.getAttribute('data-point');
+        if (point === 'true') {
+            const cellValue = parseInt(cell.value);
+            cellValue ? resultSum += parseInt(cell.value) : 0;
+        }
     });
     resultCell.textContent = resultSum;
 }

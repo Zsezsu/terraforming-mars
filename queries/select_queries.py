@@ -95,16 +95,16 @@ def get_corporations():
 def get_round_points(round_id):
     query = """
     SELECT 
-        players.username                    AS  "Player",
-        corporations.name                   AS  "Corporation",
-        points.tr_number                    AS  "TR",
-        points.milestones_points            AS  "Milestone Points",
-        points.award_points                 AS  "Award Points",
-        points.number_of_own_greeneries     AS  "Greens",
-        points.number_of_cities             AS  "Cities",
-        points.greeneries_around_cities     AS  "Greens around Cities",
-        points.vp_on_cards                  AS  "Win Points",
-        points.sum_points                   AS  "Total"
+        players.username                    AS  username,
+        corporations.name                   AS  corporation_name,
+        points.tr_number                    AS  tr_number,
+        points.milestones_points            AS  milestones_points,
+        points.award_points                 AS  award_points,
+        points.number_of_own_greeneries     AS  number_of_own_greeneries,
+        points.number_of_cities             AS  number_of_cities,
+        points.greeneries_around_cities     AS  greeneries_around_cities,
+        points.vp_on_cards                  AS  vp_on_cards,
+        points.sum_points                   AS  sum_points
         
     FROM
         points

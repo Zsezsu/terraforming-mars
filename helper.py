@@ -1,3 +1,15 @@
+def create_table_header():
+    return [
+        'TR number',
+        'Milestone points',
+        'Award points',
+        'Greeneries',
+        'Cities',
+        'Greeneries around cities',
+        'Victory points'
+    ]
+
+
 def get_round_status(round):
     round_status = ''
     for key, value in round.items():

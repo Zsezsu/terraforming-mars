@@ -112,6 +112,7 @@ def results(league_id=1, round_id=2):
     if session['UID']:
         round_data = select_queries.get_round_by_id(round_id)
         round_status = helper.get_round_status(round_data)
+        table_headers = helper.create_table_header()
         game_data, players_data, players_in_game, round_points = (None, None, None, None)
 
         if round_status == 'init_round':
@@ -133,6 +134,7 @@ def results(league_id=1, round_id=2):
         return render_template('round_details.html',
                                round_status=round_status,
                                round_points=round_points,
+                               table_headers=table_headers,
                                round=round_data,
                                round_id=round_id,
                                league_id=league_id,
