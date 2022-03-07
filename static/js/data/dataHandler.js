@@ -12,6 +12,9 @@ export const dataHandler = {
     getBoards: async function() {
         return await apiGet(`/api/boards`);
     },
+    getIsTokenExist: async function(token) {
+        return await apiGet(`/api/user/name/${token}`);
+    },
 
     //POST
     postNewLeague: async function (data) {
