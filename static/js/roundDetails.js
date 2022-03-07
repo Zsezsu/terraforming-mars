@@ -1,38 +1,35 @@
 import {dataHandler} from "./data/dataHandler.js";
 
 const roundDetails = {
-    init(){
+    init() {
         const id = this.getDataValue('id');
         const roundStatus = this.getDataValue('status');
         this.pageControl(roundStatus)
     },
 
-    getDataValue(dataValue){
+    getDataValue(dataValue) {
         const containerDiv = document.querySelector('.container');
         return containerDiv.getAttribute(`data-${dataValue}`);
     },
 
-    pageControl(roundStatus){
+    pageControl(roundStatus) {
         const containerDiv = document.querySelector('.container');
-        if (roundStatus === 'init_round'){
-             containerDiv.insertAdjacentHTML('afterbegin', `<button id="init">Init round</button>`);
-             let button = document.querySelector('#init');
-             button.addEventListener('click', this.initButtonClick.bind(this))
-        } else if (roundStatus === 'started'){
-
-        } else if (roundStatus === 'finished'){
-
+        if (roundStatus === 'init_round') {
+            containerDiv.insertAdjacentHTML('afterbegin', `<button id="init">Init round</button>`);
+            let button = document.querySelector('#init');
+            button.addEventListener('click', this.initButtonClick.bind(this))
+        } else if (roundStatus === 'started') {
+        } else if (roundStatus === 'finished') {
         }
-
     },
 
-    async initButtonClick(event){
+    async initButtonClick(event) {
         let button = event.currentTarget;
         button.hidden = 'True';
         const containerDiv = document.querySelector('.container');
-        let boards =  await dataHandler.getBoards();
+        let boards = await dataHandler.getBoards();
         let optionHTML = ''
-        for (let board of boards){
+        for (let board of boards) {
             optionHTML += `<option id="${board['id']}">${board['board_name']}</option>`
         }
         containerDiv.insertAdjacentHTML(
@@ -43,21 +40,19 @@ const roundDetails = {
                 </select>`);
         let select = document.querySelector('#select-board');
         select.addEventListener('select', this.selectEvent.bind(this))
-
     },
 
 
-    selectEvent(event){
+    selectEvent(event) {
         let value = event.currentTarget.value;
-
     },
 
-    renderTable(){
+    renderTable() {
         let containerDiv = document.querySelector('.container');
         containerDiv.innerHTML = this.htmlFactory();
     },
 
-    htmlFactory(){
+    htmlFactory() {
         return `
         <table class="text-light">
             <thead>
@@ -80,7 +75,6 @@ const roundDetails = {
             </tbody>
         </table>
         `
-
     }
 }
 

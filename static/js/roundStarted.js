@@ -57,7 +57,6 @@ async function saveRound() {
         await dataHandler.saveResults(leagueId, roundId, results);
         location.reload();
     }
-
 }
 
 main();

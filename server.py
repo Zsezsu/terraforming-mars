@@ -106,11 +106,9 @@ def results(league_id=1, round_id=2):
     round_data = select_queries.get_round_by_id(round_id)
     round_status = helper.get_round_status(round_data)
     game_data, players_data, players_in_game, round_points = (None, None, None, None)
-    players_data, players_in_game = helper.dummy_data()  # CREATES DUMMY DATA
-    # init_game, started, finished
 
     if round_status == 'init_round':
-        # players_data = select_queries.get_round_players(league_id)
+        players_data = select_queries.get_round_players(league_id)
         game_data = {
             "boards": select_queries.get_boards(),
             "expansions": select_queries.get_expansions(),
