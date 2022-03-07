@@ -87,17 +87,13 @@ def get_logged_in_user_leagues(user_id):
         WHERE
             leagues.league_admin = {user_id}
         OR
-            league_players.league_id = {user_id}
+            league_players.player_id = {user_id}
         GROUP BY
             leagues.id, images.source
         ORDER BY
             leagues.id DESC;
     """
     return execute_select(SQL(query).format(user_id=Literal(user_id)))
-
-
-def get_user_id(nickname):
-    pass
 
 
 def get_password(token):
@@ -136,7 +132,7 @@ def get_user_data(uid):
     SELECT username, first_name, last_name, email, source 
     FROM players
     JOIN images
-        ON players.image = images.id::varchar
+        ON players.image_id = images.id::varchar
     WHERE players.id = {uid}
     """
     return dict(execute_select(SQL(query).format(

@@ -56,8 +56,7 @@ def submit_registration(form):
     If process successful returns user id"""
     hashed_pwd = hash_password(form['password'])
     data = update_password_on_form(form, hashed_pwd)
-    insert_queries.insert_new_user(data)
-    user_id = select_queries.get_user_id(form['nickname'])['id']
+    user_id = insert_queries.insert_new_user(data)[0]
     return user_id
 
 

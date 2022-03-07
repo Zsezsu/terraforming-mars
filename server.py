@@ -38,7 +38,6 @@ def dashboard():
 def profile():
     if session['UID']:
         user_data = select_queries.get_user_data(session['UID'])
-        print(user_data)
         return render_template('profile.html', data=user_data)
     else:
         return redirect(url_for('registration'))
@@ -53,8 +52,9 @@ def league(league_id):
 @app.route('/my-leagues')
 def leagues():
     uid = session['UID']
+    print(uid)
+    print('--- loged user -____')
     logged_in_user = select_queries.get_logged_in_user(uid)
-    logged_in_user = session['logged_in_user'] # DUMMY DATA----------------------------------------------
     logged_in_user_leagues = select_queries.get_logged_in_user_leagues(uid)
     return render_template('my_leagues.html', logged_in_user=logged_in_user, leagues=logged_in_user_leagues)
 
