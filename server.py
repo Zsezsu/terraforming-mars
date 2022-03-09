@@ -52,7 +52,7 @@ def league(league_id):
     # For testing purposes
     logged_in_user_id = session['UID']
     rounds = select_queries.get_rounds_for_league(league_id, logged_in_user_id)
-    return render_template('league.html', rounds=rounds)
+    return render_template('league.html', rounds=rounds, logged_in_user_id=logged_in_user_id)
 
 
 @app.route('/my-leagues')

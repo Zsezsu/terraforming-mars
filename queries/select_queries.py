@@ -213,31 +213,38 @@ def get_logged_in_user_leagues(user_id):
 
 def get_rounds_for_league(league_id, logged_in_user_id):
     query = """
-    SELECT
-        rounds.id               AS  id,
-        rounds.league_id        AS  league_id,
-        leagues.league_name     AS  league_name,
-        rounds.sequence         AS  sequence,
-        rounds.started          AS  started,
-        rounds.finished         AS  finished,
-        CASE 
-            WHEN (leagues.league_admin = {logged_in_user_id})
-                THEN
-                    TRUE
-            ELSE 
-                FALSE
-        END                     AS  admin,
-        images.source           AS  image_source
-        
-    FROM
-        rounds
-    LEFT JOIN images    ON  rounds.image_id = images.id
-    LEFT JOIN leagues   ON  rounds.league_id = leagues.id
-    WHERE rounds.league_id = {league_id}
-    ORDER BY rounds.sequence ASC;
+SELECT
+                rounds.id                                       AS id,
+                rounds.league_id                                AS league_id,
+                leagues.league_name                             AS league_name,
+                rounds.sequence                                 AS sequence,
+                rounds.started                                  AS started,
+                rounds.finished                                 AS finished,
+                boards.board_name                               AS board,
+                string_agg(expansions.expansion_name, ', ')            AS expansions,
+                leagues.league_admin                            AS league_admin,
+                images.source                                   AS image_source
+
+FROM rounds
+         LEFT JOIN images ON rounds.image_id = images.id
+         LEFT JOIN leagues ON rounds.league_id = leagues.id
+         LEFT JOIN game_setup ON rounds.id = game_setup.round_id
+         LEFT JOIN boards ON game_setup.board_id = boards.id
+         LEFT JOIN expansions ON game_setup.expansion_id = expansions.id
+WHERE rounds.league_id = {league_id}
+GROUP BY
+         rounds.id,
+         rounds.league_id,
+         leagues.league_name,
+         rounds.sequence,
+         rounds.started,
+         rounds.finished,
+         boards.board_name,
+         images.source,
+         leagues.league_admin
+ORDER BY rounds.sequence;
      """
     return execute_select(SQL(query).format(
-        logged_in_user_id=Literal(logged_in_user_id),
         league_id=Literal(league_id)
     ))
 
