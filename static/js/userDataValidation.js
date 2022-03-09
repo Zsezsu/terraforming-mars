@@ -69,7 +69,7 @@ function emailMatch(target) {
 }
 
 function passwordRegex(target) {
-  const pwdRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/
+  const pwdRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{6,16}$/
   if (!(target.value.match(pwdRegex))) {
     return 'Password length between 6-16 and should contain:\n- one letter\n- one number\n one special character'
   }
