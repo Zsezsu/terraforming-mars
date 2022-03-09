@@ -28,7 +28,7 @@ async function initSlideshow(imageType) {
 }
 
 export function changeImage() {
-    imageData.imageElement.src = `static/${images[imageData.currentIndex]['image_source']}`;
+    imageData.imageElement.src = `/static/${images[imageData.currentIndex]['image_source']}`;
     imageData.imageElement.setAttribute('data-image-id', images[imageData.currentIndex].id);
 }
 
