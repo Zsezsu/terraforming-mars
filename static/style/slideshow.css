@@ -1,5 +1,5 @@
 .slideshow {
-    width: 100%;
+    width: 50%;
     height: auto;
     user-select: none;
     display: flex;
@@ -14,6 +14,7 @@
     height: auto;
     border-radius: 15px;
     box-shadow: black 5px 5px 20px -4px;
+    margin: 25px;
 }
 
 .slideshow img {

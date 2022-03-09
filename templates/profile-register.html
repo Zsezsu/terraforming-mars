@@ -13,25 +13,38 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="text-center text-light">Register new Account</h1>
-    <form method="post" action="/registration-onsubmit" class="registration-form text-light">
-        <label id="firstname-label">First Name</label><br>
-        <input id="firstname-input" type="text" name="first_name" minlength="2" maxlength="8"><br><br>
-        <label id="lastname-label">Last Name</label><br>
-        <input id="lastname-input" type="text" name="last_name" minlength="2" maxlength="8"><br><br>
-        <label id="username-label">Username</label><br>
-        <input id="username-input" type="text" name="nickname" minlength="2" maxlength="10"><br><br>
-        <label id="email-label">Email</label><br>
-        <input id="email-input" type="email" name="email"><br><br>
-        <label id="email2-label">Confirm Email</label><br>
-        <input id="email2-input" type="email" name="email2"><br><br>
-        <label id="password-label">Password</label><br>
-        <input id="password-input" type="password" name="password"><br><br>
-        <label id="password2-label">Confirm password</label><br>
-        <input id="password2-input" type="password" name="password2"><br><br>
-        <input id="picture-input" type="hidden" name="pp_id">
-        <input id="hidden-button" type="submit" value="submit" hidden>
-    </form>
+    <h1 class="text-center text-light">Sign Up</h1>
+    <div class="form-container card">
+        <form method="post" action="/registration-onsubmit" class="registration-form text-light form">
+            <h2 class="text-light">Register new Account</h2>
+            <label id="firstname-label">First Name</label><br>
+            <input id="firstname-input" type="text" name="first_name" minlength="2" maxlength="8"><br><br>
+            <label id="lastname-label">Last Name</label><br>
+            <input id="lastname-input" type="text" name="last_name" minlength="2" maxlength="8"><br><br>
+            <label id="username-label">Username</label><br>
+            <input id="username-input" type="text" name="nickname" minlength="2" maxlength="10"><br><br>
+            <label id="email-label">Email</label><br>
+            <input id="email-input" type="email" name="email"><br><br>
+            <label id="email2-label">Confirm Email</label><br>
+            <input id="email2-input" type="email" name="email2"><br><br>
+            <label id="password-label">Password</label><br>
+            <input id="password-input" type="password" name="password"><br><br>
+            <label id="password2-label">Confirm password</label><br>
+            <input id="password2-input" type="password" name="password2"><br><br>
+            <input id="picture-input" type="hidden" name="pp_id">
+            <input id="hidden-button" type="submit" value="submit" hidden>
+        </form>
+        <div class="form-separator"></div>
+        <div class="slideshow">
+            <h2 class="text-light">Choose image</h2>
+            <div class="text-light">
+                <img alt="slideshow image">
+                <i class="fa-solid fa-angle-left text-light slideshow-btn slideshow-prev"></i>
+                <i class="fa-solid fa-angle-right text-light slideshow-btn slideshow-next"></i>
+            </div>
+        </div>
+    </div>
+
 
     <div id="profile-picture-container">
         {% for picture in pictures %}
