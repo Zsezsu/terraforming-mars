@@ -32,11 +32,10 @@
                 <h3 class="text-light">{{ 'Round ' + round.sequence | string }}</h3>
             </div>
         {% else %}
-            {% set img_src = 'img/round_cards/mars-finished.webp' if finished else  'img/round_cards/mars-started.webp' %}
             <div class="card round bg-dark" id="round-{{ round.id }}">
             <a href="{{ link }}">
                 <div class="card-image">
-                    <img alt="mars" src="{{ url_for('static', filename=img_src) }}">
+                    <img alt="mars" src="{{ url_for('static', filename='img/round_cards/mars-locked.webp') }}">
                     <h3 class="text-light">{{ 'Round ' + round.sequence | string }}</h3>
                 </div>
             </a>
