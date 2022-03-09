@@ -63,7 +63,7 @@ def submit_registration(form):
 def is_password_format_correct(password):
     """If password formatted like, 'format_template'
     returns True"""
-    return re.match("^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$", password)
+    return re.match("^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,16}$", password)
 
 
 def is_unique_data_exist(unique_value):

@@ -43,10 +43,15 @@ def get_players():
 def get_round_by_id(round_id):
     query = """
     SELECT 
-        league_id, started, finished, sequence
+        rounds.league_id,
+        leagues.league_name AS league_name,
+        rounds.started,
+        rounds.finished,
+        rounds.sequence
     FROM 
         rounds
-    WHERE id = {round_id};
+        LEFT JOIN leagues ON rounds.league_id = leagues.id
+    WHERE rounds.id = {round_id};
     """
     return execute_select(SQL(query).format(round_id=Literal(round_id)), fetchall=False)
 
@@ -90,16 +95,16 @@ def get_corporations():
 def get_round_points(round_id):
     query = """
     SELECT 
-        players.username                    AS  "Player",
-        corporations.name                   AS  "Corporation",
-        points.tr_number                    AS  "TR",
-        points.milestones_points            AS  "Milestone Points",
-        points.award_points                 AS  "Award Points",
-        points.number_of_own_greeneries     AS  "Greens",
-        points.number_of_cities             AS  "Cities",
-        points.greeneries_around_cities     AS  "Greens around Cities",
-        points.vp_on_cards                  AS  "Win Points",
-        points.sum_points                   AS  "Total"
+        players.username                    AS  username,
+        corporations.name                   AS  corporation_name,
+        points.tr_number                    AS  tr_number,
+        points.milestones_points            AS  milestones_points,
+        points.award_points                 AS  award_points,
+        points.number_of_own_greeneries     AS  number_of_own_greeneries,
+        points.number_of_cities             AS  number_of_cities,
+        points.greeneries_around_cities     AS  greeneries_around_cities,
+        points.vp_on_cards                  AS  vp_on_cards,
+        points.sum_points                   AS  sum_points
         
     FROM
         points
@@ -204,6 +209,44 @@ def get_logged_in_user_leagues(user_id):
             leagues.id DESC;
     """
     return execute_select(SQL(query).format(user_id=Literal(user_id)))
+
+
+def get_rounds_for_league(league_id, logged_in_user_id):
+    query = """
+SELECT
+                rounds.id                                       AS id,
+                rounds.league_id                                AS league_id,
+                leagues.league_name                             AS league_name,
+                rounds.sequence                                 AS sequence,
+                rounds.started                                  AS started,
+                rounds.finished                                 AS finished,
+                boards.board_name                               AS board,
+                string_agg(expansions.expansion_name, ', ')            AS expansions,
+                leagues.league_admin                            AS league_admin,
+                images.source                                   AS image_source
+
+FROM rounds
+         LEFT JOIN images ON rounds.image_id = images.id
+         LEFT JOIN leagues ON rounds.league_id = leagues.id
+         LEFT JOIN game_setup ON rounds.id = game_setup.round_id
+         LEFT JOIN boards ON game_setup.board_id = boards.id
+         LEFT JOIN expansions ON game_setup.expansion_id = expansions.id
+WHERE rounds.league_id = {league_id}
+GROUP BY
+         rounds.id,
+         rounds.league_id,
+         leagues.league_name,
+         rounds.sequence,
+         rounds.started,
+         rounds.finished,
+         boards.board_name,
+         images.source,
+         leagues.league_admin
+ORDER BY rounds.sequence;
+     """
+    return execute_select(SQL(query).format(
+        league_id=Literal(league_id)
+    ))
 
 
 def get_password(token):

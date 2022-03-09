@@ -1,3 +1,15 @@
+def create_table_header():
+    return [
+        'TR number',
+        'Milestone points',
+        'Award points',
+        'Greeneries',
+        'Cities',
+        'Greeneries around cities',
+        'Victory points'
+    ]
+
+
 def get_round_status(round):
     round_status = ''
     for key, value in round.items():
@@ -23,9 +35,12 @@ def get_round_details(round_details):
 
 def init_game_setup_values(round_id, board_id, expansions):
     values = ""
-    for index in range(len(expansions)):
-        separator = ',' if index < len(expansions) - 1 else ''
-        values += f'({round_id}, {board_id}, {expansions[index]}){separator}'
+    if len(expansions) > 0:
+        for index in range(len(expansions)):
+            separator = ',' if index < len(expansions) - 1 else ''
+            values += f'({round_id}, {board_id}, {expansions[index]}){separator}'
+    else:
+        values += f'({round_id}, {board_id}, NULL)'
     return values
 
 
@@ -61,5 +76,7 @@ def add_points(points):
     ]
     point_query_values = ''
     for index in range(len(points)):
-        point_query_values += f'{points[point_types[index]]}, '
+        value = points[point_types[index]]
+        value = value if value else 'NULL'
+        point_query_values += f'{value}, '
     return point_query_values

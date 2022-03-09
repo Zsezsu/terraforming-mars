@@ -50,7 +50,9 @@ def profile():
 @app.route('/league/<league_id>')
 def league(league_id):
     # For testing purposes
-    return f'League {league_id}'
+    logged_in_user_id = session['UID']
+    rounds = select_queries.get_rounds_for_league(league_id, logged_in_user_id)
+    return render_template('league.html', rounds=rounds, logged_in_user_id=logged_in_user_id)
 
 
 @app.route('/my-leagues')
@@ -110,6 +112,7 @@ def results(league_id=1, round_id=2):
     if session['UID']:
         round_data = select_queries.get_round_by_id(round_id)
         round_status = helper.get_round_status(round_data)
+        table_headers = helper.create_table_header()
         game_data, players_data, players_in_game, round_points = (None, None, None, None)
 
         if round_status == 'init_round':
@@ -122,13 +125,16 @@ def results(league_id=1, round_id=2):
 
         elif round_status == 'started':
             players_in_game = select_queries.get_players_in_round(round_id)
+
         elif round_status == 'finished':
             round_points = select_queries.get_round_points(round_id)
+
         else:
             return redirect('/')
         return render_template('round_details.html',
                                round_status=round_status,
                                round_points=round_points,
+                               table_headers=table_headers,
                                round=round_data,
                                round_id=round_id,
                                league_id=league_id,

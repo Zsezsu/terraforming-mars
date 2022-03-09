@@ -1,7 +1,7 @@
 {% extends 'layout/layout.html' %}
 
 
-{% block title %}Round {{ round_id }}{% endblock %}
+{% block title %}{{ round.league_name }} Round {{ round.sequence }}{% endblock %}
 
 {% block script_results %}
     {% if round_status == 'init_round' %}
@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="text-light text-center">Round {{ round.sequence }} of League {{ round.league_id }}</h1>
+    <h1 class="text-light text-center">{{ round.league_name }} Round {{ round.sequence }}</h1>
 
     {% if round_status == 'init_round' %}
         {% include 'round_phase_init_game.html' %}

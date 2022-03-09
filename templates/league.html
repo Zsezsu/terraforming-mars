@@ -1,0 +1,63 @@
+{% extends 'layout/layout.html' %}
+
+{% block title %}{{ rounds[0].league_name }}{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center text-light">{{ rounds[0].league_name }}</h1>
+    <div class="cards rounds">
+    {% for round in rounds %}
+        {% set finished = round.finished %}
+        {% set in_progress = round.started %}
+        {% set locked = not rounds[loop.index0 - 1].finished and loop.index0 != 0 %}
+        {% set link = round.league_id ~ '/' ~ 'round/' ~ round.id %}
+
+        {% if finished or in_progress %}
+            {% set img_src = 'img/round_cards/mars-finished.webp' if finished else  'img/round_cards/mars-started.webp' %}
+            <div class="card round bg-dark" id="round-{{ round.id }}">
+            <a href="{{ link }}">
+                <div class="card-image">
+                    <img alt="mars" src="{{ url_for('static', filename=img_src) }}">
+                    <h3 class="text-light">{{ 'Round ' + round.sequence | string }}</h3>
+                </div>
+            </a>
+        {% elif locked %}
+            <div class="card round bg-dark locked" id="round-{{ round.id }}">
+            <div class="card-image">
+                <img alt="mars" src="{{ url_for('static', filename='img/round_cards/mars-locked.webp') }}">
+                <i class="fa-solid fa-lock lock-indicator text-light"></i>
+                <h3 class="text-light">{{ 'Round ' + round.sequence | string }}</h3>
+            </div>
+        {% else %}
+            <div class="card round bg-dark" id="round-{{ round.id }}">
+            <a href="{{ link }}">
+                <div class="card-image">
+                    <img alt="mars" src="{{ url_for('static', filename='img/round_cards/mars-locked.webp') }}">
+                    <h3 class="text-light">{{ 'Round ' + round.sequence | string }}</h3>
+                </div>
+            </a>
+        {% endif %}
+
+    <div class="card-details">
+        {% if finished %}
+            <small class="text-light">{{ round.board }}{{ ' | ' ~  round.expansions if round.expansions }}</small>
+            <i class="fa-solid fa-circle-check text-light"></i>
+        {% elif in_progress %}
+            <small class="text-light">
+                {{ round.board if round.board }}{{ ' | ' ~  round.expansions if round.expansions }}</small>
+            <i class="fa-solid fa-rocket text-light"></i>
+        {% elif locked %}
+            <i class="fa-solid fa-lock text-light"></i>
+        {% else %}
+            <i class="fa-solid fa-gears text-light"></i>
+        {% endif %}
+
+    </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+

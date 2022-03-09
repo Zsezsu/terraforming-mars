@@ -5,7 +5,7 @@
     <button class="btn btn-light show-round-form-button">Initialize round</button>
 </div>
 <div class="round-form card text-light hide-round-form">
-    <form method="post">
+    <form method="post" onsubmit="return confirm('Are you sure you want to submit?');">
         <h2 class="text-light">Round settings</h2>
         <label class="text-light" for="round-board">Choose a board</label><br>
         <select id="round-board" name="board"><br><br>
@@ -24,7 +24,8 @@
         <label class="text-light" for="round-corporations">Choose a corporation for each player</label><br><br>
         {% for player in players %}
             <label class="text-light" for="player{{ player.id }}">{{ player.username }}</label>
-            <select id="player{{ player.id }}" name="player-{{ player.id }}">
+            <select id="player{{ player.id }}" name="player-{{ player.id }}" required>
+                <option value="">--Please select a Corporation--</option>
                 {% for corporation in game.corporations %}
                     <option value="{{ corporation.id }}">{{ corporation.name }}</option>
                 {% endfor %}

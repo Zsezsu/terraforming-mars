@@ -7,14 +7,10 @@
         <thead>
         <tr>
             <th>Player</th>
-            <th>Company</th>
-            <th class="editable">TR</th>
-            <th class="editable">Milestone Points</th>
-            <th class="editable">Award Points</th>
-            <th class="editable">Greens</th>
-            <th class="editable">Cities</th>
-            <th class="editable">Greens around Cities</th>
-            <th class="editable">Win points</th>
+            <th>Corporation</th>
+            {% for  header in  table_headers %}
+                <th class="editable">{{ header }}</th>
+            {% endfor %}
             <th>Total</th>
         </tr>
         </thead>
@@ -23,10 +19,16 @@
             <tr data-player-id="{{ player.player_id }}">
                 <th>{{ player.username }}</th>
                 <th>{{ player.corporation_name }}</th>
-                {% for _ in range(7) %}
-                    <td class="editable">
-                        <input type="number" class="edit-data text-center text-light"
-                               value="0" min="0" data-player-id="{{ player.player_id }}"></td>
+                {% for header in table_headers %}
+                    {% if header == 'Cities' %}
+                        <td class="editable">
+                            <input type="number" class="edit-data text-center text-light"
+                                   value="0" min="0" data-player-id="{{ player.player_id }}" data-point="false"></td>
+                    {% else %}
+                        <td class="editable">
+                            <input type="number" class="edit-data text-center text-light"
+                                   value="0" min="0" data-player-id="{{ player.player_id }}" data-point="true"></td>
+                    {% endif %}
                 {% endfor %}
                 <th class="result" data-player-id="{{ player.player_id }}">0</th>
             </tr>

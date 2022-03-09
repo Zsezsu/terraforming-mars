@@ -6,6 +6,8 @@ function main() {
     [showRoundFormButton, closeRoundFormButton].forEach(
         button => button.addEventListener('click', toggleRoundForm)
     );
+    const saveRoundButton = document.querySelector('button.save-round-form-button');
+
 }
 
 function toggleRoundForm() {
