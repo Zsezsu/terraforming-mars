@@ -3,7 +3,8 @@ import {dataHandler} from "../data/dataHandler.js";
 let images;
 
 export const imageTypes = {
-    league: 'league-cards'
+    league: 'league-cards',
+    profile: 'profile-pictures'
 }
 
 export const imageData = {

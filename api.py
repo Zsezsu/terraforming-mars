@@ -40,6 +40,13 @@ def send_league_images():
     return jsonify(league_images)
 
 
+@api.route('/api/images/profile-pictures')
+def get_profile_pictures():
+    profile_pictures = select_queries.get_pictures()
+    print(profile_pictures)
+    return jsonify(profile_pictures)
+
+
 @api.route('/api/leagues', methods=['POST'])
 def create_league():
     data = json.loads(request.data)
