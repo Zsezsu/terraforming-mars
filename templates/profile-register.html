@@ -18,39 +18,32 @@
     <div class="form-container card">
         <form method="post" action="/registration-onsubmit" class="registration-form text-light form">
             <h2 class="text-light">Register new Account</h2>
-            <label id="firstname-label">First Name</label><br>
-            <input id="firstname-input" type="text" name="first_name" minlength="2" maxlength="8"><br><br>
-            <label id="lastname-label">Last Name</label><br>
-            <input id="lastname-input" type="text" name="last_name" minlength="2" maxlength="8"><br><br>
-            <label id="username-label">Username</label><br>
-            <input id="username-input" type="text" name="nickname" minlength="2" maxlength="10"><br><br>
-            <label id="email-label">Email</label><br>
-            <input id="email-input" type="email" name="email"><br><br>
-            <label id="email2-label">Confirm Email</label><br>
-            <input id="email2-input" type="email" name="email2"><br><br>
-            <label id="password-label">Password</label><br>
-            <input id="password-input" type="password" name="password"><br><br>
-            <label id="password2-label">Confirm password</label><br>
-            <input id="password2-input" type="password" name="password2"><br><br>
+            <label for="firstname-input">First Name</label><br>
+            <input id="firstname-input" type="text" name="first_name" minlength="2" maxlength="8" placeholder="First name"><br><br>
+            <label for="lastname-input">Last Name</label><br>
+            <input id="lastname-input" type="text" name="last_name" minlength="2" maxlength="8" placeholder="Last name"><br><br>
+            <label for="username-input">Username</label><br>
+            <input id="username-input" type="text" name="nickname" minlength="2" maxlength="10" placeholder="Username"><br><br>
+            <label for="email-input">Email</label><br>
+            <input id="email-input" type="email" name="email" placeholder="Email address"><br><br>
+            <label for="email2-input">Confirm Email</label><br>
+            <input id="email2-input" type="email" name="email2" placeholder="Confirm email address"><br><br>
+            <label for="password-input">Password</label><br>
+            <input id="password-input" type="password" name="password" placeholder="Password"><br><br>
+            <label for="password2-input">Confirm password</label><br>
+            <input id="password2-input" type="password" name="password2" placeholder="Confirm password"><br><br>
             <input id="picture-input" type="hidden" name="pp_id">
-            <input id="hidden-button" type="submit" value="submit" hidden>
+            <button type="submit" class="btn btn-light" id="submit-btn">Register</button>
         </form>
         <div class="form-separator"></div>
         <div class="slideshow">
             <h2 class="text-light">Choose image</h2>
             <div class="text-light">
-                <img alt="slideshow image" src="">
+                <img alt="slideshow image" src="/static/img/player_icons/player-card-1.webp" id="slideshow-profile"
+                     data-image-id="7">
                 <i class="fa-solid fa-angle-left text-light slideshow-btn slideshow-prev"></i>
                 <i class="fa-solid fa-angle-right text-light slideshow-btn slideshow-next"></i>
             </div>
         </div>
-    </div>
-
-
-    <div id="profile-picture-container">
-        {% for picture in pictures %}
-            <img class="profile-picture" id="{{ picture['id'] }}"
-                 src="{{ url_for('static', filename=picture['source']) }}">
-        {% endfor %}
     </div>
 {% endblock %}

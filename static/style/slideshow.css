@@ -47,3 +47,7 @@
 .slideshow-next {
     right: -40px;
 }
+
+#slideshow-profile {
+    height: 400px;
+}
