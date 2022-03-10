@@ -5,8 +5,11 @@
 {% block nav_profile %}active{% endblock %}
 
 {% block content %}
-<h1 class="text-center text-light">Profile</h1>
-
+    <h1 class="text-center text-light">Profile</h1>
+    <p class="text-light breadcrumb">
+        <a href="{{ url_for('dashboard') }}">Home</a> <small> > </small>
+        <small>Profile</small>
+    </p>
     <div id="data-container">
         <img src={{ url_for('static', filename=data.source) }}>
         <p id="username-text" class="text-light">{{ data.username }}</p>

@@ -22,12 +22,10 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 @app.route('/')
 def index():
-    return render_template('index.html')
-
-
-@app.route('/design')
-def design():
-    return render_template('design/design.html')
+    if session['UID']:
+        return redirect(url_for('dashboard'))
+    else:
+        return render_template('index.html')
 
 
 @app.route('/dashboard')
@@ -35,7 +33,12 @@ def dashboard():
     if session['UID']:
         return render_template('dashboard.html')
     else:
-        return redirect(url_for('registration'))
+        return redirect(url_for('login'))
+
+
+@app.route('/design')
+def design():
+    return render_template('design/design.html')
 
 
 @app.route('/profile')
@@ -44,7 +47,7 @@ def profile():
         user_data = select_queries.get_user_data(session['UID'])
         return render_template('profile.html', data=user_data)
     else:
-        return redirect(url_for('registration'))
+        return redirect(url_for('login'))
 
 
 @app.route('/league/<league_id>')
@@ -63,7 +66,7 @@ def leagues():
         logged_in_user_leagues = select_queries.get_logged_in_user_leagues(uid)
         return render_template('my_leagues.html', logged_in_user=logged_in_user, leagues=logged_in_user_leagues)
     else:
-        return redirect(url_for('registration'))
+        return redirect(url_for('login'))
 
 
 @app.route('/account/signup')
@@ -81,7 +84,7 @@ def registration_onsubmit():
         user_email = select_queries.get_user_email(user_id)
         send_mail(user_email['email'])
         session['UID'] = user_id
-        return redirect(url_for('index'))
+        return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('registration', d_error=error_message))
 
@@ -96,7 +99,7 @@ def login():
 def login_onsubmit():
     if pm.validate_login(request.form):
         session['UID'] = select_queries.get_user_id(request.form['login_token'])['id']
-        return redirect(url_for('index'))
+        return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('login', error=True))
 
@@ -142,7 +145,7 @@ def results(league_id=1, round_id=2):
                                players=players_data,
                                players_in_game=players_in_game)
     else:
-        return redirect(url_for('registration'))
+        return redirect(url_for('login'))
 
 
 @app.route('/league/<league_id>/round/<round_id>', methods=['POST'])
@@ -152,14 +155,15 @@ def init_round(league_id, round_id):
         insert_queries.init_round(round_details, round_id)
         return redirect(f'/league/{league_id}/round/{round_id}')
     else:
-        return redirect(url_for('registration'))
+        return redirect(url_for('login'))
 
 
 @app.route('/score/<league_id>')
 def score_board(league_id):
     player_scores = select_queries.get_player_scores(league_id)
     header = helper.create_scoreboard_table_header()
-    return render_template('scores.html', player_scores=player_scores, header=header)
+    print(player_scores)
+    return render_template('scores.html', player_scores=player_scores, header=header, league_id=league_id)
 
 if __name__ == '__main__':
     app.run(debug=True,

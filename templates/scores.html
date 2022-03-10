@@ -2,6 +2,7 @@
 {% set finished_rounds = player_scores[0].finished_rounds %}
 {% set number_of_rounds = player_scores[0].number_of_rounds %}
 {% set finished = player_scores[0].finished_rounds == player_scores[0].number_of_rounds %}
+{% set league_name = player_scores[0].league_name %}
 {% block title %}Scoreboard{% endblock %}
 
 {% block scripts %}
@@ -9,6 +10,11 @@
 {% endblock %}
 
 {% block content %}
+    <p class="text-light breadcrumb">
+        <a href="{{ url_for('dashboard') }}">Home</a> >
+        <a href="{{ url_for('leagues') }}">My leagues</a> >
+        <a href="{{ '/league/'~ league_id }}">{{ league_name }}</a> > Scoreboard
+    </p>
     <h1 class="text-light text-center">Scoreboard</h1>
     <div class="round-status" data-id="{{ round_id }}" data-status="{{ round_status }}">
         <p class="text-light text-center">Finished rounds: <small
@@ -50,7 +56,7 @@
                             {% else %}
                                 <th>{{ score }}</th>
                             {% endif %}
-                        {% elif type not in ['finished_rounds', 'number_of_rounds'] %}
+                        {% elif type not in ['finished_rounds', 'number_of_rounds', 'league_name'] %}
                             <td>{{ score }}</td>
                         {% endif %}
                     {% endfor %}

@@ -6,7 +6,12 @@
     <script src="{{ url_for('static', filename='js/togglePasswordVisibility.js') }}" defer></script>
 {% endblock %}
 
+{% block nav %}{% endblock %}
+
 {% block content %}
+    <p class="text-light breadcrumb">
+        <a href="{{ url_for('index') }}">Home</a> > Sign In
+    </p>
     <h1 class="text-center text-light">Sign In</h1>
 
     <div class="form-container card login-form">
@@ -24,6 +29,10 @@
             <button type="submit" class="btn btn-light">Login</button>
         </form>
     </div>
+
+    <br><p class="text-center text-light">Don’t have an account? <a href="{{ url_for('registration') }}">Sign up</a></p>
+
+
 
     {% if error %}
         <h1>Invalid username / email or password</h1>

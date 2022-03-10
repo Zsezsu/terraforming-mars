@@ -12,6 +12,9 @@
 {% block nav_games %}active{% endblock %}
 
 {% block content %}
+    <p class="text-light breadcrumb">
+        <a href="{{ url_for('dashboard') }}">Home</a> > My leagues
+    </p>
     <h1 class="text-center text-light">My Leagues</h1>
     <div class="header">
         <button id="new-league" class="btn btn-light">

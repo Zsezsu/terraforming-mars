@@ -3,7 +3,7 @@ body {
 }
 
 main {
-    height: 500vh;
+    height: auto;
     margin: 0 200px;
 }
 
@@ -14,6 +14,14 @@ h1 {
 
 div {
     position: relative;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: lightgray;
 }
 
 .text-center {
@@ -30,4 +38,18 @@ div {
 
 .header {
     padding: 5px;
+}
+
+.breadcrumb {
+    margin: 30px 0;
+}
+
+.breadcrumb a {
+    text-decoration: none;
+    color: gray;
+    padding: 0 10px;
+}
+
+.breadcrumb a:hover {
+    color: white;
 }
