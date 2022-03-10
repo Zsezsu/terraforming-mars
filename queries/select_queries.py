@@ -140,13 +140,11 @@ def get_players_in_round(round_id):
     SELECT 
         round_players.player_id     AS  player_id,
         players.username            AS  username,
-        corporations.name           AS  corporation_name,
-        images.source               AS  corporation_image_source
+        corporations.name           AS  corporation_name
     FROM
         round_players
     LEFT JOIN corporations  ON  round_players.corporation_id =  corporations.id
     LEFT JOIN players       ON  round_players.player_id      =  players.id
-    LEFT JOIN images        ON  corporations.image_id        =  images.id
     WHERE
         round_players.round_id = {round_id};
     """
@@ -221,12 +219,10 @@ SELECT
                 rounds.started                                  AS started,
                 rounds.finished                                 AS finished,
                 boards.board_name                               AS board,
-                string_agg(expansions.expansion_name, ', ')            AS expansions,
-                leagues.league_admin                            AS league_admin,
-                images.source                                   AS image_source
+                string_agg(expansions.expansion_name, ', ')     AS expansions,
+                leagues.league_admin                            AS league_admin
 
 FROM rounds
-         LEFT JOIN images ON rounds.image_id = images.id
          LEFT JOIN leagues ON rounds.league_id = leagues.id
          LEFT JOIN game_setup ON rounds.id = game_setup.round_id
          LEFT JOIN boards ON game_setup.board_id = boards.id
@@ -240,7 +236,6 @@ GROUP BY
          rounds.started,
          rounds.finished,
          boards.board_name,
-         images.source,
          leagues.league_admin
 ORDER BY rounds.sequence;
      """
