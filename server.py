@@ -20,6 +20,11 @@ app.register_blueprint(mail)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
 @app.route('/dashboard')
 def dashboard():
     if session['UID']:
