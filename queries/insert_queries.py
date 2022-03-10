@@ -51,7 +51,8 @@ def insert_round_points(round_id, round_data):
                 number_of_cities,
                 greeneries_around_cities,
                 vp_on_cards,
-                sum_points
+                sum_points,
+                round_points
             )
         VALUES 
             {round_points_values};
@@ -116,18 +117,17 @@ def add_league_players(league_id, data):
 
 def add_league_rounds(league_id, data):
     rounds_number = int(data['leagueRounds'])
-    image_id = 6
     rounds = ''
 
     for game_round in range(1, rounds_number + 1):
         separator = ','
         if game_round == rounds_number:
             separator = ''
-        rounds += f"({league_id}, {game_round}, {image_id}){separator}"
+        rounds += f"({league_id}, {game_round}){separator}"
 
     query = """
         INSERT INTO 
-            rounds(league_id, sequence, image_id)
+            rounds(league_id, sequence)
         VALUES {rounds}
     """
     execute_insert(SQL(query).format(rounds=SQL(rounds)))

@@ -15,9 +15,8 @@ mail_password = 'ZsuBendeBenedekVik123#'
 
 
 @mail.route('/mail-test')
-def send_registration_email(customer_address=''):
+def send_registration_email(customer_address='example@email.com'):
 
-    customer_address = 'dudaskobende@gmail.com'
     if not customer_address:
         print('customer email not found'
               'abort email sending'
