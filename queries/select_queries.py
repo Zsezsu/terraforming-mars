@@ -292,7 +292,7 @@ def get_user_data(uid):
         players
     JOIN 
         images
-        ON players.image_id = images.id::varchar
+        ON players.image_id = images.id
     WHERE players.id = {uid};
     """
     return dict(execute_select(SQL(query).format(
