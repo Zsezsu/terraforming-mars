@@ -230,13 +230,8 @@ FROM rounds
 WHERE rounds.league_id = {league_id}
 GROUP BY
          rounds.id,
-         rounds.league_id,
-         leagues.league_name,
-         rounds.sequence,
-         rounds.started,
-         rounds.finished,
-         boards.board_name,
-         leagues.league_admin
+         leagues.id,
+         boards.id
 ORDER BY rounds.sequence;
      """
     return execute_select(SQL(query).format(
