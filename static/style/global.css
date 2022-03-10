@@ -16,6 +16,14 @@ div {
     position: relative;
 }
 
+a {
+    color: white;
+}
+
+a:hover {
+    color: lightgray;
+}
+
 .text-center {
     text-align: center;
 }
