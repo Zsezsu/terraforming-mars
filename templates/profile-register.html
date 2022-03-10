@@ -2,14 +2,11 @@
 
 {% block title %}Profile{% endblock %}
 
-{% block styles %}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/registration.css' ) }}">
-{% endblock %}
-
 {% block scripts %}
-    <script src="{{ url_for('static', filename='js/registrationPicturePicker.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/registration.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/registrationSlideshow.js') }}" type="module" defer></script>
-    <script src="{{ url_for('static', filename='js/userDataValidation.js') }}" type="module" defer></script>
+    <script src="{{ url_for('static', filename='js/registrationValidation.js') }}" type="module" defer></script>
+    <script src="{{ url_for('static', filename='js/togglePasswordVisibility.js') }}" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -38,9 +35,13 @@
             <input id="email2-input" type="email" name="email2" placeholder="Confirm email address"><br>
 
             <label for="password-input">Password</label><br>
-            <small class="reg-error" data-input-id="password-input" hidden>Password length must be between 6-16 and should
+            <small class="reg-error" data-input-id="password-input" hidden>Password length must be between 6-16 and
+                should
                 contain: <br> lowercase and uppercase letters, numbers, special characters</small>
-            <input id="password-input" type="password" name="password" placeholder="Password"><br>
+            <div>
+                <input id="password-input" type="password" name="password" placeholder="Password">
+                <i class="fa-solid fa-eye-slash" id="password-visibility"></i>
+            </div><br>
 
             <label for="password2-input">Confirm password</label><br>
             <small class="reg-error" data-input-id="password2-input" hidden>Passwords are not matching.</small>
