@@ -55,13 +55,37 @@ def init_round_players_values(round_id, players):
 
 
 def insert_point_values(round_id, round_data):
+    round_points = count_round_points(round_data)
     values = ''
     for index in range(len(round_data)):
         player = round_data[index]
         separator = ', ' if index < len(round_data) - 1 else ''
         points = add_points(player['points'])
-        values += f'({round_id}, {player["playerId"]}, {points}{player["total"]}){separator}'
+        player_id = player["playerId"]
+        player_round_point = round_points[player_id]
+        values += f'({round_id}, {player_id}, {points}{player["total"]}, {player_round_point}){separator}'
     return values
+
+
+def count_round_points(round_data):
+    first = 3
+    second = 2
+    third = 1
+    player_points = []
+    for player in round_data:
+        player_points.append((player['playerId'], int(player['total'])))
+    player_points.sort(key=lambda player_point: player_point[1], reverse=True)
+    points = {}
+    for index in range(len(player_points)):
+        if index == 0:
+            points[player_points[index][0]] = first
+        elif index == 1:
+            points[player_points[index][0]] = second
+        elif index == 2:
+            points[player_points[index][0]] = third
+        else:
+            points[player_points[index][0]] = 0
+    return points
 
 
 def add_points(points):
