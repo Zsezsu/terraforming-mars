@@ -18,19 +18,34 @@
         <form method="post" action="/registration-onsubmit" class="registration-form text-light form">
             <h2 class="text-light">Register new Account</h2>
             <label for="firstname-input">First Name</label><br>
-            <input id="firstname-input" type="text" name="first_name" minlength="2" maxlength="20" placeholder="First name"><br><br>
+            <input id="firstname-input" type="text" name="first_name" minlength="2" maxlength="20"
+                   placeholder="First name"><br>
+
             <label for="lastname-input">Last Name</label><br>
-            <input id="lastname-input" type="text" name="last_name" minlength="2" maxlength="20" placeholder="Last name"><br><br>
+            <input id="lastname-input" type="text" name="last_name" minlength="2" maxlength="20"
+                   placeholder="Last name"><br>
+
             <label for="username-input">Username</label><br>
-            <input id="username-input" type="text" name="nickname" minlength="2" maxlength="16" placeholder="Username"><br><br>
+            <small class="reg-error" data-input-id="username-input" hidden>Username already exists.</small>
+            <input id="username-input" type="text" name="nickname" minlength="2" maxlength="16" placeholder="Username">
+
             <label for="email-input">Email</label><br>
-            <input id="email-input" type="email" name="email" placeholder="Email address"><br><br>
+            <small class="reg-error" data-input-id="email-input" hidden>E-mail not valid or already exists.</small>
+            <input id="email-input" type="email" name="email" placeholder="Email address"><br>
+
             <label for="email2-input">Confirm Email</label><br>
-            <input id="email2-input" type="email" name="email2" placeholder="Confirm email address"><br><br>
+            <small class="reg-error" data-input-id="email2-input" hidden>E-mails are not matching.</small>
+            <input id="email2-input" type="email" name="email2" placeholder="Confirm email address"><br>
+
             <label for="password-input">Password</label><br>
-            <input id="password-input" type="password" name="password" placeholder="Password"><br><br>
+            <small class="reg-error" data-input-id="password-input" hidden>Password length must be between 6-16 and should
+                contain: <br> lowercase and uppercase letters, numbers, special characters</small>
+            <input id="password-input" type="password" name="password" placeholder="Password"><br>
+
             <label for="password2-input">Confirm password</label><br>
-            <input id="password2-input" type="password" name="password2" placeholder="Confirm password"><br><br>
+            <small class="reg-error" data-input-id="password2-input" hidden>Passwords are not matching.</small>
+            <input id="password2-input" type="password" name="password2" placeholder="Confirm password"><br>
+
             <input id="picture-input" type="hidden" name="pp_id">
             <button type="submit" class="btn btn-light" id="submit-btn" disabled>Register</button>
         </form>

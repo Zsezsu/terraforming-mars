@@ -140,3 +140,7 @@
 .hidden {
     display: none;
 }
+
+.reg-error {
+    color: red;
+}
