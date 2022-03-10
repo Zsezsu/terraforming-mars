@@ -12,13 +12,14 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="text-light text-center">{{ round.league_name }} Round {{ round.sequence }}</h1>
     <p class="text-light breadcrumb">
-        <a href="{{ url_for('index') }}">Home</a> <small> > </small>
-        <a href="{{ url_for('leagues') }}">My leagues</a> <small> > </small>
-        <a href="{{ '/league/'~ round_id }}">{{ round.league_name }}</a> <small> > </small>
-        <small>Round {{ round.sequence }}</small>
+        <a href="{{ url_for('index') }}">Home</a> >
+        <a href="{{ url_for('leagues') }}">My leagues</a> >
+        <a href="{{ '/league/'~ round.league_id }}">{{ round.league_name }}</a> >
+        Round {{ round.sequence }}
     </p>
+    <h1 class="text-light text-center">{{ round.league_name }} Round {{ round.sequence }}</h1>
+
 
     {% if round_status == 'init_round' %}
         {% include 'round_phase_init_game.html' %}

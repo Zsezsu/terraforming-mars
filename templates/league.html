@@ -7,13 +7,12 @@
 {% endblock %}
 
 {% block content %}
+    <p class="text-light breadcrumb">
+        <a href="{{ url_for('index') }}">Home</a> >
+        <a href="{{ url_for('leagues') }}">My leagues</a> > {{ rounds[0].league_name }}
+    </p>
     <h1 class="text-center text-light">{{ rounds[0].league_name }}</h1>
     {{ rounds }}
-    <p class="text-light breadcrumb">
-        <a href="{{ url_for('index') }}">Home</a> <small> > </small>
-        <a href="{{ url_for('leagues') }}">My leagues</a> <small> > </small>
-        <small>{{ rounds[0].league_name }}</small>
-    </p>
     <div class="round-status">
         <form action="/score/{{ rounds[0].league_id }}" >
             <button class="btn btn-light" type="submit" {{ 'disabled' if not rounds[0].finished }} >Scoreboard</button>
