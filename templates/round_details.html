@@ -13,7 +13,7 @@
 
 {% block content %}
     <p class="text-light breadcrumb">
-        <a href="{{ url_for('index') }}">Home</a> >
+        <a href="{{ url_for('dashboard') }}">Home</a> >
         <a href="{{ url_for('leagues') }}">My leagues</a> >
         <a href="{{ '/league/'~ round.league_id }}">{{ round.league_name }}</a> >
         Round {{ round.sequence }}

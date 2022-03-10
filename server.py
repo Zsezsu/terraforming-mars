@@ -20,22 +20,17 @@ app.register_blueprint(mail)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-
-@app.route('/design')
-def design():
-    return render_template('design/design.html')
-
-
 @app.route('/dashboard')
 def dashboard():
     if session['UID']:
         return render_template('dashboard.html')
     else:
         return redirect(url_for('registration'))
+
+
+@app.route('/design')
+def design():
+    return render_template('design/design.html')
 
 
 @app.route('/profile')
@@ -81,7 +76,7 @@ def registration_onsubmit():
         user_email = select_queries.get_user_email(user_id)
         send_mail(user_email['email'])
         session['UID'] = user_id
-        return redirect(url_for('index'))
+        return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('registration', d_error=error_message))
 
@@ -96,7 +91,7 @@ def login():
 def login_onsubmit():
     if pm.validate_login(request.form):
         session['UID'] = select_queries.get_user_id(request.form['login_token'])['id']
-        return redirect(url_for('index'))
+        return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('login', error=True))
 
@@ -104,7 +99,7 @@ def login_onsubmit():
 @app.route('/logout')
 def logout():
     session['UID'] = ''
-    return redirect(url_for('index'))
+    return redirect(url_for('dashboard'))
 
 
 @app.route('/league/<league_id>/round/<round_id>', methods=['GET'])
