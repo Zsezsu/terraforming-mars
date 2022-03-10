@@ -1,3 +1,75 @@
-.header {
-    padding: 5px;
+#searched-players {
+    position: absolute;
+    z-index: 1;
+    margin-top: -23px;
+    border-radius: 2px;
+}
+
+#searched-players div {
+    width: 600px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+#searched-players p {
+    display: inline;
+    margin-right: 15px;
+}
+
+#searched-players div:hover {
+    background: white;
+    color: black;
+}
+
+#searched-players img {
+    display: none;
+}
+
+.remove-player {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    transition: 0.2s ease;
+}
+
+.remove-player:hover {
+    filter: brightness(0.8);
+    transition: 0.2s ease;
+}
+
+.player-container {
+    margin: 10px 0 20px;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.player-card {
+    display: flex;
+    flex-direction: row;
+    color: white;
+    width: 250px;
+    height: 100px;
+    font-size: 0.9em;
+    align-items: center;
+    justify-content: stretch;
+    gap: 15px;
+}
+
+.player-card img {
+    object-fit: cover;
+    left: 0;
+    height: 120%;
+    width: 100px;
+    filter: none;
+}
+
+.player-card img:hover {
+    filter: none;
 }

@@ -1,9 +1,3 @@
-#new-league {
-    overflow: hidden;
-    transition: 0.4s linear;
-    height: 40px;
-}
-
 .form-container {
     padding: 50px;
     width: 100%;
@@ -16,12 +10,6 @@
     justify-content: center;
     align-items: center;
     transition: max-height 1.5s ease, padding 1s ease;
-}
-
-.hide-form-container {
-    max-height: 0 !important;
-    padding: 0;
-    border: none;
 }
 
 .form {
@@ -47,100 +35,31 @@
     width: 100%;
 }
 
-
-.player-container {
-    margin: 10px 0 20px;
-    padding: 20px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
+.form button {
+    margin: 5px 0;
     width: 100%;
 }
 
-.player-card {
-    display: flex;
-    flex-direction: row;
+.form select {
+    background: #212529 !important;
     color: white;
-    width: 250px;
-    height: 100px;
-    font-size: 0.9em;
-    align-items: center;
-    justify-content: stretch;
-    gap: 15px;
+    border-radius: 5px;
+    border: 2px solid #212529;
+    width: 100%;
 }
 
-.player-card img {
-    object-fit: cover;
-    left: 0;
-    height: 120%;
-    width: 100px;
-    filter: none;
-}
-
-.player-card img:hover {
-    filter: none;
-}
-
-.hide-new-league-button {
-    height: 0 !important;
-    padding: 0 !important;
-    border: none !important;
-    box-shadow: none !important;
+.form input[type="checkbox"] {
+    width: auto;
 }
 
 .form-separator {
     height: 90%;
-    width: 30px;
-    background: white;
+    width: 50px;
+    background: white !important;
 }
 
-#searched-players {
-    position: absolute;
-    z-index: 1;
-    margin-top: -23px;
-    border-radius: 2px;
-}
-
-#searched-players div {
-    width: 600px;
-    height: 40px;
-    border-radius: 5px;
-}
-
-#searched-players p {
-    display: inline;
-    margin-right: 15px;
-}
-
-#searched-players div:hover {
-    background: white;
-    color: black;
-}
-
-#searched-players img {
-    display: none;
-}
-
-.remove-player {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    transition: 0.2s ease;
-}
-
-.remove-player:hover {
-    filter: brightness(0.8);
-    transition: 0.2s ease;
-}
-
-.hidden {
-    display: none;
-}
-
-.reg-error {
-    color: red;
+.hide-form-container {
+    max-height: 0 !important;
+    padding: 0;
+    border: none;
 }

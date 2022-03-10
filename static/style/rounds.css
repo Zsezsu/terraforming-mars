@@ -87,29 +87,6 @@
     border: none;
 }
 
-.round-form h2 {
-    margin: 0 0 30px;
-}
-
-.round-form button {
-    margin: 5px 0;
-    width: 100%;
-}
-
-.round-form select {
-    background: #212529 !important;
-    color: white;
-    border-radius: 5px;
-    border: 2px solid #212529;
-    width: 100%;
-}
-
-.hide-round-form {
-    height: 0;
-    border: none;
-    padding: 0;
-}
-
 .hide-new-league-button {
     height: 0 !important;
     padding: 0 !important;
