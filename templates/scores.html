@@ -1,5 +1,7 @@
 {% extends 'layout/layout.html' %}
-
+{% set finished_rounds = player_scores[0].finished_rounds %}
+{% set number_of_rounds = player_scores[0].number_of_rounds %}
+{% set finished = player_scores[0].finished_rounds == player_scores[0].number_of_rounds %}
 {% block title %}Scoreboard{% endblock %}
 
 {% block scripts %}
@@ -7,9 +9,38 @@
 {% endblock %}
 
 {% block content %}
-    <ul>
-    {% for player in player_scores %}
-        <li class="text-light">{{ player }}</li>
-    {% endfor %}
-    </ul>
+    <h1 class="text-light text-center">Scoreboard</h1>
+    <div class="round-status" data-id="{{ round_id }}" data-status="{{ round_status }}">
+        <p class="text-light text-center">Finished rounds: <small
+                class="status-{{ "finished" if finished else "started" }}">
+            {{ player_scores[0].finished_rounds }}/{{ player_scores[0].number_of_rounds }}</small>
+        </p>
+    </div>
+    <div class="round-results">
+        <table class="round-table table table-dark table-bordered text-center">
+            <thead>
+            <tr>
+                {% for type in header %}
+                    <th>{{ type }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for player_score in player_scores %}
+                {% set player_name = player_score.username %}
+                {% set round_point = player_score.total_round_points %}
+                {% set total_points = player_score.total_points %}
+                <tr>
+                    {% for type, score in player_score.items() %}
+                        {% if type in ['username', 'total_round_points', 'total_points'] %}
+                            <th>{{ score }}</th>
+                        {% elif type not in ['finished_rounds', 'number_of_rounds'] %}
+                            <td>{{ score }}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

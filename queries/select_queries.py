@@ -305,14 +305,21 @@ def get_player_scores(league_id):
     SELECT
             players.username                        AS username,
             SUM(points.round_points)                AS total_round_points,
-            SUM(points.tr_number)                   AS total_tr_number,
+            SUM(points.sum_points)                  AS total_points,
+            SUM(points.tr_number)                   AS total_tr_numbers,
             SUM(points.milestones_points)           AS total_milestones_points,
             SUM(points.award_points)                AS total_award_points,
             SUM(points.number_of_own_greeneries)    AS total_number_of_own_greeneries,
             SUM(points.number_of_cities)            AS total_number_of_cities,
+            SUM(points.greeneries_around_cities)    AS total_greeneries_around_cities,
             SUM(points.vp_on_cards)                 AS total_vp_on_cards,
-            SUM(points.sum_points)                  AS total_points
-    
+            COUNT(rounds.finished)                  AS finished_rounds,
+            (SELECT 
+                MAX(rounds.sequence) 
+            FROM 
+                rounds 
+            WHERE 
+            rounds.league_id = {league_id})         AS number_of_rounds
     FROM leagues
     LEFT JOIN rounds ON leagues.id = rounds.league_id
     LEFT JOIN round_players ON rounds.id = round_players.round_id
@@ -321,7 +328,7 @@ def get_player_scores(league_id):
     WHERE 
         leagues.id = {league_id} 
         AND 
-            rounds.finished IS TRUE 
+            rounds.finished IS TRUE
         AND 
             rounds.id = points.round_id
     GROUP BY players.id

@@ -10,6 +10,21 @@ def create_table_header():
     ]
 
 
+def create_scoreboard_table_header():
+    return [
+        'Player',
+        'Round points',
+        'Total TR points',
+        'Total milestones points',
+        'Total award points',
+        'Total greeneries',
+        'Total cities',
+        'Total greeneries around cities',
+        'Total victory points',
+        'Total points'
+    ]
+
+
 def get_round_status(round):
     round_status = ''
     for key, value in round.items():
