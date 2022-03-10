@@ -45,7 +45,6 @@ CREATE TABLE images
     id          SERIAL,
     source      TEXT,
     league_card BOOLEAN DEFAULT FALSE,
-    round_card  BOOLEAN DEFAULT FALSE,
     user_image  BOOLEAN DEFAULT FALSE
 );
 
@@ -130,8 +129,7 @@ CREATE TABLE rounds
     league_id   INTEGER,
     sequence    INTEGER,
     started     BOOLEAN DEFAULT FALSE,
-    finished    BOOLEAN DEFAULT FALSE,
-    image_id    INTEGER
+    finished    BOOLEAN DEFAULT FALSE
 );
 
 DROP TABLE IF EXISTS round_players;

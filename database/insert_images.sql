@@ -9,13 +9,6 @@ VALUES
     ('img/league_cards/mars-4.webp', TRUE),
     ('img/league_cards/mars-5.webp', TRUE);
 
-------------------------------------insert league images --------------------------------
-
-INSERT INTO
-    images(source, round_card)
-
-VALUES ('img/round_cards/mars-locked.webp', TRUE);
-
 
 ------------------------------------insert player images --------------------------------
 
