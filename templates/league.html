@@ -8,6 +8,12 @@
 
 {% block content %}
     <h1 class="text-center text-light">{{ rounds[0].league_name }}</h1>
+    {{ rounds }}
+    <p class="text-light breadcrumb">
+        <a href="{{ url_for('index') }}">Home</a> <small> > </small>
+        <a href="{{ url_for('leagues') }}">My leagues</a> <small> > </small>
+        <small>{{ rounds[0].league_name }}</small>
+    </p>
     <div class="round-status">
         <form action="/score/{{ rounds[0].league_id }}" >
             <button class="btn btn-light" type="submit" {{ 'disabled' if not rounds[0].finished }} >Scoreboard</button>
@@ -19,7 +25,6 @@
         {% set in_progress = round.started %}
         {% set locked = not rounds[loop.index0 - 1].finished and loop.index0 != 0 %}
         {% set link = round.league_id ~ '/' ~ 'round/' ~ round.id %}
-
         {% if finished or in_progress %}
             {% set img_src = 'img/round_cards/mars-finished.webp' if finished else  'img/round_cards/mars-started.webp' %}
             <div class="card round bg-dark" id="round-{{ round.id }}">
@@ -59,10 +64,8 @@
         {% else %}
             <i class="fa-solid fa-gears text-light"></i>
         {% endif %}
-
     </div>
     </div>
     {% endfor %}
-
 {% endblock %}
 

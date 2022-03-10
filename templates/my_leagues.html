@@ -13,6 +13,10 @@
 
 {% block content %}
     <h1 class="text-center text-light">My Leagues</h1>
+    <p class="text-light breadcrumb">
+        <a href="{{ url_for('index') }}">Home</a> <small> > </small>
+        <small>My leagues</small>
+    </p>
     <div class="header">
         <button id="new-league" class="btn btn-light">
             Add new league
