@@ -162,7 +162,8 @@ def init_round(league_id, round_id):
 def score_board(league_id):
     player_scores = select_queries.get_player_scores(league_id)
     header = helper.create_scoreboard_table_header()
-    return render_template('scores.html', player_scores=player_scores, header=header)
+    print(player_scores)
+    return render_template('scores.html', player_scores=player_scores, header=header, league_id=league_id)
 
 if __name__ == '__main__':
     app.run(debug=True,
