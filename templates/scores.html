@@ -1,0 +1,15 @@
+{% extends 'layout/layout.html' %}
+
+{% block title %}Scoreboard{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
+
+{% block content %}
+    <ul>
+    {% for player in player_scores %}
+        <li class="text-light">{{ player }}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}

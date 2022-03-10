@@ -155,6 +155,11 @@ def init_round(league_id, round_id):
         return redirect(url_for('registration'))
 
 
+@app.route('/score/<league_id>')
+def score_board(league_id):
+    player_scores = select_queries.get_player_scores(league_id)
+    return render_template('scores.html', player_scores=player_scores)
+
 if __name__ == '__main__':
     app.run(debug=True,
             port=8000,
