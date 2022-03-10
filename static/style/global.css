@@ -3,7 +3,7 @@ body {
 }
 
 main {
-    height: 500vh;
+    height: auto;
     margin: 0 200px;
 }
 

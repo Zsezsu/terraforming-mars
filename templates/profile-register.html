@@ -9,12 +9,13 @@
     <script src="{{ url_for('static', filename='js/togglePasswordVisibility.js') }}" defer></script>
 {% endblock %}
 
+{% block nav %}{% endblock %}
+
 {% block content %}
-    <h1 class="text-center text-light">Sign Up</h1>
     <p class="text-light breadcrumb">
-        <a href="{{ url_for('dashboard') }}">Home</a> <small> > </small>
-        <small>Signup</small>
+        <a href="{{ url_for('index') }}">Home</a> > Sign Up
     </p>
+    <h1 class="text-center text-light">Sign Up</h1>
     <div class="form-container card register-form">
         <form method="post" action="/registration-onsubmit" class="text-light form">
             <h2 class="text-light">Register new Account</h2>

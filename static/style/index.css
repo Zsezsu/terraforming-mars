@@ -17,10 +17,6 @@ main {
     background-size: contain;
 }
 
-main h1, h2 {
-    margin: 20%;
-}
-
 a {
     color: white;
 }
@@ -38,6 +34,7 @@ img {
 
 h1 {
     font-size: 72px;
+    margin: 12%;
 }
 
 h2 {

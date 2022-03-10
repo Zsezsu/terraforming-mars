@@ -22,7 +22,10 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    if session['UID']:
+        return redirect(url_for('dashboard'))
+    else:
+        return render_template('index.html')
 
 
 @app.route('/dashboard')
@@ -30,7 +33,7 @@ def dashboard():
     if session['UID']:
         return render_template('dashboard.html')
     else:
-        return redirect(url_for('registration'))
+        return redirect(url_for('login'))
 
 
 @app.route('/design')
@@ -44,7 +47,7 @@ def profile():
         user_data = select_queries.get_user_data(session['UID'])
         return render_template('profile.html', data=user_data)
     else:
-        return redirect(url_for('registration'))
+        return redirect(url_for('login'))
 
 
 @app.route('/league/<league_id>')
@@ -63,7 +66,7 @@ def leagues():
         logged_in_user_leagues = select_queries.get_logged_in_user_leagues(uid)
         return render_template('my_leagues.html', logged_in_user=logged_in_user, leagues=logged_in_user_leagues)
     else:
-        return redirect(url_for('registration'))
+        return redirect(url_for('login'))
 
 
 @app.route('/account/signup')
@@ -104,7 +107,7 @@ def login_onsubmit():
 @app.route('/logout')
 def logout():
     session['UID'] = ''
-    return redirect(url_for('dashboard'))
+    return redirect(url_for('index'))
 
 
 @app.route('/league/<league_id>/round/<round_id>', methods=['GET'])
@@ -142,7 +145,7 @@ def results(league_id=1, round_id=2):
                                players=players_data,
                                players_in_game=players_in_game)
     else:
-        return redirect(url_for('registration'))
+        return redirect(url_for('login'))
 
 
 @app.route('/league/<league_id>/round/<round_id>', methods=['POST'])
@@ -152,7 +155,7 @@ def init_round(league_id, round_id):
         insert_queries.init_round(round_details, round_id)
         return redirect(f'/league/{league_id}/round/{round_id}')
     else:
-        return redirect(url_for('registration'))
+        return redirect(url_for('login'))
 
 
 @app.route('/score/<league_id>')
