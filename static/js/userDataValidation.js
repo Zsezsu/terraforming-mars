@@ -8,20 +8,15 @@ function initForm() {
     const email2 = document.querySelector('#email2-input');
     const password1 = document.querySelector('#password-input');
     const password2 = document.querySelector('#password2-input');
-    [nickname, email1, email2, password1, password2].forEach((e) => {
+    [firstName, lastName, nickname, email1, email2, password1, password2].forEach((e) => {
         e.addEventListener('input', validataData);
     });
-    [firstName, lastName, nickname, email1, email2, password1, password2].forEach(e => {
-        e.addEventListener('input', unlockButton);
-    })
 }
 
 function unlockButton() {
     const inputs = document.querySelectorAll('.form input:not(#picture-input)');
     const errorMessages = document.querySelectorAll('.form small.reg-error');
     const button = document.querySelector('#submit-btn');
-    console.log(inputs);
-    console.log(errorMessages);
 
     for (let input of inputs) {
         if (!input.value) {
@@ -59,6 +54,7 @@ async function validataData(e) {
             passwordMatch();
             break;
     }
+    unlockButton(e);
 }
 
 async function usernameExist(target) {
