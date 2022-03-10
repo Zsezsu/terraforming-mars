@@ -30,10 +30,26 @@
                 {% set player_name = player_score.username %}
                 {% set round_point = player_score.total_round_points %}
                 {% set total_points = player_score.total_points %}
+                {% set first_medal = '<i class="fa-solid fa-trophy text-warning"></i>' %}
+                {% set second_medal = '<i class="fa-solid fa-trophy text-secondary"></i>' %}
+                {% set third_medal = '<i class="fa-solid fa-trophy text-danger"></i>' %}
+                {% set medal = '' %}
+                {% if loop.index == 1 %}
+                    {% set medal = first_medal %}
+                {% elif loop.index == 2 %}
+                    {% set medal = second_medal %}
+                {% elif loop.index == 3 %}
+                    {% set medal = third_medal %}
+                {% endif %}
                 <tr>
+                    <th>{{ loop.index }}</th>
                     {% for type, score in player_score.items() %}
                         {% if type in ['username', 'total_round_points', 'total_points'] %}
-                            <th>{{ score }}</th>
+                            {% if finished and type == 'username' %}
+                                <th>{{ score + medal | safe }}</th>
+                            {% else %}
+                                <th>{{ score }}</th>
+                            {% endif %}
                         {% elif type not in ['finished_rounds', 'number_of_rounds'] %}
                             <td>{{ score }}</td>
                         {% endif %}

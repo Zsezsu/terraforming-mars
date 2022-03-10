@@ -12,6 +12,7 @@ def create_table_header():
 
 def create_scoreboard_table_header():
     return [
+        'Place',
         'Player',
         'Round points',
         'Total TR points',
