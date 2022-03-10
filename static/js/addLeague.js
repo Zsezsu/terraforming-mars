@@ -1,6 +1,6 @@
 import {dataHandler} from "./data/dataHandler.js";
 import {toggleAddNewLeague} from "./addLeagueTransition.js";
-import {leagueImages, changeImage} from "./leagueSlideshow.js";
+import {imageData, changeImage} from "./components/slideshow.js";
 
 const data = {
     players: await dataHandler.getPlayers(),
@@ -198,7 +198,7 @@ function clearLeagueDiv() {
     document.querySelector('label#label-league-players').innerText = "League Players 1/5";
     document.querySelector('div#selected-players').innerHTML = createPlayerCard(data.loggedInUser);
     document.querySelector('div#searched-players').innerHTML = "";
-    leagueImages.currentImageIndex = 0;
+    imageData.currentImageIndex = 0;
     changeImage();
 }
 

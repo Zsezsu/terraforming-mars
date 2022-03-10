@@ -13,6 +13,6 @@ function main() {
 function toggleRoundForm() {
     const showRoundFormButton = document.querySelector('.show-round-form-button');
     const roundForm = document.querySelector('.round-form');
-    roundForm.classList.toggle('hide-round-form');
+    roundForm.classList.toggle('hide-form-container');
     showRoundFormButton.disabled = !showRoundFormButton.disabled;
 }

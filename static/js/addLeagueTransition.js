@@ -11,6 +11,6 @@ function main() {
 export function toggleAddNewLeague() {
     const newLeagueButton = document.querySelector('#new-league');
     const newLeague = document.querySelector('.new-league');
-    newLeague.classList.toggle('hide-new-league');
+    newLeague.classList.toggle('hide-form-container');
     newLeagueButton.disabled = !newLeagueButton.disabled;
 }

@@ -4,26 +4,25 @@
 <div class="round-details round-init-game">
     <button class="btn btn-light show-round-form-button">Initialize round</button>
 </div>
-<div class="round-form card text-light hide-round-form">
-    <form method="post" onsubmit="return confirm('Are you sure you want to submit?');">
-        <h2 class="text-light">Round settings</h2>
-        <label class="text-light" for="round-board">Choose a board</label><br>
+<div class="form-container card text-light round-form hide-form-container">
+    <form method="post" onsubmit="return confirm('Are you sure you want to submit?');" class="form">
+        <h2>Round settings</h2>
+        <label for="round-board">Choose a board</label><br>
         <select id="round-board" name="board"><br><br>
             {% for board in game.boards %}
                 <option name="board-{{ board.id }}" value="{{ board.id }}">{{ board.board_name }}</option>
             {% endfor %}
         </select><br><br>
-        <label class="text-light" for="round-expansion">Choose expansions</label><br>
+        <label for="round-expansion">Choose expansions</label><br>
         {% for expansion in game.expansions %}
             <input type="checkbox" id="expansion{{ expansion.id }}" name="expansion-{{ expansion.expansion_name }}"
                    value="{{ expansion.id }}">
-            <label class="text-light" for="expansion{{ expansion.id }}">{{ expansion.expansion_name }}</label>
-            <br>
+            <label for="expansion{{ expansion.id }}">{{ expansion.expansion_name }}</label><br>
         {% endfor %}
         <br>
-        <label class="text-light" for="round-corporations">Choose a corporation for each player</label><br><br>
+        <label for="round-corporations">Choose a corporation for each player</label><br><br>
         {% for player in players %}
-            <label class="text-light" for="player{{ player.id }}">{{ player.username }}</label>
+            <label for="player{{ player.id }}">{{ player.username }}</label>
             <select id="player{{ player.id }}" name="player-{{ player.id }}" required>
                 <option value="">--Please select a Corporation--</option>
                 {% for corporation in game.corporations %}

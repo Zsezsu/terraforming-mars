@@ -1,0 +1,53 @@
+.slideshow {
+    width: 40%;
+    height: auto;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.slideshow div {
+    position: relative;
+    width: 90%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: black 5px 5px 20px -4px;
+    margin: 25px;
+}
+
+.slideshow img {
+    object-fit: cover;
+    border-radius: 15px;
+    width: 100%;
+    height: 300px;
+}
+
+.slideshow img, .slideshow img:hover {
+    filter: none;
+}
+
+.slideshow-btn {
+    font-size: 40px;
+    position: absolute;
+    top: 45%;
+    transition: 0.2s ease;
+}
+
+.slideshow-btn:hover {
+    transition: 0.2s ease;
+    color: gray !important;
+}
+
+.slideshow-prev {
+    left: -40px;
+}
+
+.slideshow-next {
+    right: -40px;
+}
+
+#slideshow-profile {
+    height: 400px;
+}

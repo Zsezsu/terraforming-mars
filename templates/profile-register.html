@@ -2,44 +2,64 @@
 
 {% block title %}Profile{% endblock %}
 
-{% block nav_profile %}active{% endblock %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/registration.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/registrationSlideshow.js') }}" type="module" defer></script>
+    <script src="{{ url_for('static', filename='js/registrationValidation.js') }}" type="module" defer></script>
+    <script src="{{ url_for('static', filename='js/togglePasswordVisibility.js') }}" defer></script>
+{% endblock %}
 
 {% block content %}
+    <h1 class="text-center text-light">Sign Up</h1>
+    <div class="form-container card register-form">
+        <form method="post" action="/registration-onsubmit" class="text-light form">
+            <h2 class="text-light">Register new Account</h2>
+            <label for="firstname-input">First Name</label><br>
+            <input id="firstname-input" type="text" name="first_name" minlength="2" maxlength="20"
+                   placeholder="First name"><br>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Test registration</title>
-    <script src="{{ url_for('static', filename='js/registrationPicturePicker.js') }}" defer></script>
-    <script type="module" src="{{ url_for('static', filename='js/userDataValidation.js') }}" defer></script>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/registration.css' ) }}">
-</head>
-<body>
+            <label for="lastname-input">Last Name</label><br>
+            <input id="lastname-input" type="text" name="last_name" minlength="2" maxlength="20"
+                   placeholder="Last name"><br>
 
-<form method="post" action="/registration-onsubmit">
-    <label id="firstname-label">First Name</label><br>
-    <input id="firstname-input" type="text" name="first_name" minlength="2" maxlength="8"><br><br>
-    <label id="lastname-label">lastname</label><br>
-    <input id="lastname-input" type="text" name="last_name" minlength="2" maxlength="8"><br><br>
-    <label id="username-label">nickname</label><br>
-    <input id="username-input" type="text" name="nickname"minlength="2" maxlength="10"><br><br>
-    <label id="email-label">email</label><br>
-    <input id="email-input" type="email" name="email"><br><br>
-    <label id="email2-label">email2</label><br>
-    <input id="email2-input" type="email" name="email2"><br><br>
-    <label id="password-label">password</label><br>
-    <input id="password-input" type="password" name="password"><br><br>
-    <label id="password2-label">password2</label><br>
-    <input id="password2-input" type="password" name="password2"><br><br>
-    <input id="picture-input" type="hidden" name="pp_id">
-    <input id="hidden-button" type="submit" value="submit" hidden>
-</form>
+            <label for="username-input">Username</label><br>
+            <small class="reg-error" data-input-id="username-input" hidden>Username already exists.</small>
+            <input id="username-input" type="text" name="nickname" minlength="2" maxlength="16" placeholder="Username">
 
-<div id="profile-picture-container">
-    {% for picture in pictures %}
-        <img class="profile-picture" id="{{ picture['id'] }}" src="{{ url_for('static', filename=picture['source']) }}">
-    {% endfor %}
+            <label for="email-input">Email</label><br>
+            <small class="reg-error" data-input-id="email-input" hidden>E-mail not valid or already exists.</small>
+            <input id="email-input" type="email" name="email" placeholder="Email address"><br>
 
-</div>
+            <label for="email2-input">Confirm Email</label><br>
+            <small class="reg-error" data-input-id="email2-input" hidden>E-mails are not matching.</small>
+            <input id="email2-input" type="email" name="email2" placeholder="Confirm email address"><br>
 
-    <h1>{{ error }}</h1>
+            <label for="password-input">Password</label><br>
+            <small class="reg-error" data-input-id="password-input" hidden>Password length must be between 6-16 and
+                should
+                contain: <br> lowercase and uppercase letters, numbers, special characters</small>
+            <div>
+                <input id="password-input" type="password" name="password" placeholder="Password">
+                <i class="fa-solid fa-eye-slash" id="password-visibility"></i>
+            </div>
+            <br>
+
+            <label for="password2-input">Confirm password</label><br>
+            <small class="reg-error" data-input-id="password2-input" hidden>Passwords are not matching.</small>
+            <input id="password2-input" type="password" name="password2" placeholder="Confirm password"><br>
+
+            <input id="picture-input" type="hidden" name="pp_id">
+            <button type="submit" class="btn btn-light" id="submit-btn" disabled>Register</button>
+        </form>
+        <div class="form-separator"></div>
+        <div class="slideshow">
+            <h2 class="text-light">Choose image</h2>
+            <div class="text-light">
+                <img alt="slideshow image" src="/static/img/player_icons/player-card-1.webp" id="slideshow-profile"
+                     data-image-id="7">
+                <i class="fa-solid fa-angle-left text-light slideshow-btn slideshow-prev"></i>
+                <i class="fa-solid fa-angle-right text-light slideshow-btn slideshow-next"></i>
+            </div>
+        </div>
+    </div>
 {% endblock %}

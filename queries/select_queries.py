@@ -273,7 +273,7 @@ def get_user_email(user_id):
 
 def get_pictures():
     query = """
-    SELECT id, source
+    SELECT id, source AS image_source
     FROM images
     WHERE user_image IS TRUE
     """

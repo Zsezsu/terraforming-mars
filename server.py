@@ -96,7 +96,7 @@ def login():
 def login_onsubmit():
     if pm.validate_login(request.form):
         session['UID'] = select_queries.get_user_id(request.form['login_token'])['id']
-        return render_template('index.html')
+        return redirect(url_for('index'))
     else:
         return redirect(url_for('login', error=True))
 

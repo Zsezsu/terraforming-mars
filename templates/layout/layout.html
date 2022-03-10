@@ -25,14 +25,20 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/nav.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/cards.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/leagues.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/slideshow.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/form.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/rounds.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/table.css') }}">
+    {% block styles %}{% endblock %}
 
     <script src="{{ url_for('static', filename='js/index.js') }}" defer></script>
     {% block script_results %}{% endblock %}
     {% block script %}{% endblock %}
+    {% block scripts %}{% endblock %}
 
 </head>
 <body class="bg-dark">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
             aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -51,7 +57,7 @@
                 <a class="nav-link {% block nav_profile %}{% endblock %}" href="{{ url_for('profile') }}">Profile</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% block nav_design %}{% endblock %}" href="{{ url_for('design') }}">Design</a>
+                <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
             </li>
         </ul>
     </div>

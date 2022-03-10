@@ -18,8 +18,8 @@
             Add new league
         </button>
     </div>
-    <div id="add-league" class="card league bg-dark new-league hide-new-league">
-        <div id="league-form">
+    <div class="bg-dark form-container card new-league hide-form-container league-form" id="add-league">
+        <div class="form" id="league-form">
             <h2 class="text-light">Add new league</h2>
             <label class="text-light" for="league-name">League Name</label><br>
             <input type="text" id="league-name" name="league-name" placeholder="Enter the league's name"><br>
@@ -47,13 +47,13 @@
             <br>
             <button id="button-close" class="btn btn-dark" type="button">Close</button>
         </div>
-        <div class="league-separator"></div>
-        <div id="league-slideshow">
+        <div class="form-separator"></div>
+        <div class="slideshow">
             <h2 class="text-center text-light">Choose an image</h2>
-            <div class="new-league-images text-light">
-                <img id="slideshow-image" alt="league background">
-                <i class="fa-solid fa-angle-left text-light slideshow-button" id="slideshow-previous"></i>
-                <i class="fa-solid fa-angle-right text-light slideshow-button" id="slideshow-next"></i>
+            <div class="text-light">
+                <img alt="slideshow image">
+                <i class="fa-solid fa-angle-left text-light slideshow-btn slideshow-prev"></i>
+                <i class="fa-solid fa-angle-right text-light slideshow-btn slideshow-next"></i>
             </div>
         </div>
     </div>
