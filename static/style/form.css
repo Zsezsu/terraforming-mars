@@ -1,7 +1,6 @@
 .form-container {
     padding: 50px;
     width: 100%;
-    height: auto;
     margin: 20px 0;
     background: #181b1e !important;
     display: flex;
@@ -9,12 +8,14 @@
     gap: 75px;
     justify-content: center;
     align-items: center;
-    transition: max-height 1.5s ease, padding 1s ease;
+    border: none;
+    height: auto;
 }
 
 .form {
-    width: auto;
+    width: 50%;
     padding: 5px;
+    overflow: hidden;
 }
 
 .form h2 {
@@ -52,14 +53,35 @@
     width: auto;
 }
 
+/* Separator, Transitions */
+
 .form-separator {
     height: 90%;
-    width: 50px;
-    background: white !important;
+    width: 2px;
+    background: #282828 !important;
+}
+
+.league-form {
+    height: 900px;
+    transition: 1s ease;
+}
+
+.round-form {
+    height: 800px;
+    transition: 1.2s ease;
+    width: 50%;
+}
+
+.register-form {
+    height: 820px;
+}
+
+.login-form {
+    height: 400px;
 }
 
 .hide-form-container {
-    max-height: 0 !important;
+    height: 0;
     padding: 0;
     border: none;
 }
