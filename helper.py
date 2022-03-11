@@ -6,7 +6,8 @@ def create_table_header():
         'Greeneries',
         'Cities',
         'Greeneries around cities',
-        'Victory points'
+        'Victory points',
+        'M€'
     ]
 
 
@@ -15,6 +16,8 @@ def create_scoreboard_table_header():
         'Place',
         'Player',
         'Round points',
+        'Total points',
+        'Total M€',
         'Total TR points',
         'Total milestones points',
         'Total award points',
@@ -22,7 +25,7 @@ def create_scoreboard_table_header():
         'Total cities',
         'Total greeneries around cities',
         'Total victory points',
-        'Total points'
+
     ]
 
 
@@ -113,6 +116,7 @@ def add_points(points):
         'number_of_cities',
         'greeneries_around_cities',
         'vp_on_cards',
+        'mega_credits'
     ]
     point_query_values = ''
     for index in range(len(points)):

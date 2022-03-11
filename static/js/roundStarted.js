@@ -8,6 +8,7 @@ const pointsTypes = [
     'number_of_cities',
     'greeneries_around_cities',
     'vp_on_cards',
+    'mega_credits'
 ];
 
 function main() {
