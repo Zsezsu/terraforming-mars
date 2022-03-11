@@ -90,20 +90,27 @@ def count_round_points(round_data):
     first = 3
     second = 2
     third = 1
+    player_id = 0
     player_points = []
     for player in round_data:
-        player_points.append((player['playerId'], int(player['total'])))
-    player_points.sort(key=lambda player_point: player_point[1], reverse=True)
+        player_points.append((player['playerId'],
+                              int(player['total']),
+                              int(player['points']['mega_credits']),
+                              int(player['points']['tr_number']),
+                              int(player['points']['vp_on_cards'])))
+    player_points.sort(key=lambda player_point: (player_point[1], player_point[2], player_point[3], player_point[4], player_point[0]), reverse=True)
     points = {}
-    for index in range(len(player_points)):
+    number_of_players = len(player_points)
+    for index in range(number_of_players):
+        player = player_points[index]
         if index == 0:
-            points[player_points[index][0]] = first
+            points[player[player_id]] = first
         elif index == 1:
-            points[player_points[index][0]] = second
+            points[player[player_id]] = second
         elif index == 2:
-            points[player_points[index][0]] = third
+            points[player[player_id]] = third
         else:
-            points[player_points[index][0]] = 0
+            points[player[player_id]] = 0
     return points
 
 
