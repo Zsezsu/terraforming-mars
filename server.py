@@ -42,16 +42,6 @@ def design():
     return render_template('design/design.html')
 
 
-@app.route('/profile')
-def profile():
-    if session['UID']:
-        user_data = select_queries.get_user_data(session['UID'])
-        username = session['USERNAME']
-        return render_template('profile.html', data=user_data, username=username)
-    else:
-        return redirect(url_for('login'))
-
-
 @app.route('/league/<league_id>')
 def league(league_id):
     # For testing purposes
