@@ -123,6 +123,7 @@ def login_onsubmit():
 @app.route('/logout')
 def logout():
     session['UID'] = ''
+    session['USERNAME'] = ''
     return redirect(url_for('index'))
 
 
