@@ -104,6 +104,7 @@ def get_round_points(round_id):
         points.number_of_cities             AS  number_of_cities,
         points.greeneries_around_cities     AS  greeneries_around_cities,
         points.vp_on_cards                  AS  vp_on_cards,
+        points.mega_credits                 AS  mega_credits,
         points.sum_points                   AS  sum_points
         
     FROM
@@ -115,7 +116,11 @@ def get_round_points(round_id):
         points.round_id = {round_id}
         AND round_players.round_id = {round_id}
     ORDER BY
-        points.sum_points DESC;
+        points.round_points DESC,
+        points.sum_points DESC,
+        points.mega_credits DESC,
+        points.vp_on_cards DESC,
+        players.id DESC;
     """
     return execute_select(SQL(query).format(round_id=Literal(round_id)))
 
@@ -306,6 +311,7 @@ def get_player_scores(league_id):
             players.username                        AS username,
             SUM(points.round_points)                AS total_round_points,
             SUM(points.sum_points)                  AS total_points,
+            SUM(points.mega_credits)                AS total_mega_credits,
             SUM(points.tr_number)                   AS total_tr_numbers,
             SUM(points.milestones_points)           AS total_milestones_points,
             SUM(points.award_points)                AS total_award_points,
@@ -314,11 +320,11 @@ def get_player_scores(league_id):
             SUM(points.greeneries_around_cities)    AS total_greeneries_around_cities,
             SUM(points.vp_on_cards)                 AS total_vp_on_cards,
             COUNT(rounds.finished)                  AS finished_rounds,
-            (SELECT 
-                MAX(rounds.sequence) 
-            FROM 
-                rounds 
-            WHERE 
+            (SELECT
+                MAX(rounds.sequence)
+            FROM
+                rounds
+            WHERE
             rounds.league_id = {league_id})         AS number_of_rounds,
             leagues.league_name                     AS league_name
     FROM leagues
@@ -327,12 +333,17 @@ def get_player_scores(league_id):
     LEFT JOIN players ON round_players.player_id = players.id
     LEFT JOIN points ON players.id = points.player_id
     WHERE 
-        leagues.id = {league_id} 
-        AND 
+        leagues.id = {league_id}
+        AND
             rounds.finished IS TRUE
-        AND 
+        AND
             rounds.id = points.round_id
     GROUP BY players.id, leagues.id
-    ORDER BY total_round_points DESC, total_points DESC;
+    ORDER BY 
+        total_round_points DESC, 
+        total_points DESC, 
+        total_mega_credits DESC, 
+        total_vp_on_cards DESC, 
+        players.id DESC;
     """
     return execute_select(SQL(query).format(league_id=Literal(league_id)))

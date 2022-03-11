@@ -51,6 +51,7 @@ def insert_round_points(round_id, round_data):
                 number_of_cities,
                 greeneries_around_cities,
                 vp_on_cards,
+                mega_credits,
                 sum_points,
                 round_points
             )
