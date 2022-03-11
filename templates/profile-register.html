@@ -1,0 +1,73 @@
+{% extends 'layout/layout.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/registration.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/registrationSlideshow.js') }}" type="module" defer></script>
+    <script src="{{ url_for('static', filename='js/registrationValidation.js') }}" type="module" defer></script>
+    <script src="{{ url_for('static', filename='js/togglePasswordVisibility.js') }}" defer></script>
+{% endblock %}
+
+{% block nav %}{% endblock %}
+
+{% block content %}
+    <p class="text-light breadcrumb">
+        <a href="{{ url_for('index') }}">Home</a> > Sign Up
+    </p>
+    <h1 class="text-center text-light">Sign Up</h1>
+    <div class="form-container card register-form">
+        <form method="post" action="/registration-onsubmit" class="text-light form">
+            <h2 class="text-light">Register new Account</h2>
+            <label for="firstname-input">First Name</label><br>
+            <input id="firstname-input" type="text" name="first_name" minlength="2" maxlength="20"
+                   placeholder="First name"><br>
+
+            <label for="lastname-input">Last Name</label><br>
+            <input id="lastname-input" type="text" name="last_name" minlength="2" maxlength="20"
+                   placeholder="Last name"><br>
+
+            <label for="username-input">Username</label><br>
+            <small class="reg-error" data-input-id="username-input" hidden>Username already exists.</small>
+            <input id="username-input" type="text" name="nickname" minlength="2" maxlength="16" placeholder="Username">
+
+            <label for="email-input">Email</label><br>
+            <small class="reg-error" data-input-id="email-input" hidden>E-mail not valid or already exists.</small>
+            <input id="email-input" type="email" name="email" placeholder="Email address"><br>
+
+            <label for="email2-input">Confirm Email</label><br>
+            <small class="reg-error" data-input-id="email2-input" hidden>E-mails are not matching.</small>
+            <input id="email2-input" type="email" name="email2" placeholder="Confirm email address"><br>
+
+            <label for="password-input">Password</label><br>
+            <small class="reg-error" data-input-id="password-input" hidden>Password length must be between 6-16 and
+                should
+                contain: <br> lowercase and uppercase letters, numbers, special characters</small>
+            <div>
+                <input id="password-input" type="password" name="password" placeholder="Password">
+                <i class="fa-solid fa-eye-slash" id="password-visibility"></i>
+            </div>
+            <br>
+
+            <label for="password2-input">Confirm password</label><br>
+            <small class="reg-error" data-input-id="password2-input" hidden>Passwords are not matching.</small>
+            <input id="password2-input" type="password" name="password2" placeholder="Confirm password"><br>
+
+            <input id="picture-input" type="hidden" name="pp_id">
+            <button type="submit" class="btn btn-light" id="submit-btn" disabled>Register</button>
+        </form>
+        <div class="form-separator"></div>
+        <div class="slideshow">
+            <h2 class="text-light">Choose profile picture</h2>
+            <div class="text-light">
+                <img alt="slideshow image" src="/static/img/player_icons/player-card-1.webp" id="slideshow-profile"
+                     data-image-id="7">
+                <i class="fa-solid fa-angle-left text-light slideshow-btn slideshow-prev"></i>
+                <i class="fa-solid fa-angle-right text-light slideshow-btn slideshow-next"></i>
+            </div>
+        </div>
+    </div>
+
+    <br><p class="text-center text-light">Already have an account? <a href="{{ url_for('login') }}">Sign in</a></p>
+    <br><br><br>
+{% endblock %}

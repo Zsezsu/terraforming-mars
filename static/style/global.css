@@ -1,0 +1,55 @@
+body {
+    font-family: 'Enter Sansman', sans-serif;
+}
+
+main {
+    height: auto;
+    margin: 0 200px;
+}
+
+h1 {
+    margin: 50px;
+    text-transform: uppercase;
+}
+
+div {
+    position: relative;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: lightgray;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.reg-error {
+    color: red;
+}
+
+.header {
+    padding: 5px;
+}
+
+.breadcrumb {
+    margin: 30px 0;
+}
+
+.breadcrumb a {
+    text-decoration: none;
+    color: gray;
+    padding: 0 10px;
+}
+
+.breadcrumb a:hover {
+    color: white;
+}

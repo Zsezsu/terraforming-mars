@@ -1,0 +1,94 @@
+.form-container {
+    padding: 50px;
+    width: 100%;
+    margin: 20px 0;
+    background: #181b1e !important;
+    display: flex;
+    flex-direction: row;
+    gap: 75px;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    height: auto;
+}
+
+.form {
+    width: 50%;
+    padding: 5px;
+    overflow: hidden;
+}
+
+.form h2 {
+    margin: 0 0 30px;
+}
+
+.form button {
+    margin: 5px 0;
+    width: 100%;
+}
+
+.form input {
+    margin: 10px 0 25px;
+    background: #212529 !important;
+    color: white;
+    border-radius: 5px;
+    border: 2px solid #212529;
+    width: 100%;
+}
+
+.form button {
+    margin: 5px 0;
+    width: 100%;
+}
+
+.form select {
+    background: #212529 !important;
+    color: white;
+    border-radius: 5px;
+    border: 2px solid #212529;
+    width: 100%;
+}
+
+.form input[type="checkbox"] {
+    width: auto;
+}
+
+/* Separator, Transitions, Password visibility */
+
+.form-separator {
+    height: 90%;
+    width: 2px;
+    background: #282828 !important;
+}
+
+.league-form {
+    height: 900px;
+    transition: 1s ease;
+}
+
+.round-form {
+    height: 950px;
+    transition: 1.2s ease;
+    width: 50%;
+}
+
+.register-form {
+    height: 1000px;
+}
+
+.login-form {
+    height: 400px;
+}
+
+.hide-form-container {
+    height: 0;
+    padding: 0;
+    border: none;
+}
+
+#password-visibility {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 17px;
+}

@@ -46,3 +46,29 @@ Do the following when rebasing a branch to the development.
     1. After resolving conflicts, `git rebase --continue`
 4. Check if the application works as it should
 5. Complete rebase by `git push -f`
+
+## SQL Guidelines
+
+### SQL Format Example
+
+```sql
+SELECT 
+    <column_name_1>,
+    <column_name_2>,
+    <column_name_3>,
+    CASE
+        WHEN <statement>
+            THEN <column_name>
+        WHEN <another_statement>
+            THEN <value>
+    END
+        AS <name>
+FROM
+    <table_name>
+ WHERE
+    <where_clause_1>,
+    <where_clause_2>,
+    <where_clause_3>,
+ GROUP BY
+    <group_by_statement>
+```

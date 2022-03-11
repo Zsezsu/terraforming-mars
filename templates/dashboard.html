@@ -1,0 +1,20 @@
+{% extends 'layout/layout.html' %}
+
+{% block title %}Main Page{% endblock %}
+
+{% block nav_dashboard %}active{% endblock %}
+
+{% block content %}
+    <h1 class="text-center text-light">Terraforming Mars</h1>
+    <div class="cards dashboard bg-dark">
+        <div class="card league bg-dark">
+            <a href="{{ url_for('leagues') }}">
+                <img alt="mars" src="{{ url_for('static', filename='img/league_cards/mars-2.webp') }}">
+                <h3 class="text-light">My Leagues</h3>
+            </a>
+            <div class="card-details">
+                <i class="fa-solid fa-gamepad text-light"></i>
+            </div>
+        </div>
+    </div>
+{% endblock %}

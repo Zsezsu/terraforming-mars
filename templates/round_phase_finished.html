@@ -1,0 +1,32 @@
+<div class="round-status" data-id="{{ round_id }}" data-status="{{ round_status }}">
+    <p class="text-light text-center">Status: <small class="status-finished">Finished</small></p>
+</div>
+<div class="round-results">
+    <table class="round-table table table-dark table-bordered text-center">
+        <thead>
+        <tr>
+            <th>Player</th>
+            <th>Corporation</th>
+            {% for header in table_headers %}
+                <th>{{ header }}</th>
+            {% endfor %}
+            <th>Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for player_round_points in round_points %}
+            {% set player_name = player_round_points.username %}
+            {% set corporation = player_round_points.corporation_name %}
+            <tr>
+                <th>{{ player_name }}</th>
+                <th>{{ corporation }}</th>
+                {% for point in player_round_points.values() %}
+                    {% if point not in [player_name, corporation] %}
+                        <td>{{ point }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

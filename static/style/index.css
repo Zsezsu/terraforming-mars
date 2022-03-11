@@ -1,3 +1,42 @@
 body {
-    margin: 0;
+    width: 100%;
+    background: black;
+    overflow: hidden;
+    font-family: 'Enter Sansman', sans-serif;
+}
+
+main {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    color: white;
+    text-align: center;
+    background-image: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8) ), url('/static/img/main-mars.webp');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: lightgray;
+}
+
+img {
+    height: 99vh;
+    width: auto;
+    position: fixed;
+    z-index: 0;
+}
+
+h1 {
+    font-size: 72px;
+    margin: 12%;
+}
+
+h2 {
+    font-size: 54px;
 }
