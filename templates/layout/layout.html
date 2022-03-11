@@ -40,29 +40,30 @@
 <body class="bg-dark">
 {% block nav %}
     <nav class="navbar navbar-expand navbar-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation-bar"
-                aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navigation-bar">
-            <a class="navbar-brand" href="{{ url_for('dashboard') }}">Mars</a>
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link {% block nav_dashboard %}{% endblock %}"
-                       href="{{ url_for('dashboard') }}">Dashboard<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {% block nav_games %}{% endblock %}" href="{{ url_for('leagues') }}">My
-                        Leagues</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {% block nav_profile %}{% endblock %}"
-                       href="{{ url_for('profile') }}">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
-                </li>
-            </ul>
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation-bar"
+                    aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navigation-bar">
+                <a class="navbar-brand" href="{{ url_for('dashboard') }}">Mars</a>
+                <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link {% block nav_dashboard %}{% endblock %}"
+                           href="{{ url_for('dashboard') }}">Dashboard<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% block nav_games %}{% endblock %}" href="{{ url_for('leagues') }}">My
+                            Leagues</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% block nav_profile %}{% endblock %}"
+                           href="{{ url_for('profile') }}">Profile</a>
+                    </li>
+                </ul>
+                <span class="navbar-text"><small>Logged in as <em>{{ username }}</em></small></span>
+                <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+            </div>
         </div>
     </nav>
 {% endblock %}

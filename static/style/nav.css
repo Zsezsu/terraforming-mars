@@ -10,3 +10,19 @@ nav {
 nav li {
     display: inline;
 }
+
+.nav-link {
+    color: gray;
+}
+
+.nav-link:hover {
+    color: lightgray;
+}
+
+.navbar-text {
+    text-transform: capitalize;
+}
+
+em {
+    text-transform: none;
+}
