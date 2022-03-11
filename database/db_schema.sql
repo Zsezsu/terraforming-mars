@@ -163,6 +163,7 @@ CREATE TABLE points
     number_of_cities         INTEGER,
     greeneries_around_cities INTEGER,
     vp_on_cards              INTEGER,
+    mega_credits             INTEGER,
     sum_points               INTEGER,
     round_points             INTEGER
 );
