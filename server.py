@@ -22,7 +22,7 @@ app.secret_key = b'_5#y2L"Q8z\n\xec]/'
 
 @app.route('/')
 def index():
-    if session['UID']:
+    if session.get('UID'):
         return redirect(url_for('dashboard'))
     else:
         return render_template('index.html')
@@ -30,7 +30,7 @@ def index():
 
 @app.route('/dashboard')
 def dashboard():
-    if session['UID']:
+    if session.get('UID'):
         username = session['USERNAME']
         return render_template('dashboard.html', username=username)
     else:
@@ -45,7 +45,7 @@ def design():
 @app.route('/league/<league_id>')
 def league(league_id):
     # For testing purposes
-    logged_in_user_id = session['UID']
+    logged_in_user_id = session.get('UID')
     rounds = select_queries.get_rounds_for_league(league_id, logged_in_user_id)
     username = session['USERNAME']
     return render_template('league.html', rounds=rounds, logged_in_user_id=logged_in_user_id, username=username)
@@ -53,8 +53,8 @@ def league(league_id):
 
 @app.route('/my-leagues')
 def leagues():
-    if session['UID']:
-        uid = session['UID']
+    if session.get('UID'):
+        uid = session.get('UID')
         logged_in_user = select_queries.get_logged_in_user(uid)
         logged_in_user_leagues = select_queries.get_logged_in_user_leagues(uid)
         username = session['USERNAME']
@@ -66,7 +66,7 @@ def leagues():
 
 @app.route('/account/signup')
 def registration():
-    if session['UID']:
+    if session.get('UID'):
         return redirect(url_for('dashboard'))
     else:
         d_error = request.args.get('d_error')
@@ -91,7 +91,7 @@ def registration_onsubmit():
 
 @app.route('/account/login')
 def login():
-    if session['UID']:
+    if session.get('UID'):
         return redirect(url_for('dashboard'))
     else:
         error = request.args.get('error')
@@ -112,14 +112,14 @@ def login_onsubmit():
 
 @app.route('/logout')
 def logout():
-    session['UID'] = ''
-    session['USERNAME'] = ''
+    session.pop('UID')
+    session.pop('USERNAME')
     return redirect(url_for('index'))
 
 
 @app.route('/league/<league_id>/round/<round_id>', methods=['GET'])
 def results(league_id=1, round_id=2):
-    if session['UID']:
+    if session.get('UID'):
         round_data = select_queries.get_round_by_id(round_id)
         round_status = helper.get_round_status(round_data)
         table_headers = helper.create_table_header()
@@ -159,7 +159,7 @@ def results(league_id=1, round_id=2):
 
 @app.route('/league/<league_id>/round/<round_id>', methods=['POST'])
 def init_round(league_id, round_id):
-    if session['UID']:
+    if session.get('UID'):
         round_details = request.form
         insert_queries.init_round(round_details, round_id)
         return redirect(f'/league/{league_id}/round/{round_id}')
@@ -169,7 +169,7 @@ def init_round(league_id, round_id):
 
 @app.route('/score/<league_id>')
 def score_board(league_id):
-    if session['UID']:
+    if session.get('UID'):
         player_scores = select_queries.get_player_scores(league_id)
         header = helper.create_scoreboard_table_header()
         username = session['USERNAME']
