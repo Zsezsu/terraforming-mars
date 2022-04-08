@@ -45,10 +45,13 @@ def design():
 @app.route('/league/<league_id>')
 def league(league_id):
     # For testing purposes
-    logged_in_user_id = session.get('UID')
-    rounds = select_queries.get_rounds_for_league(league_id, logged_in_user_id)
-    username = session['USERNAME']
-    return render_template('league.html', rounds=rounds, logged_in_user_id=logged_in_user_id, username=username)
+    if session.get('UID'):
+        logged_in_user_id = session.get('UID')
+        rounds = select_queries.get_rounds_for_league(league_id, logged_in_user_id)
+        username = session['USERNAME']
+        return render_template('league.html', rounds=rounds, logged_in_user_id=logged_in_user_id, username=username)
+    else:
+        return redirect(url_for('index'))
 
 
 @app.route('/my-leagues')
