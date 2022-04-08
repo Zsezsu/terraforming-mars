@@ -3,14 +3,18 @@ import psycopg2
 import psycopg2.extras
 
 
-
-
 def establish_connection(connection_data=None):
     """
     Create a database connection based on the :connection_data: parameter
     :connection_data: Connection string attributes
     :returns: psycopg2.connection
     """
+    connection_string = os.environ.get('DATABASE_URL')
+    if connection_string:
+        connection = psycopg2.connect(connection_string)
+        connection.autocommit = True
+        return connection
+
     if connection_data is None:
         connection_data = get_connection_data()
     try:
