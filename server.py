@@ -84,7 +84,6 @@ def registration_onsubmit():
         user_id = pm.submit_registration(request.form)
         user_email = select_queries.get_user_email(user_id)
         username = select_queries.get_user_data(user_id)['username']
-        send_mail(user_email['email'])
         session['UID'] = user_id
         session['USERNAME'] = username
         return redirect(url_for('dashboard'))
