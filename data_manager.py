@@ -9,19 +9,18 @@ def establish_connection(connection_data=None):
     :connection_data: Connection string attributes
     :returns: psycopg2.connection
     """
-    connection_string = os.environ.get('DATABASE_URL')
-    if connection_string:
-        connection = psycopg2.connect(connection_string)
-        connection.autocommit = True
-        return connection
 
     if connection_data is None:
         connection_data = get_connection_data()
     try:
-        connect_str = "dbname={} user={} host={} password={}".format(connection_data['dbname'],
-                                                                     connection_data['user'],
-                                                                     connection_data['host'],
-                                                                     connection_data['password'])
+        database_url = os.environ.get('DATABASE_URL')
+        if database_url:
+            connect_str = database_url
+        else:
+            connect_str = "dbname={} user={} host={} password={}".format(connection_data['dbname'],
+                                                                         connection_data['user'],
+                                                                         connection_data['host'],
+                                                                         connection_data['password'])
         conn = psycopg2.connect(connect_str)
         conn.autocommit = True
     except psycopg2.DatabaseError as e:
