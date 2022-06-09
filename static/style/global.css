@@ -1,3 +1,19 @@
+/* Responsive breakpoints
+- Phone (576px)
+- Tablet (768px)
+- Laptop (992px)
+- Desktop (1200px)
+
+@media screen and (max-width: 576px) {
+
+}
+
+@media screen and (max-width: 768px) {
+
+}
+
+ */
+
 body {
     font-family: 'Enter Sansman', sans-serif;
 }
