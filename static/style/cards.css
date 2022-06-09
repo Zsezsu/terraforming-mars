@@ -62,3 +62,13 @@
 .dashboard {
     justify-content: center;
 }
+
+@media screen and (max-width: 992px) {
+    .card {
+        height: 500px;
+        width: 800px;
+    }
+    .card img {
+        height: 450px;
+    }
+}

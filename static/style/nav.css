@@ -26,3 +26,18 @@ nav li {
 em {
     text-transform: none;
 }
+
+@media screen and (max-width: 992px) {
+    nav {
+        padding: 20px;
+        height: 140px;
+        font-size: 1.8em;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+    }
+    nav li {
+        display: block;
+        width: 100%;
+    }
+}

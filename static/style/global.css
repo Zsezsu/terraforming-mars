@@ -81,9 +81,14 @@ a:hover {
     h1 {
         font-size: 3.5em;
     }
-    h2, h3, h4, p, label, button {
+    h2, h3, h4, p, label {
         /* Override bootstrap */
         font-size: 2.7em !important;
+    }
+    button {
+        font-size: 2.4em !important;
+        padding: 15px !important;
+        border-radius: 10px !important;
     }
     i {
         margin: 7px;
@@ -91,5 +96,8 @@ a:hover {
     }
     input {
         font-size: 1.8em;
+    }
+    small {
+        font-size: 1.8rem;
     }
 }
