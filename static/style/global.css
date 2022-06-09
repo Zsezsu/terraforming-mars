@@ -12,6 +12,10 @@
 
 }
 
+@media screen and (max-width: 992px) {
+
+}
+
  */
 
 body {
@@ -68,4 +72,24 @@ a:hover {
 
 .breadcrumb a:hover {
     color: white;
+}
+
+@media screen and (max-width: 992px) {
+    main {
+        margin: 70px;
+    }
+    h1 {
+        font-size: 3.5em;
+    }
+    h2, h3, h4, p, label, button {
+        /* Override bootstrap */
+        font-size: 2.7em !important;
+    }
+    i {
+        margin: 7px;
+        font-size: 2em;
+    }
+    input {
+        font-size: 1.8em;
+    }
 }

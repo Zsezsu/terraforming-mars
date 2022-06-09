@@ -92,3 +92,22 @@
     top: 0;
     padding: 17px;
 }
+
+@media screen and (max-width: 992px) {
+    .form-container {
+        flex-direction: column-reverse;
+        justify-content: space-evenly;
+    }
+    .register-form {
+        height: 2500px;
+    }
+    .login-form {
+        height: 800px;
+    }
+    .form-separator {
+        display: none;
+    }
+    .form {
+        width: 100%;
+    }
+}
