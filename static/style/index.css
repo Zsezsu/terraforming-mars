@@ -6,15 +6,14 @@ body {
 }
 
 main {
-    position: relative;
+    position: absolute;
     width: 100vw;
     height: 100vh;
     color: white;
     text-align: center;
     background-image: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8) ), url('/static/img/main-mars.webp');
     background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
+    background-size: cover;
 }
 
 a {
