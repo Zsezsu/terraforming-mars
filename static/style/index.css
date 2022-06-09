@@ -39,3 +39,13 @@ h1 {
 h2 {
     font-size: 54px;
 }
+
+@media screen and (max-width: 992px) {
+    h1 {
+        font-size: 100px;
+        margin: 35% 5%;
+    }
+    h2 {
+        font-size: 80px;
+    }
+}
