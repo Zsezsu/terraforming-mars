@@ -62,7 +62,7 @@ def is_unique_token_exist(token):
 
 @api.route('/api/leagues/<league_id>', methods=['DELETE'])
 def delete_league(league_id):
-    # TODO write delete query
-    return jsonify('')
+    delete_queries.delete_league(league_id)
+    return 'OK'
 
 
