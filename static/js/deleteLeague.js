@@ -14,9 +14,8 @@ const deleteLeague = {
         if (window.confirm('Are you sure you want to delete this league?' +
                 '\n Be careful this is irreversible!')){
             let leagueNumber = e.currentTarget.getAttribute('data-league-id');
-            console.log(leagueNumber);
             await dataHandler.deleteLeague(leagueNumber);
-            // window.location.replace("/my-leagues");
+            window.location.replace("/my-leagues");
         }
     }
 }
