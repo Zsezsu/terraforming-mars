@@ -3,7 +3,7 @@
 {% block title %}{{ rounds[0].league_name }}{% endblock %}
 
 {% block scripts %}
-
+    <script type="module" src="{{ url_for('static', filename='js/deleteLeague.js') }}" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -16,6 +16,9 @@
         <form action="/score/{{ rounds[0].league_id }}" >
             <button class="btn btn-light" type="submit" {{ 'disabled' if not rounds[0].finished }} >Scoreboard</button>
         </form>
+    </div>
+    <div class="delete">
+        <button class="btn btn-light" type="button" id="delete-button" data-league-id="{{ rounds[0].league_id }}">Delete</button>
     </div>
     <div class="cards rounds">
     {% for round in rounds %}
