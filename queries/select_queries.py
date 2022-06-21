@@ -195,21 +195,23 @@ def get_logged_in_user_leagues(user_id):
         leagues.league_name                                                 AS  league_name,
         leagues.league_admin                                                AS  league_admin,
         leagues.round_number                                                AS  round_number,
-        COUNT(DISTINCT league_players.player_id)                            AS  player_number,
+        array_length(league_players.players, 1)                             AS  player_number,
         COUNT(DISTINCT rounds.id) FILTER ( WHERE rounds.finished IS TRUE )  AS  finished_rounds,
         images.source                                                       AS  league_image_source
-    
+
     FROM
         leagues
-    LEFT JOIN league_players ON leagues.id = league_players.league_id
     LEFT JOIN images ON leagues.image_id = images.id
     LEFT JOIN rounds ON leagues.id = rounds.league_id
+    LEFT JOIN (SELECT league_id, array_agg(player_id) as players FROM league_players
+
+GROUP BY league_id) as league_players on league_players.league_id = leagues.id
     WHERE
         leagues.league_admin = {user_id}
     OR
-        league_players.player_id = {user_id}
+       {user_id} = ANY(league_players.players)
     GROUP BY
-        leagues.id, images.source
+        leagues.id, images.source, league_players.players
     ORDER BY
         leagues.id DESC;
     """
