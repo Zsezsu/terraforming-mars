@@ -230,7 +230,7 @@ ALTER TABLE IF EXISTS ONLY public.points            ADD CONSTRAINT
     fk_round_id       FOREIGN KEY (round_id)        REFERENCES rounds (id) ON DELETE CASCADE;
 
 ALTER TABLE IF EXISTS ONLY public.points            ADD CONSTRAINT
-    fk_player_id      FOREIGN KEY (player_id)       REFERENCES round_players (id) ON DELETE CASCADE;
+    fk_player_id      FOREIGN KEY (player_id)       REFERENCES players (id) ON DELETE CASCADE;
 
 
 
