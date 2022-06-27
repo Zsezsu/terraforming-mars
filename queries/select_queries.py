@@ -218,7 +218,7 @@ GROUP BY league_id) as league_players on league_players.league_id = leagues.id
     return execute_select(SQL(query).format(user_id=Literal(user_id)))
 
 
-def get_rounds_for_league(league_id, logged_in_user_id):
+def get_rounds_for_league(league_id):
     query = """
     SELECT
         rounds.id                                       AS id,
