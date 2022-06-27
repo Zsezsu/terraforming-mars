@@ -35,6 +35,10 @@ CREATE TABLE game_types_corporations_expansions
 );
 
 
+-----------------------------------------------------------------------------------------------------------------
+-- DROP unused column from corporations table.
+
+ALTER TABLE IF EXISTS corporations DROP COLUMN IF EXISTS expansion_id;
 
 ----------------------------------------------------Add Keys---------------------------------------------------------
 
