@@ -7,10 +7,7 @@ VALUES
     ('img/league_cards/mars-2.webp', TRUE),
     ('img/league_cards/mars-3.webp', TRUE),
     ('img/league_cards/mars-4.webp', TRUE),
-    ('img/league_cards/mars-5.webp', TRUE),
-    ('img/league_cards/mars-6.webp', TRUE),
-    ('img/league_cards/mars-7.webp', TRUE),
-    ('img/league_cards/mars-8.webp', TRUE);
+    ('img/league_cards/mars-5.webp', TRUE);
 
 
 ------------------------------------insert player images --------------------------------
