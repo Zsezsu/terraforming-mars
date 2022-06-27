@@ -1,8 +1,9 @@
 INSERT INTO
-    corporations(name, expansion_id)
+    corporations(name)
 VALUES
-    ('Celestior',                    NULL),
-    ('DevTechs',                     NULL),
-    ('Launch Star Incorporated',     NULL),
-    ('Mai-Ni Productions',           NULL),
-    ('Zetasel',                      NULL);
+    ('Celestior'),
+    ('DevTechs'),
+    ('Launch Star Incorporated'),
+    ('Mai-Ni Productions'),
+    ('Zetasel');
+
