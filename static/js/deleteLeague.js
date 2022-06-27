@@ -2,7 +2,6 @@ import {dataHandler} from "./data/dataHandler.js";
 
 const deleteLeague = {
     init() {
-        console.log(window)
        this.clickOnDelete();
     },
 
