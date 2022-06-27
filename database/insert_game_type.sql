@@ -44,13 +44,27 @@ CREATE TABLE game_types_corporations_expansions
 -----------------------------------------------------------------------------------------------------------------
 -- DROP unused column from corporations table.
 
-ALTER TABLE IF EXISTS corporations DROP COLUMN IF EXISTS expansion_id;
+ALTER TABLE IF EXISTS corporations
+    DROP COLUMN IF EXISTS expansion_id;
 
 
 -----------------------------------------------------------------------------------------------------------------
 -- ADD new column to expansions table.
 
-ALTER TABLE IF EXISTS expansions ADD COLUMN IF NOT EXISTS game_type_id INTEGER;
+ALTER TABLE IF EXISTS expansions
+    ADD COLUMN IF NOT EXISTS game_type_id INTEGER;
+
+
+-- UPDATE some Mars's expansions game_type_id to NULL
+
+UPDATE expansions
+SET game_type_id = NULL
+
+WHERE expansion_name LIKE 'Prelude'
+   OR expansion_name LIKE 'Venus Next'
+   OR expansion_name LIKE 'Colonies';
+
+
 ----------------------------------------------------Add Keys---------------------------------------------------------
 
 
@@ -77,3 +91,35 @@ ALTER TABLE IF EXISTS ONLY public.game_types_corporations_expansions
 ALTER TABLE IF EXISTS ONLY public.expansions
     ADD CONSTRAINT
         fk_game_type_id FOREIGN KEY (game_type_id) REFERENCES game_types (id) ON DELETE CASCADE;
+
+
+----------------------------------------------------Insert---------------------------------------------------------
+
+
+INSERT INTO game_types(name)
+VALUES ('Terraforming Mars'),
+       ('Ares Expedition');
+
+UPDATE expansions
+SET game_type_id = (SELECT id FROM game_types WHERE name LIKE 'Terraforming Mars')
+
+WHERE expansion_name LIKE 'Prelude'
+   OR expansion_name LIKE 'Venus Next'
+   OR expansion_name LIKE 'Colonies';
+
+--------------------------------------------Insert corporation relations------------------------------------------
+
+
+INSERT INTO game_types_corporations_expansions(game_type_id, expansion_id, corporation_id)
+VALUES ((SELECT id FROM game_types WHERE name = 'Terraforming Mars'), NULL,
+        (SELECT id FROM corporations WHERE name = 'Credicor'));
+
+INSERT INTO game_types_corporations_expansions(game_type_id, expansion_id, corporation_id)
+VALUES ((SELECT id FROM game_types WHERE name = 'Terraforming Mars'), NULL,
+        (SELECT id FROM corporations WHERE name = 'Ecoline'));
+
+INSERT INTO game_types_corporations_expansions(game_type_id, expansion_id, corporation_id)
+VALUES ((SELECT id FROM game_types WHERE name = 'Terraforming Mars'),
+        (SELECT id FROM expansions WHERE expansion_name = 'Venus Next'),
+        (SELECT id FROM corporations WHERE name = 'Aphrodite'));
+
