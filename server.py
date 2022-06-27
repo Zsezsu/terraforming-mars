@@ -48,8 +48,13 @@ def league(league_id):
     if session.get('UID'):
         logged_in_user_id = session.get('UID')
         rounds = select_queries.get_rounds_for_league(league_id, logged_in_user_id)
+        user_is_admin = logged_in_user_id == rounds[0]['league_admin']
         username = session['USERNAME']
-        return render_template('league.html', rounds=rounds, logged_in_user_id=logged_in_user_id, username=username)
+        return render_template('league.html',
+                               rounds=rounds,
+                               logged_in_user_id=logged_in_user_id,
+                               username=username,
+                               user_is_admin=user_is_admin)
     else:
         return redirect(url_for('index'))
 
