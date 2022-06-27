@@ -1,3 +1,14 @@
+---------------------------------------------Drop foreign keys-----------------------------------------------------
+
+ALTER TABLE IF EXISTS ONLY public.game_types_corporations_expansions
+    DROP CONSTRAINT IF EXISTS fk_game_type_id CASCADE;
+
+ALTER TABLE IF EXISTS ONLY public.game_types_corporations_expansions
+    DROP CONSTRAINT IF EXISTS fk_expansion_id CASCADE;
+
+ALTER TABLE IF EXISTS ONLY public.game_types_corporations_expansions
+    DROP CONSTRAINT IF EXISTS fk_corporation_id CASCADE;
+
 
 ---------------------------------------------Drop primary keys-----------------------------------------------------
 
@@ -14,6 +25,15 @@ CREATE TABLE game_types
     name VARCHAR
 );
 
+DROP TABLE IF EXISTS game_types_corporations_expansions;
+CREATE TABLE game_types_corporations_expansions
+(
+    id             SERIAL,
+    game_type_id   INTEGER,
+    expansion_id   INTEGER,
+    corporation_id INTEGER
+);
+
 
 
 ----------------------------------------------------Add Keys---------------------------------------------------------
@@ -23,3 +43,18 @@ CREATE TABLE game_types
 
 ALTER TABLE IF EXISTS ONLY public.game_types
     ADD CONSTRAINT pk_game_types_id PRIMARY KEY (id);
+
+
+--------------------------------------------Foreign Keys-------------------------------------------------
+
+ALTER TABLE IF EXISTS ONLY public.game_types_corporations_expansions
+    ADD CONSTRAINT
+        fk_game_type_id FOREIGN KEY (game_type_id) REFERENCES game_types (id) ON DELETE CASCADE;
+
+ALTER TABLE IF EXISTS ONLY public.game_types_corporations_expansions
+    ADD CONSTRAINT
+        fk_expansion_id FOREIGN KEY (expansion_id) REFERENCES expansions (id) ON DELETE CASCADE;
+
+ALTER TABLE IF EXISTS ONLY public.game_types_corporations_expansions
+    ADD CONSTRAINT
+        fk_corporation_id FOREIGN KEY (corporation_id) REFERENCES corporations (id) ON DELETE CASCADE;
