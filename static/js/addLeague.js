@@ -127,6 +127,7 @@ function refreshPlayersNumber() {
 
 const confirmLeague = async function () {
 
+    const gameTypeId = document.querySelector('select#game-type').value;
     const leagueName = document.querySelector('input[name="league-name"]').value;
     const leagueRounds = document.querySelector('input[name="league-rounds"]').value;
     const selectedPlayers = document.querySelector('div#selected-players').children;
@@ -138,12 +139,17 @@ const confirmLeague = async function () {
     const minPlayers = 1;
     const maxPlayers = 5;
     const divTransition = 1000;
+    if (!gameTypeId) {
+        alert('Please select a game type');
+        return;
+    }
     if (leagueName) {
         if (+leagueRounds >= minRounds && +leagueRounds <= maxRounds) {
             if (+selectedPlayers.length >= minPlayers && +selectedPlayers.length <= maxPlayers) {
                 if (confirm('Are you sure you want to add a new league?')) {
                     const selectedPlayersDetails = getPlayersDetails(selectedPlayers)
                     const data = {
+                        'gameTypeId': gameTypeId,
                         'leagueName': leagueName,
                         'leagueRounds': leagueRounds,
                         'userIds': selectedPlayersDetails,
