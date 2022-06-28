@@ -85,16 +85,17 @@ def add_new_league(data):
 def add_league(data):
     query = """
         INSERT INTO
-            leagues(league_name, league_admin, round_number, image_id)
+            leagues(league_name, league_admin, round_number, image_id, game_type_id)
         VALUES 
-            ({league_name}, {league_admin}, {round_number}, {image_id})
+            ({league_name}, {league_admin}, {round_number}, {image_id}, {game_type_id})
         RETURNING leagues.id;
     """
     return execute_insert(SQL(query).format(
         league_name=Literal(data['leagueName']),
         league_admin=Literal(data['leagueAdminId']),
         round_number=Literal(data['leagueRounds']),
-        image_id=Literal(data['leagueImageId'])
+        image_id=Literal(data['leagueImageId']),
+        game_type_id=Literal(data['gameTypeId'])
     ), fetchone=True)
 
 
