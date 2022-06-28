@@ -37,7 +37,8 @@
             <input type="number" id="league-rounds" name="league-rounds" min="1" max="10"
                    placeholder="Choose the number of rounds between 1-10"><br>
             <label id="label-league-players" class="text-light" for="league-players">League Players 1/5</label><br>
-            <input type="text" id="league-players" name="league-players" placeholder="Add new players to league" autocomplete="off"><br>
+            <input type="text" id="league-players" name="league-players" placeholder="Add new players to league"
+                   autocomplete="off"><br>
             <div id="searched-players"></div>
             <div id="selected-players" class="player-container bg-dark">
                 {% set user_id = logged_in_user['id'] %}
@@ -78,6 +79,7 @@
             {% set img_source = league['league_image_source'] %}
             {% set finished_league = number_of_rounds == finished_rounds %}
             {% set admin = league_admin_id | int == logged_in_user['id'] | int %}
+            {% set game_type_name = league.game_type_name %}
 
             <div class="card league bg-dark" data-league-id="{{ league_id }}"
                  data-league-admin-id="{{ league_admin_id }}">
@@ -91,6 +93,12 @@
                             <i class="fa-solid fa-crown text-light"></i>
                         </div>
                     {% endif %}
+
+                    {# TODO: Need to do something with game type name here  #}
+
+                    <div class="game_type">
+                        <small class="text-light">{{ game_type_name }}</small>
+                    </div>
                     <div class="detail-players">
                         <small class="text-light">{{ player_number }}</small>
                         <i class="fa-solid fa-user-astronaut text-light"></i>

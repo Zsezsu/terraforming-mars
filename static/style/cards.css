@@ -32,9 +32,13 @@
 }
 
 .detail-admin {
-    margin-right: 240px;
+    margin-right: auto;
+    margin-left: 10px;
 }
 
+.game_type {
+    margin-left: auto;
+}
 
 .card h3 {
     position: absolute;
