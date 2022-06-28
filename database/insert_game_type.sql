@@ -54,12 +54,13 @@ ALTER TABLE IF EXISTS expansions
 -----------------------------------------------------------------------------------------------------------------
 -- ADD new column to leagues table.
 
--- Drop already existing foreign key if exist
+-- DROP already existing foreign key if exist
 ALTER TABLE IF EXISTS ONLY public.leagues
     DROP CONSTRAINT IF EXISTS fk_game_type_id CASCADE;
 
--- Add new game_type_id column to leagues if not exist
-ALTER TABLE IF EXISTS leagues ADD COLUMN IF NOT EXISTS game_type_id INTEGER;
+-- ADD new game_type_id column to leagues if not exist
+ALTER TABLE IF EXISTS leagues
+    ADD COLUMN IF NOT EXISTS game_type_id INTEGER;
 
 -- ADD new foreign key to leagues(game_type_id)
 ALTER TABLE IF EXISTS ONLY public.leagues
@@ -68,8 +69,31 @@ ALTER TABLE IF EXISTS ONLY public.leagues
 
 -- UPDATE already added leagues game type to terraforming mars's game type id
 UPDATE public.leagues
-    SET game_type_id = (SELECT id FROM game_types WHERE name = 'Terraforming Mars')
+SET game_type_id = (SELECT id FROM game_types WHERE name = 'Terraforming Mars')
 WHERE leagues.game_type_id IS NULL;
+
+-----------------------------------------------------------------------------------------------------------------
+-- ADD new column to boards table.
+
+-- DROP already existing foreign key if exist
+ALTER TABLE IF EXISTS ONLY public.boards
+    DROP CONSTRAINT IF EXISTS fk_game_type_id CASCADE;
+
+--ADD new game_type_id column to boards if not exist
+ALTER TABLE IF EXISTS boards
+    ADD COLUMN IF NOT EXISTS game_type_id INTEGER;
+
+-- ADD new foreign key to boards(game_type_id)
+ALTER TABLE IF EXISTS ONLY public.boards
+    ADD CONSTRAINT
+        fk_game_type_id FOREIGN KEY (game_type_id) REFERENCES game_types (id) ON DELETE CASCADE;
+
+-- UPDATE already added tearraforming mars's boards with terraforming mars's id
+UPDATE public.boards
+SET game_type_id = (SELECT id FROM game_types WHERE name = 'Terraforming Mars')
+WHERE boards.board_name = 'Basic'
+   OR boards.board_name = 'Elysium'
+   OR boards.board_name = 'Hellas';
 
 
 -----------------------------------------------------------------------------
@@ -124,6 +148,11 @@ SET game_type_id = (SELECT id FROM game_types WHERE name LIKE 'Terraforming Mars
 WHERE expansion_name LIKE 'Prelude'
    OR expansion_name LIKE 'Venus Next'
    OR expansion_name LIKE 'Colonies';
+
+
+-- INSERT new basic board to Ares
+INSERT INTO boards(board_name, game_type_id)
+VALUES ('Basic', (SELECT id FROM game_types WHERE name = 'Ares Expedition'));
 
 --------------------------------------------Insert corporation relations------------------------------------------
 
