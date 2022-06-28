@@ -137,7 +137,7 @@ def results(league_id=1, round_id=2):
             players_data = select_queries.get_round_players(league_id)
             game_type_id = select_queries.get_game_type_by_league_id(league_id)['game_type_id']
             game_data = {
-                "boards": select_queries.get_boards(),
+                "boards": select_queries.get_boards(game_type_id),
                 "expansions": select_queries.get_expansions(),
                 "corporations": select_queries.get_corporations()
             }

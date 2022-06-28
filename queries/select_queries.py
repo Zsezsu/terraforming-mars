@@ -56,16 +56,20 @@ def get_round_by_id(round_id):
     return execute_select(SQL(query).format(round_id=Literal(round_id)), fetchall=False)
 
 
-def get_boards():
+def get_boards(game_type_id):
     query = """
     SELECT
         *
     FROM 
         boards
+    WHERE
+        game_type_id = {game_type_id}
     ORDER BY 
         boards.board_name;
     """
-    return execute_select(SQL(query))
+    return execute_select(SQL(query).format(
+        game_type_id=Literal(game_type_id)
+    ))
 
 
 def get_expansions():
