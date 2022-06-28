@@ -57,11 +57,17 @@ def league(league_id):
 def leagues():
     if session.get('UID'):
         uid = session.get('UID')
+        game_types = select_queries.get_game_types()
         logged_in_user = select_queries.get_logged_in_user(uid)
         logged_in_user_leagues = select_queries.get_logged_in_user_leagues(uid)
         username = session['USERNAME']
-        return render_template('my_leagues.html', logged_in_user=logged_in_user, leagues=logged_in_user_leagues,
-                               username=username)
+        return render_template(
+            'my_leagues.html',
+            game_types=game_types,
+            logged_in_user=logged_in_user,
+            leagues=logged_in_user_leagues,
+            username=username
+        )
     else:
         return redirect(url_for('login'))
 
