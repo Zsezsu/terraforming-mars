@@ -319,6 +319,19 @@ def get_game_types():
     return execute_select(SQL(query))
 
 
+def get_game_type_by_league_id(league_id):
+    query = """
+    SELECT 
+        game_type_id 
+    FROM 
+        leagues
+    WHERE id = {league_id};
+    """
+    return execute_select(SQL(query).format(
+        league_id=Literal(league_id)
+    ), fetchall=False)
+
+
 def get_player_scores(league_id):
     query = """
     SELECT
