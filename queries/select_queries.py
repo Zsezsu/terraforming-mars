@@ -88,16 +88,21 @@ def get_expansions(game_type_id):
     ))
 
 
-def get_corporations():
+def get_corporations(game_type_id):
     query = """
-    SELECT
-        *
+    SELECT 
+        game_types_corporations_expansions.expansion_id AS expansion_id,
+       corporations.id                                  AS corporation_id,
+       corporations.name                                AS corporation_name
     FROM 
-        corporations
-    ORDER BY 
-        corporations.name;
+        game_types_corporations_expansions
+    LEFT JOIN corporations ON game_types_corporations_expansions.corporation_id = corporations.id
+    WHERE 
+    game_types_corporations_expansions.game_type_id = {game_type_id};
     """
-    return execute_select(SQL(query))
+    return execute_select(SQL(query).format(
+        game_type_id=Literal(game_type_id)
+    ))
 
 
 def get_round_points(round_id):
