@@ -24,6 +24,12 @@
     <div class="bg-dark form-container card new-league hide-form-container league-form" id="add-league">
         <div class="form" id="league-form">
             <h2 class="text-light">Add new league</h2>
+            <label class="text-light" for="game-type">Game Type</label><br>
+            <select id="game-type" name="game_type" required>
+                <option value="" selected disabled hidden>Please select a game type</option>
+                <option>Mars(dummy data)</option>
+                <option>Ares(dummy data)</option>
+            </select><br><br>
             <label class="text-light" for="league-name">League Name</label><br>
             <input type="text" id="league-name" name="league-name" placeholder="Enter the league's name" maxlength="26"><br>
             <label class="text-light" for="league-rounds">Number of Rounds</label><br>
