@@ -139,7 +139,7 @@ def results(league_id=1, round_id=2):
             game_data = {
                 "boards": select_queries.get_boards(game_type_id),
                 "expansions": select_queries.get_expansions(game_type_id),
-                "corporations": select_queries.get_corporations()
+                "corporations": select_queries.get_corporations(game_type_id)
             }
 
         elif round_status == 'started':
