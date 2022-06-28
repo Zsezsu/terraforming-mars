@@ -26,7 +26,11 @@
             <select id="player{{ player.id }}" name="player-{{ player.id }}" required>
                 <option value="">--Please select a Corporation--</option>
                 {% for corporation in game.corporations %}
-                    <option value="{{ corporation.id }}">{{ corporation.name }}</option>
+                    <option
+                            data-expansion-id="{{ corporation.expansion_id }}"
+                            value="{{ corporation.corporation_id }}"
+                            {% if corporation.expansion_id != None %} hidden {% endif %}
+                    >{{ corporation.corporation_name }}</option>
                 {% endfor %}
             </select><br><br>
         {% endfor %}
