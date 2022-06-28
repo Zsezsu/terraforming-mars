@@ -72,16 +72,20 @@ def get_boards(game_type_id):
     ))
 
 
-def get_expansions():
+def get_expansions(game_type_id):
     query = """
     SELECT
         *
     FROM 
         expansions
+    WHERE
+        game_type_id = {game_type_id}
     ORDER BY 
         expansions.expansion_name;
     """
-    return execute_select(SQL(query))
+    return execute_select(SQL(query).format(
+        game_type_id=Literal(game_type_id)
+    ))
 
 
 def get_corporations():
