@@ -307,6 +307,16 @@ def get_user_data(uid):
     ), fetchall=False))
 
 
+def get_game_types():
+    query = """
+    SELECT
+        id, name
+    FROM
+        game_types
+    """
+    return execute_select(SQL(query))
+
+
 def get_player_scores(league_id):
     query = """
     SELECT
