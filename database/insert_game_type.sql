@@ -143,7 +143,8 @@ VALUES ('Terraforming Mars'),
        ('Ares Expedition');
 
 INSERT INTO expansions(expansion_name)
-VALUES ('Turmoil');
+VALUES ('Turmoil'),
+        ('Promo');
 
 UPDATE expansions
 SET game_type_id = (SELECT id FROM game_types WHERE name = 'Terraforming Mars')
@@ -151,7 +152,8 @@ SET game_type_id = (SELECT id FROM game_types WHERE name = 'Terraforming Mars')
 WHERE expansion_name = 'Prelude'
    OR expansion_name = 'Venus Next'
    OR expansion_name = 'Colonies'
-   OR expansion_name = 'Turmoil';
+   OR expansion_name = 'Turmoil'
+   OR expansion_name = 'Promo';
 
 
 
@@ -163,7 +165,12 @@ VALUES ('Basic', (SELECT id FROM game_types WHERE name = 'Ares Expedition'));
 INSERT INTO corporations(name)
 VALUES ('Pharmacy Union'),
        ('Astrodrill Enterprise'),
-
+       ('Factorum'),
+       ('Mons Insurance'),
+       ('Philares'),
+       ('Arcadian Communities'),
+       ('Recyclon'),
+       ('Splice Tactical Genomics'),
        ('Lakefront Resorts'),
        ('Pristar'),
        ('Septem Tribus'),
@@ -329,4 +336,47 @@ INSERT INTO game_types_corporations_expansions(game_type_id, expansion_id, corpo
 VALUES ((SELECT id FROM game_types WHERE name = 'Terraforming Mars'),
         (SELECT id FROM expansions WHERE expansion_name = 'Turmoil'),
         (SELECT id FROM corporations WHERE name = 'Utopia Invest'));
+
+--TURMOIL CORPORATION'S RELATIONS--
+
+INSERT INTO game_types_corporations_expansions(game_type_id, expansion_id, corporation_id)
+VALUES ((SELECT id FROM game_types WHERE name = 'Terraforming Mars'),
+        (SELECT id FROM expansions WHERE expansion_name = 'Promo'),
+        (SELECT id FROM corporations WHERE name = 'Pharmacy Union'));
+
+INSERT INTO game_types_corporations_expansions(game_type_id, expansion_id, corporation_id)
+VALUES ((SELECT id FROM game_types WHERE name = 'Terraforming Mars'),
+        (SELECT id FROM expansions WHERE expansion_name = 'Promo'),
+        (SELECT id FROM corporations WHERE name = 'Astrodrill Enterprise'));
+
+INSERT INTO game_types_corporations_expansions(game_type_id, expansion_id, corporation_id)
+VALUES ((SELECT id FROM game_types WHERE name = 'Terraforming Mars'),
+        (SELECT id FROM expansions WHERE expansion_name = 'Promo'),
+        (SELECT id FROM corporations WHERE name = 'Factorum'));
+
+INSERT INTO game_types_corporations_expansions(game_type_id, expansion_id, corporation_id)
+VALUES ((SELECT id FROM game_types WHERE name = 'Terraforming Mars'),
+        (SELECT id FROM expansions WHERE expansion_name = 'Promo'),
+        (SELECT id FROM corporations WHERE name = 'Mons Insurance'));
+
+INSERT INTO game_types_corporations_expansions(game_type_id, expansion_id, corporation_id)
+VALUES ((SELECT id FROM game_types WHERE name = 'Terraforming Mars'),
+        (SELECT id FROM expansions WHERE expansion_name = 'Promo'),
+        (SELECT id FROM corporations WHERE name = 'Philares'));
+
+INSERT INTO game_types_corporations_expansions(game_type_id, expansion_id, corporation_id)
+VALUES ((SELECT id FROM game_types WHERE name = 'Terraforming Mars'),
+        (SELECT id FROM expansions WHERE expansion_name = 'Promo'),
+        (SELECT id FROM corporations WHERE name = 'Arcadian Communities'));
+
+INSERT INTO game_types_corporations_expansions(game_type_id, expansion_id, corporation_id)
+VALUES ((SELECT id FROM game_types WHERE name = 'Terraforming Mars'),
+        (SELECT id FROM expansions WHERE expansion_name = 'Promo'),
+        (SELECT id FROM corporations WHERE name = 'Recyclon'));
+
+
+INSERT INTO game_types_corporations_expansions(game_type_id, expansion_id, corporation_id)
+VALUES ((SELECT id FROM game_types WHERE name = 'Terraforming Mars'),
+        (SELECT id FROM expansions WHERE expansion_name = 'Promo'),
+        (SELECT id FROM corporations WHERE name = 'Splice Tactical Genomics'));
 
