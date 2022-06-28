@@ -128,48 +128,53 @@ function refreshPlayersNumber() {
 const confirmLeague = async function () {
 
     const gameTypeId = document.querySelector('select#game-type').value;
-    const leagueName = document.querySelector('input[name="league-name"]').value;
-    const leagueRounds = document.querySelector('input[name="league-rounds"]').value;
-    const selectedPlayers = document.querySelector('div#selected-players').children;
-    const leagueAdminId = data.loggedInUser.id;
-    const selectedLeagueImage = document.querySelector('img[data-image-id]');
-    const selectedLeagueImageSource = selectedLeagueImage.getAttribute('src');
-    const minRounds = 1;
-    const maxRounds = 10;
-    const minPlayers = 1;
-    const maxPlayers = 5;
-    const divTransition = 1000;
     if (!gameTypeId) {
         alert('Please select a game type');
         return;
     }
-    if (leagueName) {
-        if (+leagueRounds >= minRounds && +leagueRounds <= maxRounds) {
-            if (+selectedPlayers.length >= minPlayers && +selectedPlayers.length <= maxPlayers) {
-                if (confirm('Are you sure you want to add a new league?')) {
-                    const selectedPlayersDetails = getPlayersDetails(selectedPlayers)
-                    const data = {
-                        'gameTypeId': gameTypeId,
-                        'leagueName': leagueName,
-                        'leagueRounds': leagueRounds,
-                        'userIds': selectedPlayersDetails,
-                        'leagueAdminId': leagueAdminId,
-                        'leagueImageId': selectedLeagueImage.getAttribute('data-image-id'),
-                        'selectedLeagueImageSource': selectedLeagueImageSource
-                    }
-                    toggleAddNewLeague();
-                    setTimeout(clearLeagueDiv, divTransition);
-                    const newLeagueId = await dataHandler.postNewLeague(data);
-                    addNewLeagueCard(data, newLeagueId);
-                }
-            } else {
-                alert(`players Number(${selectedPlayers.length}) has to be between ${minPlayers}-${maxPlayers}`);
-            }
-        } else {
-            alert(`League round(${leagueRounds}) has to be between ${minRounds}-${maxRounds}`);
-        }
-    } else {
+
+    const leagueName = document.querySelector('input[name="league-name"]').value;
+    if (!leagueName) {
         alert('League name required');
+        return;
+    }
+
+    const leagueRounds = document.querySelector('input[name="league-rounds"]').value;
+    const minRounds = 1;
+    const maxRounds = 10;
+    if (!(+leagueRounds >= minRounds && +leagueRounds <= maxRounds)) {
+        alert(`League round(${leagueRounds}) has to be between ${minRounds}-${maxRounds}`);
+        return;
+    }
+
+    const selectedPlayers = document.querySelector('div#selected-players').children;
+    const minPlayers = 1;
+    const maxPlayers = 5;
+    if (!(+selectedPlayers.length >= minPlayers && +selectedPlayers.length <= maxPlayers)) {
+        alert(`players Number(${selectedPlayers.length}) has to be between ${minPlayers}-${maxPlayers}`);
+        return;
+    }
+
+    const leagueAdminId = data.loggedInUser.id;
+    const selectedLeagueImage = document.querySelector('img[data-image-id]');
+    const selectedLeagueImageSource = selectedLeagueImage.getAttribute('src');
+    const divTransition = 1000;
+
+    if (confirm('Are you sure you want to add a new league?')) {
+        const selectedPlayersDetails = getPlayersDetails(selectedPlayers)
+        const data = {
+            'gameTypeId': gameTypeId,
+            'leagueName': leagueName,
+            'leagueRounds': leagueRounds,
+            'userIds': selectedPlayersDetails,
+            'leagueAdminId': leagueAdminId,
+            'leagueImageId': selectedLeagueImage.getAttribute('data-image-id'),
+            'selectedLeagueImageSource': selectedLeagueImageSource
+        }
+        toggleAddNewLeague();
+        setTimeout(clearLeagueDiv, divTransition);
+        const newLeagueId = await dataHandler.postNewLeague(data);
+        addNewLeagueCard(data, newLeagueId);
     }
 }
 
