@@ -12,9 +12,6 @@ ALTER TABLE IF EXISTS ONLY public.game_types_corporations_expansions
 ALTER TABLE IF EXISTS ONLY public.game_types_corporations_expansions
     DROP CONSTRAINT IF EXISTS fk_corporation_id CASCADE;
 
-ALTER TABLE IF EXISTS ONLY public.expansions
-    DROP CONSTRAINT IF EXISTS fk_game_type_id CASCADE;
-
 
 ---------------------------------------------Drop primary keys-----------------------------------------------------
 
