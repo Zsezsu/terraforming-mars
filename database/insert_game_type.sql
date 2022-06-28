@@ -54,7 +54,28 @@ ALTER TABLE IF EXISTS corporations
 ALTER TABLE IF EXISTS expansions
     ADD COLUMN IF NOT EXISTS game_type_id INTEGER;
 
+-----------------------------------------------------------------------------------------------------------------
+-- ADD new column to leagues table.
 
+-- Drop already existing foreign key if exist
+ALTER TABLE IF EXISTS ONLY public.leagues
+    DROP CONSTRAINT IF EXISTS fk_game_type_id CASCADE;
+
+-- Add new game_type_id column to leagues if not exist
+ALTER TABLE IF EXISTS leagues ADD COLUMN IF NOT EXISTS game_type_id INTEGER;
+
+-- ADD new foreign key to leagues(game_type_id)
+ALTER TABLE IF EXISTS ONLY public.leagues
+    ADD CONSTRAINT
+        fk_game_type_id FOREIGN KEY (game_type_id) REFERENCES game_types (id) ON DELETE CASCADE;
+
+-- UPDATE already added leagues game type to terraforming mars's game type id
+UPDATE public.leagues
+    SET game_type_id = (SELECT id FROM game_types WHERE name = 'Terraforming Mars')
+WHERE leagues.game_type_id IS NULL;
+
+
+-----------------------------------------------------------------------------
 -- UPDATE some Mars's expansions game_type_id to NULL
 
 UPDATE expansions
