@@ -195,6 +195,7 @@ def get_logged_in_user_leagues(user_id):
         leagues.league_name                                                 AS  league_name,
         leagues.league_admin                                                AS  league_admin,
         leagues.round_number                                                AS  round_number,
+        game_types.name                                                     AS  game_type_name,
         array_length(league_players.players, 1)                             AS  player_number,
         COUNT(DISTINCT rounds.id) FILTER ( WHERE rounds.finished IS TRUE )  AS  finished_rounds,
         images.source                                                       AS  league_image_source
@@ -203,6 +204,7 @@ def get_logged_in_user_leagues(user_id):
         leagues
     LEFT JOIN images ON leagues.image_id = images.id
     LEFT JOIN rounds ON leagues.id = rounds.league_id
+    LEFT JOIN game_types ON leagues.game_type_id = game_types.id
     LEFT JOIN (SELECT league_id, array_agg(player_id) as players FROM league_players
 
 GROUP BY league_id) as league_players on league_players.league_id = leagues.id
@@ -211,7 +213,7 @@ GROUP BY league_id) as league_players on league_players.league_id = leagues.id
     OR
        {user_id} = ANY(league_players.players)
     GROUP BY
-        leagues.id, images.source, league_players.players
+        leagues.id, images.source, league_players.players, game_types.name
     ORDER BY
         leagues.id DESC;
     """
