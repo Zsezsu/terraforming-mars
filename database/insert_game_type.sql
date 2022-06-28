@@ -215,7 +215,7 @@ VALUES ((SELECT id FROM game_types WHERE name = 'Terraforming Mars'), NULL,
 
 INSERT INTO game_types_corporations_expansions(game_type_id, expansion_id, corporation_id)
 VALUES ((SELECT id FROM game_types WHERE name = 'Terraforming Mars'), NULL,
-        (SELECT id FROM corporations WHERE name = 'Tharsis Rebuplic'));
+        (SELECT id FROM corporations WHERE name = 'Teractor'));
 
 INSERT INTO game_types_corporations_expansions(game_type_id, expansion_id, corporation_id)
 VALUES ((SELECT id FROM game_types WHERE name = 'Terraforming Mars'), NULL,
