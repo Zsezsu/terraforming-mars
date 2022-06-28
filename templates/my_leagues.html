@@ -27,8 +27,9 @@
             <label class="text-light" for="game-type">Game Type</label><br>
             <select id="game-type" name="game_type" required>
                 <option value="" selected disabled hidden>Please select a game type</option>
-                <option>Mars(dummy data)</option>
-                <option>Ares(dummy data)</option>
+                {% for game_type in game_types %}
+                    <option value="{{ game_type.id }}">{{ game_type.name }}</option>
+                {% endfor %}
             </select><br><br>
             <label class="text-light" for="league-name">League Name</label><br>
             <input type="text" id="league-name" name="league-name" placeholder="Enter the league's name" maxlength="26"><br>
