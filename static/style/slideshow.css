@@ -70,3 +70,23 @@
         right: -70px;
     }
 }
+
+@media only screen and (max-width: 576px) {
+    .slideshow {
+        width: 110%;
+        margin-bottom: -6em !important;
+    }
+    .slideshow-btn {
+        font-size: 50px;
+        top: 40%;
+    }
+    .slideshow-prev {
+        left: -50px;
+    }
+    .slideshow-next {
+        right: -50px;
+    }
+    div.slideshow h2 {
+        margin-top: -7.5em !important;
+    }
+}

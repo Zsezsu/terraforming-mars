@@ -73,3 +73,42 @@
 .player-card img:hover {
     filter: none;
 }
+
+#add-league.hide-form-container {
+    height: 0px !important;
+}
+
+@media only screen and (max-width: 576px) {
+
+    .text-light.breadcrumb {
+        display: none;
+    }
+    #new-league {
+        margin-inline: 7%;
+        font-size: 10px;
+    }
+    button.btn.btn-light, button.btn.btn-dark {
+        font-size: 1.2rem !important;
+        line-height: 0.7 !important;
+    }
+    #new-league:disabled {
+        display: none;
+    }
+    #add-league {
+        height: 78em;
+        margin-top: -20px;
+    }
+    .league-form h2{
+        font-size: 1.6em !important;
+        margin-top: -0.4em !important;
+    }
+    label {
+        font-size: 1.3em !important;
+    }
+    .league-form input {
+        font-size: 1em;
+    }
+    #league-form {
+        width: 22em !important;
+    }
+}
