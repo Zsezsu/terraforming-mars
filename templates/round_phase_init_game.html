@@ -26,11 +26,13 @@
         <label for="round-corporations">Choose a corporation for each player</label><br><br>
         {% for player in players %}
             <label for="player{{ player.id }}">{{ player.username }}</label>
-            <select id="player{{ player.id }}" name="player-{{ player.id }}" required>
+            <select class="corporations" id="player{{ player.id }}" name="player-{{ player.id }}" required>
                 <option value="">--Please select a Corporation--</option>
                 {% for corporation in game.corporations %}
                     <option
+                            class="corporation"
                             data-expansion-id="{{ corporation.expansion_id }}"
+                            data-player-id="{{ player.id }}"
                             value="{{ corporation.corporation_id }}"
                             {% if corporation.expansion_id != None %} hidden {% endif %}
                     >{{ corporation.corporation_name }}</option>
