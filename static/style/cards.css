@@ -72,3 +72,79 @@
         height: 450px;
     }
 }
+
+
+@media only screen and (max-width: 576px) {
+    .card {
+        height: 300px;
+        /*width: 200px;*/
+    }
+    .card img {
+        height: 250px;
+    }
+
+    .card-details {
+        display: flex;
+        flex-direction: row;
+        justify-content: right;
+        align-items: center;
+        margin-right: 15px;
+        column-gap: 10px;
+        height: 50px;
+    }
+
+    .detail-admin {
+        margin-right: 0px;
+    }
+
+
+    /*card details: */
+    small {
+        white-space: unset;
+    }
+    .fa-user-astronaut {
+        position: relative;
+        /*top: -1.6em;*/
+        left: -0.3em;
+    }
+    .fa-rocket {
+        position: relative;
+        /*top: -1.6em;*/
+        left: -0.3em;
+    }
+    .detail-players {
+        position: relative;
+        left: 2.2em;
+    }
+    .detail-rounds {
+        position: relative;
+        left: 1.5em;
+    }
+
+    @media only screen and (max-width: 375px) {
+        .fa-user-astronaut {
+            position: relative;
+            top: -1.6em;
+            left: 0.3em;
+        }
+
+        .fa-rocket {
+            position: relative;
+            top: -1.6em;
+            left: 2.3em;
+        }
+
+        .detail-players, .detail-rounds {
+            position: relative;
+            top: 1.8em;
+            left: 2.2em;
+        }
+
+        /*.detail-rounds {*/
+        /*    position: relative;*/
+        /*    top: 1.8em;*/
+        /*    left: 1.5em;*/
+        /*}*/
+
+    }
+}
