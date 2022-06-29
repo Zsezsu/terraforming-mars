@@ -59,18 +59,34 @@ em {
     text-transform: none;
 }
 
-/*@media screen and (max-width: 992px) {*/
-/*    nav {*/
-/*        padding: 20px;*/
-/*        height: 140px;*/
-/*        font-size: 1.8em;*/
-/*        text-align: center;*/
-/*        display: flex;*/
-/*        flex-direction: column;*/
-/*    }*/
 
-/*    nav li {*/
-/*        display: block;*/
-/*        width: 100%;*/
-/*    }*/
-/*}*/
+/* Note: not done yet, but looks ok on iPhone*/
+
+@media only screen and (max-width: 576px) {
+    nav {
+        height: 50px;
+        font-weight: bold;
+        box-shadow: black 3px 3px 20px;
+        text-transform: uppercase;
+        background: #181b1e !important;
+    }
+
+    nav ul {
+    margin: 0;
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+}
+
+    nav li {
+    padding: 1em 5px;
+    }
+
+    nav span{
+        display: none;
+    }
+
+    #nav-headline {
+        display: none;
+    }
+}
