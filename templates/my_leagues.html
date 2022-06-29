@@ -68,6 +68,15 @@
             </div>
         </div>
     </div>
+
+    <div>
+    <p class="text-light">Filter by game type: </p>
+        <select id="game-type">
+            {% for game_type in game_types %}
+                <option value="{{ game_type['name'] }}">{{ game_type['name'] }}</option>
+            {% endfor %}
+        </select>
+    </div>
     <div id="league-card-container" class="leagues cards">
         {% for league in leagues %}
             {% set league_id = league['id'] %}
@@ -82,7 +91,8 @@
             {% set game_type_name = league.game_type_name %}
 
             <div class="card league bg-dark" data-league-id="{{ league_id }}"
-                 data-league-admin-id="{{ league_admin_id }}">
+                 data-league-admin-id="{{ league_admin_id }}"
+                data-league-type="{{ game_type_name }}">
                 <a href="{{ url_for('league', league_id=league_id) }}">
                     <img alt="mars" src="{{ url_for('static', filename=img_source) }}">
                     <h3 class="text-light">{{ league_name }}</h3>
