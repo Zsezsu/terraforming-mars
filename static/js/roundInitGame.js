@@ -1,7 +1,9 @@
 main();
 
 function main() {
-    toggleExpansionDiv();
+    const expansionDiv = document.querySelector('#expansions');
+    toggleExpansionDiv(expansionDiv);
+    showExpansionsCorporations(expansionDiv);
     const showRoundFormButton = document.querySelector('.show-round-form-button');
     const closeRoundFormButton = document.querySelector('.close-round-form-button');
     [showRoundFormButton, closeRoundFormButton].forEach(
@@ -19,11 +21,27 @@ function toggleRoundForm() {
 }
 
 
-function toggleExpansionDiv() {
-    const expansions = document.querySelector('#expansions');
-    if (!hasExpansions(expansions)) {expansions.remove()}
+function toggleExpansionDiv(expansionDiv) {
+    if (!hasExpansions(expansionDiv)) {expansionDiv.remove();}
 }
 
-function hasExpansions(expansions) {
-    return expansions.querySelector('input') != null;
+function showExpansionsCorporations(expansionDiv) {
+    if (!hasExpansions(expansionDiv)) {return;}
+    const expansions = expansionDiv.querySelectorAll(".round-expansion");
+    expansions.forEach(
+        (input) => {
+            input.addEventListener('change', toggleExpansionsCorporations);
+        });
+}
+
+function toggleExpansionsCorporations() {
+    const expansionId = this.value;
+    const expansionsCorporations = document.querySelectorAll(`option[data-expansion-id="${expansionId}"]`);
+    expansionsCorporations.forEach((corporation)=> {
+        corporation.hidden = !this.checked;
+    });
+}
+
+function hasExpansions(expansionDiv) {
+    return expansionDiv.querySelector('input') != null;
 }
