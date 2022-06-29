@@ -16,7 +16,7 @@ ALTER TABLE IF EXISTS ONLY public.game_types_corporations_expansions
 ---------------------------------------------Drop primary keys-----------------------------------------------------
 
 ALTER TABLE IF EXISTS ONLY public.game_types
-    DROP CONSTRAINT IF EXISTS pk_game_types_id;
+    DROP CONSTRAINT IF EXISTS pk_game_types_id CASCADE;
 
 
 --------------------------------------------------Create Tables--------------------------------------------------
@@ -27,6 +27,53 @@ CREATE TABLE game_types
     id   SERIAL,
     name VARCHAR
 );
+--CREATE primary key to game_type.id
+ALTER TABLE IF EXISTS ONLY public.game_types
+    ADD CONSTRAINT pk_game_types_id PRIMARY KEY (id);
+
+INSERT INTO game_types(name)
+VALUES ('Terraforming Mars'),
+       ('Ares Expedition');
+
+
+-----------------------------------------------------------------------------------------------------------------
+-- ADD new column to expansions table.
+
+ALTER TABLE IF EXISTS expansions
+    ADD COLUMN IF NOT EXISTS game_type_id INTEGER;
+
+-- UPDATE some Mars's expansions game_type_id to NULL
+UPDATE expansions
+SET game_type_id = NULL
+
+WHERE expansion_name = 'Prelude'
+   OR expansion_name = 'Venus Next'
+   OR expansion_name = 'Colonies';
+
+--CREATE expansion foreign key(game types id)
+ALTER TABLE IF EXISTS ONLY public.expansions
+    ADD CONSTRAINT
+        fk_game_type_id FOREIGN KEY (game_type_id) REFERENCES game_types (id) ON DELETE CASCADE;
+
+DELETE
+FROM expansions
+WHERE expansion_name = 'Turmoil'
+   OR expansion_name = 'Promo';
+
+INSERT INTO expansions(expansion_name)
+VALUES ('Turmoil'),
+       ('Promo');
+
+UPDATE expansions
+SET game_type_id = (SELECT id FROM game_types WHERE name = 'Terraforming Mars')
+
+WHERE expansion_name = 'Prelude'
+   OR expansion_name = 'Venus Next'
+   OR expansion_name = 'Colonies'
+   OR expansion_name = 'Turmoil'
+   OR expansion_name = 'Promo';
+
+---------------------------------------------------------------------------------------------------------------
 
 DROP TABLE IF EXISTS game_types_corporations_expansions;
 CREATE TABLE game_types_corporations_expansions
@@ -36,6 +83,19 @@ CREATE TABLE game_types_corporations_expansions
     expansion_id   INTEGER,
     corporation_id INTEGER
 );
+--CREATE foreign keys to game_types_corporations_expansions
+ALTER TABLE IF EXISTS ONLY public.game_types_corporations_expansions
+    ADD CONSTRAINT
+        fk_game_type_id FOREIGN KEY (game_type_id) REFERENCES game_types (id) ON DELETE CASCADE;
+
+ALTER TABLE IF EXISTS ONLY public.game_types_corporations_expansions
+    ADD CONSTRAINT
+        fk_expansion_id FOREIGN KEY (expansion_id) REFERENCES expansions (id) ON DELETE CASCADE;
+
+ALTER TABLE IF EXISTS ONLY public.game_types_corporations_expansions
+    ADD CONSTRAINT
+        fk_corporation_id FOREIGN KEY (corporation_id) REFERENCES corporations (id) ON DELETE CASCADE;
+
 
 
 -----------------------------------------------------------------------------------------------------------------
@@ -44,12 +104,6 @@ CREATE TABLE game_types_corporations_expansions
 ALTER TABLE IF EXISTS corporations
     DROP COLUMN IF EXISTS expansion_id;
 
-
------------------------------------------------------------------------------------------------------------------
--- ADD new column to expansions table.
-
-ALTER TABLE IF EXISTS expansions
-    ADD COLUMN IF NOT EXISTS game_type_id INTEGER;
 
 -----------------------------------------------------------------------------------------------------------------
 -- ADD new column to leagues table.
@@ -96,72 +150,27 @@ WHERE boards.board_name = 'Basic'
    OR boards.board_name = 'Hellas';
 
 
------------------------------------------------------------------------------
--- UPDATE some Mars's expansions game_type_id to NULL
-
-UPDATE expansions
-SET game_type_id = NULL
-
-WHERE expansion_name = 'Prelude'
-   OR expansion_name = 'Venus Next'
-   OR expansion_name = 'Colonies';
-
-
-----------------------------------------------------Add Keys---------------------------------------------------------
-
-
---------------------------------------------Primary Keys-------------------------------------------------
-
-ALTER TABLE IF EXISTS ONLY public.game_types
-    ADD CONSTRAINT pk_game_types_id PRIMARY KEY (id);
-
-
---------------------------------------------Foreign Keys-------------------------------------------------
-
-ALTER TABLE IF EXISTS ONLY public.game_types_corporations_expansions
-    ADD CONSTRAINT
-        fk_game_type_id FOREIGN KEY (game_type_id) REFERENCES game_types (id) ON DELETE CASCADE;
-
-ALTER TABLE IF EXISTS ONLY public.game_types_corporations_expansions
-    ADD CONSTRAINT
-        fk_expansion_id FOREIGN KEY (expansion_id) REFERENCES expansions (id) ON DELETE CASCADE;
-
-ALTER TABLE IF EXISTS ONLY public.game_types_corporations_expansions
-    ADD CONSTRAINT
-        fk_corporation_id FOREIGN KEY (corporation_id) REFERENCES corporations (id) ON DELETE CASCADE;
-
-ALTER TABLE IF EXISTS ONLY public.expansions
-    ADD CONSTRAINT
-        fk_game_type_id FOREIGN KEY (game_type_id) REFERENCES game_types (id) ON DELETE CASCADE;
-
-
-----------------------------------------------------Insert---------------------------------------------------------
-
-
-INSERT INTO game_types(name)
-VALUES ('Terraforming Mars'),
-       ('Ares Expedition');
-
-INSERT INTO expansions(expansion_name)
-VALUES ('Turmoil'),
-        ('Promo');
-
-UPDATE expansions
-SET game_type_id = (SELECT id FROM game_types WHERE name = 'Terraforming Mars')
-
-WHERE expansion_name = 'Prelude'
-   OR expansion_name = 'Venus Next'
-   OR expansion_name = 'Colonies'
-   OR expansion_name = 'Turmoil'
-   OR expansion_name = 'Promo';
-
-
-
 -- INSERT new basic board to Ares
 INSERT INTO boards(board_name, game_type_id)
 VALUES ('Basic', (SELECT id FROM game_types WHERE name = 'Ares Expedition'));
 
 --------------------------------------------Insert corporation relations------------------------------------------
+DELETE
+FROM corporations
+WHERE name = 'Pharmacy Union'
+   OR name = 'Astrodrill Enterprise'
+   OR name = 'Factorum'
+   OR name = 'Mons Insurance'
+   OR name = 'Philares'
+   OR name = 'Arcadian Communities'
+   OR name = 'Recyclon'
+   OR name = 'Splice Tactical Genomics'
+   OR name = 'Lakefront Resorts'
+   OR name = 'Pristar'
+   OR name = 'Septem Tribus'
+   OR name = 'Terralabs Research'
+   OR name = 'Utopia Invest';
+
 INSERT INTO corporations(name)
 VALUES ('Pharmacy Union'),
        ('Astrodrill Enterprise'),
@@ -379,4 +388,3 @@ INSERT INTO game_types_corporations_expansions(game_type_id, expansion_id, corpo
 VALUES ((SELECT id FROM game_types WHERE name = 'Terraforming Mars'),
         (SELECT id FROM expansions WHERE expansion_name = 'Promo'),
         (SELECT id FROM corporations WHERE name = 'Splice Tactical Genomics'));
-
