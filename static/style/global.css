@@ -74,7 +74,7 @@ a:hover {
     color: white;
 }
 
-@media screen and (max-width: 992px) {
+@media only screen and (max-width: 992px) {
     main {
         margin: 70px;
     }
@@ -99,5 +99,53 @@ a:hover {
     }
     small {
         font-size: 1.8rem;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    main {
+        margin: 0;
+    }
+    h1 {
+        font-size: 1.6em;
+    }
+    h2, h3, h4, p, label {
+        /* Override bootstrap */
+        font-size: 1.5em !important;
+    }
+    button {
+        font-size: 2.4em !important;
+        padding: 15px !important;
+        border-radius: 10px !important;
+    }
+    i {
+        margin: 15px;
+        font-size: 2em;
+    }
+    input {
+        font-size: 1.8em;
+    }
+    small {
+        font-size: 1.8rem;
+    }
+
+    input {
+        font-size: 1.2em;
+    }
+
+    #password-visibility {
+        font-size: 1.2em;
+        position: relative;
+        left: 10em;
+    }
+
+    .form-container.card.login-form {
+        margin-top: -1.5em;
+        margin-bottom: 0.5em;
+        height: 32em;
+    }
+
+    div.login-form h2.text-light {
+        margin-bottom: -0.6em;
     }
 }
