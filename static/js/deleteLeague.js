@@ -7,7 +7,9 @@ const deleteLeague = {
 
     clickOnDelete() {
         const deleteButton = document.querySelector("#delete-button");
-        deleteButton.addEventListener('click', this.deleteLeague)
+        if(deleteButton){
+            deleteButton.addEventListener('click', this.deleteLeague);
+        }
     },
 
     async deleteLeague(e) {
