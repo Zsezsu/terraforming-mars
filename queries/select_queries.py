@@ -98,7 +98,9 @@ def get_corporations(game_type_id):
         game_types_corporations_expansions
     LEFT JOIN corporations ON game_types_corporations_expansions.corporation_id = corporations.id
     WHERE 
-    game_types_corporations_expansions.game_type_id = {game_type_id};
+        game_types_corporations_expansions.game_type_id = {game_type_id}
+    ORDER BY
+        corporation_name;
     """
     return execute_select(SQL(query).format(
         game_type_id=Literal(game_type_id)
