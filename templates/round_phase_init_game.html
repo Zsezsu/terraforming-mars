@@ -27,7 +27,7 @@
         {% for player in players %}
             <label for="player{{ player.id }}">{{ player.username }}</label>
             <select class="corporations" id="player{{ player.id }}" name="player-{{ player.id }}" required>
-                <option value="">--Please select a Corporation--</option>
+                <option value="" selected disabled hidden>--Please select a Corporation--</option>
                 {% for corporation in game.corporations %}
                     <option
                             class="corporation"
