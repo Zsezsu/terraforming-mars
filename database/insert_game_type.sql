@@ -143,14 +143,17 @@ ALTER TABLE IF EXISTS ONLY public.boards
         fk_game_type_id FOREIGN KEY (game_type_id) REFERENCES game_types (id) ON DELETE CASCADE;
 
 -- UPDATE already added tearraforming mars's boards with terraforming mars's id
+DELETE
+FROM boards
+WHERE board_name = 'Basic' AND boards.game_type_id = (SELECT id FROM game_types WHERE name = 'Ares Expedition');
+
+-- INSERT new basic board to Ares
 UPDATE public.boards
 SET game_type_id = (SELECT id FROM game_types WHERE name = 'Terraforming Mars')
 WHERE boards.board_name = 'Basic'
    OR boards.board_name = 'Elysium'
    OR boards.board_name = 'Hellas';
 
-
--- INSERT new basic board to Ares
 INSERT INTO boards(board_name, game_type_id)
 VALUES ('Basic', (SELECT id FROM game_types WHERE name = 'Ares Expedition'));
 
