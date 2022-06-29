@@ -211,6 +211,7 @@ def get_logged_in_user_leagues(user_id):
         leagues.league_admin                                                AS  league_admin,
         leagues.round_number                                                AS  round_number,
         game_types.name                                                     AS  game_type_name,
+        game_types.id                                                       AS  game_type_id,
         array_length(league_players.players, 1)                             AS  player_number,
         COUNT(DISTINCT rounds.id) FILTER ( WHERE rounds.finished IS TRUE )  AS  finished_rounds,
         images.source                                                       AS  league_image_source
@@ -228,7 +229,7 @@ GROUP BY league_id) as league_players on league_players.league_id = leagues.id
     OR
        {user_id} = ANY(league_players.players)
     GROUP BY
-        leagues.id, images.source, league_players.players, game_types.name
+        leagues.id, images.source, league_players.players, game_types.name, game_types.id
     ORDER BY
         leagues.id DESC;
     """
