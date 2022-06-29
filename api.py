@@ -58,3 +58,11 @@ def create_league():
 @api.route('/api/user/name/<token>')
 def is_unique_token_exist(token):
     return jsonify(bool(select_queries.get_user_id(token)))
+
+
+@api.route('/api/leagues/<league_id>', methods=['DELETE'])
+def delete_league(league_id):
+    delete_queries.delete_league(league_id)
+    return 'OK'
+
+

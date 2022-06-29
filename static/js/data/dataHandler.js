@@ -22,6 +22,11 @@ export const dataHandler = {
     },
     saveResults: async function (leagueId, roundId, data) {
         return await apiPost(`/api/leagues/${leagueId}/rounds/${roundId}`, data)
+    },
+
+    //DELETE
+    deleteLeague: async function (leagueId) {
+        await apiDelete(`/api/leagues/${leagueId}`);
     }
 }
 
@@ -44,4 +49,10 @@ async function apiPost(url, payload) {
     if (response.ok) {
         return await response.json();
     }
+}
+
+async function apiDelete(url) {
+    await fetch(url, {
+        method: 'DELETE'
+    });
 }
