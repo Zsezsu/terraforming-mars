@@ -45,6 +45,16 @@ function toggleExpansionsCorporations() {
     expansionsCorporations.forEach((corporation) => {
         corporation.hidden = !this.checked;
     });
+    const corporations = document.querySelectorAll(`.corporations`);
+    corporations.forEach(
+        (corporation) => {
+            const selectedOption = corporation.selectedOptions[0];
+            const selectedOptionExpansionId = selectedOption.getAttribute("data-expansion-id");
+            if (selectedOption.value !== "" && selectedOptionExpansionId === expansionId) {
+                corporation.value = "";
+            }
+        }
+    )
 }
 
 function toggleSelectedCorporation() {
