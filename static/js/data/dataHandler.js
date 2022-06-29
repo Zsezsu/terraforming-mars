@@ -9,9 +9,6 @@ export const dataHandler = {
     getImages: async function(imageType) {
         return await apiGet(`/api/images/${imageType}`);
     },
-    getBoards: async function() {
-        return await apiGet(`/api/boards`);
-    },
     getIsTokenExist: async function(token) {
         return await apiGet(`/api/user/name/${token}`);
     },
