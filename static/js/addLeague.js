@@ -128,6 +128,7 @@ function refreshPlayersNumber() {
 const confirmLeague = async function () {
 
     const gameTypeId = document.querySelector('select#game-type').value;
+    const gameTypeName = document.querySelector('select#game-type').selectedOptions[0].innerText;
     if (!gameTypeId) {
         alert('Please select a game type');
         return;
@@ -174,14 +175,17 @@ const confirmLeague = async function () {
         toggleAddNewLeague();
         setTimeout(clearLeagueDiv, divTransition);
         const newLeagueId = await dataHandler.postNewLeague(data);
-        addNewLeagueCard(data, newLeagueId);
+        addNewLeagueCard(data, newLeagueId, gameTypeName);
     }
 }
 
 
-function addNewLeagueCard(data, newLeagueId) {
+function addNewLeagueCard(data, newLeagueId, gameTypeName) {
     const leagueDiv = document.querySelector('div#league-card-container');
-    const newLeagueDiv = `<div class="card league bg-dark" data-league-id="${newLeagueId['league_id']}" data-league-admin-id="${data.leagueAdminId}">
+    const newLeagueDiv = `<div class="card league bg-dark" 
+                            data-league-id="${newLeagueId['league_id']}" 
+                            data-league-admin-id="${data.leagueAdminId}" 
+                            data-league-type="${data['gameTypeId']}">
                 <a href="/league/${newLeagueId['league_id']}">
                     <img alt="mars" src="${data.selectedLeagueImageSource}">
                     <h3 class="text-light">${data.leagueName}</h3>
@@ -189,6 +193,9 @@ function addNewLeagueCard(data, newLeagueId) {
                 <div class="card-details">
                     <div class="detail-admin">
                         <i class="fa-solid fa-crown text-light"></i>
+                    </div>
+                    <div class="game_type">
+                        <small class="text-light">${gameTypeName}</small>
                     </div>
                     <div class="detail-players">
                         <small class="text-light">${data.userIds.length}</small>
