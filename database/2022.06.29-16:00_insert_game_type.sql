@@ -12,6 +12,9 @@ ALTER TABLE IF EXISTS ONLY public.game_types_corporations_expansions
 ALTER TABLE IF EXISTS ONLY public.game_types_corporations_expansions
     DROP CONSTRAINT IF EXISTS fk_corporation_id CASCADE;
 
+ALTER TABLE IF EXISTS ONLY public.leagues
+    DROP CONSTRAINT IF EXISTS fk_league_admin_id CASCADE;
+
 
 ---------------------------------------------Drop primary keys-----------------------------------------------------
 
@@ -121,6 +124,9 @@ ALTER TABLE IF EXISTS ONLY public.leagues
     ADD CONSTRAINT
         fk_game_type_id FOREIGN KEY (game_type_id) REFERENCES game_types (id) ON DELETE CASCADE;
 
+ALTER TABLE IF EXISTS public.leagues
+    ADD CONSTRAINT fk_league_admin_id FOREIGN KEY (league_admin) REFERENCES players (id);
+
 -- UPDATE already added leagues game type to terraforming mars's game type id
 UPDATE public.leagues
 SET game_type_id = (SELECT id FROM game_types WHERE name = 'Terraforming Mars')
@@ -145,7 +151,8 @@ ALTER TABLE IF EXISTS ONLY public.boards
 -- UPDATE already added tearraforming mars's boards with terraforming mars's id
 DELETE
 FROM boards
-WHERE board_name = 'Basic' AND boards.game_type_id = (SELECT id FROM game_types WHERE name = 'Ares Expedition');
+WHERE board_name = 'Basic'
+  AND boards.game_type_id = (SELECT id FROM game_types WHERE name = 'Ares Expedition');
 
 -- INSERT new basic board to Ares
 UPDATE public.boards
@@ -349,7 +356,7 @@ VALUES ((SELECT id FROM game_types WHERE name = 'Terraforming Mars'),
         (SELECT id FROM expansions WHERE expansion_name = 'Turmoil'),
         (SELECT id FROM corporations WHERE name = 'Utopia Invest'));
 
---TURMOIL CORPORATION'S RELATIONS--
+--PROMO CORPORATION'S RELATIONS--
 
 INSERT INTO game_types_corporations_expansions(game_type_id, expansion_id, corporation_id)
 VALUES ((SELECT id FROM game_types WHERE name = 'Terraforming Mars'),
