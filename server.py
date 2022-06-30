@@ -57,11 +57,17 @@ def league(league_id):
 def leagues():
     if session.get('UID'):
         uid = session.get('UID')
+        game_types = select_queries.get_game_types()
         logged_in_user = select_queries.get_logged_in_user(uid)
         logged_in_user_leagues = select_queries.get_logged_in_user_leagues(uid)
         username = session['USERNAME']
-        return render_template('my_leagues.html', logged_in_user=logged_in_user, leagues=logged_in_user_leagues,
-                               username=username)
+        return render_template(
+            'my_leagues.html',
+            game_types=game_types,
+            logged_in_user=logged_in_user,
+            leagues=logged_in_user_leagues,
+            username=username
+        )
     else:
         return redirect(url_for('login'))
 
@@ -121,29 +127,31 @@ def logout():
 @app.route('/league/<league_id>/round/<round_id>', methods=['GET'])
 def results(league_id=1, round_id=2):
     if session.get('UID'):
+        game_type = select_queries.get_game_type_by_league_id(league_id)
         round_data = select_queries.get_round_by_id(round_id)
         round_status = helper.get_round_status(round_data)
-        table_headers = helper.create_table_header()
+        table_headers = helper.create_table_header(game_type['name'])
         game_data, players_data, players_in_game, round_points = (None, None, None, None)
         username = session['USERNAME']
 
         if round_status == 'init_round':
             players_data = select_queries.get_round_players(league_id)
             game_data = {
-                "boards": select_queries.get_boards(),
-                "expansions": select_queries.get_expansions(),
-                "corporations": select_queries.get_corporations()
+                "boards": select_queries.get_boards(game_type['id']),
+                "expansions": select_queries.get_expansions(game_type['id']),
+                "corporations": select_queries.get_corporations(game_type['id'])
             }
 
         elif round_status == 'started':
             players_in_game = select_queries.get_players_in_round(round_id)
 
         elif round_status == 'finished':
-            round_points = select_queries.get_round_points(round_id)
+            round_points = select_queries.get_round_points(round_id, game_type['name'])
 
         else:
             return redirect('/')
         return render_template('round_details.html',
+                               game_type=game_type,
                                round_status=round_status,
                                round_points=round_points,
                                table_headers=table_headers,
@@ -171,8 +179,9 @@ def init_round(league_id, round_id):
 @app.route('/score/<league_id>')
 def score_board(league_id):
     if session.get('UID'):
-        player_scores = select_queries.get_player_scores(league_id)
-        header = helper.create_scoreboard_table_header()
+        game_type = select_queries.get_game_type_by_league_id(league_id)
+        player_scores = select_queries.get_player_scores(league_id, game_type['name'])
+        header = helper.create_scoreboard_table_header(game_type['name'])
         username = session['USERNAME']
         return render_template('scores.html', player_scores=player_scores, header=header, league_id=league_id,
                                username=username)

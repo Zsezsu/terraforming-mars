@@ -31,7 +31,7 @@ VALUES
     (5, 3, 1);
 
 INSERT INTO
-    points(round_id, player_id, tr_number, milestones_points,
+    mars_points(round_id, player_id, tr_number, milestones_points,
            award_points, number_of_own_greeneries, number_of_cities, greeneries_around_cities, vp_on_cards, sum_points)
 VALUES
     (1, 1,1, 44, 5, 5, 5, 2, 8, 12),
