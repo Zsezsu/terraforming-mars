@@ -41,7 +41,7 @@ def insert_round_points(round_id, round_data):
     BEGIN;
     
         INSERT INTO 
-            points(
+            mars_points(
                 round_id,
                 player_id,
                 tr_number,

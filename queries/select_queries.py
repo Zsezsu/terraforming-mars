@@ -112,29 +112,29 @@ def get_round_points(round_id):
     SELECT 
         players.username                    AS  username,
         corporations.name                   AS  corporation_name,
-        points.tr_number                    AS  tr_number,
-        points.milestones_points            AS  milestones_points,
-        points.award_points                 AS  award_points,
-        points.number_of_own_greeneries     AS  number_of_own_greeneries,
-        points.number_of_cities             AS  number_of_cities,
-        points.greeneries_around_cities     AS  greeneries_around_cities,
-        points.vp_on_cards                  AS  vp_on_cards,
-        points.mega_credits                 AS  mega_credits,
-        points.sum_points                   AS  sum_points
+        mars_points.tr_number                    AS  tr_number,
+        mars_points.milestones_points            AS  milestones_points,
+        mars_points.award_points                 AS  award_points,
+        mars_points.number_of_own_greeneries     AS  number_of_own_greeneries,
+        mars_points.number_of_cities             AS  number_of_cities,
+        mars_points.greeneries_around_cities     AS  greeneries_around_cities,
+        mars_points.vp_on_cards                  AS  vp_on_cards,
+        mars_points.mega_credits                 AS  mega_credits,
+        mars_points.sum_points                   AS  sum_points
         
     FROM
-        points
-    LEFT JOIN players           ON  points.player_id = players.id
+        mars_points
+    LEFT JOIN players           ON  mars_points.player_id = players.id
     LEFT JOIN round_players     ON  players.id = round_players.player_id
     LEFT JOIN corporations      ON  round_players.corporation_id = corporations.id
     WHERE
-        points.round_id = {round_id}
+        mars_points.round_id = {round_id}
         AND round_players.round_id = {round_id}
     ORDER BY
-        points.round_points DESC,
-        points.sum_points DESC,
-        points.mega_credits DESC,
-        points.vp_on_cards DESC,
+        mars_points.round_points DESC,
+        mars_points.sum_points DESC,
+        mars_points.mega_credits DESC,
+        mars_points.vp_on_cards DESC,
         players.id DESC;
     """
     return execute_select(SQL(query).format(round_id=Literal(round_id)))
