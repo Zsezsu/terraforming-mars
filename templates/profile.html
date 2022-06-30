@@ -36,7 +36,7 @@
                 <h3>Profile Details</h3>
                 {% for key in data %}
                     {% if key not in ['source', 'image_id'] %}
-                        <p>{{ key }}: <strong>{{ data[key] }}</strong></p>
+                        <p><em class="data-key">{{ key }}:</em> {{ data[key] }}</p>
                     {% endif %}
                 {% endfor %}
             </div>

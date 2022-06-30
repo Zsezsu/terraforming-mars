@@ -42,6 +42,11 @@
     padding: 50px;
 }
 
+.data-key {
+    color: lightgray;
+    margin: 0 10px;
+}
+
 input {
     border-radius: 5px;
 }
