@@ -301,11 +301,25 @@ def get_password(token):
         id, password
     FROM 
         players
-    WHERE 
+    WHERE
         username LIKE {token} OR email LIKE {token};
     """
     return execute_select(SQL(query).format(
         token=Literal(token)
+    ), fetchall=False)
+
+
+def get_password_by_id(player_id):
+    query = """
+    SELECT
+        id, password
+    FROM
+        players
+    WHERE
+        id = {player_id};
+    """
+    return execute_select(SQL(query).format(
+        player_id=Literal(player_id)
     ), fetchall=False)
 
 
