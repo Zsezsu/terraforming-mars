@@ -22,11 +22,14 @@ export const dataHandler = {
     },
 
     //PUT
-    updateProfilePicture: async function(playerId, imageId) {
+    updateProfilePicture: async function (playerId, imageId) {
         return await apiPut(
-            `/api/players/${playerId}`,
+            `/api/players/${playerId}/profile-picture`,
             {'imageId': imageId}
         );
+    },
+    updatePassword: async function (playerId, data) {
+        return await apiPut(`/api/players/${playerId}/password`, data);
     },
 
     //DELETE
@@ -57,14 +60,11 @@ async function apiPost(url, payload) {
 }
 
 async function apiPut(url, payload) {
-    const response = await fetch(url, {
+    return await fetch(url, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(payload)
     });
-    if (response.ok) {
-        return response.status;
-    }
 }
 
 async function apiDelete(url) {
