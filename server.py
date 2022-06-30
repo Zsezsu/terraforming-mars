@@ -146,7 +146,7 @@ def results(league_id=1, round_id=2):
             players_in_game = select_queries.get_players_in_round(round_id)
 
         elif round_status == 'finished':
-            round_points = select_queries.get_round_points(round_id)
+            round_points = select_queries.get_round_points(round_id, game_type['name'])
 
         else:
             return redirect('/')
@@ -180,7 +180,7 @@ def init_round(league_id, round_id):
 def score_board(league_id):
     if session.get('UID'):
         game_type = select_queries.get_game_type_by_league_id(league_id)
-        player_scores = select_queries.get_player_scores(league_id)
+        player_scores = select_queries.get_player_scores(league_id, game_type['name'])
         header = helper.create_scoreboard_table_header(game_type['name'])
         username = session['USERNAME']
         return render_template('scores.html', player_scores=player_scores, header=header, league_id=league_id,

@@ -35,37 +35,66 @@ def init_round(round_details, round_id):
     ))
 
 
-def insert_round_points(round_id, round_data):
-    round_points_values = helper.insert_point_values(round_id, round_data)
-    query = """
-    BEGIN;
-    
-        INSERT INTO 
-            mars_points(
-                round_id,
-                player_id,
-                tr_number,
-                milestones_points,
-                award_points,
-                number_of_own_greeneries,
-                number_of_cities,
-                greeneries_around_cities,
-                vp_on_cards,
-                mega_credits,
-                sum_points,
-                round_points
-            )
-        VALUES 
-            {round_points_values};
+def insert_round_points(round_id, round_data, game_type_name):
+    round_points_values = helper.insert_point_values(round_id, round_data, game_type_name)
+    query = None
+    if game_type_name == 'Terraforming Mars':
+        query = """
+        BEGIN;
         
-        UPDATE 
-            rounds
-        SET
-            finished = TRUE
-        WHERE 
-            rounds.id = {round_id};
-    COMMIT;
-    """
+            INSERT INTO 
+                mars_points(
+                    round_id,
+                    player_id,
+                    tr_number,
+                    milestones_points,
+                    award_points,
+                    number_of_own_greeneries,
+                    number_of_cities,
+                    greeneries_around_cities,
+                    vp_on_cards,
+                    mega_credits,
+                    sum_points,
+                    round_points
+                )
+            VALUES 
+                {round_points_values};
+            
+            UPDATE 
+                rounds
+            SET
+                finished = TRUE
+            WHERE 
+                rounds.id = {round_id};
+        COMMIT;
+        """
+    elif game_type_name == 'Ares Expedition':
+        query = """
+        INSERT INTO 
+                ares_points(
+                    round_id,
+                    player_id,
+                    tr_number,
+                    number_of_own_greeneries,
+                    vp_on_cards,
+                    mega_credits,
+                    sum_points,
+                    round_points
+                )
+            VALUES 
+                {round_points_values};
+            
+            UPDATE 
+                rounds
+            SET
+                finished = TRUE
+            WHERE 
+                rounds.id = {round_id};
+        COMMIT;
+        """
+    else:
+        raise AttributeError('No such game type in database: ' + game_type_name)
+
     execute_insert(SQL(query).format(
         round_points_values=SQL(round_points_values),
         round_id=Literal(round_id)

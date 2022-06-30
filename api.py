@@ -11,7 +11,8 @@ api = Blueprint('api', __name__, template_folder='templates')
 @api.route('/api/leagues/<league_id>/rounds/<round_id>', methods=['POST'])
 def save_round_points(league_id, round_id):
     round_data = json.loads(request.data)
-    insert_queries.insert_round_points(round_id, round_data)
+    game_type = select_queries.get_game_type_by_league_id(league_id)
+    insert_queries.insert_round_points(round_id, round_data, game_type['name'])
     return jsonify('')
 
 

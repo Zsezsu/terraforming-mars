@@ -96,13 +96,33 @@ def init_round_players_values(round_id, players):
     return values
 
 
-def insert_point_values(round_id, round_data):
+def insert_point_values(round_id, round_data, game_type_name):
+    if game_type_name == 'Terraforming Mars':
+        point_types = [
+            'tr_number',
+            'milestones_points',
+            'award_points',
+            'number_of_own_greeneries',
+            'number_of_cities',
+            'greeneries_around_cities',
+            'vp_on_cards',
+            'mega_credits'
+        ]
+    elif game_type_name == 'Ares Expedition':
+        point_types = [
+            'tr_number',
+            'number_of_own_greeneries',
+            'vp_on_cards',
+            'mega_credits'
+        ]
+    else:
+        raise AttributeError('No such game type in database: ' + game_type_name)
     round_points = count_round_points(round_data)
     values = ''
     for index in range(len(round_data)):
         player = round_data[index]
         separator = ', ' if index < len(round_data) - 1 else ''
-        points = add_points(player['points'])
+        points = add_points(player['points'], point_types)
         player_id = player["playerId"]
         player_round_point = round_points[player_id]
         values += f'({round_id}, {player_id}, {points}{player["total"]}, {player_round_point}){separator}'
@@ -139,17 +159,7 @@ def count_round_points(round_data):
     return points
 
 
-def add_points(points):
-    point_types = [
-        'tr_number',
-        'milestones_points',
-        'award_points',
-        'number_of_own_greeneries',
-        'number_of_cities',
-        'greeneries_around_cities',
-        'vp_on_cards',
-        'mega_credits'
-    ]
+def add_points(points, point_types):
     point_query_values = ''
     for index in range(len(points)):
         value = points[point_types[index]]
