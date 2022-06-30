@@ -1,32 +1,55 @@
-def create_table_header():
-    return [
-        'TR number',
-        'Milestone points',
-        'Award points',
-        'Greeneries',
-        'Cities',
-        'Greeneries around cities',
-        'Victory points',
-        'M€'
-    ]
+def create_table_header(game_type_name):
+    if game_type_name == 'Terraforming Mars':
+        return [
+            'TR number',
+            'Milestone points',
+            'Award points',
+            'Greeneries',
+            'Cities',
+            'Greeneries around cities',
+            'Victory points',
+            'M€'
+        ]
+    elif game_type_name == 'Ares Expedition':
+        return [
+            'TR number',
+            'Greeneries',
+            'Victory points',
+            'M€'
+        ]
+    else:
+        raise AttributeError('No such game type in database: ' + game_type_name)
 
 
-def create_scoreboard_table_header():
-    return [
-        'Place',
-        'Player',
-        'Round points',
-        'Total points',
-        'Total M€',
-        'Total TR points',
-        'Total milestones points',
-        'Total award points',
-        'Total greeneries',
-        'Total cities',
-        'Total greeneries around cities',
-        'Total victory points',
-
-    ]
+def create_scoreboard_table_header(game_type_name):
+    if game_type_name == 'Terraforming Mars':
+        return [
+            'Place',
+            'Player',
+            'Round points',
+            'Total points',
+            'Total M€',
+            'Total TR points',
+            'Total milestones points',
+            'Total award points',
+            'Total greeneries',
+            'Total cities',
+            'Total greeneries around cities',
+            'Total victory points'
+        ]
+    elif game_type_name == 'Ares Expedition':
+        return [
+            'Place',
+            'Player',
+            'Round points',
+            'Total points',
+            'Total M€',
+            'Total award points',
+            'Total greeneries',
+            'Total victory points'
+        ]
+    else:
+        raise AttributeError('No such game type in database: ' + game_type_name)
 
 
 def get_round_status(round):
@@ -98,7 +121,9 @@ def count_round_points(round_data):
                               int(player['points']['mega_credits']),
                               int(player['points']['tr_number']),
                               int(player['points']['vp_on_cards'])))
-    player_points.sort(key=lambda player_point: (player_point[1], player_point[2], player_point[3], player_point[4], player_point[0]), reverse=True)
+    player_points.sort(
+        key=lambda player_point: (player_point[1], player_point[2], player_point[3], player_point[4], player_point[0]),
+        reverse=True)
     points = {}
     number_of_players = len(player_points)
     for index in range(number_of_players):

@@ -130,7 +130,7 @@ def results(league_id=1, round_id=2):
         game_type = select_queries.get_game_type_by_league_id(league_id)
         round_data = select_queries.get_round_by_id(round_id)
         round_status = helper.get_round_status(round_data)
-        table_headers = helper.create_table_header()
+        table_headers = helper.create_table_header(game_type['name'])
         game_data, players_data, players_in_game, round_points = (None, None, None, None)
         username = session['USERNAME']
 
@@ -179,8 +179,9 @@ def init_round(league_id, round_id):
 @app.route('/score/<league_id>')
 def score_board(league_id):
     if session.get('UID'):
+        game_type = select_queries.get_game_type_by_league_id(league_id)
         player_scores = select_queries.get_player_scores(league_id)
-        header = helper.create_scoreboard_table_header()
+        header = helper.create_scoreboard_table_header(game_type['name'])
         username = session['USERNAME']
         return render_template('scores.html', player_scores=player_scores, header=header, league_id=league_id,
                                username=username)
