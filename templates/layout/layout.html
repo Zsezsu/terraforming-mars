@@ -56,6 +56,10 @@
                         <a class="nav-link {% block nav_games %}{% endblock %}" href="{{ url_for('leagues') }}">My
                             Leagues</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% block nav_profile %}{% endblock %}"
+                           href="{{ url_for('profile') }}">Profile</a>
+                    </li>
                 </ul>
                 <span class="navbar-text"><small>Logged in as <em>{{ username }}</em></small></span>
                 <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
