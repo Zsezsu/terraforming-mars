@@ -10,7 +10,7 @@
 
 {% block scripts %}
     <script src="{{ url_for('static', filename='js/profileSlideshow.js') }}" type="module" defer></script>
-    <script src="{{ url_for('static', filename='js/profile.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/profile.js') }}" type="module" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -29,7 +29,7 @@
                     <i class="fa-solid fa-angle-right text-light slideshow-btn slideshow-next"></i>
                 </div>
             </div>
-            <button id="save-picture" class="btn btn-light">Save</button>
+            <button id="update-profile-picture" class="btn btn-light">Save</button>
         </div>
         <div id="profile-data">
             <div class="card profile-data-item">
