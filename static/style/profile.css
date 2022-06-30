@@ -11,7 +11,10 @@
 }
 
 #profile-container {
-    color: white;
+    background-color: var(--dark-card-color);
+    border-radius: var(--card-border-radius);
+    height: auto;
+    padding: 20px;
 }
 
 #save-picture {
