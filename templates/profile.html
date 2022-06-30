@@ -8,17 +8,28 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/profile.css') }}">
 {% endblock %}
 
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/registrationSlideshow.js') }}" type="module" defer></script>
+{% endblock %}
+
 {% block content %}
     <h1 class="text-center text-light">Profile</h1>
     <p class="text-light breadcrumb">
         <a href="{{ url_for('dashboard') }}">Home</a> <small> > </small>
         <small>Profile</small>
     </p>
-    <div id="data-container">
-        <img src={{ url_for('static', filename=data.source) }}>
-        <p id="username-text" class="text-light">{{ data.username }}</p>
-        <p id="firstname-lastname" class="text-light">{{ data.first_name + ' ' + data.last_name}}</p>
-        <p id="user-email" class="text-light">{{ data.email }}</p>
+    <div id="data-container" class="cards">
+        <div id="profile-picture" class="card">
+            <div class="slideshow" id="slideshow-profile-picture">
+                <h2 class="text-light">Change profile picture</h2>
+                <div class="text-light">
+                    <img alt="slideshow image" src="/static/img/player_icons/player-card-1.webp" id="slideshow-profile"
+                         data-image-id="7">
+                    <i class="fa-solid fa-angle-left text-light slideshow-btn slideshow-prev"></i>
+                    <i class="fa-solid fa-angle-right text-light slideshow-btn slideshow-next"></i>
+                </div>
+            </div>
+        </div>
     </div>
 
 {% endblock %}

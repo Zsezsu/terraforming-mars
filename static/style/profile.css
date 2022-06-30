@@ -1,3 +1,11 @@
 #profile-picture {
-    margin: 15px;
+    padding: 50px;
+    height: auto;
+    width: 40%;
+    color: white;
+    text-align: center;
+}
+
+#slideshow-profile-picture {
+    width: 100%;
 }
