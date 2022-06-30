@@ -339,7 +339,12 @@ def get_pictures():
 def get_user_data(uid):
     query = """
     SELECT 
-        username, first_name, last_name, email, source 
+        username,
+        first_name,
+        last_name,
+        email,
+        images.source AS source,
+        images.id AS image_id
     FROM 
         players
     JOIN 
