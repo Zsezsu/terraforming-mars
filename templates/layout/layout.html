@@ -61,7 +61,7 @@
                            href="{{ url_for('profile') }}">Profile</a>
                     </li>
                 </ul>
-                <span class="navbar-text"><small>Logged in as <em>{{ username }}</em></small></span>
+                <span id="username" class="navbar-text" data-user-id="{{ user_id }}"><small>Logged in as <em>{{ username }}</em></small></span>
                 <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
             </div>
         </div>
