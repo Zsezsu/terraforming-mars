@@ -13,3 +13,15 @@ def update_profile_picture(player_id, image_id):
         player_id=Literal(player_id),
         image_id=Literal(image_id)
     ))
+
+
+def update_password(player_id, new_password):
+    query = """
+    UPDATE players
+    SET password = {new_password}
+    WHERE id = {player_id}
+    """
+    execute_update(SQL(query).format(
+        player_id=Literal(player_id),
+        new_password=Literal(new_password)
+    ))
