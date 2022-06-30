@@ -9,3 +9,11 @@
 #slideshow-profile-picture {
     width: 100%;
 }
+
+#profile-container {
+    color: white;
+}
+
+#save-picture {
+    margin: 0 5%;
+}
