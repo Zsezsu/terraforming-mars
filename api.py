@@ -38,7 +38,6 @@ def send_league_images():
 @api.route('/api/images/profile-pictures')
 def get_profile_pictures():
     profile_pictures = select_queries.get_pictures()
-    print(profile_pictures)
     return jsonify(profile_pictures)
 
 
@@ -61,3 +60,10 @@ def delete_league(league_id):
     return 'OK'
 
 
+@api.route('/api/players/<player_id>', methods=['PUT'])
+def update_profile_picture(player_id):
+    player_id = int(player_id)
+    data = json.loads(request.data)
+    image_id = data['imageId']
+    update_queries.update_profile_picture(player_id, image_id)
+    return {'status': 200}
