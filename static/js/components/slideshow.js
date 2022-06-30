@@ -13,8 +13,8 @@ export const imageData = {
     currentIndex: 0
 }
 
-export async function slideshow(imageType) {
-    await initSlideshow(imageType);
+export async function slideshow(imageType, searchForIndex) {
+    await initSlideshow(imageType, searchForIndex);
     changeImage();
     const previousButton = document.querySelector('.slideshow-prev');
     const nextButton = document.querySelector('.slideshow-next');
@@ -22,10 +22,19 @@ export async function slideshow(imageType) {
     nextButton.addEventListener('click', nextImage);
 }
 
-async function initSlideshow(imageType) {
+async function initSlideshow(imageType, searchForIndex) {
     images = await dataHandler.getImages(imageType);
     imageData.imageElement = document.querySelector('.slideshow img');
     imageData.maxIndex = images.length;
+    if (searchForIndex) {
+        const imageId = parseInt(imageData.imageElement.getAttribute("data-image-id"));
+        for (let i = 0; i < images.length; i++) {
+            if (images[i]['id'] === imageId) {
+                imageData.currentIndex = i;
+                return;
+            }
+        }
+    }
 }
 
 export function changeImage() {
