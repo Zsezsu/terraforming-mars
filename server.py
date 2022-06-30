@@ -127,6 +127,7 @@ def logout():
 @app.route('/league/<league_id>/round/<round_id>', methods=['GET'])
 def results(league_id=1, round_id=2):
     if session.get('UID'):
+        game_type = select_queries.get_game_type_by_league_id(league_id)
         round_data = select_queries.get_round_by_id(round_id)
         round_status = helper.get_round_status(round_data)
         table_headers = helper.create_table_header()
@@ -135,11 +136,10 @@ def results(league_id=1, round_id=2):
 
         if round_status == 'init_round':
             players_data = select_queries.get_round_players(league_id)
-            game_type_id = select_queries.get_game_type_by_league_id(league_id)['game_type_id']
             game_data = {
-                "boards": select_queries.get_boards(game_type_id),
-                "expansions": select_queries.get_expansions(game_type_id),
-                "corporations": select_queries.get_corporations(game_type_id)
+                "boards": select_queries.get_boards(game_type['id']),
+                "expansions": select_queries.get_expansions(game_type['id']),
+                "corporations": select_queries.get_corporations(game_type['id'])
             }
 
         elif round_status == 'started':
@@ -151,6 +151,7 @@ def results(league_id=1, round_id=2):
         else:
             return redirect('/')
         return render_template('round_details.html',
+                               game_type=game_type,
                                round_status=round_status,
                                round_points=round_points,
                                table_headers=table_headers,

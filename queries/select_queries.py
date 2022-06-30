@@ -338,10 +338,13 @@ def get_game_types():
 def get_game_type_by_league_id(league_id):
     query = """
     SELECT 
-        game_type_id 
+        game_types.id           AS id,
+        game_types.name         AS name
     FROM 
-        leagues
-    WHERE id = {league_id};
+        game_types
+    LEFT JOIN leagues ON leagues.game_type_id = game_types.id
+    WHERE 
+        leagues.id = {league_id};
     """
     return execute_select(SQL(query).format(
         league_id=Literal(league_id)
