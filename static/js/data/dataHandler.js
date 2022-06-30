@@ -48,6 +48,16 @@ async function apiPost(url, payload) {
     }
 }
 
+async function apiPut(url, payload) {
+    await fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    });
+}
+
 async function apiDelete(url) {
     await fetch(url, {
         method: 'DELETE'
