@@ -1,0 +1,1 @@
+ALTER TABLE IF EXISTS public.points RENAME TO mars_points;
