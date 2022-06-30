@@ -1,3 +1,8 @@
+:root {
+    --light-card-color: #383d44 !important;
+    --dark-card-color: #181b1e !important;
+}
+
 body {
     font-family: 'Enter Sansman', sans-serif;
 }
