@@ -1,4 +1,6 @@
-from flask import Blueprint, Flask, request, redirect, session, jsonify, json
+import flask
+from flask import Blueprint, Flask, request, redirect, session, jsonify, json, make_response
+import profile_manager as pm
 
 import queries.insert_queries as insert_queries
 import queries.select_queries as select_queries
@@ -60,10 +62,23 @@ def delete_league(league_id):
     return 'OK'
 
 
-@api.route('/api/players/<player_id>', methods=['PUT'])
+@api.route('/api/players/<player_id>/profile-picture', methods=['PUT'])
 def update_profile_picture(player_id):
-    player_id = int(player_id)
     data = json.loads(request.data)
     image_id = data['imageId']
     update_queries.update_profile_picture(player_id, image_id)
-    return {'status': 200}
+    return flask.make_response('OK', 200)
+
+
+@api.route('/api/players/<player_id>/password', methods=['PUT'])
+def update_password(player_id):
+    data = json.loads(request.data)
+    old_password = data['oldPassword']
+    hashed_old_password = select_queries.get_password_by_id(player_id)['password']
+    if not pm.verify_password(old_password, hashed_old_password):
+        return flask.make_response('Invalid old password!', 401)
+
+    new_password = data['newPassword']
+    hashed_new_password = pm.hash_password(new_password)
+    update_queries.update_password(player_id, hashed_new_password)
+    return flask.make_response('OK', 200)
