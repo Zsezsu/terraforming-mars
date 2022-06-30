@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block scripts %}
-    <script src="{{ url_for('static', filename='js/registrationSlideshow.js') }}" type="module" defer></script>
+    <script src="{{ url_for('static', filename='js/profileSlideshow.js') }}" type="module" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -22,8 +22,8 @@
             <div class="slideshow" id="slideshow-profile-picture">
                 <h2 class="text-light">Change profile picture</h2>
                 <div class="text-light">
-                    <img alt="slideshow image" src="/static/img/player_icons/player-card-1.webp" id="slideshow-profile"
-                         data-image-id="7">
+                    <img alt="slideshow image" src="static/{{ data['source'] }}" id="slideshow-profile"
+                         data-image-id="{{ data['image_id'] }}">
                     <i class="fa-solid fa-angle-left text-light slideshow-btn slideshow-prev"></i>
                     <i class="fa-solid fa-angle-right text-light slideshow-btn slideshow-next"></i>
                 </div>
