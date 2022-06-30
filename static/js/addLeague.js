@@ -173,10 +173,15 @@ const confirmLeague = async function () {
             'selectedLeagueImageSource': selectedLeagueImageSource
         }
         toggleAddNewLeague();
+        removeLeagueDivMessages();
         setTimeout(clearLeagueDiv, divTransition);
         const newLeagueId = await dataHandler.postNewLeague(data);
         addNewLeagueCard(data, newLeagueId, gameTypeName);
     }
+}
+
+function removeLeagueDivMessages() {
+    document.querySelectorAll('.no-league').forEach((message) => {message.remove()});
 }
 
 

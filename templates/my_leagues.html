@@ -71,54 +71,59 @@
     </div>
 
     <div>
-    <label class="text-light" for="filter-game-type">Filter by game type: </label>
+        <label class="text-light" for="filter-game-type">Filter by game type: </label>
         <select id="filter-game-type">
-        <option value="all">Show all type of games</option>
+            <option value="all">Show all type of games</option>
             {% for game_type in game_types %}
                 <option value="{{ game_type.id }}">{{ game_type.name }}</option>
             {% endfor %}
         </select>
     </div>
     <div id="league-card-container" class="leagues cards">
-        {% for league in leagues %}
-            {% set league_id = league['id'] %}
-            {% set league_name = league['league_name'] %}
-            {% set league_admin_id = league['league_admin'] %}
-            {% set number_of_rounds = league['round_number'] | int %}
-            {% set player_number = league['player_number'] %}
-            {% set finished_rounds = league['finished_rounds'] | int %}
-            {% set img_source = league['league_image_source'] %}
-            {% set finished_league = number_of_rounds == finished_rounds %}
-            {% set admin = league_admin_id | int == logged_in_user['id'] | int %}
-            {% set game_type_name = league.game_type_name %}
+        {% if leagues  | length == 0 %}
+            <h2 class="text-light no-league">You don't have any league yet!</h2>
+        {% else %}
+            {% for league in leagues %}
+                {% set league_id = league['id'] %}
+                {% set league_name = league['league_name'] %}
+                {% set league_admin_id = league['league_admin'] %}
+                {% set number_of_rounds = league['round_number'] | int %}
+                {% set player_number = league['player_number'] %}
+                {% set finished_rounds = league['finished_rounds'] | int %}
+                {% set img_source = league['league_image_source'] %}
+                {% set finished_league = number_of_rounds == finished_rounds %}
+                {% set admin = league_admin_id | int == logged_in_user['id'] | int %}
+                {% set game_type_name = league.game_type_name %}
 
-            <div class="card league bg-dark" data-league-id="{{ league_id }}"
-                 data-league-admin-id="{{ league_admin_id }}"
-                data-league-type="{{ league.game_type_id }}">
-                <a href="{{ url_for('league', league_id=league_id) }}">
-                    <img alt="mars" src="{{ url_for('static', filename=img_source) }}">
-                    <h3 class="text-light">{{ league_name }}</h3>
-                </a>
-                <div class="card-details">
-                    {% if admin %}
-                        <div class="detail-admin">
-                            <i class="fa-solid fa-crown text-light"></i>
+                <div class="card league bg-dark" data-league-id="{{ league_id }}"
+                     data-league-admin-id="{{ league_admin_id }}"
+                     data-league-type="{{ league.game_type_id }}">
+                    <a href="{{ url_for('league', league_id=league_id) }}">
+                        <img alt="mars" src="{{ url_for('static', filename=img_source) }}">
+                        <h3 class="text-light">{{ league_name }}</h3>
+                    </a>
+                    <div class="card-details">
+                        {% if admin %}
+                            <div class="detail-admin">
+                                <i class="fa-solid fa-crown text-light"></i>
+                            </div>
+                        {% endif %}
+                        <div class="game_type">
+                            <small class="text-light">{{ game_type_name }}</small>
                         </div>
-                    {% endif %}
-                    <div class="game_type">
-                        <small class="text-light">{{ game_type_name }}</small>
-                    </div>
-                    <div class="detail-players">
-                        <small class="text-light">{{ player_number }}</small>
-                        <i class="fa-solid fa-user-astronaut text-light"></i>
-                    </div>
-                    <div class="detail-rounds">
-                        <small class="text-light">{{ finished_rounds }} / {{ number_of_rounds }}</small>
-                        <i class="fa-solid {{ 'fa-circle-check' if finished_league else 'fa-rocket' }} text-light"></i>
+                        <div class="detail-players">
+                            <small class="text-light">{{ player_number }}</small>
+                            <i class="fa-solid fa-user-astronaut text-light"></i>
+                        </div>
+                        <div class="detail-rounds">
+                            <small class="text-light">{{ finished_rounds }} / {{ number_of_rounds }}</small>
+                            <i class="fa-solid {{ 'fa-circle-check' if finished_league else 'fa-rocket' }} text-light"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        {% endif %}
+
 
     </div>
 
