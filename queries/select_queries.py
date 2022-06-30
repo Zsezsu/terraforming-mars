@@ -301,11 +301,25 @@ def get_password(token):
         id, password
     FROM 
         players
-    WHERE 
+    WHERE
         username LIKE {token} OR email LIKE {token};
     """
     return execute_select(SQL(query).format(
         token=Literal(token)
+    ), fetchall=False)
+
+
+def get_password_by_id(player_id):
+    query = """
+    SELECT
+        id, password
+    FROM
+        players
+    WHERE
+        id = {player_id};
+    """
+    return execute_select(SQL(query).format(
+        player_id=Literal(player_id)
     ), fetchall=False)
 
 
@@ -339,7 +353,12 @@ def get_pictures():
 def get_user_data(uid):
     query = """
     SELECT 
-        username, first_name, last_name, email, source 
+        username,
+        first_name,
+        last_name,
+        email,
+        images.source AS source,
+        images.id AS image_id
     FROM 
         players
     JOIN 

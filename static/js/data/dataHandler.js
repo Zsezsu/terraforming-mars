@@ -21,6 +21,17 @@ export const dataHandler = {
         return await apiPost(`/api/leagues/${leagueId}/rounds/${roundId}`, data)
     },
 
+    //PUT
+    updateProfilePicture: async function (playerId, imageId) {
+        return await apiPut(
+            `/api/players/${playerId}/profile-picture`,
+            {'imageId': imageId}
+        );
+    },
+    updatePassword: async function (playerId, data) {
+        return await apiPut(`/api/players/${playerId}/password`, data);
+    },
+
     //DELETE
     deleteLeague: async function (leagueId) {
         await apiDelete(`/api/leagues/${leagueId}`);
@@ -46,6 +57,14 @@ async function apiPost(url, payload) {
     if (response.ok) {
         return await response.json();
     }
+}
+
+async function apiPut(url, payload) {
+    return await fetch(url, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+    });
 }
 
 async function apiDelete(url) {
