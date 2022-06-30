@@ -12,6 +12,9 @@ const filter = {
 
     filterEventListener(){
         let cards = document.querySelectorAll('.card.league');
+        let leagueStatus = document.querySelector('#filter-statuses');
+        let statusValue = leagueStatus.options[leagueStatus.selectedIndex].value;
+        //TODO have to check statusValue for displaying cards
         for (let card of cards){
             if (this.value === 'all'){
                 card.hidden = false;
@@ -28,6 +31,7 @@ const filter = {
 
     filterByStatuses(){
         let cards = document.querySelectorAll('.card.league');
+        //TODO need a leagueValue for displaying cards
         for (let card of cards){
             if (this.value === 'all'){
                 card.hidden = false;
