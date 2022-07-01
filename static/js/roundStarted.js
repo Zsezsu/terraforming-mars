@@ -62,7 +62,7 @@ async function saveRound() {
             let resultPoints = {};
             let pointsTypes = null;
             switch (gameTypeName) {
-                case 'Terraformin Mars':
+                case 'Terraforming Mars':
                     pointsTypes = gamePointsTypes.mars;
                     break
                 case 'Ares Expedition':
