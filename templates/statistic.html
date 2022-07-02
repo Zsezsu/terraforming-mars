@@ -1,0 +1,19 @@
+{% extends 'layout/layout.html' %}
+
+{% block title %}Statistics{% endblock %}
+
+{% block nav_statistic %}active{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/statistic.css') }}">
+{% endblock %}
+
+{% block scripts %}
+{#javascript scripts goes here#}
+{% endblock %}
+
+{% block content %}
+<div class="statistics">
+<h1 class="text-light">Statistics goes here</h1>
+</div>
+{% endblock %}
