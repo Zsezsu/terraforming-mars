@@ -5,15 +5,19 @@
 {% block nav_statistic %}active{% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/statistic.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/statistic.css') }}">
 {% endblock %}
 
 {% block scripts %}
-{#javascript scripts goes here#}
+    {#javascript scripts goes here#}
 {% endblock %}
 
 {% block content %}
-<div class="statistics">
-<h1 class="text-light">Statistics goes here</h1>
-</div>
+    <div class="statistics">
+        <h1 class="text-light">Statistics goes here</h1>
+        <div class="card player-statistic text-light">
+            <P>player name</P>
+            <p>played rounds</p>
+        </div>
+    </div>
 {% endblock %}
