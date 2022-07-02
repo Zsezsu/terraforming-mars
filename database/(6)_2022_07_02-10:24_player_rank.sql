@@ -58,3 +58,33 @@ VALUES ('Space Traveller', 1, 0),
        ('President', 8, 100),
        ('League Master', 9, 120),
        ('League Grand Master', 10, 150);
+
+
+
+-------------------------------------------------UPDATE player ranks--------------------------------------------------
+--CREATE function what updates the players rank, if player has round points
+CREATE OR REPLACE FUNCTION update_rank_level_id(update_player_id INTEGER) RETURNS INT
+    LANGUAGE SQL AS
+$$
+WITH total_player_points AS (SELECT SUM(public.mars_points.round_points) AS total_points
+                             FROM public.mars_points
+                                      LEFT JOIN players ON mars_points.player_id = players.id
+                             WHERE public.mars_points.player_id = update_player_id
+                             GROUP BY players.id)
+SELECT id
+FROM ranks,
+     total_player_points
+WHERE minimum_points < total_player_points.total_points
+ORDER BY rank_level DESC
+LIMIT 1;
+$$;
+
+--UPDATE players' ranks whose had started round(s) before
+UPDATE players
+SET ranks_id = update_rank_level_id(players.id)
+WHERE ranks_id IS NULL;
+
+--UPDATE players' ranks whose hadn't started round(s) before
+UPDATE players
+SET ranks_id = DEFAULT
+WHERE ranks_id IS NULL;
