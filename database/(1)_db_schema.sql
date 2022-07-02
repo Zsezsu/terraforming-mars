@@ -163,6 +163,7 @@ CREATE TABLE points
     number_of_cities         INTEGER,
     greeneries_around_cities INTEGER,
     vp_on_cards              INTEGER,
+    mega_credits             INTEGER,
     sum_points               INTEGER,
     round_points             INTEGER
 );
@@ -229,7 +230,7 @@ ALTER TABLE IF EXISTS ONLY public.points            ADD CONSTRAINT
     fk_round_id       FOREIGN KEY (round_id)        REFERENCES rounds (id) ON DELETE CASCADE;
 
 ALTER TABLE IF EXISTS ONLY public.points            ADD CONSTRAINT
-    fk_player_id      FOREIGN KEY (player_id)       REFERENCES round_players (id) ON DELETE CASCADE;
+    fk_player_id      FOREIGN KEY (player_id)       REFERENCES players (id) ON DELETE CASCADE;
 
 
 

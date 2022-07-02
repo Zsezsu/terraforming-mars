@@ -1,0 +1,54 @@
+{% extends 'layout/layout.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block nav_profile %}active{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/profile.css') }}">
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/profileSlideshow.js') }}" type="module" defer></script>
+    <script src="{{ url_for('static', filename='js/profile.js') }}" type="module" defer></script>
+{% endblock %}
+
+{% block content %}
+    <p class="text-light breadcrumb">
+        <a href="{{ url_for('dashboard') }}">Home</a> > Profile
+    </p>
+    <h1 class="text-center text-light">Profile</h1>
+    <div id="profile-container" class="cards">
+        <div id="profile-picture" class="card">
+            <div class="slideshow" id="slideshow-profile-picture">
+                <h2 class="text-light">Change profile picture</h2>
+                <div class="text-light">
+                    <img alt="slideshow image" src="static/{{ data['source'] }}" id="slideshow-profile"
+                         data-image-id="{{ data['image_id'] }}">
+                    <i class="fa-solid fa-angle-left text-light slideshow-btn slideshow-prev"></i>
+                    <i class="fa-solid fa-angle-right text-light slideshow-btn slideshow-next"></i>
+                </div>
+            </div>
+            <button id="update-profile-picture" class="btn btn-light">Save</button>
+        </div>
+        <div id="profile-data">
+            <div class="card profile-data-item">
+                <h3>Profile Details</h3>
+                {% for key in data %}
+                    {% if key not in ['source', 'image_id'] %}
+                        <p><em class="data-key">{{ key }}:</em> {{ data[key] }}</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="card profile-data-item">
+                <h3>Change password</h3>
+                <label for="old-password">Old password</label>
+                <input type="password" id="old-password" name="old-password">
+                <label for="new-password">New password</label>
+                <input type="password" id="new-password" name="old-password">
+                <button id="update-password" class="btn btn-light">Change password</button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

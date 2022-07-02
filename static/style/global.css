@@ -1,3 +1,9 @@
+:root {
+    --light-card-color: #383d44;
+    --dark-card-color: #181b1e;
+    --card-border-radius: 15px;
+}
+
 body {
     font-family: 'Enter Sansman', sans-serif;
 }

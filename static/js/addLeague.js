@@ -127,50 +127,70 @@ function refreshPlayersNumber() {
 
 const confirmLeague = async function () {
 
+    const gameTypeId = document.querySelector('select#game-type').value;
+    const gameTypeName = document.querySelector('select#game-type').selectedOptions[0].innerText;
+    if (!gameTypeId) {
+        alert('Please select a game type');
+        return;
+    }
+
     const leagueName = document.querySelector('input[name="league-name"]').value;
+    if (!leagueName) {
+        alert('League name required');
+        return;
+    }
+
     const leagueRounds = document.querySelector('input[name="league-rounds"]').value;
+    const minRounds = 1;
+    const maxRounds = 10;
+    if (!(+leagueRounds >= minRounds && +leagueRounds <= maxRounds)) {
+        alert(`League round(${leagueRounds}) has to be between ${minRounds}-${maxRounds}`);
+        return;
+    }
+
     const selectedPlayers = document.querySelector('div#selected-players').children;
+    const minPlayers = 1;
+    const maxPlayers = 5;
+    if (!(+selectedPlayers.length >= minPlayers && +selectedPlayers.length <= maxPlayers)) {
+        alert(`players Number(${selectedPlayers.length}) has to be between ${minPlayers}-${maxPlayers}`);
+        return;
+    }
+
     const leagueAdminId = data.loggedInUser.id;
     const selectedLeagueImage = document.querySelector('img[data-image-id]');
     const selectedLeagueImageSource = selectedLeagueImage.getAttribute('src');
-    const minRounds = 1;
-    const maxRounds = 10;
-    const minPlayers = 1;
-    const maxPlayers = 5;
     const divTransition = 1000;
-    if (leagueName) {
-        if (+leagueRounds >= minRounds && +leagueRounds <= maxRounds) {
-            if (+selectedPlayers.length >= minPlayers && +selectedPlayers.length <= maxPlayers) {
-                if (confirm('Are you sure you want to add a new league?')) {
-                    const selectedPlayersDetails = getPlayersDetails(selectedPlayers)
-                    const data = {
-                        'leagueName': leagueName,
-                        'leagueRounds': leagueRounds,
-                        'userIds': selectedPlayersDetails,
-                        'leagueAdminId': leagueAdminId,
-                        'leagueImageId': selectedLeagueImage.getAttribute('data-image-id'),
-                        'selectedLeagueImageSource': selectedLeagueImageSource
-                    }
-                    toggleAddNewLeague();
-                    setTimeout(clearLeagueDiv, divTransition);
-                    const newLeagueId = await dataHandler.postNewLeague(data);
-                    addNewLeagueCard(data, newLeagueId);
-                }
-            } else {
-                alert(`players Number(${selectedPlayers.length}) has to be between ${minPlayers}-${maxPlayers}`);
-            }
-        } else {
-            alert(`League round(${leagueRounds}) has to be between ${minRounds}-${maxRounds}`);
+
+    if (confirm('Are you sure you want to add a new league?')) {
+        const selectedPlayersDetails = getPlayersDetails(selectedPlayers)
+        const data = {
+            'gameTypeId': gameTypeId,
+            'leagueName': leagueName,
+            'leagueRounds': leagueRounds,
+            'userIds': selectedPlayersDetails,
+            'leagueAdminId': leagueAdminId,
+            'leagueImageId': selectedLeagueImage.getAttribute('data-image-id'),
+            'selectedLeagueImageSource': selectedLeagueImageSource
         }
-    } else {
-        alert('League name required');
+        toggleAddNewLeague();
+        removeLeagueDivMessages();
+        setTimeout(clearLeagueDiv, divTransition);
+        const newLeagueId = await dataHandler.postNewLeague(data);
+        addNewLeagueCard(data, newLeagueId, gameTypeName);
     }
 }
 
+function removeLeagueDivMessages() {
+    document.querySelectorAll('.no-league').forEach((message) => {message.remove()});
+}
 
-function addNewLeagueCard(data, newLeagueId) {
+
+function addNewLeagueCard(data, newLeagueId, gameTypeName) {
     const leagueDiv = document.querySelector('div#league-card-container');
-    const newLeagueDiv = `<div class="card league bg-dark" data-league-id="${newLeagueId['league_id']}" data-league-admin-id="${data.leagueAdminId}">
+    const newLeagueDiv = `<div class="card league bg-dark" 
+                            data-league-id="${newLeagueId['league_id']}" 
+                            data-league-admin-id="${data.leagueAdminId}" 
+                            data-league-type="${data['gameTypeId']}">
                 <a href="/league/${newLeagueId['league_id']}">
                     <img alt="mars" src="${data.selectedLeagueImageSource}">
                     <h3 class="text-light">${data.leagueName}</h3>
@@ -178,6 +198,9 @@ function addNewLeagueCard(data, newLeagueId) {
                 <div class="card-details">
                     <div class="detail-admin">
                         <i class="fa-solid fa-crown text-light"></i>
+                    </div>
+                    <div class="game_type">
+                        <small class="text-light">${gameTypeName}</small>
                     </div>
                     <div class="detail-players">
                         <small class="text-light">${data.userIds.length}</small>

@@ -12,21 +12,30 @@
             {% for board in game.boards %}
                 <option name="board-{{ board.id }}" value="{{ board.id }}">{{ board.board_name }}</option>
             {% endfor %}
-        </select><br><br>
-        <label for="round-expansion">Choose expansions</label><br>
-        {% for expansion in game.expansions %}
-            <input type="checkbox" id="expansion{{ expansion.id }}" name="expansion-{{ expansion.expansion_name }}"
-                   value="{{ expansion.id }}">
-            <label for="expansion{{ expansion.id }}">{{ expansion.expansion_name }}</label><br>
-        {% endfor %}
+        </select><br>
+        <div id="expansions">
+            <br>
+            <label for="round-expansion">Choose expansions</label><br>
+            {% for expansion in game.expansions %}
+                <input class="round-expansion" type="checkbox" id="expansion{{ expansion.id }}" name="expansion-{{ expansion.expansion_name }}"
+                       value="{{ expansion.id }}">
+                <label for="expansion{{ expansion.id }}">{{ expansion.expansion_name }}</label><br>
+            {% endfor %}
+        </div>
         <br>
         <label for="round-corporations">Choose a corporation for each player</label><br><br>
         {% for player in players %}
             <label for="player{{ player.id }}">{{ player.username }}</label>
-            <select id="player{{ player.id }}" name="player-{{ player.id }}" required>
-                <option value="">--Please select a Corporation--</option>
+            <select class="corporations" id="player{{ player.id }}" name="player-{{ player.id }}" required>
+                <option value="" selected disabled hidden>--Please select a Corporation--</option>
                 {% for corporation in game.corporations %}
-                    <option value="{{ corporation.id }}">{{ corporation.name }}</option>
+                    <option
+                            class="corporation"
+                            data-expansion-id="{{ corporation.expansion_id }}"
+                            data-player-id="{{ player.id }}"
+                            value="{{ corporation.corporation_id }}"
+                            {% if corporation.expansion_id != None %} hidden {% endif %}
+                    >{{ corporation.corporation_name }}</option>
                 {% endfor %}
             </select><br><br>
         {% endfor %}
