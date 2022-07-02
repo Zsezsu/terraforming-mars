@@ -18,6 +18,16 @@
         </div>
 
         <div class="card league bg-dark">
+            <a href="{{ url_for('statistic') }}">
+                <img alt="mars_statistic" src="{{ url_for('static', filename='img/league_cards/mars-8.webp') }}">
+                <h3 class="text-light">Statistic</h3>
+            </a>
+            <div class="card-details">
+                <i class="fa-solid fa-chart-column text-light"></i>
+            </div>
+        </div>
+
+        <div class="card league bg-dark">
             <a href="{{ url_for('profile') }}">
                 <img alt="mars" src="{{ url_for('static', filename='img/league_cards/mars-3.webp') }}">
                 <h3 class="text-light">Profile</h3>

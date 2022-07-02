@@ -52,6 +52,14 @@ def profile():
         return redirect(url_for('login'))
 
 
+@app.route('/statistic')
+def statistic():
+    if session['UID']:
+        return render_template('statistic.html')
+    else:
+        return redirect(url_for('login'))
+
+
 @app.route('/league/<league_id>')
 def league(league_id):
     if session.get('UID'):
