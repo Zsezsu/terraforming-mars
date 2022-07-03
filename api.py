@@ -15,6 +15,7 @@ def save_round_points(league_id, round_id):
     round_data = json.loads(request.data)
     game_type = select_queries.get_game_type_by_league_id(league_id)
     insert_queries.insert_round_points(round_id, round_data, game_type['name'])
+    update_queries.update_round_players_ranks([data['playerId'] for data in round_data])
     return jsonify('')
 
 
@@ -58,7 +59,9 @@ def is_unique_token_exist(token):
 
 @api.route('/api/leagues/<league_id>', methods=['DELETE'])
 def delete_league(league_id):
+    league_player_id_list = [players['player_id'] for players in select_queries.get_league_player_ids(league_id)]
     delete_queries.delete_league(league_id)
+    update_queries.update_round_players_ranks(league_player_id_list)
     return 'OK'
 
 
