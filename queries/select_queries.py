@@ -353,17 +353,18 @@ def get_pictures():
 def get_user_data(uid):
     query = """
     SELECT 
-        username,
-        first_name,
-        last_name,
-        email,
+        players.username,
+        players.first_name,
+        players.last_name,
+        players.email,
+        ranks.name AS rank,
         images.source AS source,
         images.id AS image_id
     FROM 
         players
-    JOIN 
-        images
-        ON players.image_id = images.id
+    LEFT JOIN images ON players.image_id = images.id
+    LEFT JOIN ranks ON players.ranks_id = ranks.id
+    
     WHERE players.id = {uid};
     """
     return dict(execute_select(SQL(query).format(
