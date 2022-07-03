@@ -49,16 +49,16 @@ ALTER TABLE IF EXISTS public.players
 -----------------------------------------------------INSERT ranks-----------------------------------------------------
 
 INSERT INTO public.ranks(name, rank_level, minimum_points, image_source)
-VALUES ('Space Traveller', 1, 0, 'static/img/player_icons/rank_levels/lvl_1.png'),
-       ('Dock Worker', 2, 3, 'static/img/player_icons/rank_levels/lvl_2.png'),
-       ('Settler', 3, 10, 'static/img/player_icons/rank_levels/lvl_3.png'),
-       ('trader', 4, 20, 'static/img/player_icons/rank_levels/lvl_4.png'),
-       ('Astronaut', 5, 30, 'static/img/player_icons/rank_levels/lvl_5.png'),
-       ('Builder', 6, 50, 'static/img/player_icons/rank_levels/lvl_6.png'),
-       ('Terraformer', 7, 80, 'static/img/player_icons/rank_levels/lvl_7.png'),
-       ('President', 8, 100, 'static/img/player_icons/rank_levels/lvl_8.png'),
-       ('League Master', 9, 120, 'static/img/player_icons/rank_levels/lvl_9.png'),
-       ('League Grand Master', 10, 150, 'static/img/player_icons/rank_levels/lvl_10.png');
+VALUES ('Space Traveller', 1, 0, 'img/player_icons/rank_levels/lvl_1.webp'),
+       ('Dock Worker', 2, 3, 'img/player_icons/rank_levels/lvl_2.webp'),
+       ('Settler', 3, 10, 'img/player_icons/rank_levels/lvl_3.webp'),
+       ('trader', 4, 20, 'img/player_icons/rank_levels/lvl_4.webp'),
+       ('Astronaut', 5, 30, 'img/player_icons/rank_levels/lvl_5.webp'),
+       ('Builder', 6, 50, 'img/player_icons/rank_levels/lvl_6.webp'),
+       ('Terraformer', 7, 80, 'img/player_icons/rank_levels/lvl_7.webp'),
+       ('President', 8, 100, 'img/player_icons/rank_levels/lvl_8.webp'),
+       ('League Master', 9, 120, 'img/player_icons/rank_levels/lvl_9.webp'),
+       ('League Grand Master', 10, 150, 'img/player_icons/rank_levels/lvl_10.webp');
 
 
 
