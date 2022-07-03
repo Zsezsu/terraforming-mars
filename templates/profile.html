@@ -32,16 +32,33 @@
             <button id="update-profile-picture" class="btn btn-light">Save</button>
         </div>
 
+        {#----------------------------------------------Profile Div-----------------------------------------------#}
         <div id="profile-data">
             <div class="card profile-data-item">
                 <h3>Terraformer Identity Card</h3>
                 {% for key in data %}
-                    {% if key not in ['source', 'image_id'] %}
-                        <p><em class="data-key">{{ key }}:</em> {{ data[key] }}</p>
+                    {% if key in ['username', 'first_name', 'last_name', 'email'] %}
+                        <p>
+                        <em class="data-key">{{ key }}:</em>
+                        {{ data[key] }}
                     {% endif %}
+                </p>
                 {% endfor %}
             </div>
 
+            {#----------------------------------------------Rank Div----------------------------------------------#}
+            <div class="card" id="rank-data">
+                <img class="rank-image"
+                     alt="Rank image" src="/static/{{ data.rank_image }}">
+                <p>{{ data.rank }}</p>
+                <p>Your points: {{ data.total_ranked_points }}</p>
+                <img class="rank-image"
+                     alt="Next rank image" src="/static/{{ data.next_rank_image }}">
+                <p>{{ data.next_rank_minimum_points }}</p>
+                <p>{{ data.next_rank_name }}</p>
+            </div>
+
+            {#--------------------------------------------Password Div-------------------------------------------#}
             <div class="card profile-data-item">
                 <h3>Change password</h3>
                 <label for="old-password">Old password</label>

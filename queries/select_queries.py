@@ -362,18 +362,65 @@ def get_pictures():
 
 def get_user_data(uid):
     query = """
+    WITH ranked_points AS (
+                            WITH total_ares_points AS (
+                                                        SELECT coalesce(SUM(coalesce(round_points, 0)), 0) AS total
+                                                        FROM ares_points
+                                                        WHERE player_id = {uid}
+                                                        ),
+                                 total_mars_points AS (
+                                                        SELECT coalesce(SUM(coalesce(round_points, 0)), 0) AS total
+                                                        FROM mars_points
+                                                        WHERE player_id = {uid}
+                                                        )
+                            SELECT total_mars_points.total + total_ares_points.total AS total
+                            FROM total_mars_points, total_ares_points
+                            ),
+        next_rank AS (
+                        WITH  actual_rank_level AS (
+                                                    SELECT ranks.rank_level AS actual
+                                                    FROM players
+                                                    LEFT JOIN ranks ON players.ranks_id = ranks.id
+                                                    WHERE players.id = {uid}
+                                                    ),
+                                max_rank_level AS (
+                                                    SELECT minimum_points AS max 
+                                                    FROM ranks 
+                                                    ORDER BY rank_level DESC 
+                                                    LIMIT 1
+                                                    )
+                        SELECT 
+                            name            AS name,
+                            minimum_points  AS minimum,
+                            image_source    AS image
+                        FROM ranks,
+                             actual_rank_level,
+                             max_rank_level
+                        WHERE rank_level = CASE
+                            WHEN actual_rank_level.actual < 10
+                                THEN actual_rank_level.actual + 1
+                            ELSE max_rank_level.max
+                            END
+                    )
     SELECT 
         players.username,
         players.first_name,
         players.last_name,
         players.email,
-        ranks.name AS rank,
-        images.source AS source,
-        images.id AS image_id
+        ranks.name                      AS rank,
+        ranked_points.total             AS total_ranked_points,
+        next_rank.name                  AS next_rank_name,
+        next_rank.minimum               AS next_rank_minimum_points,
+        next_rank.image                 AS next_rank_image,
+        ranks.image_source              AS rank_image,
+        images.source                   AS source,
+        images.id                       AS image_id
     FROM 
         players
-    LEFT JOIN images ON players.image_id = images.id
-    LEFT JOIN ranks ON players.ranks_id = ranks.id
+            LEFT JOIN images    ON players.image_id = images.id
+            LEFT JOIN ranks     ON players.ranks_id = ranks.id,
+        ranked_points,
+        next_rank
     
     WHERE players.id = {uid};
     """
