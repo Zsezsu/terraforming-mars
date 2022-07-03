@@ -33,6 +33,7 @@ def get_players():
         players.username AS username,
         players.first_name || ' ' || players.last_name AS name,
         ranks.name AS rank,
+        ranks.image_source AS rank_image,
         images.source AS image_source
     FROM 
         players
@@ -223,6 +224,7 @@ def get_logged_in_user(user_id):
         players.username AS username,
         players.first_name || ' ' || players.last_name AS name,
         ranks.name AS rank,
+        ranks.image_source AS rank_image,
         images.source AS image_source
     FROM 
         players

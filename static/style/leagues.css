@@ -76,15 +76,24 @@
     filter: none;
 }
 
-.player-card-description{
+.player-card-description {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
-.player-card-description p{
+
+.player-card-description p {
     margin-block-end: auto;
 }
-.rank{
+
+.rank-image {
+    right: 0;
+    max-width: 48px;
+    max-height: 48px;
+    background-color: transparent!important;
+}
+
+.rank {
     font-size: 12px;
 }
