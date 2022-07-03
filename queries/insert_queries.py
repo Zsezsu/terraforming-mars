@@ -37,7 +37,6 @@ def init_round(round_details, round_id):
 
 def insert_round_points(round_id, round_data, game_type_name):
     round_points_values = helper.insert_point_values(round_id, round_data, game_type_name)
-    query = None
     if game_type_name == 'Terraforming Mars':
         query = """
         BEGIN;
