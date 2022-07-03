@@ -31,15 +31,17 @@
             </div>
             <button id="update-profile-picture" class="btn btn-light">Save</button>
         </div>
+
         <div id="profile-data">
             <div class="card profile-data-item">
-                <h3>Profile Details</h3>
+                <h3>Terraformer Identity Card</h3>
                 {% for key in data %}
                     {% if key not in ['source', 'image_id'] %}
                         <p><em class="data-key">{{ key }}:</em> {{ data[key] }}</p>
                     {% endif %}
                 {% endfor %}
             </div>
+
             <div class="card profile-data-item">
                 <h3>Change password</h3>
                 <label for="old-password">Old password</label>
