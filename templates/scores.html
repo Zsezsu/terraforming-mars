@@ -34,6 +34,7 @@
             <tbody>
             {% for player_score in player_scores %}
                 {% set player_name = player_score.username %}
+                {% set rank_image = player_score.rank_image %}
                 {% set round_point = player_score.total_round_points %}
                 {% set total_points = player_score.total_points %}
                 {% set first_medal = '<i class="fa-solid fa-trophy text-warning"></i>' %}
@@ -52,11 +53,15 @@
                     {% for type, score in player_score.items() %}
                         {% if type in ['username', 'total_round_points', 'total_points'] %}
                             {% if finished and type == 'username' %}
-                                <th>{{ score + medal | safe }}</th>
+                                <th>
+                                    {{ (medal | safe) + score }}
+                                    <img class="rank-image"
+                                         alt="Rank image" src="/static/{{ rank_image }}">
+                                </th>
                             {% else %}
                                 <th>{{ score }}</th>
                             {% endif %}
-                        {% elif type not in ['finished_rounds', 'number_of_rounds', 'league_name'] %}
+                        {% elif type not in ['finished_rounds', 'number_of_rounds', 'league_name', 'rank_image'] %}
                             <td>{{ score }}</td>
                         {% endif %}
                     {% endfor %}

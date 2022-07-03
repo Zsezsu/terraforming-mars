@@ -70,3 +70,10 @@
     opacity: 1;
     transition: 0.4s linear;
 }
+
+.rank-image {
+    right: 0;
+    max-width: 48px;
+    max-height: 48px;
+    background-color: transparent!important;
+}

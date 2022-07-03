@@ -114,8 +114,9 @@ def get_round_points(round_id, game_type_name):
     if game_type_name == 'Terraforming Mars':
         query = """
         SELECT 
-            players.username                    AS  username,
-            corporations.name                   AS  corporation_name,
+            players.username                         AS  username,
+            ranks.image_source                       AS  rank_image,
+            corporations.name                        AS  corporation_name,
             mars_points.tr_number                    AS  tr_number,
             mars_points.milestones_points            AS  milestones_points,
             mars_points.award_points                 AS  award_points,
@@ -131,6 +132,7 @@ def get_round_points(round_id, game_type_name):
         LEFT JOIN players           ON  mars_points.player_id = players.id
         LEFT JOIN round_players     ON  players.id = round_players.player_id
         LEFT JOIN corporations      ON  round_players.corporation_id = corporations.id
+        LEFT JOIN ranks             ON  players.ranks_id = ranks.id
         WHERE
             mars_points.round_id = {round_id}
             AND round_players.round_id = {round_id}
@@ -190,11 +192,13 @@ def get_players_in_round(round_id):
     SELECT 
         round_players.player_id     AS  player_id,
         players.username            AS  username,
-        corporations.name           AS  corporation_name
+        corporations.name           AS  corporation_name,
+        ranks.image_source          AS  rank_image
     FROM
         round_players
     LEFT JOIN corporations  ON  round_players.corporation_id =  corporations.id
     LEFT JOIN players       ON  round_players.player_id      =  players.id
+    LEFT OUTER JOIN ranks   ON  players.ranks_id             =  ranks.id
     WHERE
         round_players.round_id = {round_id};
     """
@@ -413,6 +417,7 @@ def get_player_scores(league_id, game_type_name):
                GROUP BY rounds.league_id)
         SELECT
                 players.username                             AS username,
+                ranks.image_source                           AS rank_image,
                 SUM(mars_points.round_points)                AS total_round_points,
                 SUM(mars_points.sum_points)                  AS total_points,
                 SUM(mars_points.mega_credits)                AS total_mega_credits,
@@ -430,7 +435,8 @@ def get_player_scores(league_id, game_type_name):
                 LEFT JOIN rounds ON leagues.id = rounds.league_id
                 LEFT JOIN round_players ON rounds.id = round_players.round_id
                 LEFT JOIN players ON round_players.player_id = players.id
-                LEFT JOIN mars_points ON players.id = mars_points.player_id,
+                LEFT JOIN mars_points ON players.id = mars_points.player_id
+                LEFT JOIN ranks ON players.ranks_id = ranks.id,
             round
         WHERE 
             leagues.id = {league_id} 
@@ -440,7 +446,7 @@ def get_player_scores(league_id, game_type_name):
                 rounds.finished IS TRUE
             AND
                 rounds.id = mars_points.round_id
-        GROUP BY players.id, leagues.id, number_of_rounds
+        GROUP BY players.id, leagues.id, number_of_rounds, rank_image
         ORDER BY 
             total_round_points DESC, 
             total_points DESC, 

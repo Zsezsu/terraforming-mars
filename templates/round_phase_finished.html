@@ -17,11 +17,16 @@
         {% for player_round_points in round_points %}
             {% set player_name = player_round_points.username %}
             {% set corporation = player_round_points.corporation_name %}
+            {% set rank_image  = player_round_points.rank_image %}
             <tr>
-                <th>{{ player_name }}</th>
+                <th>
+                    {{ player_name }}
+                    <img class="rank-image"
+                         alt="Rank image" src="/static/{{ rank_image }}">
+                </th>
                 <th>{{ corporation }}</th>
                 {% for point in player_round_points.values() %}
-                    {% if point not in [player_name, corporation] %}
+                    {% if point not in [player_name, corporation, rank_image] %}
                         <td>{{ point }}</td>
                     {% endif %}
                 {% endfor %}

@@ -17,7 +17,11 @@
         <tbody>
         {% for player in players_in_game %}
             <tr data-player-id="{{ player.player_id }}">
-                <th>{{ player.username }}</th>
+                <th>
+                    {{ player.username }}
+                    <img class="rank-image"
+                         alt="Rank image" src="/static/{{ player.rank_image }}">
+                </th>
                 <th>{{ player.corporation_name }}</th>
                 {% for header in table_headers %}
                     {% if header in ['Cities', 'M€'] %}
