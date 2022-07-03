@@ -14,7 +14,8 @@ CREATE TABLE public.ranks
     id             SERIAL,
     name           TEXT,
     rank_level     INTEGER UNIQUE NOT NULL,
-    minimum_points INTEGER        NOT NULL
+    minimum_points INTEGER        NOT NULL,
+    image_source    VARCHAR(255)
 
 );
 
@@ -47,17 +48,17 @@ ALTER TABLE IF EXISTS public.players
 
 -----------------------------------------------------INSERT ranks-----------------------------------------------------
 
-INSERT INTO public.ranks(name, rank_level, minimum_points)
-VALUES ('Space Traveller', 1, 0),
-       ('Dock Worker', 2, 3),
-       ('Settler', 3, 10),
-       ('trader', 4, 20),
-       ('Astronaut', 5, 30),
-       ('Builder', 6, 50),
-       ('Terraformer', 7, 80),
-       ('President', 8, 100),
-       ('League Master', 9, 120),
-       ('League Grand Master', 10, 150);
+INSERT INTO public.ranks(name, rank_level, minimum_points, image_source)
+VALUES ('Space Traveller', 1, 0, 'static/img/player_icons/rank_levels/lvl_1.png'),
+       ('Dock Worker', 2, 3, 'static/img/player_icons/rank_levels/lvl_2.png'),
+       ('Settler', 3, 10, 'static/img/player_icons/rank_levels/lvl_3.png'),
+       ('trader', 4, 20, 'static/img/player_icons/rank_levels/lvl_4.png'),
+       ('Astronaut', 5, 30, 'static/img/player_icons/rank_levels/lvl_5.png'),
+       ('Builder', 6, 50, 'static/img/player_icons/rank_levels/lvl_6.png'),
+       ('Terraformer', 7, 80, 'static/img/player_icons/rank_levels/lvl_7.png'),
+       ('President', 8, 100, 'static/img/player_icons/rank_levels/lvl_8.png'),
+       ('League Master', 9, 120, 'static/img/player_icons/rank_levels/lvl_9.png'),
+       ('League Grand Master', 10, 150, 'static/img/player_icons/rank_levels/lvl_10.png');
 
 
 
