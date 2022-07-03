@@ -481,3 +481,14 @@ def get_player_scores(league_id, game_type_name):
     else:
         raise AttributeError('No such game type in database: ' + game_type_name)
     return execute_select(SQL(query).format(league_id=Literal(league_id)))
+
+
+def get_league_player_ids(league_id):
+    query = """
+    SELECT league_players.player_id 
+    FROM league_players
+    WHERE league_id = {league_id}
+    """
+    return execute_select(SQL(query).format(
+        league_id=Literal(league_id)
+    ))
