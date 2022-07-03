@@ -32,10 +32,12 @@ def get_players():
         players.id AS id,
         players.username AS username,
         players.first_name || ' ' || players.last_name AS name,
+        ranks.name AS rank,
         images.source AS image_source
     FROM 
         players
-    LEFT JOIN images ON players.image_id = images.id;
+    LEFT JOIN images ON players.image_id = images.id
+    LEFT JOIN ranks ON players.ranks_id = ranks.id;
     """
     return execute_select(SQL(query))
 
@@ -220,10 +222,12 @@ def get_logged_in_user(user_id):
         players.id AS id,
         players.username AS username,
         players.first_name || ' ' || players.last_name AS name,
+        ranks.name AS rank,
         images.source AS image_source
     FROM 
         players
     LEFT JOIN images ON players.image_id = images.id
+    LEFT JOIN ranks ON players.ranks_id = ranks.id
     WHERE 
         players.id = {user_id};
     """

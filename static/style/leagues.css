@@ -6,6 +6,8 @@
 }
 
 #searched-players div {
+    display: flex;
+    gap: 10px;
     width: 600px;
     height: 40px;
     border-radius: 5px;
@@ -72,4 +74,17 @@
 
 .player-card img:hover {
     filter: none;
+}
+
+.player-card-description{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.player-card-description p{
+    margin-block-end: auto;
+}
+.rank{
+    font-size: 12px;
 }

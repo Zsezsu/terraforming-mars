@@ -65,6 +65,7 @@ function createPlayerCard(player) {
         <img alt="Profile picture of ${player.username}" src="static/${player.image_source}">
         <div class="player-card-description">
             <p>${player.name}</p>
+            <small class="rank">${player.rank}</small>
             <small>${player.username}</small>
         </div>
     </div>`;

@@ -44,6 +44,7 @@
             <div id="selected-players" class="player-container bg-dark">
                 {% set user_id = logged_in_user['id'] %}
                 {% set username = logged_in_user['username'] %}
+                {% set rank = logged_in_user.rank %}
                 {% set name = logged_in_user['name'] %}
                 {% set img_source = logged_in_user['image_source'] %}
                 <div class="player-card card bg-dark" data-player-id="{{ user_id }}">
@@ -51,6 +52,7 @@
                          src="{{ url_for('static', filename=img_source) }}">
                     <div class="player-card-description">
                         <p>{{ name }}</p>
+                        <small class="rank">{{ rank }}</small>
                         <small>{{ username }}</small>
                     </div>
                 </div>
