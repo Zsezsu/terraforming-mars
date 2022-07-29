@@ -481,3 +481,43 @@ def get_player_scores(league_id, game_type_name):
     else:
         raise AttributeError('No such game type in database: ' + game_type_name)
     return execute_select(SQL(query).format(league_id=Literal(league_id)))
+
+
+def get_leagues():
+    query = """
+    DROP FUNCTION IF EXISTS get_player_details(l_id INTEGER);
+    CREATE FUNCTION get_player_details(l_id INTEGER)
+        RETURNS JSON
+        LANGUAGE plpgsql
+    AS
+    $$
+    DECLARE
+        player_details JSON;
+    BEGIN
+        SELECT JSON_AGG(users_details)
+        INTO player_details
+        FROM (
+            SELECT
+                 players.id,
+                 players.username,
+                 players.first_name,
+                 players.last_name
+                FROM leagues
+            LEFT JOIN league_players ON leagues.id = league_players.league_id
+            LEFT JOIN players ON league_players.player_id = players.id
+            WHERE leagues.id = l_id
+            )
+        AS users_details;
+        RETURN player_details;
+    END;
+    $$;
+    SELECT leagues.id              AS league_id,
+           leagues.league_admin    AS league_admin,
+           leagues.league_name     AS league_name,
+           leagues.round_number    AS number_of_league_rounds,
+           get_player_details(leagues.id) AS league_players
+    FROM leagues
+    GROUP BY leagues.id;
+    """
+    return execute_select(SQL(query))
+

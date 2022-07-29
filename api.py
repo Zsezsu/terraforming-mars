@@ -82,3 +82,9 @@ def update_password(player_id):
     hashed_new_password = pm.hash_password(new_password)
     update_queries.update_password(player_id, hashed_new_password)
     return flask.make_response('OK', 200)
+
+
+@api.route('/api/leagues', methods=['GET'])
+def get_all_leagues():
+    leagues = select_queries.get_leagues()
+    return jsonify(leagues)
