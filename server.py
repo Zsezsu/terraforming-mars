@@ -202,4 +202,4 @@ def score_board(league_id):
 if __name__ == '__main__':
     app.run(debug=True,
             port=8000,
-            host="0.0.0.0")
+            host="localhost")
