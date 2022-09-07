@@ -485,39 +485,70 @@ def get_player_scores(league_id, game_type_name):
 
 def get_leagues():
     query = """
-    DROP FUNCTION IF EXISTS get_player_details(l_id INTEGER);
-    CREATE FUNCTION get_player_details(l_id INTEGER)
-        RETURNS JSON
-        LANGUAGE plpgsql
-    AS
-    $$
-    DECLARE
-        player_details JSON;
-    BEGIN
-        SELECT JSON_AGG(users_details)
-        INTO player_details
-        FROM (
-            SELECT
-                 players.id,
-                 players.username,
-                 players.first_name,
-                 players.last_name
-                FROM leagues
-            LEFT JOIN league_players ON leagues.id = league_players.league_id
-            LEFT JOIN players ON league_players.player_id = players.id
-            WHERE leagues.id = l_id
-            )
-        AS users_details;
-        RETURN player_details;
-    END;
-    $$;
-    SELECT leagues.id              AS league_id,
-           leagues.league_admin    AS league_admin,
-           leagues.league_name     AS league_name,
-           leagues.round_number    AS number_of_league_rounds,
-           get_player_details(leagues.id) AS league_players
-    FROM leagues
-    GROUP BY leagues.id;
+        DROP FUNCTION IF EXISTS get_player_details(l_id INTEGER);
+        CREATE FUNCTION get_player_details(l_id INTEGER)
+            RETURNS JSON
+            LANGUAGE plpgsql
+        AS
+        $$
+        DECLARE
+            player_details JSON;
+        BEGIN
+            SELECT JSON_AGG(users_details)
+            INTO player_details
+            FROM (
+                     SELECT players.id,
+                            players.username,
+                            players.first_name,
+                            players.last_name,
+                            players.email,
+                            images.source
+                     FROM leagues
+                              LEFT JOIN league_players ON leagues.id = league_players.league_id
+                              LEFT JOIN players ON league_players.player_id = players.id
+                              LEFT JOIN images ON players.image_id = images.id
+                     WHERE leagues.id = l_id
+                 )
+                     AS users_details;
+            RETURN player_details;
+        END;
+        $$;
+        DROP FUNCTION IF EXISTS get_admin_player(admin_id INTEGER);
+        CREATE FUNCTION get_admin_player(admin_id INTEGER)
+            RETURNS JSON
+            LANGUAGE plpgsql
+        AS
+        $$
+        DECLARE
+            round_admin JSON;
+        BEGIN
+            SELECT JSON_AGG(player_details)
+            INTO round_admin
+            FROM (SELECT players.id,
+                         players.username,
+                         players.first_name,
+                         players.last_name,
+                         images.source
+                  FROM players
+                           LEFT JOIN images ON players.image_id = images.id
+                  WHERE players.id = admin_id) AS player_details;
+            RETURN round_admin;
+        END;
+        $$;
+        SELECT leagues.id                                                                    AS id,
+               leagues.league_admin                                                          AS league_admin_id,
+               leagues.league_name                                                           AS name,
+               images.source                                                                 AS image_source,
+               leagues.round_number                                                          AS number_of_rounds,
+               SUM(CASE WHEN rounds.finished THEN 1 ELSE 0 END)                              AS number_of_finished_rounds,
+               SUM(CASE WHEN (rounds.started AND rounds.finished = false) THEN 1 ELSE 0 END) AS number_of_in_progress_rounds,
+               game_types.name                                                               AS game_type,
+               get_player_details(leagues.id)                                                AS league_players
+        FROM leagues
+                 LEFT JOIN game_types ON leagues.game_type_id = game_types.id
+                 LEFT JOIN rounds ON leagues.id = rounds.league_id
+                 LEFT JOIN images ON leagues.image_id = images.id
+        GROUP BY leagues.id, game_types.id, images.id;
     """
     return execute_select(SQL(query))
 
