@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:15
+    container_name: tmars-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: tmars
+      POSTGRES_PASSWORD: tmars
+      POSTGRES_DB: tmars
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Run all SQL files on first init (alphabetical order)
+      - ./database:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tmars -d tmars"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tmars-web
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file: .env
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    # For hot-reload dev, uncomment these two lines and ensure FLASK_ENV=development:
+    # volumes:
+    #   - .:/app
+    # command: flask run --host=0.0.0.0 --port=5000
+
+volumes:
+  pgdata:
