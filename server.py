@@ -1,23 +1,18 @@
-from flask import Flask, render_template, request, url_for, redirect, jsonify, session
+import os, secrets
+from flask import Flask, render_template, request, url_for, redirect, session
 from dotenv import load_dotenv
 from api import api
-from mail_system import mail
-import os
 
 import profile_manager as pm
 from mail_system import send_registration_email as send_mail
-import queries.insert_queries as insert_queries
-import queries.select_queries as select_queries
-import queries.update_queries as update_queries
-import queries.delete_queries as delete_queries
+from queries import insert_queries
+from queries import select_queries
 import helper
 
 load_dotenv()
 app = Flask(__name__)
 app.register_blueprint(api)
-app.register_blueprint(mail)
-
-app.secret_key = b'_5#y2L"Q8z\n\xec]/'
+app.secret_key = os.getenv("FLASK_SECRET_KEY") or secrets.token_hex(32)
 
 
 @app.route('/')
@@ -97,10 +92,15 @@ def registration_onsubmit():
     error_message = pm.validate_registration(request.form)
     if error_message == '':
         user_id = pm.submit_registration(request.form)
-        user_email = select_queries.get_user_email(user_id)
+        user_email = select_queries.get_user_email(user_id)['email']
         username = select_queries.get_user_data(user_id)['username']
         session['UID'] = user_id
         session['USERNAME'] = username
+        
+        try:
+            send_mail(user_email, username)
+        except Exception as e:
+            app.logger.warning(f"Registration email failed for {user_email}: {e}")
         return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('registration', d_error=error_message))
