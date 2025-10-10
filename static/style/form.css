@@ -1,6 +1,6 @@
 .form-container {
     padding: 50px;
-    width: 100%;
+    width: auto;
     margin: 20px 0;
     background: #181b1e !important;
     display: flex;
@@ -62,22 +62,23 @@
 }
 
 .league-form {
-    height: 900px;
+    height: auto;
+    width: auto;
     transition: 1s ease;
 }
 
 .round-form {
-    height: 950px;
+    height: auto;
     transition: 1.2s ease;
     width: 50%;
 }
 
 .register-form {
-    height: 1000px;
+    height: auto;
 }
 
 .login-form {
-    height: 400px;
+    height: auto;
 }
 
 .hide-form-container {

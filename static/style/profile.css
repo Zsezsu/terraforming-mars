@@ -1,7 +1,7 @@
 #profile-picture {
     padding: 40px;
-    height: 60vh;
-    width: 40%;
+    height: auto;
+    width: auto;
     color: white;
     text-align: center;
 }
@@ -19,7 +19,7 @@
     border-radius: var(--card-border-radius);
     box-shadow: 5px 5px 20px black;
     height: auto;
-    width: 100%;
+    width: auto;
     padding: 20px;
     display: flex;
     flex-direction: row;
@@ -37,8 +37,8 @@
 }
 
 .profile-data-item {
-    width: 100%;
-    height: 29vh;
+    width: auto;
+    height: auto;
     padding: 50px;
 }
 

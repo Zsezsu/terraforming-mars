@@ -1,59 +1,32 @@
-from flask import Blueprint
-import smtplib
-import os
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
+import os, smtplib
+from email.message import EmailMessage
+from email.utils import formataddr
 
-basedir = os.path.abspath(os.path.dirname(__file__))
-text_file = os.path.join(basedir, 'templates/email-designs/test-mail.txt')
-html_file = os.path.join(basedir, 'templates/email-designs/test-mail.html')
+SMTP_HOST = os.getenv("SMTP_HOST", "localhost")
+SMTP_PORT = int(os.getenv("SMTP_PORT", "25"))
+SMTP_USER = os.getenv("SMTP_USER", "")
+SMTP_PASS = os.getenv("SMTP_PASS", "")
+SMTP_USE_TLS = os.getenv("SMTP_USE_TLS", "false").lower() == "true"
+MAIL_FROM = os.getenv("MAIL_FROM", SMTP_USER or "no-reply@example.com")
+MAIL_FROM_NAME = os.getenv("MAIL_FROM_NAME", "Terraforming Mars")
 
-mail = Blueprint('mail_system', __name__, template_folder='templates')
+def send_registration_email(to_email: str, username: str) -> None:
+    msg = EmailMessage()
+    msg["Subject"] = "Welcome to Terraforming Mars Leagues 🚀"
+    msg["From"] = formataddr((MAIL_FROM_NAME, MAIL_FROM))
+    msg["To"] = to_email
+    msg.set_content(
+        f"Hi {username},\n\n"
+        "Welcome aboard! Your account has been created successfully.\n"
+        "You can now log in and start tracking your games.\n\n"
+        "— Terraforming Mars Leagues Team"
+    )
 
-mail_address = 'mars.scoreboard@gmail.com'
-mail_password = 'ZsuBendeBenedekVik123#'
-
-
-@mail.route('/mail-test')
-def send_registration_email(customer_address='example@email.com'):
-
-    if not customer_address:
-        print('customer email not found'
-              'abort email sending'
-              'see mail_system.py / send_registration_email() for more information')
-        return ''
-    print(f'customer email address: {customer_address}')
-
-    # build email structure -----------------------------------------------
-    msg = MIMEMultipart('alternative')
-    msg['Subject'] = 'Hello New User'
-    msg['From'] = mail_address
-    msg['To'] = customer_address
-
-    # open files from templates/email-design route -------------------------
-    with open(text_file, 'r') as plain_text:
-        text = plain_text.read()
-    with open(html_file, 'r') as design:
-        html = design.read()
-
-    # attach opened files to email structure -------------------------------
-    mail_part_1 = MIMEText(text, 'plain')
-    mail_part_2 = MIMEText(html, 'html')
-    msg.attach(mail_part_1)
-    msg.attach(mail_part_2)
-
-    # login to GMAIL email system -----------------------------------------
-    server = smtplib.SMTP("smtp.gmail.com", 587)
-    server.starttls()
-    server.login(mail_address, mail_password)
-
-    # sends email and quit server -----------------------------------------
-    try:
-        server.sendmail(mail_address, customer_address, msg.as_string())
-    except:
-        print('An exception occurred when: email sent to client'
-              '>-< Program skips step >-<'
-              'see mail_system.py / send_registration_email() for more information')
-    finally:
-        server.quit()
-    return ''
+    with smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=20) as smtp:
+        smtp.ehlo() 
+        if SMTP_USE_TLS:
+            smtp.starttls()
+            smtp.ehlo()
+        if SMTP_USER and SMTP_PASS:
+            smtp.login(SMTP_USER, SMTP_PASS)
+        smtp.send_message(msg)
