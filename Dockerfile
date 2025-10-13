@@ -18,10 +18,12 @@ RUN pip install --no-cache-dir --upgrade pip setuptools wheel \
 COPY . .
 
 # Flask must bind to 0.0.0.0 in containers
-ENV FLASK_RUN_HOST=0.0.0.0
 ENV PYTHONUNBUFFERED=1
+ENV PORT=10000
 
-EXPOSE 5000
+# Render will set $PORT; we default to 10000 for local runs
+EXPOSE 10000
 
-# Example final command; adjust module if needed (server:app looks right for you)
-CMD ["gunicorn", "-b", "0.0.0.0:$PORT", "server:app", "--workers", "2", "--threads", "4", "--timeout", "120"]
+# Run Gunicorn (env vars expand in shell-form)
+CMD gunicorn -w ${WEB_CONCURRENCY:-2} -k gthread -b 0.0.0.0:${PORT:-10000} --threads ${GTHREADS:-4} --timeout 120 server:app
+
