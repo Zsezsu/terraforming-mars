@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: tmars-web
+    env: docker
+    plan: free
+    region: frankfurt
+    autoDeploy: true
+    healthCheckPath: /
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: tmars-db
+          property: connectionString
+      - key: FLASK_SECRET_KEY
+        generateValue: true
+      - key: FLASK_ENV
+        value: production
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: 587
+      - key: SMTP_USER
+        value: mars.scoreboard@gmail.com
+      - key: SMTP_PASS
+        sync: false
+      - key: SMTP_USE_TLS
+        value: "true"
+      - key: MAIL_FROM
+        value: mars.scoreboard@gmail.com
+      - key: MAIL_FROM_NAME
+        value: Terraforming Mars Leagues
+
+databases:
+  - name: tmars-db
+    plan: free
