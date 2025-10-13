@@ -23,5 +23,5 @@ ENV PYTHONUNBUFFERED=1
 
 EXPOSE 5000
 
-# Use gunicorn for a prod-like server. If your module isn't server:app, change it.
-CMD ["gunicorn", "server:app", "--workers", "2", "--threads", "4", "--timeout", "120", "--bind", "0.0.0.0:5000", "--no-sendfile", "--access-logfile", "-"]
+# Example final command; adjust module if needed (server:app looks right for you)
+CMD ["gunicorn", "-b", "0.0.0.0:$PORT", "server:app", "--workers", "2", "--threads", "4", "--timeout", "120"]
