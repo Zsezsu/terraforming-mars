@@ -1,4 +1,6 @@
 import os, secrets
+import logging, traceback
+from werkzeug.exceptions import HTTPException
 from flask import Flask, render_template, request, url_for, redirect, session
 from dotenv import load_dotenv
 from api import api
@@ -9,10 +11,96 @@ from queries import insert_queries
 from queries import select_queries
 import helper
 
+
 load_dotenv()
 app = Flask(__name__)
 app.register_blueprint(api)
 app.secret_key = os.getenv("FLASK_SECRET_KEY") or secrets.token_hex(32)
+logging.basicConfig(level=logging.INFO)
+
+
+def _render_safe_error(message: str = "Something went wrong. Please try again later.", code: int = 500):
+    """
+    Safely render a user-friendly error response.
+
+    Tries to render a shared error template with the provided message and HTTP
+    status code. If template rendering itself fails (e.g., missing template),
+    it falls back to returning a plain-text response to guarantee a reply.
+
+    Args:
+        message (str): Human-friendly message to display to the user.
+        code (int): HTTP status code to return (e.g., 404, 500).
+
+    Returns:
+        tuple[flask.wrappers.Response, int]:
+            A Flask response (HTML or plain text) and the HTTP status code.
+
+    Notes:
+        - Requires `render_template` to be imported.
+        - This helper never raises; it always returns a response.
+    """
+    try:
+        return render_template("error.html", message=message), code
+    except Exception:
+        return message, code
+
+
+@app.errorhandler(HTTPException)
+def handle_http_error(e: HTTPException):
+    """
+    Global handler for Werkzeug/Flask HTTPExceptions (e.g., 404, 403).
+
+    Logs the HTTP error with path context and returns a friendly page using the
+    exception's status code. Avoids exposing internal details to the end user.
+
+    Args:
+        e (HTTPException): The raised HTTP-related exception.
+
+    Returns:
+        tuple[flask.wrappers.Response, int]:
+            A user-friendly error page and the original HTTP status code.
+
+    Side Effects:
+        - Writes a warning entry to the Flask app logger.
+
+    Examples:
+        - Missing route -> 404 Not Found
+        - Forbidden access -> 403 Forbidden
+    """
+    app.logger.warning(f"HTTP error {e.code} at {request.path}: {e.description}")
+    return _render_safe_error(message="Oops! That page isn’t available.", code=e.code)
+
+
+@app.errorhandler(Exception)
+def handle_exception(e: Exception):
+    """
+    Catch-all handler for any uncaught non-HTTP exceptions.
+
+    Captures the full traceback and logs it as an error, then returns a generic
+    500 response without leaking internal details to the client. This prevents
+    the app from crashing and provides a consistent failure experience.
+
+    Args:
+        e (Exception): The unexpected exception that was not handled elsewhere.
+
+    Returns:
+        tuple[flask.wrappers.Response, int]:
+            A generic error page and HTTP 500 status code.
+
+    Side Effects:
+        - Writes a detailed error (including traceback) to the Flask app logger.
+
+    Notes:
+        - Ensure `import traceback` is available at module scope.
+        - In production, set `debug=False` so Flask does not override this with
+          its own debugger/traceback page.
+    """
+    app.logger.error(
+        "Unhandled exception at %s\n%s",
+        request.path,
+        "".join(traceback.format_exception(type(e), e, e.__traceback__)),
+    )
+    return _render_safe_error()
 
 
 @app.route('/')

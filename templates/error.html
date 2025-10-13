@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Error</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/index.css') }}">
+  </head>
+  <body>
+    <div style="min-height:50vh; display:flex; align-items:center; justify-content:center;">
+      <h2 style="color: white;">{{ message or "Something went wrong. Please try again later." }}</h2>
+    </div>
+  </body>
+</html>
