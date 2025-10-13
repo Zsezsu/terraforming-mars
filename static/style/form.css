@@ -70,7 +70,7 @@
 .round-form {
     height: auto;
     transition: 1.2s ease;
-    width: 50%;
+    width: auto;
 }
 
 .register-form {
